@@ -9,4 +9,15 @@ template(name="meeting")
               | #{name}
               | &nbsp;
               small #{number}
+            ul
+              each talks
+                with user
+                  li
+                    a(href=pathForUser) #{profile.name}
+                ul
+                  each replies
+                    with user
+                      li
+                        a(href=pathForUser) #{profile.name}
+
 

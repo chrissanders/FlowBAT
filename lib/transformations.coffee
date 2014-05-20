@@ -1,3 +1,4 @@
+# not used by default
 class share.User
   constructor: (doc) ->
     _.extend(@, doc)
@@ -9,28 +10,36 @@ class share.User
 class share.Meeting
   constructor: (doc) ->
     _.extend(@, doc)
+  saker: ->
+    share.Saker.find({meetingId: @_id})
 
 class share.Sak
   constructor: (doc) ->
     _.extend(@, doc)
   meeting: ->
     share.Meetings.findOne({_id: @meetingId})
+  talks: ->
+    share.Talks.find({sakId: @_id})
 
 class share.Talk
   constructor: (doc) ->
     _.extend(@, doc)
-  meeting: ->
-    share.Meetings.findOne({_id: @meetingId})
+  sak: ->
+    share.Saker.findOne({_id: @sakId})
+  user: ->
+    Meteor.users.findOne({_id: @userId})
+  replies: ->
+    share.Replies.find({talkId: @_id})
 
 class share.Reply
   constructor: (doc) ->
     _.extend(@, doc)
+  user: ->
+    Meteor.users.findOne({_id: @userId})
   meeting: ->
     share.Meetings.findOne({_id: @meetingId})
 
 share.Transformations =
-  user: (user) ->
-    if user instanceof share.User or not user then user else new share.User(user)
   meeting: (meeting) ->
     if meeting instanceof share.Meeting or not meeting then meeting else new share.Meeting(meeting)
   sak: (sak) ->

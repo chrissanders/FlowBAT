@@ -13,7 +13,7 @@ meetings =
 
 insertData(meetings, share.Meetings)
 
-users =
+saker =
   FirstSak:
     name: "First sak"
     number: "01/14"
@@ -39,4 +39,27 @@ users =
     number: "06/14"
     meetingId: "ThirdMeeting"
 
-insertData(users, share.Saker)
+insertData(saker, share.Saker)
+
+talks =
+  MortenJohansenFirstSakTalk:
+    sakId: "FirstSak"
+    userId: "MortenJohansen"
+  DenisGorbachevFirstSakTalk:
+    sakId: "FirstSak"
+    userId: "DenisGorbachev"
+  JensStoltenbergSecondSakTalk:
+    sakId: "SecondSak"
+    userId: "JensStoltenberg"
+
+insertData(talks, share.Talks)
+
+replies =
+  MortenJohansenFirstSakTalkReplyByJensStoltenberg:
+    talkId: "MortenJohansenFirstSakTalk"
+    userId: "JensStoltenberg"
+  MortenJohansenFirstSakTalkReplyBySivJensen:
+    talkId: "MortenJohansenFirstSakTalk"
+    userId: "SivJensen"
+
+insertData(replies, share.Replies)
