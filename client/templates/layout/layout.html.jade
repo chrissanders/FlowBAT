@@ -49,7 +49,7 @@ template(name="layout")
         ul.nav.navbar-nav.navbar-right
           li.dropdown
             a.dropdown-toggle(href="#", data-toggle="dropdown")
-              | Morten Johansen
+              | {{currentUser.profile.name}}
               | &nbsp;
               b.caret
             ul.dropdown-menu
