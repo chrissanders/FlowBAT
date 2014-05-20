@@ -2,8 +2,8 @@ share.Meetings = window.Meetings = new Meteor.Collection(null,
   transform: share.Transformations.meeting
 )
 
-share.Issues = window.Issues = new Meteor.Collection(null,
-  transform: share.Transformations.issue
+share.Saker = window.Saker = new Meteor.Collection(null,
+  transform: share.Transformations.sak
 )
 
 share.Talks = window.Talks = new Meteor.Collection(null,

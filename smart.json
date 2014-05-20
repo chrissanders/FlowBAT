@@ -3,6 +3,7 @@
     "iron-router": {},
     "jade": {},
     "collection-hooks": {},
-    "percolatestudio-mixpanel": {}
+    "percolatestudio-mixpanel": {},
+    "fast-render": {}
   }
 }

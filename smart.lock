@@ -5,7 +5,8 @@
       "iron-router": {},
       "jade": {},
       "collection-hooks": {},
-      "percolatestudio-mixpanel": {}
+      "percolatestudio-mixpanel": {},
+      "fast-render": {}
     },
     "packages": {
       "iron-router": {
@@ -27,6 +28,11 @@
         "git": "https://github.com/percolatestudio/meteor-mixpanel.git",
         "tag": "v0.5.0",
         "commit": "d92c8fd6c0504d3f1c195cf972354ab2e81b4e20"
+      },
+      "fast-render": {
+        "git": "https://github.com/arunoda/meteor-fast-render.git",
+        "tag": "v0.2.5",
+        "commit": "93e2fb334e55fbe9b5ebb2a2e65964018658f43e"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",

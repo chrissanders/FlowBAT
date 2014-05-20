@@ -13,24 +13,30 @@ meetings =
 
 insertData(meetings, share.Meetings)
 
-issues =
-  FirstIssue:
-    name: "First issue"
+users =
+  FirstSak:
+    name: "First sak"
+    number: "01/14"
     meetingId: "FirstMeeting"
-  SecondIssue:
-    name: "Second issue"
+  SecondSak:
+    name: "Second sak"
+    number: "02/14"
     meetingId: "FirstMeeting"
-  ThirdIssue:
-    name: "Third issue"
+  ThirdSak:
+    name: "Third sak"
+    number: "03/14"
     meetingId: "FirstMeeting"
-  FourthIssue:
-    name: "Fourth issue"
+  FourthSak:
+    name: "Fourth sak"
+    number: "04/14"
     meetingId: "SecondMeeting"
-  FifthIssue:
-    name: "Fifth issue"
+  FifthSak:
+    name: "Fifth sak"
+    number: "05/14"
     meetingId: "SecondMeeting"
-  SixthIssue:
-    name: "Sixth issue"
+  SixthSak:
+    name: "Sixth sak"
+    number: "06/14"
     meetingId: "ThirdMeeting"
 
-insertData(issues, share.Issues)
+insertData(users, share.Saker)

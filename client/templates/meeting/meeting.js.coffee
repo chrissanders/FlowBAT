@@ -1,5 +1,6 @@
 Template.meeting.helpers
-#  helper: ->
+  saker: ->
+    share.Saker.find({meetingId: @_id})
 
 Template.meeting.rendered = ->
 

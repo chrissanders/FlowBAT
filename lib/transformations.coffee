@@ -10,7 +10,7 @@ class share.Meeting
   constructor: (doc) ->
     _.extend(@, doc)
 
-class share.Issue
+class share.Sak
   constructor: (doc) ->
     _.extend(@, doc)
   meeting: ->
@@ -33,8 +33,8 @@ share.Transformations =
     if user instanceof share.User or not user then user else new share.User(user)
   meeting: (meeting) ->
     if meeting instanceof share.Meeting or not meeting then meeting else new share.Meeting(meeting)
-  issue: (issue) ->
-    if issue instanceof share.Issue or not issue then issue else new share.Issue(issue)
+  sak: (sak) ->
+    if sak instanceof share.Sak or not sak then sak else new share.Sak(sak)
   talk: (talk) ->
     if talk instanceof share.Talk or not talk then talk else new share.Talk(talk)
   reply: (reply) ->

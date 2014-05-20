@@ -4,3 +4,9 @@ template(name="meeting")
       .row
         .col-lg-12
           h1 #{name}
+          each saker
+            h2
+              | #{name}
+              | &nbsp;
+              small #{number}
+
