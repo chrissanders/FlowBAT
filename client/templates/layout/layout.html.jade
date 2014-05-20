@@ -42,7 +42,7 @@ template(name="layout")
               b.caret
             ul.dropdown-menu
               each meetings
-                li: a(href=pathForMeeting) #{name}
+                li: a(href="/meetings/#{_id}") #{name}
               li.divider
               li: a(href="/meetings/add") <i class="fa fa-plus"></i> Add new
               li: a(href="/") <i class="fa fa-search"></i> Search

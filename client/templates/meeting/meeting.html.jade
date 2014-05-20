@@ -11,13 +11,15 @@ template(name="meeting")
               small #{number}
             ul
               each talks
-                with user
-                  li
-                    a(href=pathForUser) #{profile.name}
+                li
+                  a(href="/user/#{user._id}") #{user.profile.name}
                 ul
                   each replies
-                    with user
-                      li
-                        a(href=pathForUser) #{profile.name}
+                    li
+                      a(href="/user/#{user._id}") #{user.profile.name}
+              li
+                span.text-muted Add delegate
+          h2.text-muted
+            | Add sak
 
 
