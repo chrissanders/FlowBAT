@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DIRNAME=$(cd `dirname $0` && pwd)
+
+$DIRNAME/download-dump
+if [[ $? == 0 ]] ; then
+  $DIRNAME/mongorestore-dump
+fi
+

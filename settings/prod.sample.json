@@ -1,0 +1,31 @@
+{
+  "baseUrl": "https://priest.me",
+  "facebook": {
+    "secret": ""
+  },
+  "google": {
+    "secret": ""
+  },
+  "apm": {
+    "appId": "",
+    "secret": ""
+  },
+  "public": {
+    "version": "__VERSION__",
+    "isDebug": false,
+    "facebook": {
+      "appId": ""
+    },
+    "google": {
+      "clientId": ""
+    },
+    "googleAnalytics": {
+      "property": "",
+      "disabled": true
+    },
+    "mixpanel": {
+      "token": "",
+      "disabled": false
+    }
+  }
+}

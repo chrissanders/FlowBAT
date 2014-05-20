@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DIRNAME=$(cd `dirname $0` && pwd)
+
+echo "Resetting..."
+until meteor reset "$@" > /dev/null 2>&1
+do
+  echo "Resetting again..."
+done
+$DIRNAME/run

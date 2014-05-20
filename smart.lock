@@ -1,0 +1,38 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "iron-router": {},
+      "jade": {},
+      "collection-hooks": {},
+      "percolatestudio-mixpanel": {}
+    },
+    "packages": {
+      "iron-router": {
+        "git": "https://github.com/EventedMind/iron-router.git",
+        "tag": "v0.7.1",
+        "commit": "d1ffb3f06ea4c112132b030f2eb1a70b81675ecb"
+      },
+      "jade": {
+        "git": "https://github.com/mquandalle/meteor-jade.git",
+        "tag": "v0.2.2",
+        "commit": "0391abab7d592b17ff74d9b9beaa721051970729"
+      },
+      "collection-hooks": {
+        "git": "https://github.com/matb33/meteor-collection-hooks.git",
+        "tag": "v0.6.7",
+        "commit": "f1d2ac629864edda09df6c955fa5ff3df26f739c"
+      },
+      "percolatestudio-mixpanel": {
+        "git": "https://github.com/percolatestudio/meteor-mixpanel.git",
+        "tag": "v0.5.0",
+        "commit": "d92c8fd6c0504d3f1c195cf972354ab2e81b4e20"
+      },
+      "blaze-layout": {
+        "git": "https://github.com/EventedMind/blaze-layout.git",
+        "tag": "v0.2.4",
+        "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
+      }
+    }
+  }
+}

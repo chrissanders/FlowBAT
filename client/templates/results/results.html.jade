@@ -1,0 +1,21 @@
+template(name="results")
+  .results
+    .container
+      .row
+        .col-lg-8.col-lg-offset-2
+          h1.header
+            | Choosing <a href="/#{category.slug}">#{category.smallName}</a>
+            if condition filteredResults.count "isnt" allResults.count
+              if condition filteredResults.count "gt" 1
+                | &nbsp;
+                small from #{filteredResults.count} alternatives
+    if condition filteredResults.count "gt" 2
+      .container-fluid
+        .row
+          .col-lg-12
+            +table
+    else
+      .container
+        .row
+          .col-lg-8.col-lg-offset-2
+            +table

@@ -1,0 +1,22 @@
+template(name="table")
+  table.table.table-striped
+    thead
+      tr
+        each filteredResults
+          th
+            | #{name}
+    tbody
+      tr
+        each filteredResults
+          td
+            a(href=url) #{url}
+      tr
+        each filteredResults
+          td
+            +markdown
+              | #{pricing}
+      tr
+        each filteredResults
+          td
+            +markdown
+              | #{blog}

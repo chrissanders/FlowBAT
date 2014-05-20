@@ -1,0 +1,31 @@
+#!/bin/bash
+
+DIRNAME=$(cd `dirname $0` && pwd)
+METEOR_DOMAIN="meetings.me"
+USERNAME=$(<~/.meteor/${METEOR_DOMAIN}.username)
+PASSWORD=$(<~/.meteor/${METEOR_DOMAIN}.password)
+HOST="54.85.95.182"
+PORT="27017"
+DB="meetings_me"
+OUT_DIR="/tmp"
+
+EMAIL=$1
+if [[ "$EMAIL" == "" ]]
+then
+        echo "Usage:"
+        echo "$0 email"
+        exit 1
+fi
+
+QUERY="db.users.findOne({'emails.address': /${EMAIL}/}, {'emails.address': 1, 'services.resume.loginTokens.token': 1})"
+LOG_FILE=$(mktemp)
+
+mongo -u $USERNAME -p $PASSWORD $HOST:$PORT/$DB --eval "printjson($QUERY)" > $LOG_FILE
+cat $LOG_FILE
+
+TOKEN=$(grep -Po '(?<="token" : ")[^"]+' "${LOG_FILE}" | head -n 1)
+echo $TOKEN
+URL="https://${METEOR_DOMAIN}/autologin/$TOKEN"
+echo $URL
+
+google-chrome --user-data-dir=$HOME/chrome-autologin $URL

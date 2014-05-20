@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DIRNAME=$(cd `dirname $0` && pwd)
+USERNAME=$(<~/.meteor/meetings.me.username)
+PASSWORD=$(<~/.meteor/meetings.me.password)
+HOST="54.85.95.182"
+PORT="27017"
+DB="meetings_me"
+OUT_DIR="/tmp"
+
+echo "mongodump --host $HOST:$PORT -u $USERNAME -p \"${PASSWORD}\" -d $DB -c {collection_name} -o $OUT_DIR for all collections except 'system.users'"
+TMP_FILE="$OUT_DIR/getCollectionNames.js"
+echo "print(db.getCollectionNames())" > $TMP_FILE
+cols=`mongo $HOST:$PORT/$DB -u $USERNAME -p "${PASSWORD}" $TMP_FILE | tail -1 | tr ',' ' ' `
+for c in $cols
+do
+    if [ "$c" != "system.users" ]
+    then
+        mongodump --host $HOST:$PORT -u $USERNAME -p "${PASSWORD}" -d $DB -c $c -o $OUT_DIR
+    fi
+done
+rm $TMP_FILE
+
+echo ""
+echo "Dumped to $OUT_DIR/$DB"

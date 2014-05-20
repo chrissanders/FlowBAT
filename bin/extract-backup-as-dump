@@ -1,0 +1,9 @@
+#!/bin/bash
+
+DIRNAME=$(cd `dirname $0` && pwd)
+
+tar -C /tmp -xzf ~/meetings_me.tar.gz
+if [[ $? == 0 ]] ; then
+  $DIRNAME/mongorestore-dump
+fi
+
