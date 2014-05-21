@@ -12,6 +12,11 @@ class share.Meeting
     _.extend(@, doc)
   saker: ->
     share.Saker.find({meetingId: @_id})
+  calculatedDuration: ->
+    calculatedDuration = 0
+    @saker().forEach (saker) ->
+      calculatedDuration += saker.maximumDuration
+    calculatedDuration
 
 class share.Sak
   constructor: (doc) ->
@@ -20,6 +25,11 @@ class share.Sak
     share.Meetings.findOne({_id: @meetingId})
   talks: ->
     share.Talks.find({sakId: @_id})
+  calculatedDuration: ->
+    calculatedDuration = 0
+    @talks().forEach (talk) =>
+      calculatedDuration += @talkDuration + @replyDuration * talk.replies().count()
+    calculatedDuration
 
 class share.Talk
   constructor: (doc) ->

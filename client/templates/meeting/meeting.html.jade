@@ -4,30 +4,30 @@ template(name="meeting")
       .container
         .row
           .col-lg-9.name
-            h1 #{name}
+            h2 #{name}
           .col-lg-1.col-lg-offset-1.duration
-            h1.text-muted {{formatDuration calculatedDuration}}
+            h2.text-muted {{formatDuration calculatedDuration}}
           .col-lg-1.duration
-            h1.text-success {{formatDuration maximumDuration}}
+            h2.text-success {{formatDuration maximumDuration}}
         each saker
           .saker
             .row.cue
               .col-lg-9.name
-                h2
+                h3
                   | #{name}
                   | &nbsp;
                   small #{number}
               .col-lg-1.duration
-                h2.text-muted {{formatDuration calculatedDuration}}
+                h3.text-muted {{formatDuration calculatedDuration}}
               .col-lg-1.duration
-                h2.text-success {{formatDuration maximumDuration}}
+                h3(class=durationOverflowClass) {{formatDuration maximumDuration}}
             .talks
               each talks
                 .row.talk
                   .col-lg-9.name
-                    a(href="/user/#{user._id}") #{user.profile.name}
+                    h4: a(href="/user/#{user._id}") #{user.profile.name}
                   .col-lg-1.duration
-                    | 0:05
+                    h4.text-muted 0:05
                 .replies
                   each replies
                     .row.reply
@@ -35,13 +35,13 @@ template(name="meeting")
                         | +&nbsp;
                         a(href="/user/#{user._id}") #{user.profile.name}
                       .col-lg-1.duration
-                        | 0:03
+                        span.text-muted 0:03
             .row.talk.add
               .col-lg-9.name
-                span.text-muted Add delegate
+                h4.text-muted Add delegate
         .row
           .col-lg-9
-            h2.text-muted
+            h3.text-muted
               | Add sak
 
 
