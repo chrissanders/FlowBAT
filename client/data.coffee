@@ -6,6 +6,7 @@ insertData = (data, collection) ->
 meetings =
   FirstMeeting:
     name: "First meeting"
+    maximumDuration: 1.5 * share.hour
   SecondMeeting:
     name: "Second meeting"
   ThirdMeeting:
@@ -17,14 +18,17 @@ saker =
   FirstSak:
     name: "First sak"
     number: "01/14"
+    maximumDuration: 0.5 * share.hour
     meetingId: "FirstMeeting"
   SecondSak:
     name: "Second sak"
     number: "02/14"
+    maximumDuration: 0.3 * share.hour
     meetingId: "FirstMeeting"
   ThirdSak:
     name: "Third sak"
     number: "03/14"
+    maximumDuration: 0.4 * share.hour
     meetingId: "FirstMeeting"
   FourthSak:
     name: "Fourth sak"

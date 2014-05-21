@@ -31,3 +31,9 @@ UI.registerHelper("condition", (v1, operator, v2, options) ->
     else
       throw "Undefined operator \"" + operator + "\""
 )
+
+UI.registerHelper("formatDuration", (duration, options) ->
+  hours = share.intval(duration / 1000 / 3600)
+  minutes = share.intval(duration / 1000 % 3600 / 60)
+  _.str.pad(hours, 2, "0") + ":" + _.str.pad(minutes, 2, "0")
+)

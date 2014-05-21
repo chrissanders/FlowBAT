@@ -5,6 +5,12 @@ share = share or {}
 #    for func in funcs
 #      func.apply(@, args)
 
+share.intval = (value) ->
+  parseInt(value, 10) || 0
+
+share.minute = 60 * 1000
+share.hour = 60 * share.minute
+
 share.isDebug = Meteor.settings.public.isDebug
 
 object = if typeof(window) != "undefined" then window else GLOBAL

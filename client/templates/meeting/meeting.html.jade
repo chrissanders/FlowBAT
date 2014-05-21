@@ -1,25 +1,47 @@
 template(name="meeting")
   with meeting
-    .container.meeting
-      .row
-        .col-lg-12
-          h1 #{name}
-          each saker
-            h2
-              | #{name}
-              | &nbsp;
-              small #{number}
-            ul
+    .meeting
+      .container
+        .row
+          .col-lg-9.name
+            h1 #{name}
+          .col-lg-1.col-lg-offset-1.duration
+            h1.text-muted {{formatDuration calculatedDuration}}
+          .col-lg-1.duration
+            h1.text-success {{formatDuration maximumDuration}}
+        each saker
+          .saker
+            .row.cue
+              .col-lg-9.name
+                h2
+                  | #{name}
+                  | &nbsp;
+                  small #{number}
+              .col-lg-1.duration
+                h2.text-muted {{formatDuration calculatedDuration}}
+              .col-lg-1.duration
+                h2.text-success {{formatDuration maximumDuration}}
+            .talks
               each talks
-                li
-                  a(href="/user/#{user._id}") #{user.profile.name}
-                ul
+                .row.talk
+                  .col-lg-9.name
+                    a(href="/user/#{user._id}") #{user.profile.name}
+                  .col-lg-1.duration
+                    | 0:05
+                .replies
                   each replies
-                    li
-                      a(href="/user/#{user._id}") #{user.profile.name}
-              li
+                    .row.reply
+                      .col-lg-9.name
+                        | +&nbsp;
+                        a(href="/user/#{user._id}") #{user.profile.name}
+                      .col-lg-1.duration
+                        | 0:03
+            .row.talk.add
+              .col-lg-9.name
                 span.text-muted Add delegate
-          h2.text-muted
-            | Add sak
+        .row
+          .col-lg-9
+            h2.text-muted
+              | Add sak
 
 
