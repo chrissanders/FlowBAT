@@ -15,7 +15,6 @@ template(name="meeting")
               .col-lg-9.name
                 h3
                   | #{name}
-                  | &nbsp;
                   small #{number}
               .col-lg-1.duration
                 h3.text-muted {{formatDuration calculatedDuration}}
@@ -32,7 +31,7 @@ template(name="meeting")
                   each replies
                     .row.reply
                       .col-lg-9.name
-                        | +&nbsp;
+                        | +
                         a(href="/user/#{user._id}") #{user.profile.name}
                       .col-lg-1.duration
                         span.text-muted 0:03

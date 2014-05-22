@@ -1,9 +1,9 @@
 {
   "packages": {
     "iron-router": {},
-    "jade": {},
     "collection-hooks": {},
     "percolatestudio-mixpanel": {},
-    "fast-render": {}
+    "fast-render": {},
+    "jade": {}
   }
 }
