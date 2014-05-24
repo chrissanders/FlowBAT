@@ -2,51 +2,55 @@ template(name="meeting")
   with meeting
     .meeting
       .container
-        .row
+        .row.object(class="{{#if isEdited}}is-edited{{/if}}" data-family="meeting" data-id="#{_id}")
+          .col-lg-10.name
+            h2
+              if isEdited
+                +textarea(family="meeting" property="name" _id=_id placeholderI18n="forms.meeting.namePlaceholder" value=name)
+              else
+                span(class="{{#if not isEdited}}start-editing{{/if}}") #{name}
           .col-lg-1.duration
             h2.text-success {{formatDuration maximumDurationSum}}
           .col-lg-1.duration
             h2.text-muted {{formatDuration calculatedDurationSum}}
-          .col-lg-10.name
-            h2 #{name}
         each saker
           .saker
             .row.cue
-              .col-lg-1.duration
-                h3(class=durationOverflowClass) {{formatDuration maximumDuration}}
-              .col-lg-1.duration
-                h3.text-muted {{formatDuration calculatedDurationSum}}
               .col-lg-10.name
                 h3
                   | #{name}
                   small #{number}
+              .col-lg-1.duration
+                h3(class=durationOverflowClass) {{formatDuration maximumDuration}}
+              .col-lg-1.duration
+                h3.text-muted {{formatDuration calculatedDurationSum}}
             .talks
               each talks
                 .row.talk
+                  .col-lg-10.name
+                    h4: a(href="/user/#{user._id}") #{user.profile.name}
                   .col-lg-1.duration
                   .col-lg-1.duration
                     h4.text-muted {{formatDuration ../talkDuration}}
-                  .col-lg-10.name
-                    h4: a(href="/user/#{user._id}") #{user.profile.name}
                 .replies
                   each replies
                     .row.reply
-                      .col-lg-1.duration
-                      .col-lg-1.duration
-                        span.text-muted {{formatDuration ../../replyDuration}}
                       .col-lg-10.name
                         | +
                         a(href="/user/#{user._id}") #{user.profile.name}
+                      .col-lg-1.duration
+                      .col-lg-1.duration
+                        span.text-muted {{formatDuration ../../replyDuration}}
             .row.talk.add
-              .col-lg-1.duration
-              .col-lg-1.duration
               .col-lg-10.name
                 h4.text-muted Add delegate
+              .col-lg-1.duration
+              .col-lg-1.duration
         .row
-          .col-lg-1.duration
-          .col-lg-1.duration
           .col-lg-10
             h3.text-muted
               | Add sak
+          .col-lg-1.duration
+          .col-lg-1.duration
 
 

@@ -54,6 +54,7 @@ class share.Reply
   meeting: ->
     share.Meetings.findOne({_id: @meetingId})
 
+
 share.Transformations =
   meeting: (meeting) ->
     if meeting instanceof share.Meeting or not meeting then meeting else new share.Meeting(meeting)

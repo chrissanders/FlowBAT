@@ -2,6 +2,8 @@ Router.configure
   layoutTemplate: "layout"
   notFoundTemplate: "notFound"
   loadingTemplate: "loading"
+  yieldTemplates:
+    navbar: {to: "header"}
 
 Router.onBeforeAction("dataNotFound")
 

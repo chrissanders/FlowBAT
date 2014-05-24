@@ -1,8 +1,8 @@
 Template.layout.helpers
-  meetings: ->
-    share.Meetings.find()
 
 Template.layout.rendered = ->
 
 Template.layout.events
-#  "submit .subscribe": encapsulate (event, template) ->
+  "click": (event, template) ->
+    $object = $(event.target).closest(".object")
+    share.EditorCache.stopEditing(share.EditorCache.editorId($object.attr("data-family"), $object.attr("data-id")))
