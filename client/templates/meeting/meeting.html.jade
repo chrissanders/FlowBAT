@@ -13,10 +13,12 @@ template(name="meeting")
                     | #{name}
                   else
                     | {{t "forms.meeting.nameIsEmpty"}}
-          .col-lg-1.duration
-            h2.text-success {{formatDuration maximumDurationSum}}
-          .col-lg-1.duration
-            h2.text-muted {{formatDuration calculatedDurationSum}}
+          if maximumDurationSum
+            .col-lg-1.duration
+              h2.text-success {{formatDuration maximumDurationSum}}
+          if calculatedDurationSum
+            .col-lg-1.duration
+              h2.text-muted {{formatDuration calculatedDurationSum}}
         each saker
           .saker
             .row.cue

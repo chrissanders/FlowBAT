@@ -35,6 +35,14 @@ class share.Editor
     _id = @collection.insert(object, callback)
     @startEditing(_id)
     _id
+  insertAfter: (_id, object = {}, callback = ->) ->
+    @insertAndShow(object, callback)
+  insertAndShow: (object = {}, callback = ->) ->
+    _id = @insert(object, callback)
+    object = @collection.findOne(_id)
+    path = object.path()
+    _.defer ->
+      Router.go(path)
   isEdited: (_id) ->
     Session.equals(@family + "-" + _id + "-is-edited", true)
   startEditing: (_id) ->
@@ -53,7 +61,12 @@ class share.Editor
     $(".property-editor[data-family='" + @family + "'][data-object-id='" + _id + "']").each (index, element) ->
       $element = $(element)
       $set[$element.attr("name")] = $element.val()
+    object = @collection.findOne(_id)
+    if object.isNew
+      $set["isNew"] = false
     @collection.update(_id, {$set: $set})
+  isSingleLine: (property) ->
+    false
 share.Editor::debouncedSaveProperty = _.debounce(share.Editor::saveProperty, 500)
 share.Editor::debouncedSaveObject = _.debounce(share.Editor::saveObject, 500)
 

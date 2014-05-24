@@ -1,6 +1,8 @@
 share.MeetingEditor = new share.Editor(
   collection: share.Meetings
   family: "meeting"
+  isSingleLine: (property) ->
+    property in ["name"]
 )
 share.SakEditor = new share.Editor(
   collection: share.Saker

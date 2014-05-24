@@ -28,8 +28,9 @@ Template.textarea.events
           if not activeElementFamily or activeElementFamily isnt editor.family
             editor.saveProperty(data._id, data.property, $editor.val())
             editor.stopEditing(data._id)
+            editor.insertAfter(data._id)
       when 13 # Enter
-        if event.ctrlKey
+        if editor.isSingleLine(data.property) or event.ctrlKey
           event.preventDefault()
           editor.saveProperty(data._id, data.property, $editor.val())
           editor.stopEditing(data._id)

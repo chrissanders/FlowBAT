@@ -10,6 +10,8 @@ class share.User
 class share.Meeting
   constructor: (doc) ->
     _.extend(@, doc)
+  path: ->
+    "/meeting/" + @_id
   saker: ->
     share.Saker.find({meetingId: @_id})
   calculatedDurationSum: ->

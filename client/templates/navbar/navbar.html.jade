@@ -16,7 +16,7 @@ template(name="navbar")
               b.caret
             ul.dropdown-menu
               each meetings
-                li: a(href="/meeting/#{_id}") #{name}
+                li: a(href=path) #{name}
               li.divider
               li: a.insert-meeting(href="#") <i class="fa fa-plus"></i> Add new
               li: a(href="/") <i class="fa fa-search"></i> Search
