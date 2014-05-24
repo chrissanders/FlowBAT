@@ -3,7 +3,9 @@ Template.textarea.helpers
 Template.textarea.rendered = ->
   editor = @firstNode
   $editor = $(editor)
-  $editor.autosize()
+  $editor.autosize(
+    append: ""
+  )
   editor = share.EditorCache.editors[@data.family]
   if editor.isEdited(@data._id) # and Session.equals("edited" + cls + "Property", @data.property)
     $activeElement = $(document.activeElement)
@@ -14,4 +16,32 @@ Template.textarea.rendered = ->
         $editor.focusToEnd()
 
 Template.textarea.events
-#  "click .selector": (event, template) ->
+  "keydown .property-editor": encapsulate (event, template) ->
+    $editor = $(event.target)
+    editor = share.EditorCache.editors[template.data.family]
+    data = template.data
+    switch event.keyCode
+      when 9 # Tab
+        _.defer -> # maybe replace with keyup
+          $activeElement = $(document.activeElement)
+          activeElementFamily = $activeElement.attr("data-family")
+          if not activeElementFamily or activeElementFamily isnt editor.family
+            editor.saveProperty(data._id, data.property, $editor.val())
+            editor.stopEditing(data._id)
+      when 13 # Enter
+        if event.ctrlKey
+          event.preventDefault()
+          editor.saveProperty(data._id, data.property, $editor.val())
+          editor.stopEditing(data._id)
+          if not event.altKey
+            editor.insertAfter(data._id)
+      when 27 # Escape
+        event.preventDefault()
+        editor.saveProperty(data._id, data.property, $editor.val())
+        editor.stopEditing(data._id)
+      else
+      # noop
+  "keyup, paste .property-editor": encapsulate (event, template) ->
+    $editor = $(event.target)
+    editor = share.EditorCache.editors[template.data.family]
+    editor.debouncedSaveProperty(template.data._id, template.data.property, $editor.val())

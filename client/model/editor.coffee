@@ -39,8 +39,21 @@ class share.Editor
     Session.set(@editorKey(_id, "is-edited"), true)
     share.EditorCache.add(@editorId(_id), "is-edited", {family: @family, _id: _id})
   stopEditing: (_id) ->
+    @saveObject(_id)
     Session.set(@editorKey(_id, "is-edited"), false)
     share.EditorCache.remove(@editorId(_id), "is-edited")
+  saveProperty: (_id, property, value) ->
+    $set = {}
+    $set[property] = value
+    @collection.update(_id, {$set: $set})
+  saveObject: (_id) ->
+    $set = {}
+    $(".property-editor[data-family='" + @family + "'][data-object-id='" + _id + "']").each (index, element) ->
+      $element = $(element)
+      $set[$element.attr("name")] = $element.val()
+    @collection.update(_id, {$set: $set})
+share.Editor::debouncedSaveProperty = _.debounce(share.Editor::saveProperty, 500)
+share.Editor::debouncedSaveObject = _.debounce(share.Editor::saveObject, 500)
 
 share.MeetingEditor = new share.Editor(
   collection: share.Meetings
