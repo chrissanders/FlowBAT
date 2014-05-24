@@ -6,7 +6,6 @@ insertData = (data, collection) ->
 meetings =
   FirstMeeting:
     name: "First meeting"
-    maximumDuration: 4.5 * share.hour
   SecondMeeting:
     name: "Second meeting"
   ThirdMeeting:

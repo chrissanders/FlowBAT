@@ -3,43 +3,43 @@ template(name="meeting")
     .meeting
       .container
         .row
-          .col-lg-9.name
+          .col-lg-10.name
             h2 #{name}
-          .col-lg-1.col-lg-offset-1.duration
-            h2.text-muted {{formatDuration calculatedDuration}}
           .col-lg-1.duration
-            h2.text-success {{formatDuration maximumDuration}}
+            h2.text-muted {{formatDuration calculatedDurationSum}}
+          .col-lg-1.duration
+            h2.text-success {{formatDuration maximumDurationSum}}
         each saker
           .saker
             .row.cue
-              .col-lg-9.name
+              .col-lg-10.name
                 h3
                   | #{name}
                   small #{number}
               .col-lg-1.duration
-                h3.text-muted {{formatDuration calculatedDuration}}
+                h3.text-muted {{formatDuration calculatedDurationSum}}
               .col-lg-1.duration
                 h3(class=durationOverflowClass) {{formatDuration maximumDuration}}
             .talks
               each talks
                 .row.talk
-                  .col-lg-9.name
+                  .col-lg-10.name
                     h4: a(href="/user/#{user._id}") #{user.profile.name}
                   .col-lg-1.duration
-                    h4.text-muted 0:05
+                    h4.text-muted {{formatDuration ../talkDuration}}
                 .replies
                   each replies
                     .row.reply
-                      .col-lg-9.name
+                      .col-lg-10.name
                         | +
                         a(href="/user/#{user._id}") #{user.profile.name}
                       .col-lg-1.duration
-                        span.text-muted 0:03
+                        span.text-muted {{formatDuration ../../replyDuration}}
             .row.talk.add
-              .col-lg-9.name
+              .col-lg-10.name
                 h4.text-muted Add delegate
         .row
-          .col-lg-9
+          .col-lg-10
             h3.text-muted
               | Add sak
 

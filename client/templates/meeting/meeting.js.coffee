@@ -1,6 +1,6 @@
 Template.meeting.helpers
   durationOverflowClass: ->
-    if @calculatedDuration() > @maximumDuration then "text-danger" else "text-success"
+    if @calculatedDurationSum() > @maximumDuration then "text-danger" else "text-success"
 
 Template.meeting.rendered = ->
 
