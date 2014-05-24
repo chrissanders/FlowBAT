@@ -65,4 +65,7 @@ i18n.addResourceBundle("en",
         save: "Save meeting"
         remove: "Delete this meeting"
         removeConfirmation: "Deleting a meeting will wipe it completely. If you just want to hide it, you can click \"archive\" (next to \"delete\"). Are you sure you want to delete this meeting?"
+  defaults:
+    meeting:
+      name: "New meeting"
 )

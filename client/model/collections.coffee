@@ -10,9 +10,3 @@ share.Talks = window.Talks = new Meteor.Collection("talks",
 share.Replies = window.Replies = new Meteor.Collection("replies",
   transform: share.Transformations.reply
 )
-
-share.MeetingEditor = new share.Editor(
-  collection: share.Meetings
-  family: "meeting"
-)
-share.EditorCache.register(share.MeetingEditor)

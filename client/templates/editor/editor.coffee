@@ -25,11 +25,13 @@ share.EditorCache =
 class share.Editor
   constructor: (options) ->
     _.extend(@, options)
+    share.EditorCache.register(@)
   editorId: (_id) ->
     share.EditorCache.editorId(@family, _id)
   editorKey: (_id, key) ->
     share.EditorCache.editorKey(@family, _id, key)
   insert: (object = {}, callback = ->) ->
+    _.defaults(object, i18n.t("defaults." + @family, {returnObjectTrees: true}) or {})
     _id = @collection.insert(object, callback)
     @startEditing(_id)
     _id
