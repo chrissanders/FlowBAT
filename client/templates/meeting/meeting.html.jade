@@ -8,7 +8,11 @@ template(name="meeting")
               if isEdited
                 +textarea(family="meeting" property="name" _id=_id placeholderI18n="forms.meeting.namePlaceholder" value=name)
               else
-                span(class="{{#if not isEdited}}start-editing{{/if}}") #{name}
+                span(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
+                  if name
+                    | #{name}
+                  else
+                    | {{t "forms.meeting.nameIsEmpty"}}
           .col-lg-1.duration
             h2.text-success {{formatDuration maximumDurationSum}}
           .col-lg-1.duration

@@ -55,12 +55,6 @@ class share.Editor
 share.Editor::debouncedSaveProperty = _.debounce(share.Editor::saveProperty, 500)
 share.Editor::debouncedSaveObject = _.debounce(share.Editor::saveObject, 500)
 
-share.MeetingEditor = new share.Editor(
-  collection: share.Meetings
-  family: "meeting"
-)
-share.EditorCache.register(share.MeetingEditor)
-
 share.createExtension = ->
   share.stopEditingExtension()
   extensionId = Extensions.insert({})

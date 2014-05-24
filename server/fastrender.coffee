@@ -47,4 +47,8 @@
 FastRender.onAllRoutes (params) ->
   @subscribe("currentUser")
   @subscribe("friends")
+  @subscribe("meetings")
+  @subscribe("saker")
+  @subscribe("talks")
+  @subscribe("replies")
   @subscribe("allUsersInsecure") # TEMP

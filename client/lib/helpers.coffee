@@ -35,8 +35,17 @@ UI.registerHelper("condition", (v1, operator, v2, options) ->
 UI.registerHelper "not", (value, options) ->
   not value
 
+UI.registerHelper "t", (key, hash) ->
+  params = {} #default
+  params = hash.hash  if hash
+  result = i18n.t(key, params)
+  new Spacebars.SafeString(result)
+
 UI.registerHelper("formatDuration", (duration, options) ->
   hours = share.intval(duration / 1000 / 3600)
   minutes = share.intval(duration / 1000 % 3600 / 60)
   _.str.pad(hours, 2, "0") + ":" + _.str.pad(minutes, 2, "0")
 )
+
+UI.registerHelper "cl", (v) ->
+  cl v

@@ -26,3 +26,15 @@ Meteor.publish "allUsersInsecure", ->
       profile: 1
       invitationFailed: 1
   })
+
+Meteor.publish "meetings", ->
+  share.Meetings.find({})
+
+Meteor.publish "saker", ->
+  share.Saker.find({})
+
+Meteor.publish "talks", ->
+  share.Talks.find({})
+
+Meteor.publish "replies", ->
+  share.Replies.find({})

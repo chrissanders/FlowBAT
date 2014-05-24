@@ -12,7 +12,7 @@ Router.map ->
     path: "/"
     data: -> {}
   @route "meeting",
-    path: "/meetings/:_id"
+    path: "/meeting/:_id"
     data: ->
       meeting = share.Meetings.findOne(@params._id)
       if not meeting

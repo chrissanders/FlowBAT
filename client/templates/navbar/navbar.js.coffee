@@ -5,5 +5,7 @@ Template.navbar.helpers
 Template.navbar.rendered = ->
 
 Template.navbar.events
-  "click .add-meeting": (event, template) ->
+  "click .insert-meeting": grab encapsulate (event, template) ->
+    _id = share.EditorCache.editors["meeting"].insert()
+    Router.go("/meeting/" + _id)
 
