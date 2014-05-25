@@ -1,11 +1,11 @@
 template(name="sak")
   .object(class="{{#if isEdited}}is-edited{{/if}}" data-family="sak" data-id="#{_id}")
     .row
-      .col-lg-1.control-icons.text-right
+      .col-xs-1.control-icons.text-right
         h3
           if isEdited
             i.fa.fa-check.stop-editing
-      .col-lg-8.name
+      .col-xs-8.name
         h3
           if isEdited
             +textarea(family="sak" property="name" _id=_id placeholderI18n="forms.sak.namePlaceholder" value=name)
@@ -17,22 +17,22 @@ template(name="sak")
                 | {{t "forms.sak.nameIsEmpty"}}
             | &nbsp;
             small #{number}
-      .col-lg-1.duration
+      .col-xs-1.duration
         if not isEdited
           if maximumDuration
             h3(class=durationOverflowClass) {{milliseconds2hourminutes maximumDuration}}
-      .col-lg-1.duration
+      .col-xs-1.duration
         if not isEdited
           if calculatedDurationSum
             h3.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
-      .col-lg-1.control-icons.text-center
+      .col-xs-1.control-icons.text-center
         h3
           if isEdited
             i.fa.fa-trash-o.remove(data-confirmation="{{t 'forms.sak.actions.removeConfirmation'}}")
     if isEdited
       .row
-        .col-lg-1.control-icons.text-right
-        .col-lg-10
+        .col-xs-1.control-icons.text-right
+        .col-xs-10
           form.form-horizontal(role="form")
             .form-group
               label.col-sm-2.control-label Number
@@ -53,22 +53,22 @@ template(name="sak")
   .talks
     each talks
       .row.talk
-        .col-lg-8.col-lg-offset-1.name
+        .col-xs-8.col-xs-offset-1.name
           h4: a(href="/user/#{user._id}") #{user.profile.name}
-        .col-lg-1.duration
-        .col-lg-1.duration
+        .col-xs-1.duration
+        .col-xs-1.duration
           h4.text-muted {{milliseconds2hourminutes ../talkDuration}}
       .replies
         each replies
           .row.reply
-            .col-lg-8.col-lg-offset-1.name
+            .col-xs-8.col-xs-offset-1.name
               | +
               a(href="/user/#{user._id}") #{user.profile.name}
-            .col-lg-1.duration
-            .col-lg-1.duration
+            .col-xs-1.duration
+            .col-xs-1.duration
               span.text-muted {{milliseconds2hourminutes ../../replyDuration}}
   if not isNew
     .row.talk.add
-      .col-lg-1
-      .col-lg-8.name
+      .col-xs-1
+      .col-xs-8.name
         h4.text-muted Add delegate

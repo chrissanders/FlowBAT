@@ -1,13 +1,13 @@
 template(name="meeting")
   .object(class="{{#if isEdited}}is-edited{{/if}}" data-family="meeting" data-id="#{_id}")
     .row
-      .col-lg-1.control-icons.text-right
+      .col-xs-1.control-icons.text-right
         h2
           if isEdited
             i.fa.fa-check.stop-editing(title="{{t 'forms.meeting.actions.save'}}")
             //| &nbsp;
             //i.fa.fa-cog
-      .col-lg-8.name
+      .col-xs-8.name
         h2
           if isEdited
             +textarea(family="meeting" property="name" _id=_id placeholderI18n="forms.meeting.namePlaceholder" value=name)
@@ -17,13 +17,13 @@ template(name="meeting")
                 | #{name}
               else
                 | {{t "forms.meeting.nameIsEmpty"}}
-      .col-lg-1.duration
+      .col-xs-1.duration
         if maximumDurationSum
           h2(class=durationOverflowClass) {{milliseconds2hourminutes maximumDurationSum}}
-      .col-lg-1.duration
+      .col-xs-1.duration
         if calculatedDurationSum
           h2.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
-      .col-lg-1.control-icons.text-center
+      .col-xs-1.control-icons.text-center
         h2
           if isEdited
             i.fa.fa-trash-o.remove(data-confirmation="{{t 'forms.meeting.actions.removeConfirmation'}}" title="{{t 'forms.meeting.actions.remove'}}")
@@ -32,7 +32,7 @@ template(name="meeting")
       +sak
   if not isNew
     .row
-      .col-lg-1
-      .col-lg-8.name
+      .col-xs-1
+      .col-xs-8.name
         h3.text-muted
           span.add-object.add-sak Add case
