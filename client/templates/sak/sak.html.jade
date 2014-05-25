@@ -32,23 +32,23 @@ template(name="sak")
     if isEdited
       .row
         .col-xs-1.col-md-1.control-icons.text-right
-        .col-xs-8.col-md-6
+        .col-xs-6.col-md-8
           form.form-horizontal(role="form")
             .form-group
-              label.col-sm-2.control-label Number
-              .col-sm-2
+              label.col-xs-4.col-md-3.control-label Number
+              div.col-xs-6.col-md-3
                 +input(family="sak" property="number" _id=_id placeholderI18n="forms.sak.numberPlaceholder" value=number)
             .form-group
-              label.col-sm-2.control-label Case duration
-              .col-sm-2
+              label.col-xs-4.col-md-3.control-label Case duration
+              div.col-xs-6.col-md-3
                 +durationInput(family="sak" property="maximumDuration" _id=_id placeholderI18n="forms.sak.maximumDurationPlaceholder" value=maximumDuration)
             .form-group
-              label.col-sm-2.control-label Talk duration
-              .col-sm-2
+              label.col-xs-4.col-md-3.control-label Talk duration
+              div.col-xs-6.col-md-3
                 +durationInput(family="sak" property="talkDuration" _id=_id placeholderI18n="forms.sak.talkDurationPlaceholder" value=talkDuration)
             .form-group
-              label.col-sm-2.control-label Reply duration
-              .col-sm-2
+              label.col-xs-4.col-md-3.control-label Reply duration
+              div.col-xs-6.col-md-3
                 +durationInput(family="sak" property="replyDuration" _id=_id placeholderI18n="forms.sak.replyDurationPlaceholder" value=replyDuration)
   .talks
     each talks
