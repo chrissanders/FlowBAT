@@ -14,6 +14,9 @@ class share.Meeting
     "/meeting/" + @_id
   saker: ->
     share.Saker.find({meetingId: @_id}, {sort: {position: 1}})
+  lastSakPosition: ->
+    lastSak = share.Saker.findOne({meetingId: @_id}, {sort: {position: -1}})
+    if lastSak then lastSak.position else 0
   calculatedDurationSum: ->
     calculatedDurationSum = 0
     @saker().forEach (saker) ->

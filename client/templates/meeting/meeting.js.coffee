@@ -25,6 +25,4 @@ Template.meeting.events
       Router.go("/")
   "click .add-sak": encapsulate (event, template) ->
     share.EditorCache.stopEditing()
-    share.SakEditor.insert(
-      meetingId: template.data._id
-    )
+    share.MeetingEditor.insertSak(template.data._id)

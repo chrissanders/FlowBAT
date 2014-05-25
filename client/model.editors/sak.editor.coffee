@@ -11,6 +11,7 @@ share.SakEditor = new share.Editor(
     sibling = share.Saker.findOne(_id)
     _.defaults(sak,
       meetingId: sibling.meetingId
+      position: sibling.position + 1
     )
     share.SakEditor.insert(sak, callback)
 )
