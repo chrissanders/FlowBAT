@@ -11,6 +11,7 @@ Router.map ->
     data: -> {}
   @route "meeting",
     path: "/meeting/:_id"
+    template: "meetingView"
     data: ->
       meeting = share.Meetings.findOne(@params._id)
       if not meeting

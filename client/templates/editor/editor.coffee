@@ -67,6 +67,9 @@ class share.Editor
     @collection.update(_id, {$set: $set})
   isSingleLine: (property) ->
     false
+  remove: (_id) ->
+    @collection.remove(_id)
+    share.EditorCache.remove(@editorId(_id), "is-edited")
 share.Editor::debouncedSaveProperty = _.debounce(share.Editor::saveProperty, 500)
 share.Editor::debouncedSaveObject = _.debounce(share.Editor::saveObject, 500)
 

@@ -1,31 +1,33 @@
 template(name="navbar")
   nav.navbar.navbar-default.navbar-static-top(role="navigation")
     .container
-      .navbar-header
-        button.navbar-toggle(type="button", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1")
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand(href="/") Meetings
-      #bs-example-navbar-collapse-1.collapse.navbar-collapse
-        ul.nav.navbar-nav
-          li.dropdown
-            a.dropdown-toggle(href="#", data-toggle="dropdown")
-              | My meetings
-              b.caret
-            ul.dropdown-menu
-              each meetings
-                li: a(href=path) #{name}
-              li.divider
-              li: a.insert-meeting(href="#") <i class="fa fa-plus"></i> Add new
-              li: a(href="/") <i class="fa fa-search"></i> Search
-        ul.nav.navbar-nav.navbar-right
-          li.dropdown
-            a.dropdown-toggle(href="#", data-toggle="dropdown")
-              | {{currentUser.profile.name}}
-              b.caret
-            ul.dropdown-menu
-              li: a(href="/user/{{currentUser._id}}") Profile
-              li.divider
-              li: a.logout(href="#") Logout
+      .row
+        .col-lg-10.col-lg-offset-1
+          .navbar-header
+            button.navbar-toggle(type="button", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1")
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href="/") Meetings
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              li.dropdown
+                a.dropdown-toggle(href="#", data-toggle="dropdown")
+                  | My meetings
+                  b.caret
+                ul.dropdown-menu
+                  each meetings
+                    li: a(href=path) #{name}
+                  li.divider
+                  li: a.insert-meeting(href="#") <i class="fa fa-plus"></i> Add new
+                  li: a(href="/") <i class="fa fa-search"></i> Search
+            ul.nav.navbar-nav.navbar-right
+              li.dropdown
+                a.dropdown-toggle(href="#", data-toggle="dropdown")
+                  | {{currentUser.profile.name}}
+                  b.caret
+                ul.dropdown-menu
+                  li: a(href="/user/{{currentUser._id}}") Profile
+                  li.divider
+                  li: a.logout(href="#") Logout
