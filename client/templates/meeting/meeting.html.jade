@@ -16,11 +16,11 @@ template(name="meeting")
               | #{name}
             else
               | {{t "forms.meeting.nameIsEmpty"}}
-    if maximumDurationSum
-      .col-lg-1.duration
+    .col-lg-1.duration
+      if maximumDurationSum
         h2.text-success {{formatDuration maximumDurationSum}}
-    if calculatedDurationSum
-      .col-lg-1.duration
+    .col-lg-1.duration
+      if calculatedDurationSum
         h2.text-muted {{formatDuration calculatedDurationSum}}
     .col-lg-1.control-icons.text-center
       h2
@@ -59,9 +59,10 @@ template(name="meeting")
           h4.text-muted Add delegate
         .col-lg-1.duration
         .col-lg-1.duration
-  .row
-    .col-lg-8.col-lg-offset-1.name
-      h3.text-muted
-        | Add sak
-    .col-lg-1.duration
-    .col-lg-1.duration
+  if not isNew
+    .row
+      .col-lg-8.col-lg-offset-1.name
+        h3.text-muted
+          | Add sak
+      .col-lg-1.duration
+      .col-lg-1.duration
