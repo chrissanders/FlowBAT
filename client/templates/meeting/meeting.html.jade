@@ -10,7 +10,7 @@ template(name="meeting")
       .col-xs-6.col-md-8.name
         h2
           if isEdited
-            +textarea(family="meeting" property="name" _id=_id placeholderI18n="forms.meeting.namePlaceholder" value=name)
+            +textarea(family="meeting" _id=_id property="name" value=name placeholderI18n="forms.meeting.namePlaceholder" isNew=isNew)
           else
             span(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
               if name

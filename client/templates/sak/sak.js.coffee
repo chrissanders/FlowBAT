@@ -17,8 +17,6 @@ Template.sak.events
     share.SakEditor.startEditing(template.data._id)
   "click .stop-editing": encapsulate (event, template) ->
     share.SakEditor.stopEditing(template.data._id)
-    if template.data.isNew
-      share.SakEditor.insertAfter(template.data._id)
   "click .remove": encapsulate (event, template) ->
     $target = $(event.currentTarget)
     confirmation = $target.attr("data-confirmation")

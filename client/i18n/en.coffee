@@ -68,6 +68,10 @@ i18n.addResourceBundle("en",
     sak:
       namePlaceholder: "Case name"
       nameIsEmpty: "Type case name here"
+      numberPlaceholder: "NN/YY"
+      maximumDurationPlaceholder: "hh:mm"
+      talkDurationPlaceholder: "hh:mm"
+      replyDurationPlaceholder: "hh:mm"
       owner: "Case creator"
       createdAt: "Case added at"
       updatedAt: "Case edited at"

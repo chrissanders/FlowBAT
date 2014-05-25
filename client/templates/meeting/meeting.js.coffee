@@ -17,8 +17,6 @@ Template.meeting.events
     share.MeetingEditor.startEditing(template.data._id)
   "click .stop-editing": encapsulate (event, template) ->
     share.MeetingEditor.stopEditing(template.data._id)
-    if template.data.isNew
-      share.MeetingEditor.insertAfter(template.data._id)
   "click .remove": encapsulate (event, template) ->
     $target = $(event.currentTarget)
     confirmation = $target.attr("data-confirmation")
@@ -26,6 +24,7 @@ Template.meeting.events
       share.MeetingEditor.remove(template.data._id)
       Router.go("/")
   "click .add-sak": encapsulate (event, template) ->
+    share.EditorCache.stopEditing()
     share.SakEditor.insert(
       meetingId: template.data._id
     )

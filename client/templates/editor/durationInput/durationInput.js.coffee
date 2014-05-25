@@ -1,3 +1,3 @@
 Template.durationInput.helpers
   formattedValue: ->
-    share.milliseconds2hourminutes(@value)
+    if @value then share.milliseconds2hourminutes(@value) else ""

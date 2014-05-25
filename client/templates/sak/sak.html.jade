@@ -8,7 +8,7 @@ template(name="sak")
       .col-xs-6.col-md-8.name
         h3
           if isEdited
-            +textarea(family="sak" property="name" _id=_id placeholderI18n="forms.sak.namePlaceholder" value=name)
+            +textarea(family="sak" _id=_id property="name" value=name placeholderI18n="forms.sak.namePlaceholder" isNew=isNew)
           else
             span(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
               if name
@@ -37,19 +37,19 @@ template(name="sak")
             .form-group
               label.col-xs-4.col-md-3.control-label Number
               div.col-xs-6.col-md-3
-                +input(family="sak" property="number" _id=_id placeholderI18n="forms.sak.numberPlaceholder" value=number)
+                +input(family="sak" _id=_id property="number" value=number placeholderI18n="forms.sak.numberPlaceholder" isNew=isNew)
             .form-group
               label.col-xs-4.col-md-3.control-label Case duration
               div.col-xs-6.col-md-3
-                +durationInput(family="sak" property="maximumDuration" _id=_id placeholderI18n="forms.sak.maximumDurationPlaceholder" value=maximumDuration)
+                +durationInput(family="sak" _id=_id property="maximumDuration" value=maximumDuration placeholderI18n="forms.sak.maximumDurationPlaceholder" isNew=isNew)
             .form-group
               label.col-xs-4.col-md-3.control-label Talk duration
               div.col-xs-6.col-md-3
-                +durationInput(family="sak" property="talkDuration" _id=_id placeholderI18n="forms.sak.talkDurationPlaceholder" value=talkDuration)
+                +durationInput(family="sak" _id=_id property="talkDuration" value=talkDuration placeholderI18n="forms.sak.talkDurationPlaceholder" isNew=isNew)
             .form-group
               label.col-xs-4.col-md-3.control-label Reply duration
               div.col-xs-6.col-md-3
-                +durationInput(family="sak" property="replyDuration" _id=_id placeholderI18n="forms.sak.replyDurationPlaceholder" value=replyDuration)
+                +durationInput(family="sak" _id=_id property="replyDuration" value=replyDuration placeholderI18n="forms.sak.replyDurationPlaceholder" isNew=isNew)
   .talks
     each talks
       .row.talk
@@ -71,8 +71,8 @@ template(name="sak")
             .col-xs-2.col-md-1.duration
               span.text-muted {{milliseconds2hourminutes ../../replyDuration}}
             .col-xs-1.col-md-1.control-icons.text-center
-  if not isNew
-    .row.talk.add
-      .col-xs-1
-      .col-xs-8.name
-        h4.text-muted Add delegate
+  //if not isNew
+  //  .row.talk.add
+  //    .col-xs-1
+  //    .col-xs-8.name
+  //      h4.text-muted Add delegate

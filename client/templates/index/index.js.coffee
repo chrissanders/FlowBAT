@@ -1,6 +1,6 @@
 Template.index.helpers
   meetings: ->
-    share.Meetings.find()
+    share.Meetings.find({}, {sort: {createdAt: 1}})
 
 Template.index.rendered = ->
 

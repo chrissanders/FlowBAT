@@ -1,6 +1,6 @@
 Template.navbar.helpers
   meetings: ->
-    share.Meetings.find()
+    share.Meetings.find({}, {sort: {createdAt: 1}})
 
 Template.navbar.rendered = ->
 
