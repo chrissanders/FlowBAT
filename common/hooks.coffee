@@ -45,7 +45,7 @@ share.Meetings.before.insert (userId, meeting) ->
 share.Meetings.before.update (userId, meeting, fieldNames, modifier, options) ->
   now = new Date()
   modifier.$set = modifier.$set or {}
-  modifier.$set.updatedAt = now
+  modifier.$set.updatedAt = modifier.$set.updatedAt or now
   meetingPreSave.call(@, userId, modifier.$set)
 
 share.Saker.before.insert (userId, sak) ->
@@ -66,5 +66,5 @@ share.Saker.before.insert (userId, sak) ->
 share.Saker.before.update (userId, sak, fieldNames, modifier, options) ->
   now = new Date()
   modifier.$set = modifier.$set or {}
-  modifier.$set.updatedAt = now
+  modifier.$set.updatedAt = modifier.$set.updatedAt or now
   sakPreSave.call(@, userId, modifier.$set)

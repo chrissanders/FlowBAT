@@ -5,8 +5,6 @@ Router.configure
   yieldTemplates:
     navbar: {to: "header"}
 
-Router.onBeforeAction("dataNotFound")
-
 Router.map ->
   @route "index",
     path: "/"
@@ -20,6 +18,8 @@ Router.map ->
       _.defaults({}, @params,
         meeting: meeting
       )
+
+Router.onBeforeAction("dataNotFound")
 
 share.setPageTitle = (title, appendSiteName = true) ->
   if appendSiteName

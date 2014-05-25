@@ -5,6 +5,9 @@ share = share or {}
 #    for func in funcs
 #      func.apply(@, args)
 
+share.user = (fields, userId = Meteor.userId()) ->
+  Meteor.users.findOne(userId, {fields: fields})
+
 share.intval = (value) ->
   parseInt(value, 10) || 0
 
