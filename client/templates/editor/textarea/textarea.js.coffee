@@ -27,20 +27,18 @@ Template.textarea.events
             $activeElement = $(document.activeElement)
             activeElementFamily = $activeElement.attr("data-family")
             if not activeElementFamily or activeElementFamily isnt editor.family
-              editor.saveProperty(data._id, data.property, $editor.val())
               editor.stopEditing(data._id)
               if data.isNew
                 editor.insertAfter(data._id)
       when 13 # Enter
         if editor.isSingleLine(data.property) or event.ctrlKey
           event.preventDefault()
-          editor.saveProperty(data._id, data.property, $editor.val())
           editor.stopEditing(data._id)
-          if not event.altKey and data.isNew
-            editor.insertAfter(data._id)
+          if not event.altKey
+            if data.isNew
+              editor.insertAfter(data._id)
       when 27 # Escape
         event.preventDefault()
-        editor.saveProperty(data._id, data.property, $editor.val())
         editor.stopEditing(data._id)
       else
       # noop

@@ -1,0 +1,47 @@
+template(name="sak")
+  .row.object(class="{{#if isEdited}}is-edited{{/if}}" data-family="sak" data-id="#{_id}")
+    .col-lg-1.control-icons.text-right
+      h3
+        if isEdited
+          i.fa.fa-check.stop-editing
+    .col-lg-8.name
+      h3
+        if isEdited
+          +textarea(family="sak" property="name" _id=_id placeholderI18n="forms.sak.namePlaceholder" value=name)
+        else
+          span(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
+            if name
+              | #{name}
+            else
+              | {{t "forms.sak.nameIsEmpty"}}
+          small #{number}
+    .col-lg-1.duration
+      h3(class=durationOverflowClass) {{formatDuration maximumDuration}}
+    .col-lg-1.duration
+      h3.text-muted {{formatDuration calculatedDurationSum}}
+    .col-lg-1.control-icons.text-center
+      h3
+        if isEdited
+          i.fa.fa-trash-o.remove(data-confirmation="{{t 'forms.sak.actions.removeConfirmation'}}")
+  .talks
+    each talks
+      .row.talk
+        .col-lg-8.col-lg-offset-1.name
+          h4: a(href="/user/#{user._id}") #{user.profile.name}
+        .col-lg-1.duration
+        .col-lg-1.duration
+          h4.text-muted {{formatDuration ../talkDuration}}
+      .replies
+        each replies
+          .row.reply
+            .col-lg-8.col-lg-offset-1.name
+              | +
+              a(href="/user/#{user._id}") #{user.profile.name}
+            .col-lg-1.duration
+            .col-lg-1.duration
+              span.text-muted {{formatDuration ../../replyDuration}}
+  if not isNew
+    .row.talk.add
+      .col-lg-1
+      .col-lg-8.name
+        h4.text-muted Add delegate

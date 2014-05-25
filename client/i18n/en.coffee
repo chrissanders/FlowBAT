@@ -55,7 +55,7 @@ i18n.addResourceBundle("en",
           phone: "Please specify full phone number (with country code)"
     meeting:
       namePlaceholder: "Meeting name"
-      nameIsEmpty: "Click here to set meeting name"
+      nameIsEmpty: "Type meeting name here"
       owner: "Meeting creator"
       createdAt: "Meeting added at"
       updatedAt: "Meeting edited at"
@@ -63,9 +63,23 @@ i18n.addResourceBundle("en",
         insert: "Add meeting"
         update: "Edit meeting"
         save: "Save meeting"
-        remove: "Delete this meeting"
+        remove: "Delete meeting"
         removeConfirmation: "Deleting a meeting will wipe it completely. If you just want to hide it, you can click \"archive\" (next to \"delete\"). Are you sure you want to delete this meeting?"
+    sak:
+      namePlaceholder: "Case name"
+      nameIsEmpty: "Type case name here"
+      owner: "Case creator"
+      createdAt: "Case added at"
+      updatedAt: "Case edited at"
+      actions:
+        insert: "Add case"
+        update: "Edit case"
+        save: "Save case"
+        remove: "Delete case"
+        removeConfirmation: "Deleting a case will wipe it completely. Are you sure you want to delete this case?"
   defaults:
     meeting:
       name: "New meeting"
+    sak:
+      name: "New case"
 )
