@@ -2,6 +2,7 @@
 
 DIRNAME=$(cd `dirname $0` && pwd)
 
-# Using dev.json for a while
+# Using full data reload + dev.json for a while
+meteor deploy -D meetings.meteor.com
 meteor deploy --settings settings/dev.json meetings.meteor.com
 $DIRNAME/logs
