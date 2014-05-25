@@ -13,6 +13,7 @@ Template.sak.rendered = ->
 
 Template.sak.events
   "click .start-editing": encapsulate (event, template) ->
+    share.EditorCache.stopEditing(template.data._id)
     share.SakEditor.startEditing(template.data._id)
   "click .stop-editing": encapsulate (event, template) ->
     share.SakEditor.stopEditing(template.data._id)

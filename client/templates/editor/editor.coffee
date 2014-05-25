@@ -18,11 +18,12 @@ share.EditorCache =
     bag = @getSessionValue(subkey)
     delete bag[editorId]
     @setSessionValue(subkey, bag)
-  stopEditing: (exceptEditorId) ->
+  stopEditing: (exceptEditorId = null) ->
     for editorId, info of @getSessionValue("is-edited") when editorId isnt exceptEditorId
       @editors[info.family].stopEditing(info._id)
 
 class share.Editor
+  defaultEditedProperty: "name"
   constructor: (options) ->
     _.extend(@, options)
     share.EditorCache.register(@)
@@ -44,23 +45,33 @@ class share.Editor
     _.defer ->
       Router.go(path)
   isEdited: (_id) ->
-    Session.equals(@family + "-" + _id + "-is-edited", true)
-  startEditing: (_id) ->
+    Session.equals(@editorKey(_id, "is-edited"), true)
+  isEditedProperty: (_id, property) ->
+    @isEdited(_id) and Session.equals(@editorKey(_id, "edited-property"), property)
+  startEditing: (_id, property) ->
     Session.set(@editorKey(_id, "is-edited"), true)
     share.EditorCache.add(@editorId(_id), "is-edited", {family: @family, _id: _id})
+    @setEditingProperty(_id, property or @defaultEditedProperty)
+  setEditingProperty: (_id, property) ->
+    Session.set(@editorKey(_id, "edited-property"), property)
   stopEditing: (_id) ->
     @saveObject(_id)
-    Session.set(@editorKey(_id, "is-edited"), false)
+    Session.set(@editorKey(_id, "is-edited"), null)
+    Session.set(@editorKey(_id, "edited-property"), null)
     share.EditorCache.remove(@editorId(_id), "is-edited")
+  cleanProperty: (property, value) ->
+    value
   saveProperty: (_id, property, value) ->
     $set = {}
-    $set[property] = value
+    $set[property] = @cleanProperty(property, value)
     @collection.update(_id, {$set: $set})
   saveObject: (_id) ->
     $set = {}
-    $(".property-editor[data-family='" + @family + "'][data-object-id='" + _id + "']").each (index, element) ->
+    $(".property-editor[data-family='" + @family + "'][data-object-id='" + _id + "']").each (index, element) =>
       $element = $(element)
-      $set[$element.attr("name")] = $element.val()
+      property = $element.attr("name")
+      value = $element.val()
+      $set[property] = @cleanProperty(property, value)
     object = @collection.findOne(_id)
     if object.isNew
       $set["isNew"] = false

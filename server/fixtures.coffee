@@ -2,6 +2,7 @@ insertData = (data, collection) ->
   if collection.find().count() is 0
     for _id, object of data
       object._id = _id
+      object.isNew = false
       collection.insert(object)
     return true
 
@@ -173,28 +174,34 @@ share.loadFixtures = ->
       name: "First sak"
       number: "01/14"
       maximumDuration: 2.0 * 60 * share.minute
+      position: 1
       meetingId: "FirstMeeting"
     SecondSak:
       name: "Second sak"
       number: "02/14"
       maximumDuration: 15 * share.minute
+      position: 2
       meetingId: "FirstMeeting"
     ThirdSak:
       name: "Third sak"
       number: "03/14"
       maximumDuration: 1.5 * 60 * share.minute
+      position: 3
       meetingId: "FirstMeeting"
     FourthSak:
       name: "Fourth sak"
       number: "04/14"
+      position: 1
       meetingId: "SecondMeeting"
     FifthSak:
       name: "Fifth sak"
       number: "05/14"
+      position: 2
       meetingId: "SecondMeeting"
     SixthSak:
       name: "Sixth sak"
       number: "06/14"
+      position: 1
       meetingId: "ThirdMeeting"
 
   insertData(saker, share.Saker)

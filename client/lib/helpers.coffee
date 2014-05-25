@@ -41,10 +41,8 @@ UI.registerHelper "t", (key, hash) ->
   result = i18n.t(key, params)
   new Spacebars.SafeString(result)
 
-UI.registerHelper("formatDuration", (duration, options) ->
-  hours = share.intval(duration / 1000 / 3600)
-  minutes = share.intval(duration / 1000 % 3600 / 60)
-  _.str.pad(hours, 2, "0") + ":" + _.str.pad(minutes, 2, "0")
+UI.registerHelper("milliseconds2hourminutes", (duration, options) ->
+  share.milliseconds2hourminutes(duration)
 )
 
 UI.registerHelper "cl", (v) ->

@@ -1,6 +1,6 @@
-Template.textarea.helpers
+Template.input.helpers
 
-Template.textarea.rendered = ->
+Template.input.rendered = ->
   editor = @firstNode
   $editor = $(editor)
   $editor.autosize(
@@ -15,7 +15,7 @@ Template.textarea.rendered = ->
       else
         $editor.focusToEnd()
 
-Template.textarea.events
+Template.input.events
   "focus .property-editor": encapsulate (event, template) ->
     editor = share.EditorCache.editors[template.data.family]
     editor.setEditingProperty(template.data._id, template.data.property)

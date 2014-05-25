@@ -13,7 +13,7 @@ class share.Meeting
   path: ->
     "/meeting/" + @_id
   saker: ->
-    share.Saker.find({meetingId: @_id})
+    share.Saker.find({meetingId: @_id}, {sort: {position: 1}})
   calculatedDurationSum: ->
     calculatedDurationSum = 0
     @saker().forEach (saker) ->
