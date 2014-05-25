@@ -9,7 +9,7 @@ share.currentUserHandle = Meteor.subscribe("currentUser", ->
     if Meteor.user()
       share.userStartupOnce()
 )
-share.friendsHandle = Meteor.subscribe("friends")
+#share.friendsHandle = Meteor.subscribe("friends")
 share.allUsersInsecureHandle = Meteor.subscribe("allUsersInsecure")
 share.meetingsHandle = Meteor.subscribe("meetings")
 share.sakerHandle = Meteor.subscribe("saker")
