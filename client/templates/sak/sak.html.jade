@@ -5,6 +5,9 @@ template(name="sak")
         h3
           if isEdited
             i.fa.fa-check.stop-editing
+          else
+            span(class="{{#if not isEdited}}start-editing{{/if}}")
+              | #{number}
       .col-xs-6.col-md-8.name
         h3
           if isEdited
@@ -15,8 +18,6 @@ template(name="sak")
                 | #{name}
               else
                 | {{t "forms.sak.nameIsEmpty"}}
-            | &nbsp;
-            small #{number}
       .col-xs-2.col-md-1.duration
         if not isEdited
           if maximumDuration
