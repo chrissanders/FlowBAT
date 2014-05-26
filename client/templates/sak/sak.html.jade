@@ -1,40 +1,18 @@
 template(name="sak")
-  .object(class="{{#if isEdited}}is-edited{{/if}}" data-family="sak" data-id="#{_id}")
+  .object.sak(class="{{#if isEdited}}is-edited{{/if}}" data-family="sak" data-id="#{_id}")
     .row
-      .col-xs-1.col-md-1.control-icons.text-right
-        h4
-          if isEdited
-            i.fa.fa-check.stop-editing
-          else
-            span(class="{{#if not isEdited}}start-editing{{/if}}")
+      .col-xs-1.col-md-1
+        if not isEdited
+          h4
+            span(class="{{#if not isEdited}}start-editing{{/if}}" data-edited-property="number")
               | #{number}
       .col-xs-6.col-md-8.name
-        h4
-          if isEdited
-            +textarea(family="sak" _id=_id property="name" value=name placeholderI18n="forms.sak.namePlaceholder" isNew=isNew)
-          else
-            span(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
-              if name
-                | #{name}
-              else
-                | {{t "forms.sak.nameIsEmpty"}}
-      .col-xs-2.col-md-1.duration
-        if not isEdited
-          if maximumDuration
-            h4(class=durationOverflowClass) {{milliseconds2hourminutes maximumDuration}}
-      .col-xs-2.col-md-1.duration
-        if not isEdited
-          if calculatedDurationSum
-            h4.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
-      .col-xs-1.col-md-1.control-icons.text-center
-        h4
-          if isEdited
-            i.fa.fa-trash-o.remove(data-confirmation="{{t 'forms.sak.actions.removeConfirmation'}}")
-    if isEdited
-      .row
-        .col-xs-1.col-md-1.control-icons.text-right
-        .col-xs-6.col-md-8
+        if isEdited
           form.form-horizontal(role="form")
+            .form-group
+              label.sr-only.control-label Name
+              div.col-xs-12
+                +input(family="sak" _id=_id property="name" value=name placeholderI18n="forms.sak.namePlaceholder" isNew=isNew)
             .form-group
               label.col-xs-4.col-md-3.control-label Number
               div.col-xs-6.col-md-3.input-group
@@ -54,6 +32,28 @@ template(name="sak")
               div.col-xs-6.col-md-3.input-group
                 +durationInput(family="sak" _id=_id property="replyDuration" value=replyDuration placeholderI18n="forms.sak.replyDurationPlaceholder" isNew=isNew)
                 span.input-group-addon minutes
+            button.btn.btn-primary(type='submit')
+              span.fa.fa-check
+              | Save case
+            button.btn.btn-link.remove(data-confirmation="{{t 'forms.sak.actions.removeConfirmation'}}")
+              | Delete
+        else
+          h4
+            span(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
+              if name
+                | #{name}
+              else
+                | {{t "forms.sak.nameIsEmpty"}}
+
+      .col-xs-2.col-md-1.duration
+        if not isEdited
+          if maximumDuration
+            h4(class=durationOverflowClass) {{milliseconds2hourminutes maximumDuration}}
+      .col-xs-2.col-md-1.duration
+        if not isEdited
+          if calculatedDurationSum
+            h4.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
+      .col-xs-1.col-md-1
   .talks
     each talks
       +talk
