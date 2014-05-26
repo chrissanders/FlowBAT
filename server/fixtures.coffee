@@ -39,7 +39,7 @@ share.loadFixtures = ->
   for userinfo in userinfos
     splinters = userinfo.name.split(",")
     name = splinters.reverse().join(" ")
-    _id = name.replace(/[\s-]/g, "")
+    _id = name.replace(/[^\w]/g, "")
     users[_id] =
       _id: _id
       profile:
