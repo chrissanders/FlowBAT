@@ -1,0 +1,39 @@
+template(name="talk")
+  .object.talk(class="{{#if isEdited}}is-edited{{/if}}" data-family="talk" data-id="#{_id}")
+    .row
+      .col-xs-1.col-md-1.control-icons.text-right
+        h4
+          if isEdited
+            i.fa.fa-check.stop-editing
+      .col-xs-6.col-md-8.name
+        h5.user
+          if isEdited
+            +textarea(family="talk" _id=_id property="name" value=name placeholderI18n="forms.talk.namePlaceholder" isNew=isNew)
+          else
+            if user
+              span.avatar
+                img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+              | &nbsp;
+              span.name(class="{{#if not isEdited}}start-editing{{/if}}") #{user.profile.name}
+            else
+              span {{t "forms.talk.nameIsEmpty"}}
+      .col-xs-2.col-md-1.duration
+      .col-xs-2.col-md-1.duration
+        h5.text-muted {{share.milliseconds2minutes ../talkDuration}}
+      .col-xs-1.col-md-1.control-icons.text-center
+        h5
+          if isEdited
+            i.fa.fa-trash-o.remove(data-confirmation="{{t 'forms.talk.actions.removeConfirmation'}}")
+  .replies
+    each replies
+      .row.reply
+        .col-xs-1.col-md-1.control-icons.text-right
+        .col-xs-6.col-md-8.name.user
+          | ⌙
+          span.avatar
+            img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+          span.name #{user.profile.name}
+        .col-xs-2.col-md-1.duration
+        .col-xs-2.col-md-1.duration
+          span.text-muted {{share.milliseconds2minutes ../../replyDuration}}
+        .col-xs-1.col-md-1.control-icons.text-center
