@@ -59,7 +59,10 @@ template(name="sak")
       .row.talk
         .col-xs-1.col-md-1.control-icons.text-right
         .col-xs-6.col-md-8.name
-          h5.text-muted #{user.profile.name}
+          h5.text-muted.user
+            span.avatar
+              img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+            span.name #{user.profile.name}
         .col-xs-2.col-md-1.duration
         .col-xs-2.col-md-1.duration
           h5.text-muted {{share.milliseconds2minutes ../talkDuration}}
@@ -68,8 +71,11 @@ template(name="sak")
         each replies
           .row.reply
             .col-xs-1.col-md-1.control-icons.text-right
-            .col-xs-6.col-md-8.name
-              | + #{user.profile.name}
+            .col-xs-6.col-md-8.name.user
+              | ⌙
+              span.avatar
+                img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+              span.name #{user.profile.name}
             .col-xs-2.col-md-1.duration
             .col-xs-2.col-md-1.duration
               span.text-muted {{share.milliseconds2minutes ../../replyDuration}}
