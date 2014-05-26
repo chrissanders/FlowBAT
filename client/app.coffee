@@ -8,3 +8,9 @@ share.milliseconds2hourminutes = (milliseconds) ->
 share.hourminutes2milliseconds = (duration) ->
   splinters = duration.split(":")
   (share.intval(splinters[0]) * 60 + share.intval(splinters[1])) * 60 * 1000
+
+share.milliseconds2minutes = (milliseconds) ->
+  share.intval(milliseconds / 1000 / 60)
+
+share.minutes2milliseconds = (duration) ->
+  share.intval(duration) * 60 * 1000

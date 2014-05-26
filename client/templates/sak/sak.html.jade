@@ -2,14 +2,14 @@ template(name="sak")
   .object(class="{{#if isEdited}}is-edited{{/if}}" data-family="sak" data-id="#{_id}")
     .row
       .col-xs-1.col-md-1.control-icons.text-right
-        h3
+        h4
           if isEdited
             i.fa.fa-check.stop-editing
           else
             span(class="{{#if not isEdited}}start-editing{{/if}}")
               | #{number}
       .col-xs-6.col-md-8.name
-        h3
+        h4
           if isEdited
             +textarea(family="sak" _id=_id property="name" value=name placeholderI18n="forms.sak.namePlaceholder" isNew=isNew)
           else
@@ -21,13 +21,13 @@ template(name="sak")
       .col-xs-2.col-md-1.duration
         if not isEdited
           if maximumDuration
-            h3(class=durationOverflowClass) {{milliseconds2hourminutes maximumDuration}}
+            h4(class=durationOverflowClass) {{milliseconds2hourminutes maximumDuration}}
       .col-xs-2.col-md-1.duration
         if not isEdited
           if calculatedDurationSum
-            h3.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
+            h4.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
       .col-xs-1.col-md-1.control-icons.text-center
-        h3
+        h4
           if isEdited
             i.fa.fa-trash-o.remove(data-confirmation="{{t 'forms.sak.actions.removeConfirmation'}}")
     if isEdited
@@ -37,37 +37,39 @@ template(name="sak")
           form.form-horizontal(role="form")
             .form-group
               label.col-xs-4.col-md-3.control-label Number
-              div.col-xs-6.col-md-3
+              div.col-xs-6.col-md-3.input-group
                 +input(family="sak" _id=_id property="number" value=number placeholderI18n="forms.sak.numberPlaceholder" isNew=isNew)
             .form-group
               label.col-xs-4.col-md-3.control-label Case duration
-              div.col-xs-6.col-md-3
+              div.col-xs-6.col-md-3.input-group
                 +durationInput(family="sak" _id=_id property="maximumDuration" value=maximumDuration placeholderI18n="forms.sak.maximumDurationPlaceholder" isNew=isNew)
+                span.input-group-addon minutes
             .form-group
               label.col-xs-4.col-md-3.control-label Talk duration
-              div.col-xs-6.col-md-3
+              div.col-xs-6.col-md-3.input-group
                 +durationInput(family="sak" _id=_id property="talkDuration" value=talkDuration placeholderI18n="forms.sak.talkDurationPlaceholder" isNew=isNew)
+                span.input-group-addon minutes
             .form-group
               label.col-xs-4.col-md-3.control-label Reply duration
-              div.col-xs-6.col-md-3
+              div.col-xs-6.col-md-3.input-group
                 +durationInput(family="sak" _id=_id property="replyDuration" value=replyDuration placeholderI18n="forms.sak.replyDurationPlaceholder" isNew=isNew)
+                span.input-group-addon minutes
   .talks
     each talks
       .row.talk
         .col-xs-1.col-md-1.control-icons.text-right
         .col-xs-6.col-md-8.name
-          h4: a(href="/user/#{user._id}") #{user.profile.name}
+          h5.text-muted #{user.profile.name}
         .col-xs-2.col-md-1.duration
         .col-xs-2.col-md-1.duration
-          h4.text-muted {{milliseconds2hourminutes ../talkDuration}}
+          h5.text-muted {{milliseconds2hourminutes ../talkDuration}}
         .col-xs-1.col-md-1.control-icons.text-center
       .replies
         each replies
           .row.reply
             .col-xs-1.col-md-1.control-icons.text-right
             .col-xs-6.col-md-8.name
-              | +
-              a(href="/user/#{user._id}") #{user.profile.name}
+              | + #{user.profile.name}
             .col-xs-2.col-md-1.duration
             .col-xs-2.col-md-1.duration
               span.text-muted {{milliseconds2hourminutes ../../replyDuration}}
