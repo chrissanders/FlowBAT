@@ -26,3 +26,5 @@ Template.meeting.events
   "click .add-sak": encapsulate (event, template) ->
     share.EditorCache.stopEditing()
     share.MeetingEditor.insertSak(template.data._id)
+  "submit .object form": grab encapsulate (event, template) ->
+    share.MeetingEditor.stopEditing(template.data._id)

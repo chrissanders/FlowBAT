@@ -34,6 +34,7 @@ body
 .header
   font-size 30px
 
+/*
 textarea
   box-sizing: border-box
   width 100%
@@ -49,6 +50,7 @@ textarea
   margin 0
   color #393939
   background-color transparent
+*/
 
 .start-editing, .add-object
   &:hover
@@ -67,6 +69,10 @@ textarea
   .fa
     cursor pointer
 
+.object
+  .form-horizontal
+    margin 15px 0
+
 .duration
   text-align right
 
@@ -78,20 +84,15 @@ textarea
     height 30px
     overflow hidden
     border-radius 5px
+    margin-right 4px
     img
       max-width 30px
   .name
     vertical-align middle
 
-/* textarea editor height hacks */
-h2
-  min-height 41px
-h3
-  min-height 33px
-
 /* Override Bootstrap */
 html
-  body
-    font-family "News Cycle", "Arial Narrow Bold", sans-serif
   h4, .h4, h5, .h5, h6, .h6
     margin-bottom 5px
+  .reply
+    font-family "News Cycle", "Arial Narrow Bold", sans-serif

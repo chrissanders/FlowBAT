@@ -24,22 +24,6 @@ Template.input.events
     editor = share.EditorCache.editors[template.data.family]
     data = template.data
     switch event.keyCode
-      when 9 # Tab
-        if not event.shiftKey
-          _.defer -> # maybe replace with keyup
-            $activeElement = $(document.activeElement)
-            activeElementFamily = $activeElement.attr("data-family")
-            if not activeElementFamily or activeElementFamily isnt editor.family
-              editor.stopEditing(data._id)
-              if data.isNew
-                editor.insertAfter(data._id)
-      when 13 # Enter
-        if editor.isSingleLine(data.property) or event.ctrlKey
-          event.preventDefault()
-          editor.stopEditing(data._id)
-          if not event.altKey
-            if data.isNew
-              editor.insertAfter(data._id)
       when 27 # Escape
         event.preventDefault()
         editor.stopEditing(data._id)

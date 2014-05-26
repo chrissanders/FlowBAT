@@ -1,17 +1,21 @@
 template(name="meeting")
-  .object(class="{{#if isEdited}}is-edited{{/if}}" data-family="meeting" data-id="#{_id}")
+  .object.meeting(class="{{#if isEdited}}is-edited{{/if}}" data-family="meeting" data-id="#{_id}")
     .row
-      .col-xs-1.col-md-1.control-icons.text-right
-        h3
-          if isEdited
-            i.fa.fa-check.stop-editing(title="{{t 'forms.meeting.actions.save'}}")
-            //| &nbsp;
-            //i.fa.fa-cog
+      .col-xs-1.col-md-1
       .col-xs-6.col-md-8.name
-        h3
-          if isEdited
-            +textarea(family="meeting" _id=_id property="name" value=name placeholderI18n="forms.meeting.namePlaceholder" isNew=isNew)
-          else
+        if isEdited
+          form.form-horizontal(role="form")
+            .form-group
+              label.sr-only.control-label Name
+              div.col-xs-12
+                +input(family="meeting" _id=_id property="name" value=name placeholderI18n="forms.meeting.namePlaceholder" isNew=isNew)
+            button.btn.btn-primary(type='submit')
+              span.fa.fa-check
+              | Save meeting
+            button.btn.btn-link.remove(data-confirmation="{{t 'forms.meeting.actions.removeConfirmation'}}")
+              | Delete
+        else
+          h3
             span(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
               if name
                 | #{name}
@@ -23,10 +27,7 @@ template(name="meeting")
       .col-xs-2.col-md-1.duration
         if calculatedDurationSum
           h3.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
-      .col-xs-1.col-md-1.control-icons.text-center
-        h3
-          if isEdited
-            i.fa.fa-trash-o.remove(data-confirmation="{{t 'forms.meeting.actions.removeConfirmation'}}" title="{{t 'forms.meeting.actions.remove'}}")
+      .col-xs-1.col-md-1
   .saker
     each saker
       +sak
