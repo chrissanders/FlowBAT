@@ -2,13 +2,13 @@ template(name="meeting")
   .object(class="{{#if isEdited}}is-edited{{/if}}" data-family="meeting" data-id="#{_id}")
     .row
       .col-xs-1.col-md-1.control-icons.text-right
-        h2
+        h3
           if isEdited
             i.fa.fa-check.stop-editing(title="{{t 'forms.meeting.actions.save'}}")
             //| &nbsp;
             //i.fa.fa-cog
       .col-xs-6.col-md-8.name
-        h2
+        h3
           if isEdited
             +textarea(family="meeting" _id=_id property="name" value=name placeholderI18n="forms.meeting.namePlaceholder" isNew=isNew)
           else
@@ -19,12 +19,12 @@ template(name="meeting")
                 | {{t "forms.meeting.nameIsEmpty"}}
       .col-xs-2.col-md-1.duration
         if maximumDurationSum
-          h2(class=durationOverflowClass) {{milliseconds2hourminutes maximumDurationSum}}
+          h3(class=durationOverflowClass) {{milliseconds2hourminutes maximumDurationSum}}
       .col-xs-2.col-md-1.duration
         if calculatedDurationSum
-          h2.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
+          h3.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
       .col-xs-1.col-md-1.control-icons.text-center
-        h2
+        h3
           if isEdited
             i.fa.fa-trash-o.remove(data-confirmation="{{t 'forms.meeting.actions.removeConfirmation'}}" title="{{t 'forms.meeting.actions.remove'}}")
   .saker
