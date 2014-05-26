@@ -1,22 +1,23 @@
 template(name="talk")
   .object.talk(class="{{#if isEdited}}is-edited{{/if}}" data-family="talk" data-id="#{_id}")
     .row
-      .col-xs-1.col-md-1.control-icons.text-right
-        h5
-          if isEdited
-            i.fa.fa-check.stop-editing
+      .col-xs-1.col-md-1
       .col-xs-6.col-md-8.name
         h5.user
           span.avatar
             img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
           span.name(class="{{#if not isEdited}}start-editing{{/if}}") #{user.profile.name}
+        if isEdited
+          form.form-horizontal(role="form")
+            button.btn.btn-primary(type='submit')
+              span.fa.fa-check
+              | Save talk
+            button.btn.btn-link.remove(data-confirmation="{{t 'forms.talk.actions.removeConfirmation'}}")
+              | Delete
       .col-xs-2.col-md-1.duration
       .col-xs-2.col-md-1.duration
         h5.text-muted {{share.milliseconds2minutes ../talkDuration}}
-      .col-xs-1.col-md-1.control-icons.text-left
-        h5
-          if isEdited
-            i.fa.fa-trash-o.remove(data-confirmation="{{t 'forms.talk.actions.removeConfirmation'}}")
+      .col-xs-1.col-md-1
   .replies
     each replies
       .row.reply

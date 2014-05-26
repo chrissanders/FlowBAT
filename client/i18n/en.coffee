@@ -81,9 +81,20 @@ i18n.addResourceBundle("en",
         save: "Save case"
         remove: "Delete case"
         removeConfirmation: "Deleting a case will wipe it completely. Are you sure you want to delete this case?"
+    talk:
+      owner: "Talk creator"
+      createdAt: "Talk added at"
+      updatedAt: "Talk edited at"
+      actions:
+        insert: "Add talk"
+        update: "Edit talk"
+        save: "Save talk"
+        remove: "Delete talk"
+        removeConfirmation: "Deleting a talk will wipe it completely. Are you sure you want to delete this talk?"
   defaults:
     meeting:
       name: "New meeting"
     sak:
       name: "New case"
+    talk: {}
 )
