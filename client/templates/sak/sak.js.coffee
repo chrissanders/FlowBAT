@@ -1,6 +1,8 @@
 Template.sak.helpers
   isEdited: ->
     share.SakEditor.isEdited(@_id)
+  isAddingTalk: ->
+    share.SakEditor.isAddingTalk(@_id)
   durationOverflowClass: ->
     if not @maximumDuration
       return ""
@@ -24,3 +26,12 @@ Template.sak.events
       share.SakEditor.remove(template.data._id)
   "submit .object form": grab encapsulate (event, template) ->
     share.SakEditor.stopEditing(template.data._id)
+  "click .add-talk": encapsulate (event, template) ->
+    share.EditorCache.stopEditing()
+    share.SakEditor.startAddingTalk(template.data._id)
+    _.defer ->
+      $(".add-talk-wrapper input").first().focus()
+  "click .add-talk-wrapper .cancel": grab encapsulate (event, template) ->
+    share.EditorCache.stopEditing()
+    share.SakEditor.stopAddingTalk(template.data._id)
+

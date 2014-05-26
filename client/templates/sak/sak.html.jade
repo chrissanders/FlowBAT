@@ -44,7 +44,6 @@ template(name="sak")
                 | #{name}
               else
                 | {{t "forms.sak.nameIsEmpty"}}
-
       .col-xs-2.col-md-1.duration
         if not isEdited
           if maximumDuration
@@ -57,8 +56,23 @@ template(name="sak")
   .talks
     each talks
       +talk
-  //if not isNew
-  //  .row.talk.add
-  //    .col-xs-1
-  //    .col-xs-8.name
-  //      h4.text-muted Add delegate
+  if isAddingTalk
+    .row.is-edited
+      .col-xs-1.col-md-1
+      .col-xs-6.col-md-8.add-talk-wrapper
+        form.form-horizontal(role="form")
+          .form-group
+            label.sr-only(for="query") Search
+            div.col-xs-6
+              input#query.form-control(name="query" type="search" placeholder="Type delegate name to search...")
+            div.col-xs-6
+              button.btn.btn-link.cancel
+                i.fa.fa-times
+                | Cancel
+  else
+    if not isNew
+      .row.talk.add
+        .col-xs-1.col-md-1
+        .col-xs-6.col-md-8.name
+          h5.text-muted
+            span.add-object.add-talk Add talk

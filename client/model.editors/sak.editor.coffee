@@ -14,4 +14,13 @@ share.SakEditor = new share.Editor(
       position: sibling.position + 1
     )
     share.SakEditor.insert(sak, callback)
+  isAddingTalk: (_id) ->
+    Session.equals(@editorKey(_id, "is-adding-talk"), true)
+  startAddingTalk: (_id) ->
+    Session.set(@editorKey(_id, "is-adding-talk"), true)
+    share.EditorCache.add(@editorId(_id), "is-adding-talk", {family: @family, _id: _id})
+  stopAddingTalk: (_id) ->
+    @saveObject(_id)
+    Session.set(@editorKey(_id, "is-adding-talk"), null)
+    share.EditorCache.remove(@editorId(_id), "is-adding-talk")
 )
