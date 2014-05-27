@@ -48,7 +48,7 @@ share.loadFixtures = ->
         image: "/fixtures/" + _id + ".jpg"
       emails: [
         {
-          address: _id + "@meetings.me"
+          address: _id.toLowerCase() + "@meetings.me"
           verified: true
         }
       ]
