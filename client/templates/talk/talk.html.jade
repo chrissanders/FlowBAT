@@ -4,13 +4,9 @@ template(name="talk")
       .col-xs-1.col-md-1
       .col-xs-7.col-md-9.name
         h5.user
-          span.avatar
+          span.avatar.add-reply
             img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
           span.name(class="{{#if not isEdited}}start-editing{{/if}}") #{user.profile.name}
-          if not isNew
-            span.add-reply-link-wrapper.text-muted
-              | -
-              span.add-object.add-reply Add reply
         if isEdited
           form.form-horizontal(role="form")
             button.btn.btn-primary(type='submit')
