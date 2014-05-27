@@ -15,6 +15,7 @@ Template.meeting.rendered = ->
     delay: 75
     distance: 4
     handle: ".sortable-handle"
+    containment: "parent"
     cursor: "move"
     tolerance: "pointer"
     forceHelperSize: true
