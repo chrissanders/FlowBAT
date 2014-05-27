@@ -1,8 +1,7 @@
 template(name="meeting")
   .object.meeting(class="{{#if isEdited}}is-edited{{/if}}" data-family="meeting" data-id="#{_id}")
     .row
-      .col-xs-1.col-md-1
-      .col-xs-6.col-md-8.name
+      .col-xs-8.col-md-10.name
         if isEdited
           form.form-horizontal(role="form")
             .form-group
@@ -34,6 +33,6 @@ template(name="meeting")
   if not isNew
     .row
       .col-xs-1
-      .col-xs-8.name
+      .col-xs-7.col-md-9.name
         h4.text-muted
           span.add-object.add-sak Add case

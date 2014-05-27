@@ -2,7 +2,7 @@ template(name="talk")
   .object.talk(class="{{#if isEdited}}is-edited{{/if}}" data-family="talk" data-id="#{_id}")
     .row
       .col-xs-1.col-md-1
-      .col-xs-6.col-md-8.name
+      .col-xs-7.col-md-9.name
         h5.user
           span.avatar
             img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
@@ -20,8 +20,8 @@ template(name="talk")
               | Delete
       .col-xs-2.col-md-1.duration
       .col-xs-2.col-md-1.duration
-        h5.text-muted {{share.milliseconds2minutes ../talkDuration}}
-      .col-xs-1.col-md-1
+        h5.text-muted
+          span.align-middle {{share.milliseconds2minutes ../talkDuration}}
   .replies
     each replies
       +reply
@@ -29,7 +29,7 @@ template(name="talk")
     .add-reply-wrapper.add-objects-wrapper.is-edited
       .row.first-row
         .col-xs-1.col-md-1
-        .col-xs-6.col-md-8
+        .col-xs-7.col-md-9
           form.form-horizontal(role="form")
             .form-group
               label.sr-only(for="add-reply-query") Search

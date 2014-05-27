@@ -10,6 +10,40 @@ Template.meeting.helpers
       return "text-success"
 
 Template.meeting.rendered = ->
+  @$(".saker").sortable(
+    axis: "y"
+    delay: 75
+    distance: 4
+    handle: ".sortable-handle"
+    cursor: "move"
+    tolerance: "pointer"
+    forceHelperSize: true
+    forcePlaceholderSize: true
+    placeholder: "placeholder saker"
+#    start: (event, ui) ->
+#      ui.item.addClass("prevent-click")
+#    stop: (event, ui) ->
+#      _.defer ->
+#        ui.item.removeClass("prevent-click") # prevent click after drag in Firefox
+    update: (event, ui) ->
+      if ui.sender # duplicate "update" event
+        return
+      $sak = ui.item
+      sakId = $sak.attr("data-id")
+      prevSakId = $sak.prev().attr("data-id")
+      nextSakId = $sak.next().attr("data-id")
+      if !prevSakId && !nextSakId
+        position = 1
+      else if !prevSakId
+        position = share.Saker.findOne(nextSakId).position - 1
+      else if !nextSakId
+        position = share.Saker.findOne(prevSakId).position + 1
+      else
+        position = (share.Saker.findOne(nextSakId).position + share.Saker.findOne(prevSakId).position) / 2
+      sak = share.Saker.findOne(sakId)
+      $set = {position: position}
+      share.Saker.update(sakId, {$set: $set})
+  )
 
 Template.meeting.events
   "click .start-editing": encapsulate (event, template) ->
