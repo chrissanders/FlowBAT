@@ -50,8 +50,7 @@ Template.talk.events
       )
       share.Replies.remove(reply._id)
     else
-      _id = share.ReplyEditor.insert(
-        talkId: template.data._id
+      _id = share.TalkEditor.insertReply(template.data._id,
         userId: $user.attr("data-id")
         isNew: false
       )

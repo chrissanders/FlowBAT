@@ -34,7 +34,10 @@ class share.Sak
   meeting: ->
     share.Meetings.findOne({_id: @meetingId})
   talks: ->
-    share.Talks.find({sakId: @_id})
+    share.Talks.find({sakId: @_id}, {sort: {position: 1}})
+  lastTalkPosition: ->
+    lastTalk = share.Talks.findOne({sakId: @_id}, {sort: {position: -1}})
+    if lastTalk then lastTalk.position else 0
   calculatedDurationSum: ->
     calculatedDurationSum = 0
     @talks().forEach (talk) =>
@@ -50,7 +53,10 @@ class share.Talk
   user: ->
     Meteor.users.findOne({_id: @userId})
   replies: ->
-    share.Replies.find({talkId: @_id})
+    share.Replies.find({talkId: @_id}, {sort: {position: 1}})
+  lastReplyPosition: ->
+    lastReply = share.Replies.findOne({talkId: @_id}, {sort: {position: -1}})
+    if lastReply then lastReply.position else 0
 
 class share.Reply
   constructor: (doc) ->

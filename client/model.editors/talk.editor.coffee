@@ -1,6 +1,13 @@
 share.TalkEditor = new share.Editor(
   collection: share.Talks
   family: "talk"
+  insertReply: (_id, reply = {}, callback = ->) ->
+    talk = @collection.findOne(_id)
+    _.defaults(reply,
+      talkId: talk._id
+      position: talk.lastReplyPosition() + 1
+    )
+    share.ReplyEditor.insert(reply, callback)
   isAddingReply: (_id) ->
     Session.equals(@editorKey(_id, "is-adding-reply"), true)
   startAddingReply: (_id) ->

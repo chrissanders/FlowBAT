@@ -115,21 +115,27 @@ share.loadFixtures = ->
     JensJohanHjortKONTROLLUTVALGSSAKTalk:
       sakId: "KONTROLLUTVALGSSAK"
       userId: "JensJohanHjort"
+      position: 1
     AnniSkogmanKONTROLLUTVALGSSAKTalk:
       sakId: "KONTROLLUTVALGSSAK"
       userId: "AnniSkogman"
+      position: 2
     BodilRiddersethLarsenREGULERINGSPLANTalk:
       sakId: "REGULERINGSPLAN"
       userId: "BodilRiddersethLarsen"
+      position: 1
     FridEinarsdotterFossbakkREGULERINGSPLANTalk:
       sakId: "REGULERINGSPLAN"
       userId: "FridEinarsdotterFossbakk"
+      position: 2
     KnutBarmanJenssenREGULERINGSPLANTalk:
       sakId: "REGULERINGSPLAN"
       userId: "KnutBarmanJenssen"
+      position: 3
     LarsEchrollREGULERINGSPLANTalk:
       sakId: "REGULERINGSPLAN"
       userId: "LarsEchroll"
+      position: 4
 
   insertData(talks, share.Talks)
 
@@ -137,9 +143,11 @@ share.loadFixtures = ->
     JensJohanHjortKONTROLLUTVALGSSAKTalkReplyByBodilRiddersethLarsen:
       talkId: "JensJohanHjortKONTROLLUTVALGSSAKTalk"
       userId: "BodilRiddersethLarsen"
+      position: 1
     JensJohanHjortKONTROLLUTVALGSSAKTalkReplyByKnutBarmanJenssen:
       talkId: "JensJohanHjortKONTROLLUTVALGSSAKTalk"
       userId: "KnutBarmanJenssen"
+      position: 2
 
   insertData(replies, share.Replies)
 

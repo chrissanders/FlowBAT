@@ -57,8 +57,7 @@ Template.sak.events
       )
       share.Talks.remove(talk._id)
     else
-      _id = share.TalkEditor.insert(
-        sakId: template.data._id
+      _id = share.SakEditor.insertTalk(template.data._id,
         userId: $user.attr("data-id")
         isNew: false
       )
