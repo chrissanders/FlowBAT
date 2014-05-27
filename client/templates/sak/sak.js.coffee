@@ -63,3 +63,6 @@ Template.sak.events
         isNew: false
       )
       share.TalkEditor.stopEditing(_id)
+      Session.set("add-talk-query", "")
+      _.defer ->
+        template.$(".add-talk-wrapper input").first().focus()
