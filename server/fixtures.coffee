@@ -48,7 +48,7 @@ share.loadFixtures = ->
         image: "/fixtures/" + _id + ".jpg"
       emails: [
         {
-          address: "denis.gorbachev+meetings." + _id + "@faster-than-wind.ru"
+          address: _id + "@meetings.me"
           verified: true
         }
       ]

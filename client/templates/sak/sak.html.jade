@@ -1,14 +1,34 @@
 template(name="sak")
-  .sak(class="{{#if isEdited}}is-edited{{/if}}" data-family="sak" data-id="#{_id}")
-    .object
-      .row
-        .col-xs-1.col-md-1
-          if not isEdited
+  .sak.object(class="{{#if isEdited}}is-edited{{/if}}" data-family="sak" data-id="#{_id}")
+    .form-area
+      if not isNew
+        .row
+          .col-xs-1.col-md-1
             h4
-              span.sortable-handle(class="{{#if not isEdited}}start-editing{{/if}}" data-edited-property="number")
-                | #{number}
-        .col-xs-7.col-md-9.name
-          if isEdited
+              span.sortable-handle(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not number}}text-muted{{/if}}" data-edited-property="number")
+                if number
+                  | #{number}
+                else
+                  | {{t "forms.sak.numberIsEmpty"}}
+          .col-xs-7.col-md-9.name
+            h4
+              span.sortable-handle(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}" data-edited-property="name")
+                if name
+                  | #{name}
+                else
+                  | {{t "forms.sak.nameIsEmpty"}}
+          .col-xs-2.col-md-1.duration
+            if not isEdited
+              if maximumDuration
+                h4(class=durationOverflowClass) {{milliseconds2hourminutes maximumDuration}}
+          .col-xs-2.col-md-1.duration
+            if not isEdited
+              if calculatedDurationSum
+                h4.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
+      if isEdited
+        .row
+          .col-xs-1.col-md-1
+          .col-xs-7.col-md-9
             form.form-horizontal(role="form")
               .form-group
                 label.sr-only.control-label Name
@@ -33,31 +53,21 @@ template(name="sak")
                 div.col-xs-6.col-md-3.input-group
                   +durationInput(family="sak" _id=_id property="replyDuration" value=replyDuration placeholderI18n="forms.sak.replyDurationPlaceholder" isNew=isNew)
                   span.input-group-addon minutes
+              .form-group
+                label.col-xs-4.col-md-3.control-label Answer duration
+                div.col-xs-6.col-md-3.input-group
+                  +durationInput(family="sak" _id=_id property="answerDuration" value=answerDuration placeholderI18n="forms.sak.answerDurationPlaceholder" isNew=isNew)
+                  span.input-group-addon minutes
               button.btn.btn-primary(type='submit')
                 span.fa.fa-check
                 | Save case
               button.btn.btn-link.remove(data-confirmation="{{t 'forms.sak.actions.removeConfirmation'}}")
                 | Delete
-          else
-            h4
-              span.sortable-handle(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
-                if name
-                  | #{name}
-                else
-                  | {{t "forms.sak.nameIsEmpty"}}
-        .col-xs-2.col-md-1.duration
-          if not isEdited
-            if maximumDuration
-              h4(class=durationOverflowClass) {{milliseconds2hourminutes maximumDuration}}
-        .col-xs-2.col-md-1.duration
-          if not isEdited
-            if calculatedDurationSum
-              h4.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
     .talks
       each talks
         +talk
     if isAddingTalk
-      .add-talk-wrapper.add-objects-wrapper.is-edited
+      .add-talk-wrapper.add-objects-wrapper.form-area
         .row.first-row
           .col-xs-1.col-md-1
           .col-xs-7.col-md-9

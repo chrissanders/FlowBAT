@@ -31,6 +31,6 @@ template(name="navbar")
                   ul.dropdown-menu
                     li: a(href="/user/{{currentUser._id}}") Profile
                     li.divider
-                    li: a.signout(href="#") Logout
+                    li: a.logout(href="#") Logout
               else
                 +login

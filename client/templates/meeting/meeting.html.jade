@@ -1,39 +1,39 @@
 template(name="meeting")
   .object.meeting(class="{{#if isEdited}}is-edited{{/if}}" data-family="meeting" data-id="#{_id}")
+    .form-area
+      if not isNew
+        .row
+          .col-xs-8.col-md-10.name
+            h3
+              span(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
+                if name
+                  | #{name}
+                else
+                  | {{t "forms.meeting.nameIsEmpty"}}
+          .col-xs-2.col-md-1.duration
+            if maximumDurationSum
+              h3(class=durationOverflowClass) {{milliseconds2hourminutes maximumDurationSum}}
+          .col-xs-2.col-md-1.duration
+            if calculatedDurationSum
+              h3.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
+      if isEdited
+        .row
+          .col-xs-8.col-md-10
+            form.form-horizontal(role="form")
+              .form-group
+                label.sr-only.control-label Name
+                div.col-xs-12
+                  +input(family="meeting" _id=_id property="name" value=name placeholderI18n="forms.meeting.namePlaceholder" isNew=isNew)
+              button.btn.btn-primary(type='submit')
+                span.fa.fa-check
+                | Save meeting
+              button.btn.btn-link.remove(data-confirmation="{{t 'forms.meeting.actions.removeConfirmation'}}")
+                | Delete
+    .saker
+      each saker
+        +sak
     if not isNew
       .row
         .col-xs-8.col-md-10.name
-          h3
-            span(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
-              if name
-                | #{name}
-              else
-                | {{t "forms.meeting.nameIsEmpty"}}
-        .col-xs-2.col-md-1.duration
-          if maximumDurationSum
-            h3(class=durationOverflowClass) {{milliseconds2hourminutes maximumDurationSum}}
-        .col-xs-2.col-md-1.duration
-          if calculatedDurationSum
-            h3.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
-    if isEdited
-      .row
-        .col-xs-8.col-md-10
-          form.form-horizontal(role="form")
-            .form-group
-              label.sr-only.control-label Name
-              div.col-xs-12
-                +input(family="meeting" _id=_id property="name" value=name placeholderI18n="forms.meeting.namePlaceholder" isNew=isNew)
-            button.btn.btn-primary(type='submit')
-              span.fa.fa-check
-              | Save meeting
-            button.btn.btn-link.remove(data-confirmation="{{t 'forms.meeting.actions.removeConfirmation'}}")
-              | Delete
-  .saker
-    each saker
-      +sak
-  if not isNew
-    .row
-      .col-xs-1
-      .col-xs-7.col-md-9.name
-        h4.text-muted
-          span.add-object.add-sak Add case
+          h4.text-muted
+            span.add-object.add-sak Add case

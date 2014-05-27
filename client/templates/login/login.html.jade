@@ -10,11 +10,12 @@ template(name="login")
             if loggingIn
               | Signing in...
             else
-              | Signin with Google
+              | Sign in with Google
           p: span or
           form(autocomplete="off")
             div.form-group
               input.email.form-control(type="text", name="email" placeholder="Email")
+            div.form-group
               input.password.form-control(type="password", name="password", placeholder="Password")
             div.links.clearfix
               button.btn.btn-default(type="submit")
@@ -33,12 +34,14 @@ template(name="login")
             if loggingIn
               | Signing in...
             else
-              | Signin with Google
+              | Sign up with Google
           p: span or
           form(autocomplete="off")
             div.form-group
               input.email.form-control(type="text", name="email" placeholder="Email")
+            div.form-group
               input.password.form-control(type="password", name="password", placeholder="Password")
+            div.form-group
               input.passwordAgain.form-control(type="password", name="passwordAgain", placeholder="Password again")
             div.links.clearfix
               button.btn.btn-default(type="submit")
