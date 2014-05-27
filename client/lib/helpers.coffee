@@ -6,6 +6,10 @@ UI.registerHelper("Router", ->
   Router
 )
 
+UI.registerHelper("Session", (key) ->
+  Session.get(key)
+)
+
 UI.registerHelper("condition", (v1, operator, v2, options) ->
   switch operator
     when "==", "eq", "is"
