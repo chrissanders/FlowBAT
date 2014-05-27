@@ -23,6 +23,40 @@ Template.sak.helpers
       return "text-success"
 
 Template.sak.rendered = ->
+  @$(".talks").sortable(
+    axis: "y"
+    delay: 75
+    distance: 4
+    handle: ".sortable-handle"
+    cursor: "move"
+    tolerance: "pointer"
+    forceHelperSize: true
+    forcePlaceholderSize: true
+    placeholder: "placeholder talk"
+#    start: (event, ui) ->
+#      ui.item.addClass("prevent-click")
+#    stop: (event, ui) ->
+#      _.defer ->
+#        ui.item.removeClass("prevent-click") # prevent click after drag in Firefox
+    update: (event, ui) ->
+      if ui.sender # duplicate "update" event
+        return
+      $talk = ui.item
+      talkId = $talk.attr("data-id")
+      prevTalkId = $talk.prev().attr("data-id")
+      nextTalkId = $talk.next().attr("data-id")
+      if !prevTalkId && !nextTalkId
+        position = 1
+      else if !prevTalkId
+        position = share.Talks.findOne(nextTalkId).position - 1
+      else if !nextTalkId
+        position = share.Talks.findOne(prevTalkId).position + 1
+      else
+        position = (share.Talks.findOne(nextTalkId).position + share.Talks.findOne(prevTalkId).position) / 2
+      talk = share.Talks.findOne(talkId)
+      $set = {position: position}
+      share.Talks.update(talkId, {$set: $set})
+  )
 
 Template.sak.events
   "click .start-editing": encapsulate (event, template) ->

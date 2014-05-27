@@ -94,8 +94,9 @@ template(name="sak")
                   | Finish adding talks
     else
       if not isNew
-        .row.talk.add
-          .col-xs-1.col-md-1
-          .col-xs-7.col-md-9.name
-            h5.text-muted
-              span.add-object.add-talk Add talk
+        .add-talk-link-wrapper
+          .row
+            .col-xs-1.col-md-1
+            .col-xs-7.col-md-9.name
+              h5.text-muted
+                span.add-object.add-talk Add talk

@@ -15,12 +15,11 @@ Template.meeting.rendered = ->
     delay: 75
     distance: 4
     handle: ".sortable-handle"
-    containment: "parent"
     cursor: "move"
     tolerance: "pointer"
     forceHelperSize: true
     forcePlaceholderSize: true
-    placeholder: "placeholder saker"
+    placeholder: "placeholder sak"
 #    start: (event, ui) ->
 #      ui.item.addClass("prevent-click")
 #    stop: (event, ui) ->

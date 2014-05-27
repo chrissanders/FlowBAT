@@ -62,7 +62,6 @@ textarea
     cursor pointer
 
 .object
-  .form-horizontal
   &.is-edited
     > .form-area
       margin-left: -15px;
@@ -110,14 +109,13 @@ textarea
           text-decoration underline
 
 .ui-sortable-helper
-  outline 2px solid #222222
-  outline-offset 2px
-  .is-edited
-    background-color transparent
+  box-shadow 0 0 5px 2px #B0B0B0
+  &.is-edited
+    > .form-area
+      background-color transparent
 
 .placeholder
-  outline 2px dashed #222222
-  outline-offset 7px
+  background-color #F0F0F0
 
 /* Override Bootstrap */
 html
