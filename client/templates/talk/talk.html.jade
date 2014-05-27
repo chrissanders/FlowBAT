@@ -2,11 +2,15 @@ template(name="talk")
   .object.talk(class="{{#if isEdited}}is-edited{{/if}}" data-family="talk" data-id="#{_id}")
     .row
       .col-xs-1.col-md-1
-      .col-xs-6.col-md-8.name
+      .col-xs-7.col-md-9.name
         h5.user
           span.avatar
             img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
           span.name(class="{{#if not isEdited}}start-editing{{/if}}") #{user.profile.name}
+          if not isNew
+            span.add-reply-link-wrapper.text-muted
+              | -
+              span.add-object.add-reply Add reply
         if isEdited
           form.form-horizontal(role="form")
             button.btn.btn-primary(type='submit')
@@ -16,18 +20,33 @@ template(name="talk")
               | Delete
       .col-xs-2.col-md-1.duration
       .col-xs-2.col-md-1.duration
-        h5.text-muted {{share.milliseconds2minutes ../talkDuration}}
-      .col-xs-1.col-md-1
+        h5.text-muted
+          span.align-middle {{share.milliseconds2minutes ../talkDuration}}
   .replies
     each replies
-      .row.reply
-        .col-xs-1.col-md-1.control-icons.text-right
-        .col-xs-6.col-md-8.name.user
-          | ⌙
-          span.avatar
-            img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
-          span.name #{user.profile.name}
-        .col-xs-2.col-md-1.duration
-        .col-xs-2.col-md-1.duration
-          span.text-muted {{share.milliseconds2minutes ../../replyDuration}}
-        .col-xs-1.col-md-1.control-icons.text-center
+      +reply
+  if isAddingReply
+    .add-reply-wrapper.add-objects-wrapper.is-edited
+      .row.first-row
+        .col-xs-1.col-md-1
+        .col-xs-7.col-md-9
+          form.form-horizontal(role="form")
+            .form-group
+              label.sr-only(for="add-reply-query") Search
+              div.col-xs-6
+                input#add-reply-query.add-reply-query.form-control(name="query" type="search" placeholder="Type delegate name to search..." value="{{Session 'add-reply-query'}}")
+          .row.results
+            each addReplySearchResults
+              .col-xs-6
+                h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
+                  span.avatar
+                    img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+                  span.name
+                    | #{profile.name}
+                    if isAlreadyAdded
+                      i.fa.fa-check
+          .row.buttons
+            div.col-xs-6
+              button.btn.btn-primary.cancel
+                i.fa.fa-check
+                | Finish adding replies

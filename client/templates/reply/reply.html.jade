@@ -1,0 +1,21 @@
+template(name="reply")
+  .object.reply(class="{{#if isEdited}}is-edited{{/if}}" data-family="reply" data-id="#{_id}")
+    .row
+      .col-xs-1.col-md-1
+      .col-xs-7.col-md-9.name
+        .user
+          | ⌙
+          span.avatar
+            img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+          span.name(class="{{#if not isEdited}}start-editing{{/if}}") #{user.profile.name}
+        if isEdited
+          form.form-horizontal(role="form")
+            button.btn.btn-primary(type='submit')
+              span.fa.fa-check
+              | Save reply
+            button.btn.btn-link.remove(data-confirmation="{{t 'forms.reply.actions.removeConfirmation'}}")
+              | Delete
+      .col-xs-2.col-md-1.duration
+      .col-xs-2.col-md-1.duration
+        h5.text-muted
+          span.align-middle {{share.milliseconds2minutes ../../replyDuration}}

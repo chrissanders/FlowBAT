@@ -91,10 +91,21 @@ i18n.addResourceBundle("en",
         save: "Save talk"
         remove: "Delete talk"
         removeConfirmation: "Deleting a talk will wipe it completely. Are you sure you want to delete this talk?"
+    reply:
+      owner: "Reply creator"
+      createdAt: "Reply added at"
+      updatedAt: "Reply edited at"
+      actions:
+        insert: "Add reply"
+        update: "Edit reply"
+        save: "Save reply"
+        remove: "Delete reply"
+        removeConfirmation: "Deleting a reply will wipe it completely. Are you sure you want to delete this reply?"
   defaults:
     meeting:
       name: "New meeting"
     sak:
       name: "New case"
     talk: {}
+    reply: {}
 )

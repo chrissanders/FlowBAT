@@ -1,9 +1,23 @@
 template(name="meeting")
   .object.meeting(class="{{#if isEdited}}is-edited{{/if}}" data-family="meeting" data-id="#{_id}")
-    .row
-      .col-xs-1.col-md-1
-      .col-xs-6.col-md-8.name
-        if isEdited
+    if not isNew
+      .row
+        .col-xs-8.col-md-10.name
+          h3
+            span(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
+              if name
+                | #{name}
+              else
+                | {{t "forms.meeting.nameIsEmpty"}}
+        .col-xs-2.col-md-1.duration
+          if maximumDurationSum
+            h3(class=durationOverflowClass) {{milliseconds2hourminutes maximumDurationSum}}
+        .col-xs-2.col-md-1.duration
+          if calculatedDurationSum
+            h3.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
+    if isEdited
+      .row
+        .col-xs-8.col-md-10
           form.form-horizontal(role="form")
             .form-group
               label.sr-only.control-label Name
@@ -14,26 +28,12 @@ template(name="meeting")
               | Save meeting
             button.btn.btn-link.remove(data-confirmation="{{t 'forms.meeting.actions.removeConfirmation'}}")
               | Delete
-        else
-          h3
-            span(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
-              if name
-                | #{name}
-              else
-                | {{t "forms.meeting.nameIsEmpty"}}
-      .col-xs-2.col-md-1.duration
-        if maximumDurationSum
-          h3(class=durationOverflowClass) {{milliseconds2hourminutes maximumDurationSum}}
-      .col-xs-2.col-md-1.duration
-        if calculatedDurationSum
-          h3.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
-      .col-xs-1.col-md-1
   .saker
     each saker
       +sak
   if not isNew
     .row
       .col-xs-1
-      .col-xs-8.name
+      .col-xs-7.col-md-9.name
         h4.text-muted
           span.add-object.add-sak Add case

@@ -1,78 +1,90 @@
 template(name="sak")
-  .object.sak(class="{{#if isEdited}}is-edited{{/if}}" data-family="sak" data-id="#{_id}")
-    .row
-      .col-xs-1.col-md-1
-        if not isEdited
-          h4
-            span(class="{{#if not isEdited}}start-editing{{/if}}" data-edited-property="number")
-              | #{number}
-      .col-xs-6.col-md-8.name
-        if isEdited
-          form.form-horizontal(role="form")
-            .form-group
-              label.sr-only.control-label Name
-              div.col-xs-12
-                +input(family="sak" _id=_id property="name" value=name placeholderI18n="forms.sak.namePlaceholder" isNew=isNew)
-            .form-group
-              label.col-xs-4.col-md-3.control-label Number
-              div.col-xs-6.col-md-3.input-group
-                +input(family="sak" _id=_id property="number" value=number placeholderI18n="forms.sak.numberPlaceholder" isNew=isNew)
-            .form-group
-              label.col-xs-4.col-md-3.control-label Case duration
-              div.col-xs-6.col-md-3.input-group
-                +durationInput(family="sak" _id=_id property="maximumDuration" value=maximumDuration placeholderI18n="forms.sak.maximumDurationPlaceholder" isNew=isNew)
-                span.input-group-addon minutes
-            .form-group
-              label.col-xs-4.col-md-3.control-label Talk duration
-              div.col-xs-6.col-md-3.input-group
-                +durationInput(family="sak" _id=_id property="talkDuration" value=talkDuration placeholderI18n="forms.sak.talkDurationPlaceholder" isNew=isNew)
-                span.input-group-addon minutes
-            .form-group
-              label.col-xs-4.col-md-3.control-label Reply duration
-              div.col-xs-6.col-md-3.input-group
-                +durationInput(family="sak" _id=_id property="replyDuration" value=replyDuration placeholderI18n="forms.sak.replyDurationPlaceholder" isNew=isNew)
-                span.input-group-addon minutes
-            button.btn.btn-primary(type='submit')
-              span.fa.fa-check
-              | Save case
-            button.btn.btn-link.remove(data-confirmation="{{t 'forms.sak.actions.removeConfirmation'}}")
-              | Delete
-        else
-          h4
-            span(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
-              if name
-                | #{name}
-              else
-                | {{t "forms.sak.nameIsEmpty"}}
-      .col-xs-2.col-md-1.duration
-        if not isEdited
-          if maximumDuration
-            h4(class=durationOverflowClass) {{milliseconds2hourminutes maximumDuration}}
-      .col-xs-2.col-md-1.duration
-        if not isEdited
-          if calculatedDurationSum
-            h4.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
-      .col-xs-1.col-md-1
-  .talks
-    each talks
-      +talk
-  if isAddingTalk
-    .row.is-edited
-      .col-xs-1.col-md-1
-      .col-xs-6.col-md-8.add-talk-wrapper
-        form.form-horizontal(role="form")
-          .form-group
-            label.sr-only(for="query") Search
-            div.col-xs-6
-              input#query.form-control(name="query" type="search" placeholder="Type delegate name to search...")
-            div.col-xs-6
-              button.btn.btn-link.cancel
-                i.fa.fa-times
-                | Cancel
-  else
-    if not isNew
-      .row.talk.add
+  .sak(class="{{#if isEdited}}is-edited{{/if}}" data-family="sak" data-id="#{_id}")
+    .object
+      .row
         .col-xs-1.col-md-1
-        .col-xs-6.col-md-8.name
-          h5.text-muted
-            span.add-object.add-talk Add talk
+          if not isEdited
+            h4
+              span.sortable-handle(class="{{#if not isEdited}}start-editing{{/if}}" data-edited-property="number")
+                | #{number}
+        .col-xs-7.col-md-9.name
+          if isEdited
+            form.form-horizontal(role="form")
+              .form-group
+                label.sr-only.control-label Name
+                div.col-xs-12
+                  +input(family="sak" _id=_id property="name" value=name placeholderI18n="forms.sak.namePlaceholder" isNew=isNew)
+              .form-group
+                label.col-xs-4.col-md-3.control-label Number
+                div.col-xs-6.col-md-3.input-group
+                  +input(family="sak" _id=_id property="number" value=number placeholderI18n="forms.sak.numberPlaceholder" isNew=isNew)
+              .form-group
+                label.col-xs-4.col-md-3.control-label Case duration
+                div.col-xs-6.col-md-3.input-group
+                  +durationInput(family="sak" _id=_id property="maximumDuration" value=maximumDuration placeholderI18n="forms.sak.maximumDurationPlaceholder" isNew=isNew)
+                  span.input-group-addon minutes
+              .form-group
+                label.col-xs-4.col-md-3.control-label Talk duration
+                div.col-xs-6.col-md-3.input-group
+                  +durationInput(family="sak" _id=_id property="talkDuration" value=talkDuration placeholderI18n="forms.sak.talkDurationPlaceholder" isNew=isNew)
+                  span.input-group-addon minutes
+              .form-group
+                label.col-xs-4.col-md-3.control-label Reply duration
+                div.col-xs-6.col-md-3.input-group
+                  +durationInput(family="sak" _id=_id property="replyDuration" value=replyDuration placeholderI18n="forms.sak.replyDurationPlaceholder" isNew=isNew)
+                  span.input-group-addon minutes
+              button.btn.btn-primary(type='submit')
+                span.fa.fa-check
+                | Save case
+              button.btn.btn-link.remove(data-confirmation="{{t 'forms.sak.actions.removeConfirmation'}}")
+                | Delete
+          else
+            h4
+              span.sortable-handle(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
+                if name
+                  | #{name}
+                else
+                  | {{t "forms.sak.nameIsEmpty"}}
+        .col-xs-2.col-md-1.duration
+          if not isEdited
+            if maximumDuration
+              h4(class=durationOverflowClass) {{milliseconds2hourminutes maximumDuration}}
+        .col-xs-2.col-md-1.duration
+          if not isEdited
+            if calculatedDurationSum
+              h4.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
+    .talks
+      each talks
+        +talk
+    if isAddingTalk
+      .add-talk-wrapper.add-objects-wrapper.is-edited
+        .row.first-row
+          .col-xs-1.col-md-1
+          .col-xs-7.col-md-9
+            form.form-horizontal(role="form")
+              .form-group
+                label.sr-only(for="add-talk-query") Search
+                div.col-xs-6
+                  input#add-talk-query.add-talk-query.form-control(name="query" type="search" placeholder="Type delegate name to search..." value="{{Session 'add-talk-query'}}")
+            .row.results
+              each addTalkSearchResults
+                .col-xs-6
+                  h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
+                    span.avatar
+                      img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+                    span.name
+                      | #{profile.name}
+                      if isAlreadyAdded
+                        i.fa.fa-check
+            .row.buttons
+              div.col-xs-6
+                button.btn.btn-primary.cancel
+                  i.fa.fa-check
+                  | Finish adding talks
+    else
+      if not isNew
+        .row.talk.add
+          .col-xs-1.col-md-1
+          .col-xs-7.col-md-9.name
+            h5.text-muted
+              span.add-object.add-talk Add talk

@@ -52,12 +52,12 @@ textarea
   background-color transparent
 */
 
-.start-editing, .add-object
+.start-editing, .stop-editing, .add-object
   &:hover
     cursor pointer
     text-decoration underline
 
-.object.is-edited, .row.is-edited
+.is-edited
   background-color #F5F5F5
   border-radius 5px
   .control-label
@@ -70,6 +70,12 @@ textarea
     cursor pointer
 
 .object
+  &.is-edited
+    margin-left: -15px;
+    margin-right: -15px;
+    > .row
+      margin-left: 0;
+      margin-right: 0;
   .form-horizontal
     margin 15px 0
 
@@ -89,6 +95,30 @@ textarea
       max-width 30px
   .name
     vertical-align middle
+
+.align-middle
+  vertical-align middle
+
+.add-objects-wrapper
+  margin 10px 0
+  .first-row
+    padding 15px 0
+  .results
+    .user
+      &:hover
+        cursor pointer
+        .name
+          text-decoration underline
+  .buttons
+    padding 15px 0 0
+
+.ui-sortable-helper
+  outline 2px solid #222222
+  outline-offset 2px
+
+.placeholder
+  outline 2px dashed #222222
+  outline-offset 7px
 
 /* Override Bootstrap */
 html

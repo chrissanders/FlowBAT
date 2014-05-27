@@ -3,6 +3,17 @@ Template.sak.helpers
     share.SakEditor.isEdited(@_id)
   isAddingTalk: ->
     share.SakEditor.isAddingTalk(@_id)
+  addTalkSearchResults: ->
+    addTalkQuery = Session.get("add-talk-query")
+    if addTalkQuery
+      regexp = new RegExp(addTalkQuery, "gi")
+      existingUserIds = _.pluck(@talks().fetch(), "userId")
+      Meteor.users.find({"profile.name": regexp}, {limit: 9, sort: {createdAt: 1}, transform: (user) ->
+        user.isAlreadyAdded = user._id in existingUserIds
+        user
+      })
+    else
+      []
   durationOverflowClass: ->
     if not @maximumDuration
       return ""
@@ -34,4 +45,21 @@ Template.sak.events
   "click .add-talk-wrapper .cancel": grab encapsulate (event, template) ->
     share.EditorCache.stopEditing()
     share.SakEditor.stopAddingTalk(template.data._id)
-
+    Session.set("add-talk-query", "")
+  "input .add-talk-query": encapsulate (event, template) ->
+    Session.set("add-talk-query", $(event.currentTarget).val())
+  "click .add-talk-wrapper .user": encapsulate (event, template) ->
+    $user = $(event.currentTarget)
+    if $user.hasClass("already-added")
+      talk = share.Talks.findOne(
+        sakId: template.data._id
+        userId: $user.attr("data-id")
+      )
+      share.Talks.remove(talk._id)
+    else
+      _id = share.TalkEditor.insert(
+        sakId: template.data._id
+        userId: $user.attr("data-id")
+        isNew: false
+      )
+      share.TalkEditor.stopEditing(_id)
