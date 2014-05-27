@@ -1,4 +1,5 @@
 share.loginCallback = ->
+  (error) ->
 
 share.milliseconds2hourminutes = (milliseconds) ->
   hours = share.intval(milliseconds / 1000 / 3600)

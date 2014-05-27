@@ -1,0 +1,48 @@
+template(name="login")
+  li.dropdown
+    a.dropdown-toggle(href="#", data-toggle="dropdown")
+      | Sign in
+      b.caret
+    ul.dropdown-menu
+      li
+        .signin
+          button.btn.btn-primary.sign-in-with-google
+            if loggingIn
+              | Signing in...
+            else
+              | Signin with Google
+          p: span or
+          form(autocomplete="off")
+            div.form-group
+              input.email.form-control(type="text", name="email" placeholder="Email")
+              input.password.form-control(type="password", name="password", placeholder="Password")
+            div.links.clearfix
+              button.btn.btn-default(type="submit")
+                if loggingIn
+                  | Signing in...
+                else
+                  | Sign in
+  li.dropdown
+    a.dropdown-toggle(href="#", data-toggle="dropdown")
+      | Sign up
+      b.caret
+    ul.dropdown-menu
+      li
+        .signup
+          button.btn.btn-primary.sign-in-with-google
+            if loggingIn
+              | Signing in...
+            else
+              | Signin with Google
+          p: span or
+          form(autocomplete="off")
+            div.form-group
+              input.email.form-control(type="text", name="email" placeholder="Email")
+              input.password.form-control(type="password", name="password", placeholder="Password")
+              input.passwordAgain.form-control(type="password", name="passwordAgain", placeholder="Password again")
+            div.links.clearfix
+              button.btn.btn-default(type="submit")
+                if loggingIn
+                  | Signing up...
+                else
+                  | Sign up

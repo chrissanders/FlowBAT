@@ -8,4 +8,6 @@ Template.navbar.events
   "click .insert-meeting": grab (event, template) ->
     _.defer -> # let other editors be stopped
       share.EditorCache.editors["meeting"].insertAndShow()
+  "click .signout": grab (event, template) ->
+    Meteor.logout()
 

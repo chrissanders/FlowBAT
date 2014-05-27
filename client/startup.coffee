@@ -1,7 +1,7 @@
 Meteor.startup ->
   userId = Meteor.userId()
   if Meteor.settings.public.isDebug
-    if not userId # and (location.host == "localhost:3000" or location.host.indexOf("192.168") != -1)
+    if not userId and (location.host == "localhost:3000" or location.host.indexOf("192.168") != -1)
       if jQuery.browser.webkit
         Meteor.loginWithPassword("denis.gorbachev+meetings.JensJohanHjort@faster-than-wind.ru", "123123", share.loginCallback)
       if jQuery.browser.mozilla

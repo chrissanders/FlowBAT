@@ -143,11 +143,11 @@ share.loadFixtures = ->
 
   insertData(replies, share.Replies)
 
-#  AccountsLoginServiceConfigurationData = [
-#    {
-#      service: "google",
-#      clientId: Meteor.settings.public.google.clientId,
-#      secret: Meteor.settings.google.secret
-#    }
-#  ]
-#  insertData(AccountsLoginServiceConfigurationData, Accounts.loginServiceConfiguration)
+  AccountsLoginServiceConfigurationData = [
+    {
+      service: "google",
+      clientId: Meteor.settings.public.google.clientId,
+      secret: Meteor.settings.google.secret
+    }
+  ]
+  insertData(AccountsLoginServiceConfigurationData, Accounts.loginServiceConfiguration)

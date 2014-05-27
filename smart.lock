@@ -6,7 +6,8 @@
       "collection-hooks": {},
       "percolatestudio-mixpanel": {},
       "fast-render": {},
-      "jade": {}
+      "jade": {},
+      "jquery-validation": {}
     },
     "packages": {
       "iron-router": {
@@ -31,8 +32,13 @@
       },
       "jade": {
         "git": "https://github.com/mquandalle/meteor-jade.git",
-        "tag": "v0.2.3",
-        "commit": "38220544108cdc30e2e53f40481dce0b594d6f31"
+        "tag": "v0.2.4",
+        "commit": "a47a4c59daaa57e7fe5f1544d4ea76d95a5c9abf"
+      },
+      "jquery-validation": {
+        "git": "https://github.com/properapp/jquery-validation.git",
+        "tag": "v1.0.0",
+        "commit": "afce6a53368c4f35f3bd82d92572312db68ecbb7"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
