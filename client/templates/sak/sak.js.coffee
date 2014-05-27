@@ -32,7 +32,7 @@ Template.sak.rendered = ->
     tolerance: "pointer"
     forceHelperSize: true
     forcePlaceholderSize: true
-    placeholder: "placeholder talk"
+    placeholder: "object talk placeholder"
 #    start: (event, ui) ->
 #      ui.item.addClass("prevent-click")
 #    stop: (event, ui) ->

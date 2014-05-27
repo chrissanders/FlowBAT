@@ -19,7 +19,7 @@ Template.meeting.rendered = ->
     tolerance: "pointer"
     forceHelperSize: true
     forcePlaceholderSize: true
-    placeholder: "placeholder sak"
+    placeholder: "object sak placeholder"
 #    start: (event, ui) ->
 #      ui.item.addClass("prevent-click")
 #    stop: (event, ui) ->

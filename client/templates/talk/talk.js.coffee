@@ -16,6 +16,40 @@ Template.talk.helpers
       []
 
 Template.talk.rendered = ->
+  @$(".replies").sortable(
+    axis: "y"
+    delay: 75
+    distance: 4
+    handle: ".sortable-handle"
+    cursor: "move"
+    tolerance: "pointer"
+    forceHelperSize: true
+    forcePlaceholderSize: true
+    placeholder: "object reply placeholder"
+#    start: (event, ui) ->
+#      ui.item.addClass("prevent-click")
+#    stop: (event, ui) ->
+#      _.defer ->
+#        ui.item.removeClass("prevent-click") # prevent click after drag in Firefox
+    update: (event, ui) ->
+      if ui.sender # duplicate "update" event
+        return
+      $reply = ui.item
+      replyId = $reply.attr("data-id")
+      prevReplyId = $reply.prev().attr("data-id")
+      nextReplyId = $reply.next().attr("data-id")
+      if !prevReplyId && !nextReplyId
+        position = 1
+      else if !prevReplyId
+        position = share.Replies.findOne(nextReplyId).position - 1
+      else if !nextReplyId
+        position = share.Replies.findOne(prevReplyId).position + 1
+      else
+        position = (share.Replies.findOne(nextReplyId).position + share.Replies.findOne(prevReplyId).position) / 2
+      reply = share.Replies.findOne(replyId)
+      $set = {position: position}
+      share.Replies.update(replyId, {$set: $set})
+  )
 
 Template.talk.events
   "click .start-editing": encapsulate (event, template) ->
