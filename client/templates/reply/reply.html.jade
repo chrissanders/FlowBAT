@@ -2,9 +2,9 @@ template(name="reply")
   .object.reply(class="{{#if isEdited}}is-edited{{/if}}" data-family="reply" data-id="#{_id}")
     .form-area
       .row
-        .col-xs-1.col-md-1
-        .col-xs-7.col-md-9.shifted
-          .user.sortable-handle
+        .col-xs-1.col-md-1.sortable-handle
+        .col-xs-7.col-md-9.sortable-handle.shifted
+          .user
             | ⌙
             span.avatar
               img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
@@ -16,7 +16,7 @@ template(name="reply")
       if isEdited
         .row
           .col-xs-1.col-md-1
-          .col-xs-7.col-md-9.shifted
+          .col-xs-10.col-md-10.shifted
             form.form-horizontal(role="form")
               button.btn.btn-primary(type='submit')
                 span.fa.fa-check

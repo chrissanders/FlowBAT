@@ -90,4 +90,4 @@ Template.talk.events
       )
       share.ReplyEditor.stopEditing(_id)
       Session.set("add-reply-query", "")
-      template.$(".add-reply-wrapper input").first().focus()
+      template.$(".add-reply-wrapper input").first().val("").focus()
