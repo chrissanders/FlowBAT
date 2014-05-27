@@ -24,6 +24,15 @@ sakPreSave = (sakId, changes) ->
     changes.name = root.xssClean(changes.name)
 
 Meteor.users.before.insert (userId, user) ->
+  _.defaults(user,
+    isNew: true
+    isInvitation: false
+    invitations: []
+  )
+  _.defaults(user.profile,
+    settings: {}
+    isRealName: false
+  )
   userPreSave.call(@, userId, user)
 
 Meteor.users.before.update (userId, user, fieldNames, modifier, options) ->
