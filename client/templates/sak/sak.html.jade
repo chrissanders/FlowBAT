@@ -74,12 +74,12 @@ template(name="sak")
             form.form-horizontal(role="form")
               .form-group
                 label.sr-only(for="add-talk-query") Search
-                div.col-xs-6
+                div.col-xs-12.col-md-6
                   input#add-talk-query.add-talk-query.form-control(name="query" type="search" placeholder="Type delegate name to search..." value="{{Session 'add-talk-query'}}")
             if addTalkSearchResults.count
               .row.results
                 each addTalkSearchResults
-                  .col-xs-6
+                  .col-xs-12.col-md-6
                     h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
                       span.avatar
                         img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")

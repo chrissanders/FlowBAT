@@ -49,12 +49,12 @@ template(name="talk")
             form.form-horizontal(role="form")
               .form-group
                 label.sr-only(for="add-reply-query") Search
-                div.col-xs-6
+                div.col-xs-12.col-md-6
                   input#add-reply-query.add-reply-query.form-control(name="query" type="search" placeholder="Type delegate name to search..." value="{{Session 'add-reply-query'}}")
             if addReplySearchResults.count
               .row.results
                 each addReplySearchResults
-                  .col-xs-6
+                  .col-xs-12.col-md-6
                     h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
                       span.avatar
                         img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
