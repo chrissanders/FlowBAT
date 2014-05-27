@@ -1,67 +1,73 @@
 template(name="talk")
   .object.talk(class="{{#if isEdited}}is-edited{{/if}}" data-family="talk" data-id="#{_id}")
-    .row
-      .col-xs-1.col-md-1
-      .col-xs-7.col-md-9.name
-        h5.user
-          span.avatar
-            img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
-          span.name(class="{{#if not isEdited}}start-editing{{/if}}") #{user.profile.name}
-          if not isNew
-            span.add-reply-link-wrapper.text-muted
-              | -
-              span.add-object.add-reply Add reply
-        if isEdited
-          form.form-horizontal(role="form")
-            button.btn.btn-primary(type='submit')
-              span.fa.fa-check
-              | Save talk
-            button.btn.btn-link.remove(data-confirmation="{{t 'forms.talk.actions.removeConfirmation'}}")
-              | Delete
-      .col-xs-2.col-md-1.duration
-      .col-xs-2.col-md-1.duration
-        h5.text-muted
-          span.align-middle {{share.milliseconds2minutes ../talkDuration}}
-  .replies
-    each replies
-      +reply
-  if replies.count
-    .object.answer
-      .row
-        .col-xs-1.col-md-1
-        .col-xs-7.col-md-9.name
-          .user
-            | ⌙
-            span.avatar
-              img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
-            span.name #{user.profile.name}
-            em.align-middle (answer)
-        .col-xs-2.col-md-1.duration
-        .col-xs-2.col-md-1.duration
-          h5.text-muted
-            span.align-middle {{share.milliseconds2minutes ../answerDuration}}
-  if isAddingReply
-    .add-reply-wrapper.add-objects-wrapper.form-area
-      .row.first-row
-        .col-xs-1.col-md-1
-        .col-xs-7.col-md-9
-          form.form-horizontal(role="form")
-            .form-group
-              label.sr-only(for="add-reply-query") Search
+    .form-area
+      if not isNew
+        .row
+          .col-xs-1.col-md-1.sortable-handle
+          .col-xs-7.col-md-9.name.sortable-handle
+            h5.user
+              span.avatar.add-reply
+                img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+              span.name(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}}") #{user.profile.name}
+              if isEdited
+                span.add-reply-link-wrapper.align-middle.text-muted
+                  | -
+                  span.add-object.add-reply Add reply
+          .col-xs-2.col-md-1.duration
+          .col-xs-2.col-md-1.duration
+            h5.text-muted
+              span.align-middle {{share.milliseconds2minutes ../talkDuration}}
+      if isEdited
+        .row
+          .col-xs-1.col-md-1
+          .col-xs-10.col-md-10
+            form.form-horizontal(role="form")
+              button.btn.btn-primary(type='submit')
+                span.fa.fa-check
+                | Save talk
+              button.btn.btn-link.remove(data-confirmation="{{t 'forms.talk.actions.removeConfirmation'}}")
+                | Delete
+    .replies
+      each replies
+        +reply
+    if replies.count
+      .object.answer
+        .row
+          .col-xs-1.col-md-1
+          .col-xs-7.col-md-9.shifted
+            .user
+              | ⌙
+              span.avatar
+                img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+              span.name #{user.profile.name}
+              em.align-middle (answer)
+          .col-xs-2.col-md-1.duration
+          .col-xs-2.col-md-1.duration
+            h5.text-muted
+              span.align-middle {{share.milliseconds2minutes ../answerDuration}}
+    if isAddingReply
+      .add-reply-wrapper.add-objects-wrapper
+        .row
+          .col-xs-1.col-md-1
+          .col-xs-7.col-md-9
+            form.form-horizontal(role="form")
+              .form-group
+                label.sr-only(for="add-reply-query") Search
+                div.col-xs-12.col-md-6
+                  input#add-reply-query.add-reply-query.form-control(name="query" type="search" placeholder="Type delegate name to search..." value="{{Session 'add-reply-query'}}")
+            if addReplySearchResults.count
+              .row.results
+                each addReplySearchResults
+                  .col-xs-12.col-md-6
+                    h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
+                      span.avatar
+                        img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+                      span.name
+                        | #{profile.name}
+                        if isAlreadyAdded
+                          i.fa.fa-check
+            .row.buttons
               div.col-xs-6
-                input#add-reply-query.add-reply-query.form-control(name="query" type="search" placeholder="Type delegate name to search..." value="{{Session 'add-reply-query'}}")
-          .row.results
-            each addReplySearchResults
-              .col-xs-6
-                h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
-                  span.avatar
-                    img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
-                  span.name
-                    | #{profile.name}
-                    if isAlreadyAdded
-                      i.fa.fa-check
-          .row.buttons
-            div.col-xs-6
-              button.btn.btn-primary.cancel
-                i.fa.fa-check
-                | Finish adding replies
+                button.btn.btn-primary.cancel
+                  i.fa.fa-check
+                  | Finish adding replies

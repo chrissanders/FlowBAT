@@ -62,8 +62,6 @@ textarea
     cursor pointer
 
 .object
-  .form-horizontal
-    margin 15px 0
   &.is-edited
     > .form-area
       margin-left: -15px;
@@ -73,6 +71,8 @@ textarea
       > .row
         margin-left: 0;
         margin-right: 0;
+      form
+        margin 15px 0
       .control-label
         text-align left
       .form-control
@@ -100,26 +100,22 @@ textarea
 
 .add-objects-wrapper
   margin 10px 0
-  .first-row
-    padding 15px 0
   .results
+    margin-bottom 15px
     .user
       &:hover
         cursor pointer
         .name
           text-decoration underline
-  .buttons
-    padding 15px 0 0
 
 .ui-sortable-helper
-  outline 2px solid #222222
-  outline-offset 2px
-  .is-edited
-    background-color transparent
+  box-shadow 0 0 8px 4px #B0B0B0
+  &.is-edited
+    > .form-area
+      background-color transparent
 
-.placeholder
-  outline 2px dashed #222222
-  outline-offset 7px
+.object.placeholder
+  background-color #F0F0F0
 
 /* Override Bootstrap */
 html

@@ -14,6 +14,13 @@ share.SakEditor = new share.Editor(
       position: sibling.position + 1
     )
     share.SakEditor.insert(sak, callback)
+  insertTalk: (_id, talk = {}, callback = ->) ->
+    sak = @collection.findOne(_id)
+    _.defaults(talk,
+      sakId: sak._id
+      position: sak.lastTalkPosition() + 1
+    )
+    share.TalkEditor.insert(talk, callback)
   isAddingTalk: (_id) ->
     Session.equals(@editorKey(_id, "is-adding-talk"), true)
   startAddingTalk: (_id) ->

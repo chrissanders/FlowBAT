@@ -23,6 +23,10 @@ sakPreSave = (sakId, changes) ->
   if changes.name
     changes.name = root.xssClean(changes.name)
 
+talkPreSave = (talkId, changes) ->
+
+replyPreSave = (replyId, changes) ->
+
 Meteor.users.before.insert (userId, user) ->
   _.defaults(user,
     isNew: true
@@ -62,6 +66,7 @@ share.Saker.before.insert (userId, sak) ->
   now = new Date()
   _.defaults(sak,
     name: ""
+    position: 0
     maximumDuration: 0
     talkDuration: 5 * share.minute
     replyDuration: 3 * share.minute
@@ -78,3 +83,39 @@ share.Saker.before.update (userId, sak, fieldNames, modifier, options) ->
   modifier.$set = modifier.$set or {}
   modifier.$set.updatedAt = modifier.$set.updatedAt or now
   sakPreSave.call(@, userId, modifier.$set)
+
+share.Talks.before.insert (userId, talk) ->
+  talk._id = talk._id || Random.id()
+  now = new Date()
+  _.defaults(talk,
+    position: 0
+    ownerId: userId
+    isNew: true
+    updatedAt: now
+    createdAt: now
+  )
+  talkPreSave.call(@, userId, talk)
+
+share.Talks.before.update (userId, talk, fieldNames, modifier, options) ->
+  now = new Date()
+  modifier.$set = modifier.$set or {}
+  modifier.$set.updatedAt = modifier.$set.updatedAt or now
+  talkPreSave.call(@, userId, modifier.$set)
+
+share.Replies.before.insert (userId, reply) ->
+  reply._id = reply._id || Random.id()
+  now = new Date()
+  _.defaults(reply,
+    position: 0
+    ownerId: userId
+    isNew: true
+    updatedAt: now
+    createdAt: now
+  )
+  replyPreSave.call(@, userId, reply)
+
+share.Replies.before.update (userId, reply, fieldNames, modifier, options) ->
+  now = new Date()
+  modifier.$set = modifier.$set or {}
+  modifier.$set.updatedAt = modifier.$set.updatedAt or now
+  replyPreSave.call(@, userId, modifier.$set)

@@ -3,16 +3,16 @@ template(name="sak")
     .form-area
       if not isNew
         .row
-          .col-xs-1.col-md-1
+          .col-xs-1.col-md-1.sortable-handle
             h4
-              span.sortable-handle(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not number}}text-muted{{/if}}" data-edited-property="number")
+              span(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not number}}text-muted{{/if}}" data-edited-property="number")
                 if number
                   | #{number}
                 else
                   | {{t "forms.sak.numberIsEmpty"}}
-          .col-xs-7.col-md-9.name
+          .col-xs-7.col-md-9.name.sortable-handle
             h4
-              span.sortable-handle(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}" data-edited-property="name")
+              span(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}" data-edited-property="name")
                 if name
                   | #{name}
                 else
@@ -28,34 +28,34 @@ template(name="sak")
       if isEdited
         .row
           .col-xs-1.col-md-1
-          .col-xs-7.col-md-9
+          .col-xs-10.col-md-10
             form.form-horizontal(role="form")
               .form-group
                 label.sr-only.control-label Name
                 div.col-xs-12
                   +input(family="sak" _id=_id property="name" value=name placeholderI18n="forms.sak.namePlaceholder" isNew=isNew)
               .form-group
-                label.col-xs-4.col-md-3.control-label Number
-                div.col-xs-6.col-md-3.input-group
+                label.col-xs-5.col-md-3.control-label Number
+                div.col-xs-7.col-md-3.input-group
                   +input(family="sak" _id=_id property="number" value=number placeholderI18n="forms.sak.numberPlaceholder" isNew=isNew)
               .form-group
-                label.col-xs-4.col-md-3.control-label Case duration
-                div.col-xs-6.col-md-3.input-group
+                label.col-xs-5.col-md-3.control-label Case duration
+                div.col-xs-7.col-md-3.input-group
                   +durationInput(family="sak" _id=_id property="maximumDuration" value=maximumDuration placeholderI18n="forms.sak.maximumDurationPlaceholder" isNew=isNew)
                   span.input-group-addon minutes
               .form-group
-                label.col-xs-4.col-md-3.control-label Talk duration
-                div.col-xs-6.col-md-3.input-group
+                label.col-xs-5.col-md-3.control-label Talk duration
+                div.col-xs-7.col-md-3.input-group
                   +durationInput(family="sak" _id=_id property="talkDuration" value=talkDuration placeholderI18n="forms.sak.talkDurationPlaceholder" isNew=isNew)
                   span.input-group-addon minutes
               .form-group
-                label.col-xs-4.col-md-3.control-label Reply duration
-                div.col-xs-6.col-md-3.input-group
+                label.col-xs-5.col-md-3.control-label Reply duration
+                div.col-xs-7.col-md-3.input-group
                   +durationInput(family="sak" _id=_id property="replyDuration" value=replyDuration placeholderI18n="forms.sak.replyDurationPlaceholder" isNew=isNew)
                   span.input-group-addon minutes
               .form-group
-                label.col-xs-4.col-md-3.control-label Answer duration
-                div.col-xs-6.col-md-3.input-group
+                label.col-xs-5.col-md-3.control-label Answer duration
+                div.col-xs-7.col-md-3.input-group
                   +durationInput(family="sak" _id=_id property="answerDuration" value=answerDuration placeholderI18n="forms.sak.answerDurationPlaceholder" isNew=isNew)
                   span.input-group-addon minutes
               button.btn.btn-primary(type='submit')
@@ -67,25 +67,26 @@ template(name="sak")
       each talks
         +talk
     if isAddingTalk
-      .add-talk-wrapper.add-objects-wrapper.form-area
-        .row.first-row
+      .add-talk-wrapper.add-objects-wrapper
+        .row
           .col-xs-1.col-md-1
           .col-xs-7.col-md-9
             form.form-horizontal(role="form")
               .form-group
                 label.sr-only(for="add-talk-query") Search
-                div.col-xs-6
+                div.col-xs-12.col-md-6
                   input#add-talk-query.add-talk-query.form-control(name="query" type="search" placeholder="Type delegate name to search..." value="{{Session 'add-talk-query'}}")
-            .row.results
-              each addTalkSearchResults
-                .col-xs-6
-                  h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
-                    span.avatar
-                      img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
-                    span.name
-                      | #{profile.name}
-                      if isAlreadyAdded
-                        i.fa.fa-check
+            if addTalkSearchResults.count
+              .row.results
+                each addTalkSearchResults
+                  .col-xs-12.col-md-6
+                    h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
+                      span.avatar
+                        img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+                      span.name
+                        | #{profile.name}
+                        if isAlreadyAdded
+                          i.fa.fa-check
             .row.buttons
               div.col-xs-6
                 button.btn.btn-primary.cancel
@@ -93,8 +94,9 @@ template(name="sak")
                   | Finish adding talks
     else
       if not isNew
-        .row.talk.add
-          .col-xs-1.col-md-1
-          .col-xs-7.col-md-9.name
-            h5.text-muted
-              span.add-object.add-talk Add talk
+        .add-talk-link-wrapper
+          .row
+            .col-xs-1.col-md-1
+            .col-xs-7.col-md-9.name
+              h5.text-muted
+                span.add-object.add-talk Add talk

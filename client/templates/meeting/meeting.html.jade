@@ -18,7 +18,7 @@ template(name="meeting")
               h3.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
       if isEdited
         .row
-          .col-xs-8.col-md-10
+          .col-xs-10.col-md-10
             form.form-horizontal(role="form")
               .form-group
                 label.sr-only.control-label Name
@@ -33,7 +33,8 @@ template(name="meeting")
       each saker
         +sak
     if not isNew
-      .row
-        .col-xs-8.col-md-10.name
-          h4.text-muted
-            span.add-object.add-sak Add case
+      .add-sak-link-wrapper
+        .row
+          .col-xs-8.col-md-10.name
+            h4.text-muted
+              span.add-object.add-sak Add case
