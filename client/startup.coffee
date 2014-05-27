@@ -3,9 +3,9 @@ Meteor.startup ->
   if Meteor.settings.public.isDebug
     if not userId and (location.host == "localhost:3000" or location.host.indexOf("192.168") != -1)
       if jQuery.browser.webkit
-        Meteor.loginWithPassword("denis.gorbachev+meetings.JensJohanHjort@faster-than-wind.ru", "123123", share.loginCallback)
+        Meteor.loginWithPassword("JensJohanHjort@meetings.me", "123123", share.loginCallback)
       if jQuery.browser.mozilla
-        Meteor.loginWithPassword("denis.gorbachev+meetings.AnniSkogman@faster-than-wind.ru", "123123", share.loginCallback)
+        Meteor.loginWithPassword("AnniSkogman@meetings.me", "123123", share.loginCallback)
   if share.isDebug
     amplify.store("processedPropertyIds", [])
     amplify.store("requiredPropertyIds", [])
