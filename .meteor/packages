@@ -19,3 +19,5 @@ showdown
 accounts-google
 accounts-password
 fast-render
+i18next-meteor
+filepicker

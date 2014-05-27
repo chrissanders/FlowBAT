@@ -13,3 +13,5 @@ fast-render
 blaze-layout
 jquery-validation
 /jquery-validation
+i18next-meteor
+filepicker

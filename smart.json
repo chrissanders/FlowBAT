@@ -4,6 +4,10 @@
     "collection-hooks": {},
     "percolatestudio-mixpanel": {},
     "fast-render": {},
-    "jade": {}
+    "jade": {},
+    "i18next-meteor": {
+      "git": "https://github.com/wsoul/i18next-meteor.git"
+    },
+    "filepicker": {}
   }
 }

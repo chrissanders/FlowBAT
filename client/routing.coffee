@@ -19,6 +19,15 @@ Router.map ->
       _.defaults({}, @params,
         meeting: meeting
       )
+  @route "user",
+    path: "/user/:_id"
+    data: ->
+      user = Meteor.users.findOne(@params._id)
+      unless user
+        return null
+      _.defaults({}, @params,
+        user: user
+      )
 
 Router.onBeforeAction("dataNotFound")
 

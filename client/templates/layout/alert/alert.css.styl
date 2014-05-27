@@ -1,0 +1,53 @@
+//@import "client/mixins.lessimport"
+
+.alert-message
+  display block
+  position fixed
+  top 150px
+  left 50%
+  width 500px
+  margin-left -250px
+  padding 15px
+  background #fff
+  //.border-radius()
+  z-index 7000
+  box-shadow 0 5px 15px rgba(0, 0, 0, .25)
+
+  .head-block
+    border-bottom 1px solid #ededed
+    padding-bottom 10px
+
+    .alert-title
+      color #4b4b4b
+      font-size 20px
+      padding-right 20px
+
+    .close-pop-up-button
+      margin-top 2px
+      cursor pointer
+
+  .alert-text
+    max-height 500px
+    overflow auto
+    margin 10px 0
+    padding 0 5px
+    color #707070
+    a
+      text-decoration underline
+      &hover
+        text-decoration none
+
+  .transparent-button
+    margin-right 10px
+
+  .buttons
+    margin-top 5px
+
+  .button-panel
+    .error-container
+      line-height 36px
+
+  form
+    input
+      //.box-sizing()
+      width 100%

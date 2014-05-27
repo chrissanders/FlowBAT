@@ -116,4 +116,11 @@ i18n.addResourceBundle("en",
     "Incorrect password": "Incorrect password"
     "User has no password set": "Please, follow the link from the invitation email and set a new password"
     "Token expired": "Invitation link has expired"
+  interface:
+    insert: "Add"
+    update: "Edit"
+    remove: "Delete"
+    save: "Save"
+    cancel: "Cancel"
+    changesAreSavedAutomatically: "All changes are saved automatically."
 )

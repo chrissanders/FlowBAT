@@ -1,0 +1,7 @@
+<template name="dynamicTemplate">
+  {{#with chooseTemplate name}}
+    {{#with ../data}}  {{! original 'data' argument to DynamicTemplate}}
+      {{> ..}}         {{! return value from chooseTemplate(name) }}
+    {{/with}}
+  {{/with}}
+</template>
