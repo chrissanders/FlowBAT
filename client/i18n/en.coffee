@@ -110,4 +110,10 @@ i18n.addResourceBundle("en",
       name: "New case"
     talk: {}
     reply: {}
+  serverErrors:
+    "User not found": "User not found"
+    "Email already exists": "Email already exists"
+    "Incorrect password": "Incorrect password"
+    "User has no password set": "Please, follow the link from the invitation email and set a new password"
+    "Token expired": "Invitation link has expired"
 )
