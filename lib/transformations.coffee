@@ -38,7 +38,8 @@ class share.Sak
   calculatedDurationSum: ->
     calculatedDurationSum = 0
     @talks().forEach (talk) =>
-      calculatedDurationSum += @talkDuration + @replyDuration * talk.replies().count()
+      repliesCount = talk.replies().count()
+      calculatedDurationSum += @talkDuration + @replyDuration * repliesCount + (if repliesCount then @answerDuration else 0)
     calculatedDurationSum
 
 class share.Talk

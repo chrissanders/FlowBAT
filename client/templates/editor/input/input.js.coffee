@@ -3,9 +3,6 @@ Template.input.helpers
 Template.input.rendered = ->
   editor = @firstNode
   $editor = $(editor)
-  $editor.autosize(
-    append: ""
-  )
   editor = share.EditorCache.editors[@data.family]
   if editor.isEditedProperty(@data._id, @data.property)
     $activeElement = $(document.activeElement)

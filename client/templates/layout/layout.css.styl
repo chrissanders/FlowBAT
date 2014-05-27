@@ -57,27 +57,26 @@ textarea
     cursor pointer
     text-decoration underline
 
-.is-edited, .object.is-edited // enforce style
-  background-color #F5F5F5
-  border-radius 5px
-  .control-label
-    text-align left
-  .form-control
-    font-size 18px
-
 .control-icons
   .fa
     cursor pointer
 
 .object
-  &.is-edited
-    margin-left: -15px;
-    margin-right: -15px;
-    > .row
-      margin-left: 0;
-      margin-right: 0;
   .form-horizontal
     margin 15px 0
+  &.is-edited
+    > .form-area
+      margin-left: -15px;
+      margin-right: -15px;
+      background-color #F5F5F5
+      border-radius 5px
+      > .row
+        margin-left: 0;
+        margin-right: 0;
+      .control-label
+        text-align left
+      .form-control
+        font-size 18px
 
 .duration
   text-align right
@@ -115,6 +114,8 @@ textarea
 .ui-sortable-helper
   outline 2px solid #222222
   outline-offset 2px
+  .is-edited
+    background-color transparent
 
 .placeholder
   outline 2px dashed #222222
@@ -124,5 +125,5 @@ textarea
 html
   h4, .h4, h5, .h5, h6, .h6
     margin-bottom 5px
-  .reply
+  .reply, .answer
     font-family "News Cycle", "Arial Narrow Bold", sans-serif

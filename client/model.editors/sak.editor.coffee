@@ -4,7 +4,7 @@ share.SakEditor = new share.Editor(
   isSingleLine: (property) ->
     property not in [] # all properties
   cleanProperty: (property, value) ->
-    if property in ["maximumDuration", "talkDuration", "replyDuration"]
+    if property in ["maximumDuration", "talkDuration", "replyDuration", "answerDuration"]
       return share.minutes2milliseconds(value)
     return value
   insertAfter: (_id, sak = {}, callback = ->) ->

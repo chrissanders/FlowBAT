@@ -25,8 +25,23 @@ template(name="talk")
   .replies
     each replies
       +reply
+  if replies.count
+    .object.answer
+      .row
+        .col-xs-1.col-md-1
+        .col-xs-7.col-md-9.name
+          .user
+            | ⌙
+            span.avatar
+              img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+            span.name #{user.profile.name}
+            em.align-middle (answer)
+        .col-xs-2.col-md-1.duration
+        .col-xs-2.col-md-1.duration
+          h5.text-muted
+            span.align-middle {{share.milliseconds2minutes ../answerDuration}}
   if isAddingReply
-    .add-reply-wrapper.add-objects-wrapper.is-edited
+    .add-reply-wrapper.add-objects-wrapper.form-area
       .row.first-row
         .col-xs-1.col-md-1
         .col-xs-7.col-md-9

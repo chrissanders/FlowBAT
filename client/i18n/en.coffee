@@ -73,6 +73,7 @@ i18n.addResourceBundle("en",
       maximumDurationPlaceholder: ""
       talkDurationPlaceholder: ""
       replyDurationPlaceholder: ""
+      answerDurationPlaceholder: ""
       owner: "Case creator"
       createdAt: "Case added at"
       updatedAt: "Case edited at"
