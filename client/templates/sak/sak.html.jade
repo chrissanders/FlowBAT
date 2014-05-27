@@ -67,8 +67,8 @@ template(name="sak")
       each talks
         +talk
     if isAddingTalk
-      .add-talk-wrapper.add-objects-wrapper.form-area
-        .row.first-row
+      .add-talk-wrapper.add-objects-wrapper
+        .row
           .col-xs-1.col-md-1
           .col-xs-7.col-md-9
             form.form-horizontal(role="form")
@@ -76,16 +76,17 @@ template(name="sak")
                 label.sr-only(for="add-talk-query") Search
                 div.col-xs-6
                   input#add-talk-query.add-talk-query.form-control(name="query" type="search" placeholder="Type delegate name to search..." value="{{Session 'add-talk-query'}}")
-            .row.results
-              each addTalkSearchResults
-                .col-xs-6
-                  h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
-                    span.avatar
-                      img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
-                    span.name
-                      | #{profile.name}
-                      if isAlreadyAdded
-                        i.fa.fa-check
+            if addTalkSearchResults.count
+              .row.results
+                each addTalkSearchResults
+                  .col-xs-6
+                    h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
+                      span.avatar
+                        img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+                      span.name
+                        | #{profile.name}
+                        if isAlreadyAdded
+                          i.fa.fa-check
             .row.buttons
               div.col-xs-6
                 button.btn.btn-primary.cancel
