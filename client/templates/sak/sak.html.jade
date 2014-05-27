@@ -24,39 +24,39 @@ template(name="sak")
           if not isEdited
             if calculatedDurationSum
               h4.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
-      if isEdited
-        .row
-          .col-xs-1.col-md-1
-          .col-xs-7.col-md-9
-            form.form-horizontal(role="form")
-              .form-group
-                label.sr-only.control-label Name
-                div.col-xs-12
-                  +input(family="sak" _id=_id property="name" value=name placeholderI18n="forms.sak.namePlaceholder" isNew=isNew)
-              .form-group
-                label.col-xs-4.col-md-3.control-label Number
-                div.col-xs-6.col-md-3.input-group
-                  +input(family="sak" _id=_id property="number" value=number placeholderI18n="forms.sak.numberPlaceholder" isNew=isNew)
-              .form-group
-                label.col-xs-4.col-md-3.control-label Case duration
-                div.col-xs-6.col-md-3.input-group
-                  +durationInput(family="sak" _id=_id property="maximumDuration" value=maximumDuration placeholderI18n="forms.sak.maximumDurationPlaceholder" isNew=isNew)
-                  span.input-group-addon minutes
-              .form-group
-                label.col-xs-4.col-md-3.control-label Talk duration
-                div.col-xs-6.col-md-3.input-group
-                  +durationInput(family="sak" _id=_id property="talkDuration" value=talkDuration placeholderI18n="forms.sak.talkDurationPlaceholder" isNew=isNew)
-                  span.input-group-addon minutes
-              .form-group
-                label.col-xs-4.col-md-3.control-label Reply duration
-                div.col-xs-6.col-md-3.input-group
-                  +durationInput(family="sak" _id=_id property="replyDuration" value=replyDuration placeholderI18n="forms.sak.replyDurationPlaceholder" isNew=isNew)
-                  span.input-group-addon minutes
-              button.btn.btn-primary(type='submit')
-                span.fa.fa-check
-                | Save case
-              button.btn.btn-link.remove(data-confirmation="{{t 'forms.sak.actions.removeConfirmation'}}")
-                | Delete
+    if isEdited
+      .row
+        .col-xs-1.col-md-1
+        .col-xs-7.col-md-9
+          form.form-horizontal(role="form")
+            .form-group
+              label.sr-only.control-label Name
+              div.col-xs-12
+                +input(family="sak" _id=_id property="name" value=name placeholderI18n="forms.sak.namePlaceholder" isNew=isNew)
+            .form-group
+              label.col-xs-4.col-md-3.control-label Number
+              div.col-xs-6.col-md-3.input-group
+                +input(family="sak" _id=_id property="number" value=number placeholderI18n="forms.sak.numberPlaceholder" isNew=isNew)
+            .form-group
+              label.col-xs-4.col-md-3.control-label Case duration
+              div.col-xs-6.col-md-3.input-group
+                +durationInput(family="sak" _id=_id property="maximumDuration" value=maximumDuration placeholderI18n="forms.sak.maximumDurationPlaceholder" isNew=isNew)
+                span.input-group-addon minutes
+            .form-group
+              label.col-xs-4.col-md-3.control-label Talk duration
+              div.col-xs-6.col-md-3.input-group
+                +durationInput(family="sak" _id=_id property="talkDuration" value=talkDuration placeholderI18n="forms.sak.talkDurationPlaceholder" isNew=isNew)
+                span.input-group-addon minutes
+            .form-group
+              label.col-xs-4.col-md-3.control-label Reply duration
+              div.col-xs-6.col-md-3.input-group
+                +durationInput(family="sak" _id=_id property="replyDuration" value=replyDuration placeholderI18n="forms.sak.replyDurationPlaceholder" isNew=isNew)
+                span.input-group-addon minutes
+            button.btn.btn-primary(type='submit')
+              span.fa.fa-check
+              | Save case
+            button.btn.btn-link.remove(data-confirmation="{{t 'forms.sak.actions.removeConfirmation'}}")
+              | Delete
   .talks
     each talks
       +talk
