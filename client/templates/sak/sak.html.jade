@@ -1,14 +1,33 @@
 template(name="sak")
-  .sak(class="{{#if isEdited}}is-edited{{/if}}" data-family="sak" data-id="#{_id}")
-    .object
+  .object.sak(class="{{#if isEdited}}is-edited{{/if}}" data-family="sak" data-id="#{_id}")
+    if not isNew
       .row
         .col-xs-1.col-md-1
-          if not isEdited
-            h4
-              span.sortable-handle(class="{{#if not isEdited}}start-editing{{/if}}" data-edited-property="number")
+          h4
+            span.sortable-handle(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not number}}text-muted{{/if}}" data-edited-property="number")
+              if number
                 | #{number}
+              else
+                | {{t "forms.sak.numberIsEmpty"}}
         .col-xs-7.col-md-9.name
-          if isEdited
+          h4
+            span.sortable-handle(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}" data-edited-property="name")
+              if name
+                | #{name}
+              else
+                | {{t "forms.sak.nameIsEmpty"}}
+        .col-xs-2.col-md-1.duration
+          if not isEdited
+            if maximumDuration
+              h4(class=durationOverflowClass) {{milliseconds2hourminutes maximumDuration}}
+        .col-xs-2.col-md-1.duration
+          if not isEdited
+            if calculatedDurationSum
+              h4.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
+      if isEdited
+        .row
+          .col-xs-1.col-md-1
+          .col-xs-7.col-md-9
             form.form-horizontal(role="form")
               .form-group
                 label.sr-only.control-label Name
@@ -38,53 +57,38 @@ template(name="sak")
                 | Save case
               button.btn.btn-link.remove(data-confirmation="{{t 'forms.sak.actions.removeConfirmation'}}")
                 | Delete
-          else
-            h4
-              span.sortable-handle(class="{{#if not isEdited}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}")
-                if name
-                  | #{name}
-                else
-                  | {{t "forms.sak.nameIsEmpty"}}
-        .col-xs-2.col-md-1.duration
-          if not isEdited
-            if maximumDuration
-              h4(class=durationOverflowClass) {{milliseconds2hourminutes maximumDuration}}
-        .col-xs-2.col-md-1.duration
-          if not isEdited
-            if calculatedDurationSum
-              h4.text-muted {{milliseconds2hourminutes calculatedDurationSum}}
-    .talks
-      each talks
-        +talk
-    if isAddingTalk
-      .add-talk-wrapper.add-objects-wrapper.is-edited
-        .row.first-row
-          .col-xs-1.col-md-1
-          .col-xs-7.col-md-9
-            form.form-horizontal(role="form")
-              .form-group
-                label.sr-only(for="add-talk-query") Search
-                div.col-xs-6
-                  input#add-talk-query.add-talk-query.form-control(name="query" type="search" placeholder="Type delegate name to search..." value="{{Session 'add-talk-query'}}")
-            .row.results
-              each addTalkSearchResults
-                .col-xs-6
-                  h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
-                    span.avatar
-                      img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
-                    span.name
-                      | #{profile.name}
-                      if isAlreadyAdded
-                        i.fa.fa-check
-            .row.buttons
+  .talks
+    each talks
+      +talk
+  if isAddingTalk
+    .add-talk-wrapper.add-objects-wrapper.is-edited
+      .row.first-row
+        .col-xs-1.col-md-1
+        .col-xs-7.col-md-9
+          form.form-horizontal(role="form")
+            .form-group
+              label.sr-only(for="add-talk-query") Search
               div.col-xs-6
-                button.btn.btn-primary.cancel
-                  i.fa.fa-check
-                  | Finish adding talks
-    else
-      if not isNew
-        .row.talk.add
-          .col-xs-1.col-md-1
-          .col-xs-7.col-md-9.name
-            h5.text-muted
-              span.add-object.add-talk Add talk
+                input#add-talk-query.add-talk-query.form-control(name="query" type="search" placeholder="Type delegate name to search..." value="{{Session 'add-talk-query'}}")
+          .row.results
+            each addTalkSearchResults
+              .col-xs-6
+                h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
+                  span.avatar
+                    img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+                  span.name
+                    | #{profile.name}
+                    if isAlreadyAdded
+                      i.fa.fa-check
+          .row.buttons
+            div.col-xs-6
+              button.btn.btn-primary.cancel
+                i.fa.fa-check
+                | Finish adding talks
+  else
+    if not isNew
+      .row.talk.add
+        .col-xs-1.col-md-1
+        .col-xs-7.col-md-9.name
+          h5.text-muted
+            span.add-object.add-talk Add talk
