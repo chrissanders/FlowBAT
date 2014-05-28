@@ -89,5 +89,5 @@ Template.talk.events
         isNew: false
       )
       share.ReplyEditor.stopEditing(_id)
-      Session.set("add-reply-query", "")
-      template.$(".add-reply-wrapper input").first().val("").focus()
+#      Session.set("add-reply-query", "")
+#      template.$(".add-reply-wrapper input").first().val("").focus()

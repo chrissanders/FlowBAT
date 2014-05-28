@@ -96,5 +96,5 @@ Template.sak.events
         isNew: false
       )
       share.TalkEditor.stopEditing(_id)
-      Session.set("add-talk-query", "")
-      template.$(".add-talk-wrapper input").first().val("").focus()
+#      Session.set("add-talk-query", "")
+#      template.$(".add-talk-wrapper input").first().val("").focus()
