@@ -1,0 +1,28 @@
+template(name="userForm")
+  form.profile-form
+    div.form-group
+      label {{t "forms.profile.name"}}
+        input.form-control.input-profile-name(type="text", name="name", value="{{profile.name}}", placeholder="{{t 'forms.profile.namePlaceholder'}}")
+    unless services.google.email
+      div.form-group
+        label(for="password") {{t "forms.profile.password"}}
+        input#password.form-control.input-profile-password(type="text", name="password", value="******", readonly, disabled)
+        button.btn.btn-primary.change-password {{t "forms.profile.passwordChange.link"}}
+    div.form-group
+      label(for="locale") {{t "forms.profile.language"}}
+      select#locale.form-control(name="locale")
+        each locales
+          option(value="{{code}}", selected="{{isCurrent}}") {{name}}
+    div.form-group
+      label(for="image") {{t "forms.profile.image"}}
+      if profile.image
+        div.image-wrapper
+          img.large.profile-image(src="{{profile.image}}")
+      div.profile-image-button-wrap
+        button.btn.btn-default.input-profile-image
+          if profile.image
+            | {{t "interface.update"}}
+          else
+            | {{t "interface.insert"}}
+    div.form-group
+      div.hint {{t "interface.changesAreSavedAutomatically"}}

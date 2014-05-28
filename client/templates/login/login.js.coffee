@@ -18,7 +18,7 @@ Template.login.rendered = ->
             password: i18n.t("serverErrors." + error.reason)
         else
           $(document.body).trigger("popup.hide")
-          share.loginCallback()() # create and run
+          share.loginCallback()
 
   $signupForm = @$(".signup form")
   $signupForm.validate
@@ -42,7 +42,7 @@ Template.login.rendered = ->
             password: i18n.t("serverErrors." + error.reason)
         else
           $(document.body).trigger("popup.hide")
-          share.loginCallback()() # create and run
+          share.loginCallback()
   if share.isDebug
     $signupForm.find(".email").val(Random.id() + "@meetings.me")
     $signupForm.find(".password").val("asdfasdf")
@@ -50,4 +50,4 @@ Template.login.rendered = ->
 
 Template.login.events
   "click .sign-in-with-google": grab (event, template) ->
-    Meteor.loginWithGoogle({}, share.loginCallback())
+    Meteor.loginWithGoogle({}, share.loginCallback)

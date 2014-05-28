@@ -1,0 +1,10 @@
+template(name="user")
+  div.container
+    if isCurrentUser
+      +userForm user
+    else
+      with user
+        h2 {{profile.name}}
+        if profile.image
+          div.image-wrapper
+            img.large.profile-image(src="{{profile.image}}")

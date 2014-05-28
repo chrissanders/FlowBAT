@@ -5,6 +5,10 @@
     "percolatestudio-mixpanel": {},
     "fast-render": {},
     "jade": {},
-    "user-status": {}
+    "user-status": {},
+    "i18next-meteor": {
+      "git": "https://github.com/wsoul/i18next-meteor.git"
+    },
+    "filepicker": {}
   }
 }

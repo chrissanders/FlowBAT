@@ -7,7 +7,12 @@
       "percolatestudio-mixpanel": {},
       "fast-render": {},
       "jade": {},
-      "user-status": {}
+      "user-status": {},
+      "i18next-meteor": {
+        "git": "https://github.com/wsoul/i18next-meteor.git",
+        "branch": "master"
+      },
+      "filepicker": {}
     },
     "packages": {
       "iron-router": {
@@ -39,6 +44,16 @@
         "git": "https://github.com/mizzao/meteor-user-status.git",
         "tag": "v0.4.0",
         "commit": "e2a1c7a4075f28b87b361387688e083a4b047a08"
+      },
+      "i18next-meteor": {
+        "git": "https://github.com/wsoul/i18next-meteor.git",
+        "branch": "master",
+        "commit": "7d6007fbdc1fd3c93784e37dc90a44b4954f547c"
+      },
+      "filepicker": {
+        "git": "https://github.com/Ink/meteor.git",
+        "tag": "v0.4.0",
+        "commit": "20d56aaaf48be3a5c0499547a495a6463b4fa3d9"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
