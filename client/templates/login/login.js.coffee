@@ -51,3 +51,11 @@ Template.login.rendered = ->
 Template.login.events
   "click .sign-in-with-google": grab (event, template) ->
     Meteor.loginWithGoogle({}, share.loginCallback)
+  "click .forgot-password": grab (event, template) ->
+    UI.insert(UI.renderWithData(Template.alert,
+      name: i18n.t("forms.login.passwordForgot.alert.name")
+      descriptionTemplateName: "forgotPasswordAlertDescription"
+      descriptionTemplateData: {}
+      buttonPanelTemplateName: "forgotPasswordAlertButtonsPanel"
+      buttonPanelTemplateData: {}
+    ), document.body)

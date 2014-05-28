@@ -19,6 +19,14 @@ i18n.addResourceBundle("en",
         passwordAgain:
           required: "Please repeat your password"
           equalTo: "The passwords should match"
+      passwordForgot:
+        link: "Forgot password"
+        alert:
+          name: "Reset password"
+          emailPlaceholder: "Your email"
+          reset: "Reset"
+          errors:
+            userNotFound: "Account with that email does not exists."
     invite:
       setPassword: "Set your password to begin using the application:"
     profile:

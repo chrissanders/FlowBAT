@@ -23,6 +23,7 @@ template(name="login")
                   | Signing in...
                 else
                   | Sign in
+              a.forgot-password.pull-right(href="#") {{t "forms.login.passwordForgot.link"}}
   li.dropdown
     a.dropdown-toggle(href="#", data-toggle="dropdown")
       | Sign up
@@ -44,7 +45,7 @@ template(name="login")
             div.form-group
               input.passwordAgain.form-control(type="password", name="passwordAgain", placeholder="Password again")
             div.links.clearfix
-              button.btn.btn-default(type="submit")
+              button.btn.btn-default.pull-left(type="submit")
                 if loggingIn
                   | Signing up...
                 else
