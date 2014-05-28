@@ -3,8 +3,8 @@ template(name="talk")
     .form-area
       if not isNew
         .row
-          .col-xs-1.col-md-1.sortable-handle
-          .col-xs-7.col-md-9.name.sortable-handle
+          .col-xs-1.col-md-1
+          .col-xs-7.col-md-9.name
             h5.user
               +userpin(user=user isEditable=true isEdited=isEdited)
               if isEdited

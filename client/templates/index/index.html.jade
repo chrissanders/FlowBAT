@@ -3,8 +3,11 @@ template(name="index")
     .row
       .col-xs-12
         h3 Welcome!
-        p Please select the meeting from menu above or the following list:
-        ul
-          each meetings
-            li
-              a(href=path) #{name}
+        if currentUser
+          p Please select the meeting from menu above or the following list:
+          ul
+            each meetings
+              li
+                a(href=path) #{name}
+        else
+          p Please sign in using the dropdown in top-right corner.

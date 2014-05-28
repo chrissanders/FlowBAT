@@ -33,6 +33,8 @@ i18n.addResourceBundle("en",
       header: "Profile settings"
       name: "Name"
       namePlaceholder: "Name and surname"
+      party: "Political party"
+      partyPlaceholder: ""
       password: "Password"
       passwordChange:
         link: "Change password"

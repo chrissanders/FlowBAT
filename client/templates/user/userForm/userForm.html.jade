@@ -3,6 +3,9 @@ template(name="userForm")
     div.form-group
       label.control-label(for="profile-name") {{t "forms.profile.name"}}
       input.form-control.input-profile-name(type="text", id="profile-name", name="name", value="{{profile.name}}", placeholder="{{t 'forms.profile.namePlaceholder'}}")
+    div.form-group
+      label.control-label(for="profile-party") {{t "forms.profile.party"}}
+      input.form-control.input-profile-party(type="text", id="profile-party", name="party", value="{{profile.party}}", placeholder="{{t 'forms.profile.partyPlaceholder'}}")
     unless services.google.email
       div.form-group
         label.control-label(for="password") {{t "forms.profile.password"}}
