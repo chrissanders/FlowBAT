@@ -1,0 +1,20 @@
+template(name="alert")
+  .alert-message.stop-propagation
+    unless hideHead
+      .head-block.clearfix
+        span.close-button.icon-close.pull-right
+        span.alert-title
+          if nameTemplate
+            | {{>dynamicTemplate name=nameTemplateName data=nameTemplateData}}
+          else
+            | {{{name}}}
+    .alert-text
+      if descriptionTemplateName
+        | {{> dynamicTemplate name=descriptionTemplateName data=descriptionTemplateData}}
+      else
+        | {{{description}}}
+    unless hideButtonPanel
+      if buttonPanelTemplateName
+        | {{> dynamicTemplate name=buttonPanelTemplateName data=buttonPanelTemplateData}}
+      else
+        | {{> buttonPanel}}
