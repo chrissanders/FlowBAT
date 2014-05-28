@@ -2,8 +2,8 @@ template(name="reply")
   .object.reply(class="{{#if isEdited}}is-edited{{/if}}" data-family="reply" data-id="#{_id}")
     .form-area
       .row
-        .col-xs-1.col-md-1.sortable-handle
-        .col-xs-7.col-md-9.sortable-handle.shifted
+        .col-xs-1.col-md-1
+        .col-xs-7.col-md-9.shifted
           .user
             | ⌙
             +userpin(user=user isEditable=true isEdited=isEdited)

@@ -3,16 +3,16 @@ template(name="sak")
     .form-area
       if not isNew
         .row
-          .col-xs-1.col-md-1.sortable-handle
+          .col-xs-1.col-md-1
             h4
-              span(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not number}}text-muted{{/if}}" data-edited-property="number")
+              span.sortable-handle(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not number}}text-muted{{/if}}" data-edited-property="number")
                 if number
                   | #{number}
                 else
                   | {{t "forms.sak.numberIsEmpty"}}
-          .col-xs-7.col-md-9.name.sortable-handle
+          .col-xs-7.col-md-9.name
             h4
-              span(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}" data-edited-property="name")
+              span.sortable-handle(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}} {{#if not name}}text-muted{{/if}}" data-edited-property="name")
                 if name
                   | #{name}
                 else

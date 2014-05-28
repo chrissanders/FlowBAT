@@ -1,7 +1,7 @@
 template(name="userpin")
-  span.avatar.add-reply
+  span.avatar.add-reply.sortable-handle
     img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
-  span.name(class="{{#if isEditable}}{{#if isEdited}}stop-editing{{else}}start-editing{{/if}}{{/if}}") #{user.profile.name}
+  span.name.sortable-handle(class="{{#if isEditable}}{{#if isEdited}}stop-editing{{else}}start-editing{{/if}}{{/if}}") #{user.profile.name}
   if user.profile.party
     | &nbsp;
     span.party.text-muted (#{user.profile.party})
