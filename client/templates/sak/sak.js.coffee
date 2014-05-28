@@ -71,7 +71,7 @@ Template.sak.events
       share.SakEditor.remove(template.data._id)
   "submit .object form": grab encapsulate (event, template) ->
     share.SakEditor.stopEditing(template.data._id)
-  "click .add-talk": encapsulate (event, template) ->
+  "click .add-talk": grab encapsulate (event, template) ->
     share.EditorCache.stopEditing()
     share.SakEditor.startAddingTalk(template.data._id)
     _.defer ->

@@ -57,7 +57,7 @@ Template.meeting.events
     if (not confirmation or confirm(confirmation))
       share.MeetingEditor.remove(template.data._id)
       Router.go("/")
-  "click .add-sak": encapsulate (event, template) ->
+  "click .add-sak": grab encapsulate (event, template) ->
     share.EditorCache.stopEditing()
     share.MeetingEditor.insertSak(template.data._id)
   "submit .object form": grab encapsulate (event, template) ->
