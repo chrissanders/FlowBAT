@@ -1,20 +1,22 @@
 template(name="userForm")
   form.profile-form
     div.form-group
-      label {{t "forms.profile.name"}}
-        input.form-control.input-profile-name(type="text", name="name", value="{{profile.name}}", placeholder="{{t 'forms.profile.namePlaceholder'}}")
+      label.control-label(for="profile-name") {{t "forms.profile.name"}}
+      input.form-control.input-profile-name(type="text", id="profile-name", name="name", value="{{profile.name}}", placeholder="{{t 'forms.profile.namePlaceholder'}}")
     unless services.google.email
       div.form-group
-        label(for="password") {{t "forms.profile.password"}}
-        input#password.form-control.input-profile-password(type="text", name="password", value="******", readonly, disabled)
-        button.btn.btn-primary.change-password {{t "forms.profile.passwordChange.link"}}
+        label.control-label(for="password") {{t "forms.profile.password"}}
+        .input-group
+          input#password.form-control.input-profile-password(type="text", name="password", value="******", readonly, disabled)
+          span.input-group-btn
+            button.btn.btn-primary.change-password {{t "forms.profile.passwordChange.link"}}
     div.form-group
-      label(for="locale") {{t "forms.profile.language"}}
+      label.control-label(for="locale") {{t "forms.profile.language"}}
       select#locale.form-control(name="locale")
         each locales
           option(value="{{code}}", selected="{{isCurrent}}") {{name}}
     div.form-group
-      label(for="image") {{t "forms.profile.image"}}
+      label.control-label(for="image") {{t "forms.profile.image"}}
       if profile.image
         div.image-wrapper
           img.large.profile-image(src="{{profile.image}}")
