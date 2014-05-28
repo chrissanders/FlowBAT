@@ -7,9 +7,10 @@ Template.talk.helpers
     addReplyQuery = Session.get("add-reply-query")
     if addReplyQuery
       regexp = new RegExp(addReplyQuery, "gi")
-      existingUserIds = _.pluck(@replies().fetch(), "userId")
-      Meteor.users.find({"profile.name": regexp}, {limit: 9, sort: {createdAt: 1}, transform: (user) ->
-        user.isAlreadyAdded = user._id in existingUserIds
+      repliesGroupedByUserId = _.groupBy(@replies().fetch(), "userId")
+      Meteor.users.find({_id: {$ne: @userId}, "profile.name": regexp}, {limit: 9, sort: {createdAt: 1}, transform: (user) ->
+        userReplies = repliesGroupedByUserId[user._id]
+        user.replyCount = if userReplies then userReplies.length else 0
         user
       })
     else
@@ -77,13 +78,8 @@ Template.talk.events
     Session.set("add-reply-query", $(event.currentTarget).val())
   "click .add-reply-wrapper .user": encapsulate (event, template) ->
     $user = $(event.currentTarget)
-    if $user.hasClass("already-added")
-      reply = share.Replies.findOne(
-        talkId: template.data._id
-        userId: $user.attr("data-id")
-      )
-      share.Replies.remove(reply._id)
-    else
+    replyCount = $user.attr("data-reply-count")
+    if replyCount < 1
       _id = share.TalkEditor.insertReply(template.data._id,
         userId: $user.attr("data-id")
         isNew: false
