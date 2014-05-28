@@ -8,10 +8,6 @@
       "fast-render": {},
       "jade": {},
       "user-status": {},
-      "i18next-meteor": {
-        "git": "https://github.com/wsoul/i18next-meteor.git",
-        "branch": "master"
-      },
       "filepicker": {}
     },
     "packages": {
@@ -44,11 +40,6 @@
         "git": "https://github.com/mizzao/meteor-user-status.git",
         "tag": "v0.4.0",
         "commit": "e2a1c7a4075f28b87b361387688e083a4b047a08"
-      },
-      "i18next-meteor": {
-        "git": "https://github.com/wsoul/i18next-meteor.git",
-        "branch": "master",
-        "commit": "7d6007fbdc1fd3c93784e37dc90a44b4954f547c"
       },
       "filepicker": {
         "git": "https://github.com/Ink/meteor.git",
