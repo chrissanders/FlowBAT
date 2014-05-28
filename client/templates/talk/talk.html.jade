@@ -9,6 +9,8 @@ template(name="talk")
               span.avatar.add-reply
                 img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
               span.name(class="{{#if isEdited}}stop-editing{{else}}start-editing{{/if}}") #{user.profile.name}
+              if user.status.online
+                span.align-middle.text-success ∗
               if isEdited
                 span.add-reply-link-wrapper.align-middle.text-muted
                   | -

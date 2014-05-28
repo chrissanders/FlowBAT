@@ -4,6 +4,7 @@
     "collection-hooks": {},
     "percolatestudio-mixpanel": {},
     "fast-render": {},
-    "jade": {}
+    "jade": {},
+    "user-status": {}
   }
 }

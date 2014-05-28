@@ -7,6 +7,7 @@ Meteor.publish "currentUser", () ->
     fields:
       "emails": 1
       "profile": 1
+      "status": 1
       "createdAt": 1
   )
 
@@ -23,9 +24,9 @@ Meteor.publish "allUsersInsecure", ->
   if not @userId then return []
   Meteor.users.find({_id: {$ne: @userId}}, {
     fields:
-      handle: 1
-      profile: 1
-      invitationFailed: 1
+      "profile": 1
+      "status": 1
+      "invitationFailed": 1
   })
 
 Meteor.publish "meetings", ->

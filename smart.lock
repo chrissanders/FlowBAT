@@ -6,7 +6,8 @@
       "collection-hooks": {},
       "percolatestudio-mixpanel": {},
       "fast-render": {},
-      "jade": {}
+      "jade": {},
+      "user-status": {}
     },
     "packages": {
       "iron-router": {
@@ -34,10 +35,20 @@
         "tag": "v0.2.4",
         "commit": "a47a4c59daaa57e7fe5f1544d4ea76d95a5c9abf"
       },
+      "user-status": {
+        "git": "https://github.com/mizzao/meteor-user-status.git",
+        "tag": "v0.4.0",
+        "commit": "e2a1c7a4075f28b87b361387688e083a4b047a08"
+      },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",
         "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
+      },
+      "timesync": {
+        "git": "https://github.com/mizzao/meteor-timesync.git",
+        "tag": "v0.1.6",
+        "commit": "83067433f511bc13a11ae8c87e9a4d331256915e"
       }
     }
   }
