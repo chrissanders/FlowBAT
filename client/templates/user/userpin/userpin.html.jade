@@ -1,0 +1,7 @@
+template(name="userpin")
+  span.avatar.add-reply
+    img(src="{{#if user.profile.image}}{{user.profile.image}}{{else}}/images/default-avatar.png{{/if}}")
+  span.name(class="{{#if isEditable}}{{#if isEdited}}stop-editing{{else}}start-editing{{/if}}{{/if}}") #{user.profile.name}
+  if user.status.online
+    | &nbsp;
+    span.align-middle.text-success ∗

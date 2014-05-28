@@ -81,12 +81,9 @@ template(name="sak")
                 each addTalkSearchResults
                   .col-xs-12.col-md-6
                     h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
-                      span.avatar
-                        img(src="{{#if profile.image}}{{profile.image}}{{else}}/images/default-avatar.png{{/if}}")
-                      span.name
-                        | #{profile.name}
-                        if isAlreadyAdded
-                          i.fa.fa-check
+                      +userpin(user=.)
+                      if isAlreadyAdded
+                        i.fa.fa-check.align-middle
             .row.buttons
               div.col-xs-6
                 button.btn.btn-primary.cancel
