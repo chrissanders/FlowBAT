@@ -77,19 +77,19 @@ share.loadFixtures = ->
   saker =
     KONTROLLUTVALGSSAK:
       name: "KONTROLLUTVALGSSAK 22/14 - BRANN OG REDNING	"
-      number: "0075/14"
+      number: "75/14"
       maximumDuration: 2.0 * 60 * share.minute
       position: 1
       meetingId: "Kommunestyret"
     REGULERINGSPLAN:
       name: "PLAN- 1783- REGULERINGSPLAN FOR NEDRE VANGBERG, EIEND. 118/24 M.FL SAKSFREMLEGG TIL VEDTAK"
-      number: "0076/14"
+      number: "76/14"
       maximumDuration: 15 * share.minute
       position: 2
       meetingId: "Kommunestyret"
     BOLIGBYGG:
       name: "PLAN -1762- NYTT BOLIGBYGG VED ST.ELISABETH"
-      number: "0077/14"
+      number: "77/14"
       maximumDuration: 1.5 * 60 * share.minute
       position: 3
       meetingId: "Kommunestyret"
