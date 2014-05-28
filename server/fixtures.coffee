@@ -13,27 +13,35 @@ share.loadFixtures = ->
   userinfos = [
     {
       name: "Hjort, Jens Johan"
+      party: "H"
     }
     {
       name: "Skogman, Anni"
+      party: "FRP"
     }
     {
       name: "Lind, Rolleiv"
+      party: "H"
     }
     {
       name: "Barman-Jenssen, Knut"
+      party: "H"
     }
     {
       name: "Echroll, Lars"
+      party: "H"
     }
     {
       name: "Fossbakk, Frid Einarsdotter"
+      party: "H"
     }
     {
       name: "Larsen, Bodil Ridderseth"
+      party: "H"
     }
     {
       name: "Mæland, Magnus"
+      party: "H"
     }
   ]
   for userinfo in userinfos
@@ -44,6 +52,7 @@ share.loadFixtures = ->
       _id: _id
       profile:
         name: name
+        party: userinfo.party
         locale: "no"
         image: "/fixtures/" + _id + ".jpg"
       emails: [
