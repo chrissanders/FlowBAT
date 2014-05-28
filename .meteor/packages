@@ -21,3 +21,5 @@ accounts-password
 fast-render
 user-status
 filepicker
+handlebars-server
+email

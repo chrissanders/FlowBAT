@@ -27,6 +27,13 @@ i18n.addResourceBundle("en",
           reset: "Reset"
           errors:
             userNotFound: "Account with that email does not exists."
+      passwordReset:
+        alert:
+          name: "Reset password"
+          passwordPlaceholder: "New password"
+          reset: "Reset"
+          errors:
+            tokenNotFound: "Request is expired, try again."
     invite:
       setPassword: "Set your password to begin using the application:"
     profile:

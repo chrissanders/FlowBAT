@@ -29,6 +29,17 @@ Router.map ->
         user: user
       )
 
+Router.onBeforeAction (pause) ->
+  if Accounts._resetPasswordToken
+    UI.insert(UI.renderWithData(Template.alert,
+      name: i18n.t("forms.login.passwordReset.alert.name")
+      descriptionTemplateName: "resetPasswordAlertDescription"
+      descriptionTemplateData: {}
+      buttonPanelTemplateName: "resetPasswordAlertButtonsPanel"
+      buttonPanelTemplateData: {token: Accounts._resetPasswordToken}
+    ), document.body)
+    delete Accounts._resetPasswordToken
+
 Router.onBeforeAction("dataNotFound")
 
 share.setPageTitle = (title, appendSiteName = true) ->

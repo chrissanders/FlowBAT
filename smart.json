@@ -6,6 +6,7 @@
     "fast-render": {},
     "jade": {},
     "user-status": {},
-    "filepicker": {}
+    "filepicker": {},
+    "handlebars-server": {}
   }
 }
