@@ -56,10 +56,10 @@ template(name="talk")
               .row.results
                 each addReplySearchResults
                   .col-xs-12.col-md-6
-                    h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
+                    h5.user(data-id=_id class="{{#if replyCount}}text-muted{{/if}}" data-reply-count=replyCount)
                       +userpin(user=.)
-                      if isAlreadyAdded
-                        i.fa.fa-check.align-middle
+                      if replyCount
+                        span.align-middle.text-muted +#{replyCount}
             .row.buttons
               div.col-xs-6
                 button.btn.btn-primary.cancel

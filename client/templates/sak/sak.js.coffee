@@ -7,9 +7,10 @@ Template.sak.helpers
     addTalkQuery = Session.get("add-talk-query")
     if addTalkQuery
       regexp = new RegExp(addTalkQuery, "gi")
-      existingUserIds = _.pluck(@talks().fetch(), "userId")
+      talksGroupedByUserId = _.groupBy(@talks().fetch(), "userId")
       Meteor.users.find({"profile.name": regexp}, {limit: 9, sort: {createdAt: 1}, transform: (user) ->
-        user.isAlreadyAdded = user._id in existingUserIds
+        userTalks = talksGroupedByUserId[user._id]
+        user.talkCount = if userTalks then userTalks.length else 0
         user
       })
     else
@@ -84,13 +85,8 @@ Template.sak.events
     Session.set("add-talk-query", $(event.currentTarget).val())
   "click .add-talk-wrapper .user": encapsulate (event, template) ->
     $user = $(event.currentTarget)
-    if $user.hasClass("already-added")
-      talk = share.Talks.findOne(
-        sakId: template.data._id
-        userId: $user.attr("data-id")
-      )
-      share.Talks.remove(talk._id)
-    else
+    talkCount = $user.attr("data-talk-count")
+    if talkCount < 2
       _id = share.SakEditor.insertTalk(template.data._id,
         userId: $user.attr("data-id")
         isNew: false

@@ -80,10 +80,10 @@ template(name="sak")
               .row.results
                 each addTalkSearchResults
                   .col-xs-12.col-md-6
-                    h5.user(data-id=_id class="{{#if isAlreadyAdded}}already-added text-muted{{/if}}")
+                    h5.user(data-id=_id class="{{#if talkCount}}text-muted{{/if}}" data-talk-count=talkCount)
                       +userpin(user=.)
-                      if isAlreadyAdded
-                        i.fa.fa-check.align-middle
+                      if talkCount
+                        span.align-middle.text-muted +#{talkCount}
             .row.buttons
               div.col-xs-6
                 button.btn.btn-primary.cancel
