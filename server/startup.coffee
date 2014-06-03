@@ -4,7 +4,10 @@ process.env.MAIL_URL = Meteor.settings.mailUrl
 Email.sendImmediate = Email.send
 Email.send = (options) ->
   share.Emails.insert(options)
-  if Meteor.settings.public.isDebug then share.sendEmails()
+  if Meteor.settings.public.isDebug
+    Meteor.setTimeout(->
+      share.sendEmails()
+    , 1000)
 
 Accounts.emailTemplates.from = "Postman (Meetings) <herald@mail.meetings.me>"
 Accounts.emailTemplates.resetPassword.subject = (user) ->

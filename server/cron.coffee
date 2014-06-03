@@ -7,9 +7,7 @@ share.sendEmails = ->
     share.Emails.find().forEach (email) ->
       if !email.to.match(/@meetings.me$/)
 #        if Meteor.settings.public.isDebug then Meteor._debug('Sending "'+email.subject+'" to "'+email.to+'"')
-        Meteor.setTimeout( ->
-          Email.sendImmediate(email)
-        , 1000)
+        Email.sendImmediate(email)
       share.Emails.remove(email._id)
   finally
     share.sendEmailsRunning = false
