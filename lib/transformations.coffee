@@ -12,7 +12,7 @@ class share.Query
     _.extend(@, doc)
     @rows = []
     for row in @result.split("\n")
-      @rows.push({cells: row.split(" ")})
+      @rows.push({cells: row.split("|")})
   path: ->
     "/query/" + @_id
 
