@@ -1,0 +1,12 @@
+template(name="welcome")
+  .container.welcome
+    .row
+      .col-xs-4.col-xs-offset-4
+        h3 Please login to use FlowBAT:
+        form(role='form')
+          .form-group
+            input.email.form-control.input-lg(type='text', placeholder='Email', autofocus='autofocus', required='required')
+          .form-group
+            input.password.form-control.input-lg(type='password', placeholder='Password', required='required')
+          button.btn.btn-lg.btn-primary.pull-right(type='submit') Login
+          .error-container.text-danger.pull-right

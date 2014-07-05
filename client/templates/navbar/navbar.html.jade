@@ -19,8 +19,8 @@ template(name="navbar")
                     | {{currentUser.profile.name}}
                     b.caret
                   ul.dropdown-menu
-                    li: a(href="/user/{{currentUser._id}}") Profile
-                    li.divider
+                    //li: a(href="/user/{{currentUser._id}}") Profile
+                    //li.divider
                     li: a.logout(href="#") Logout
               else
                 +login

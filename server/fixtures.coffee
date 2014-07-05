@@ -36,6 +36,8 @@ share.loadFixtures = ->
       createdAt: lastWeek
     )
   insertData(users, Meteor.users)
+  for _id, user of users
+    Accounts.setPassword(_id, "123123")
 
 #  serviceConfigurations = {}
 #  insertData(serviceConfigurations, ServiceConfiguration.configurations)

@@ -5,6 +5,14 @@ Router.configure
   yieldTemplates:
     navbar: {to: "header"}
 
+Router.onBeforeAction((pause) ->
+  if not Meteor.user()
+    @render("welcome")
+    pause()
+, {except: []})
+
+Router.onBeforeAction("dataNotFound")
+
 Router.map ->
   @route "index",
     path: "/"
@@ -39,8 +47,6 @@ Router.onBeforeAction (pause) ->
       buttonPanelTemplateData: {token: Accounts._resetPasswordToken}
     ), document.body)
     delete Accounts._resetPasswordToken
-
-Router.onBeforeAction("dataNotFound")
 
 share.setPageTitle = (title, appendSiteName = true) ->
   if appendSiteName
