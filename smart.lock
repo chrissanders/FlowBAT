@@ -4,10 +4,8 @@
     "basePackages": {
       "iron-router": {},
       "collection-hooks": {},
-      "percolatestudio-mixpanel": {},
       "fast-render": {},
       "jade": {},
-      "user-status": {},
       "handlebars-server": {}
     },
     "packages": {
@@ -21,11 +19,6 @@
         "tag": "v0.7.2",
         "commit": "261f61f07b371ae913463fba8964a9b93cab531b"
       },
-      "percolatestudio-mixpanel": {
-        "git": "https://github.com/percolatestudio/meteor-mixpanel.git",
-        "tag": "v0.5.0",
-        "commit": "d92c8fd6c0504d3f1c195cf972354ab2e81b4e20"
-      },
       "fast-render": {
         "git": "https://github.com/arunoda/meteor-fast-render.git",
         "tag": "v0.2.8",
@@ -36,11 +29,6 @@
         "tag": "v0.2.4",
         "commit": "a47a4c59daaa57e7fe5f1544d4ea76d95a5c9abf"
       },
-      "user-status": {
-        "git": "https://github.com/mizzao/meteor-user-status.git",
-        "tag": "v0.5.0",
-        "commit": "6a096fd9f3a916887c92cb778040ce2f8a9cc554"
-      },
       "handlebars-server": {
         "git": "https://github.com/EventedMind/meteor-handlebars-server.git",
         "tag": "v1.2.0",
@@ -50,11 +38,6 @@
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",
         "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
-      },
-      "timesync": {
-        "git": "https://github.com/mizzao/meteor-timesync.git",
-        "tag": "v0.2.0",
-        "commit": "55f1daf261996dfbd726253688cfe7a2cc169d9b"
       }
     }
   }

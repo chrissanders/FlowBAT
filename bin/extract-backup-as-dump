@@ -2,7 +2,7 @@
 
 DIRNAME=$(cd `dirname $0` && pwd)
 
-tar -C /tmp -xzf ~/meetings_me.tar.gz
+tar -C /tmp -xzf ~/flowbat_com.tar.gz
 if [[ $? == 0 ]] ; then
   $DIRNAME/mongorestore-dump
 fi

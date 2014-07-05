@@ -1,11 +1,11 @@
 #!/bin/bash
 
 DIRNAME=$(cd `dirname $0` && pwd)
-USERNAME=$(<~/.meteor/meetings.me.username)
-PASSWORD=$(<~/.meteor/meetings.me.password)
+USERNAME=$(<~/.meteor/flowbat.com.username)
+PASSWORD=$(<~/.meteor/flowbat.com.password)
 HOST="54.85.95.182"
 PORT="27017"
-DB="meetings_me"
+DB="flowbat_com"
 OUT_DIR="/tmp"
 
 rm -rf $OUT_DIR/$DB/meteor_accounts_loginServiceConfiguration*

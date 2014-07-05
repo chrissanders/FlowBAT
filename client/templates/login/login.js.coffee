@@ -44,7 +44,7 @@ Template.login.rendered = ->
           $(document.body).trigger("popup.hide")
           share.loginCallback()
   if share.isDebug
-    $signupForm.find(".email").val(Random.id() + "@meetings.me")
+    $signupForm.find(".email").val(Random.id() + "@flowbat.com")
     $signupForm.find(".password").val("asdfasdf")
     $signupForm.find(".passwordAgain").val("asdfasdf")
 

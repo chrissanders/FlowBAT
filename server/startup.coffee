@@ -9,7 +9,7 @@ Email.send = (options) ->
       share.sendEmails()
     , 1000)
 
-Accounts.emailTemplates.from = "Postman (Meetings) <herald@mail.meetings.me>"
+Accounts.emailTemplates.from = "Postman (FlowBAT) <postman@flowbat.com>"
 Accounts.emailTemplates.resetPassword.subject = (user) ->
   Handlebars.templates["resetPasswordSubject"](user: user, settings: Meteor.settings).trim()
 Accounts.emailTemplates.resetPassword.text = (user, url) ->

@@ -1,5 +1,5 @@
 template(name="navbar")
-  nav.navbar.navbar-default.navbar-static-top(role="navigation")
+  nav.navbar.navbar-default.navbar-static-top.navbar-main(role="navigation")
     .container
       .row
         .col-xs-12
@@ -9,20 +9,9 @@ template(name="navbar")
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            a.navbar-brand(href="/") Meetings
+            a.navbar-brand(href="/") FlowBAT
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav
-              if currentUser
-                li.dropdown
-                  a.dropdown-toggle(href="#", data-toggle="dropdown")
-                    | My meetings
-                    b.caret
-                  ul.dropdown-menu
-                    each meetings
-                      li: a(href=path) #{name}
-                    li.divider
-                    li: a.insert-meeting(href="#") <i class="fa fa-plus"></i> Add new
-                    li: a(href="/") <i class="fa fa-search"></i> Search
             ul.nav.navbar-nav.navbar-right
               if currentUser
                 li.dropdown

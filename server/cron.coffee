@@ -19,7 +19,7 @@ setIntervals = ->
 
 Meteor.startup ->
   if Meteor.settings.public.isDebug
-    setIntervals()
+#    setIntervals()
   else
     setIntervals()
 

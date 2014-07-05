@@ -1,11 +1,11 @@
 #!/bin/bash
 
 DIRNAME=$(cd `dirname $0` && pwd)
-USERNAME=$(<~/.meteor/meetings.me.username)
-PASSWORD=$(<~/.meteor/meetings.me.password)
+USERNAME=$(<~/.meteor/flowbat.com.username)
+PASSWORD=$(<~/.meteor/flowbat.com.password)
 HOST="54.85.95.182"
 PORT="27017"
-DB="meetings_me"
+DB="flowbat_com"
 OUT_DIR="/tmp"
 
 echo "mongodump --host $HOST:$PORT -u $USERNAME -p \"${PASSWORD}\" -d $DB -c {collection_name} -o $OUT_DIR for all collections except 'system.users'"

@@ -44,10 +44,7 @@ Router.onBeforeAction("dataNotFound")
 
 share.setPageTitle = (title, appendSiteName = true) ->
   if appendSiteName
-    title += " - Meetings"
+    title += " - FlowBAT"
   if Meteor.settings.public.isDebug
     title = "(D) " + title
   document.title = title
-
-Router.onAfterAction ->
-  share.debouncedSendPageview()
