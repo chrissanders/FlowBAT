@@ -4,29 +4,9 @@ template(name="index")
       .col-xs-12
         .panel.panel-default
           .panel-heading
-            form
+            form.query-form
               .input-group
                 .input-group-addon
                   span.fa.fa-search
-                input.form-control(type="text", placeholder="Query")
-          table.table.table-striped
-            thead
-              tr
-                th Start time
-                th Sensor
-                th IP (Src)
-                th Port (Src)
-                th IP (Dst)
-                th Port (Dst)
-                th Protocol
-            tbody
-              tr
-                td 1/15/14:23:21
-                td 1
-                td 192.168.1.1
-                td 80
-                td 10.10.10.5
-                td 6452
-                td TCP
-
-
+                input.form-control.query(type="text", placeholder="Query", value=query.string)
+          +results(query)

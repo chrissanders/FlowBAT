@@ -11,36 +11,6 @@ Meteor.publish "currentUser", () ->
       "createdAt": 1
   )
 
-#Meteor.publish "friends", ->
-#  if not @userId then return []
-#  Meteor.users.find({friendUserIds: @userId}, {
-#    fields:
-#      handle: 1
-#      profile: 1
-#      invitationFailed: 1
-#  })
-
-Meteor.publish "allUsersInsecure", ->
+Meteor.publish "queries", ->
   if not @userId then return []
-  Meteor.users.find({_id: {$ne: @userId}}, {
-    fields:
-      "profile": 1
-      "status": 1
-      "invitationFailed": 1
-  })
-
-Meteor.publish "meetings", ->
-  if not @userId then return []
-  share.Meetings.find({})
-
-Meteor.publish "saker", ->
-  if not @userId then return []
-  share.Saker.find({})
-
-Meteor.publish "talks", ->
-  if not @userId then return []
-  share.Talks.find({})
-
-Meteor.publish "replies", ->
-  if not @userId then return []
-  share.Replies.find({})
+  share.Queries.find({userId: @userId})

@@ -17,15 +17,15 @@ Router.map ->
   @route "index",
     path: "/"
     data: -> {}
-  @route "meeting",
-    path: "/meeting/:_id"
+  @route "query",
+    path: "/query/:_id"
     template: "meetingView"
     data: ->
-      meeting = share.Meetings.findOne(@params._id)
+      meeting = share.Queries.findOne(@params._id)
       if not meeting
         return null
       _.defaults({}, @params,
-        meeting: meeting
+        query: meeting
       )
   @route "user",
     path: "/user/:_id"

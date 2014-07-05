@@ -1,4 +1,4 @@
-share.Meetings.allow
+share.Queries.allow
   insert: share.securityRulesWrapper (userId, meeting) ->
     unless userId
       throw new Match.Error("Operation not allowed for unauthorized users")

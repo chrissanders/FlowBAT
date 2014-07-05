@@ -17,17 +17,8 @@ share.loginCallback = (error) ->
     $(document.body).trigger("popup.hide")
     share.userStartupOnce()
 
-share.milliseconds2hourminutes = (milliseconds) ->
-  hours = share.intval(milliseconds / 1000 / 3600)
-  minutes = share.intval(milliseconds / 1000 % 3600 / 60)
-  _.str.pad(hours, 2, "0") + ":" + _.str.pad(minutes, 2, "0")
-
-share.hourminutes2milliseconds = (duration) ->
-  splinters = duration.split(":")
-  (share.intval(splinters[0]) * 60 + share.intval(splinters[1])) * 60 * 1000
-
-share.milliseconds2minutes = (milliseconds) ->
-  share.intval(milliseconds / 1000 / 60)
-
-share.minutes2milliseconds = (duration) ->
-  share.intval(duration) * 60 * 1000
+share.saveQuery = (string, force = false) ->
+  quickQuery = share.Queries.findOne({type: "quick"})
+  if quickQuery.string isnt string or force
+    share.Queries.update(quickQuery._id, {$set: {"string": string}})
+share.debouncedSaveQuery = _.debounce(share.saveQuery, 500)

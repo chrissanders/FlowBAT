@@ -1,0 +1,24 @@
+template(name="results")
+  if string
+    if error
+      .panel-body
+        .alert.alert-danger(role='alert')
+          strong Oh snap!
+          | {{error}}
+    table.results.table.table-striped
+      thead
+        tr
+          th Start time
+          th Sensor
+          th IP (Src)
+          th Port (Src)
+          th IP (Dst)
+          th Port (Dst)
+          th Protocol
+      tbody
+        each rows
+          tr
+            each cells
+              td {{.}}
+  else
+    .panel-body Please type in the query.

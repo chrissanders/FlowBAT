@@ -1,8 +1,15 @@
 Template.index.helpers
-  meetings: ->
-    share.Meetings.find({}, {sort: {createdAt: 1}})
+  query: ->
+    share.Queries.findOne({type: "quick"})
 
 Template.index.rendered = ->
 
 Template.index.events
-#  "click .selector": (event, template) ->
+  "keyup, paste .query": encapsulate (event, template) ->
+    $query = $(event.target)
+    query = $query.val()
+    share.debouncedSaveQuery(query)
+  "submit .query-form": grab encapsulate (event, template) ->
+    $query = $(event.target).find(".query")
+    query = $query.val()
+    share.saveQuery(query, true)

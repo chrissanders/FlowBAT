@@ -1,6 +1,6 @@
 share.MeetingEditor = new share.Editor(
-  collection: share.Meetings
-  family: "meeting"
+  collection: share.Queries
+  family: "query"
   isSingleLine: (property) ->
     property not in [] # all properties
   insertAfter: (_id, sak = {}, callback = ->) ->

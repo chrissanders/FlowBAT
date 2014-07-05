@@ -70,18 +70,18 @@ i18n.addResourceBundle("en",
           required: "Please specify your name"
         phone:
           phone: "Please specify full phone number (with country code)"
-    meeting:
-      namePlaceholder: "Meeting name"
-      nameIsEmpty: "Type meeting name here"
-      owner: "Meeting creator"
-      createdAt: "Meeting added at"
-      updatedAt: "Meeting edited at"
+    query:
+      namePlaceholder: "Query name"
+      nameIsEmpty: "Type query name here"
+      owner: "Query creator"
+      createdAt: "Query added at"
+      updatedAt: "Query edited at"
       actions:
-        insert: "Add meeting"
-        update: "Edit meeting"
-        save: "Save meeting"
-        remove: "Delete meeting"
-        removeConfirmation: "Deleting a meeting will wipe it completely. If you just want to hide it, you can click \"archive\" (next to \"delete\"). Are you sure you want to delete this meeting?"
+        insert: "Add query"
+        update: "Edit query"
+        save: "Save query"
+        remove: "Delete query"
+        removeConfirmation: "Deleting a query will wipe it completely. If you just want to hide it, you can click \"archive\" (next to \"delete\"). Are you sure you want to delete this query?"
     sak:
       namePlaceholder: "Case name"
       nameIsEmpty: "Type case name here"
@@ -121,8 +121,8 @@ i18n.addResourceBundle("en",
         remove: "Delete reply"
         removeConfirmation: "Deleting a reply will wipe it completely. Are you sure you want to delete this reply?"
   defaults:
-    meeting:
-      name: "New meeting"
+    query:
+      name: "New query"
     sak:
       name: "New case"
     talk: {}

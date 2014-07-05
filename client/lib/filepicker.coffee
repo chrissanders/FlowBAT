@@ -24,7 +24,7 @@ share.MeetingFilepicker = {
         ],
         openTo: 'COMPUTER',
       },{
-        path: '/meeting/'
+        path: '/query/'
       },
       callback,
       (FPError) ->
@@ -62,7 +62,7 @@ share.MeetingFilepicker = {
         openTo: 'COMPUTER',
         multiple: false
       },{
-        path: '/meeting/'
+        path: '/query/'
       },
       callback,
       (FPError) ->
