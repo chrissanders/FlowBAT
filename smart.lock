@@ -8,7 +8,6 @@
       "fast-render": {},
       "jade": {},
       "user-status": {},
-      "filepicker": {},
       "handlebars-server": {}
     },
     "packages": {
@@ -19,8 +18,8 @@
       },
       "collection-hooks": {
         "git": "https://github.com/matb33/meteor-collection-hooks.git",
-        "tag": "v0.6.7",
-        "commit": "f1d2ac629864edda09df6c955fa5ff3df26f739c"
+        "tag": "v0.7.2",
+        "commit": "261f61f07b371ae913463fba8964a9b93cab531b"
       },
       "percolatestudio-mixpanel": {
         "git": "https://github.com/percolatestudio/meteor-mixpanel.git",
@@ -29,8 +28,8 @@
       },
       "fast-render": {
         "git": "https://github.com/arunoda/meteor-fast-render.git",
-        "tag": "v0.2.5",
-        "commit": "93e2fb334e55fbe9b5ebb2a2e65964018658f43e"
+        "tag": "v0.2.8",
+        "commit": "149984b1aff3a5642a270aff9bd9006872c8302e"
       },
       "jade": {
         "git": "https://github.com/mquandalle/meteor-jade.git",
@@ -39,13 +38,8 @@
       },
       "user-status": {
         "git": "https://github.com/mizzao/meteor-user-status.git",
-        "tag": "v0.4.0",
-        "commit": "e2a1c7a4075f28b87b361387688e083a4b047a08"
-      },
-      "filepicker": {
-        "git": "https://github.com/Ink/meteor.git",
-        "tag": "v0.4.0",
-        "commit": "20d56aaaf48be3a5c0499547a495a6463b4fa3d9"
+        "tag": "v0.5.0",
+        "commit": "6a096fd9f3a916887c92cb778040ce2f8a9cc554"
       },
       "handlebars-server": {
         "git": "https://github.com/EventedMind/meteor-handlebars-server.git",
@@ -59,8 +53,8 @@
       },
       "timesync": {
         "git": "https://github.com/mizzao/meteor-timesync.git",
-        "tag": "v0.1.6",
-        "commit": "83067433f511bc13a11ae8c87e9a4d331256915e"
+        "tag": "v0.2.0",
+        "commit": "55f1daf261996dfbd726253688cfe7a2cc169d9b"
       }
     }
   }

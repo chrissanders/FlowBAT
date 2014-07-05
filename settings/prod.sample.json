@@ -1,11 +1,5 @@
 {
-  "baseUrl": "https://priest.me",
-  "facebook": {
-    "secret": ""
-  },
-  "google": {
-    "secret": ""
-  },
+  "baseUrl": "http://flowbat.com",
   "apm": {
     "appId": "",
     "secret": ""
@@ -13,12 +7,6 @@
   "public": {
     "version": "__VERSION__",
     "isDebug": false,
-    "facebook": {
-      "appId": ""
-    },
-    "google": {
-      "clientId": ""
-    },
     "googleAnalytics": {
       "property": "",
       "disabled": true
