@@ -8,13 +8,8 @@ template(name="results")
     table.results.table
       thead
         tr
-          th Start time
-          th Sensor
-          th IP (Src)
-          th Port (Src)
-          th IP (Dst)
-          th Port (Dst)
-          th Protocol
+          each header
+            th {{.}}
       tbody
         each rows
           tr

@@ -13,6 +13,7 @@ class share.Query
     @rows = []
     for row in @result.split("\n")
       @rows.push({cells: row.split("|")})
+    @header = @rows.shift().cells
   path: ->
     "/query/" + @_id
 
