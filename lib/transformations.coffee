@@ -11,11 +11,11 @@ class share.Query
   constructor: (doc) ->
     _.extend(@, doc)
     @rows = []
-    for row in @result.split("\n")
-      splinters = row.split("|")
-      splinters.pop() # extra "|" at the end
-      @rows.push(splinters)
-    @header = @rows.shift()
+    @header = []
+    if @result
+      for row in @result.split("\n")
+        @rows.push(row.split("|"))
+      @header = @rows.shift()
   path: ->
     "/query/" + @_id
 

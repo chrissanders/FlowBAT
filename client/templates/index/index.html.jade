@@ -6,10 +6,11 @@ template(name="index")
           .panel-heading
             form.query-form
               .input-group
-                .input-group-addon
-                  if query.stale
-                    i.fa.fa-fw.fa-spinner.fa-spin
-                  else
-                    i.fa.fa-fw.fa-search
+                .input-group-btn
+                  button.btn.btn-default(type="submit")
+                    if query.stale
+                      i.fa.fa-fw.fa-spinner.fa-spin
+                    else
+                      i.fa.fa-fw.fa-search
                 input.form-control.query(type="text", placeholder="Query", value=query.string)
           +results(query)
