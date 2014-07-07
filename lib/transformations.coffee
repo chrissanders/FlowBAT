@@ -12,7 +12,9 @@ class share.Query
     _.extend(@, doc)
     @rows = []
     for row in @result.split("\n")
-      @rows.push(row.split("|"))
+      splinters = row.split("|")
+      splinters.pop() # extra "|" at the end
+      @rows.push(splinters)
     @header = @rows.shift()
   path: ->
     "/query/" + @_id

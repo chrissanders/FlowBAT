@@ -1,4 +1,6 @@
 Template.results.helpers
+  fieldI18nString: ->
+    "rwcut.fields." + @.trim()
 
 Template.results.rendered = ->
 #  cl "results.rendered"

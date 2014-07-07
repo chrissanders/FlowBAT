@@ -70,63 +70,6 @@ i18n.addResourceBundle("en",
           required: "Please specify your name"
         phone:
           phone: "Please specify full phone number (with country code)"
-    query:
-      namePlaceholder: "Query name"
-      nameIsEmpty: "Type query name here"
-      owner: "Query creator"
-      createdAt: "Query added at"
-      updatedAt: "Query edited at"
-      actions:
-        insert: "Add query"
-        update: "Edit query"
-        save: "Save query"
-        remove: "Delete query"
-        removeConfirmation: "Deleting a query will wipe it completely. If you just want to hide it, you can click \"archive\" (next to \"delete\"). Are you sure you want to delete this query?"
-    sak:
-      namePlaceholder: "Case name"
-      nameIsEmpty: "Type case name here"
-      numberPlaceholder: "NN/YY"
-      numberIsEmpty: "NN/YY"
-      maximumDurationPlaceholder: ""
-      talkDurationPlaceholder: ""
-      replyDurationPlaceholder: ""
-      answerDurationPlaceholder: ""
-      owner: "Case creator"
-      createdAt: "Case added at"
-      updatedAt: "Case edited at"
-      actions:
-        insert: "Add case"
-        update: "Edit case"
-        save: "Save case"
-        remove: "Delete case"
-        removeConfirmation: "Deleting a case will wipe it completely. Are you sure you want to delete this case?"
-    talk:
-      owner: "Talk creator"
-      createdAt: "Talk added at"
-      updatedAt: "Talk edited at"
-      actions:
-        insert: "Add talk"
-        update: "Edit talk"
-        save: "Save talk"
-        remove: "Delete talk"
-        removeConfirmation: "Deleting a talk will wipe it completely. Are you sure you want to delete this talk?"
-    reply:
-      owner: "Reply creator"
-      createdAt: "Reply added at"
-      updatedAt: "Reply edited at"
-      actions:
-        insert: "Add reply"
-        update: "Edit reply"
-        save: "Save reply"
-        remove: "Delete reply"
-        removeConfirmation: "Deleting a reply will wipe it completely. Are you sure you want to delete this reply?"
-  defaults:
-    query:
-      name: "New query"
-    sak:
-      name: "New case"
-    talk: {}
-    reply: {}
   serverErrors:
     "User not found": "User not found"
     "Email already exists": "Email already exists"
@@ -140,4 +83,27 @@ i18n.addResourceBundle("en",
     save: "Save"
     cancel: "Cancel"
     changesAreSavedAutomatically: "All changes are saved automatically."
+  rwcut:
+    fields:
+      "sIP": "Source IP"
+      "dIP": "Destination IP"
+      "sPort": "Source port"
+      "dPort": "Destination port"
+      "protocol": "IP protocol"
+      "pro": "$t(rwcut.fields.protocol)"
+      "packets": "Packet count"
+      "bytes": "Byte count"
+      "flags": "TCP flags"
+      "sTime": "Starting time"
+      "dur": "Duration"
+      "eTime": "End time"
+      "sensor": "Sensor"
+      "sen": "$t(rwcut.fields.sensor)"
+      "class": "Sensor class"
+      "type": "Sensor type"
+      "sTime+msec": "starting time of flow including milliseconds (milliseconds are always displayed)"
+      "eTime+msec": "end time of flow including milliseconds (milliseconds are always displayed)"
+      "dur+msec": "duration of flow including milliseconds (milliseconds are always displayed)"
+      "iType": "ICMP type"
+      "iCode": "ICMP code"
 )
