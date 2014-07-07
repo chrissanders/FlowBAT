@@ -40,7 +40,7 @@ share.loadFixtures = ->
     for _id, user of users
       Accounts.setPassword(_id, "123123")
       quickQuery = share.Queries.findOne({type: "quick", userId: _id})
-      share.Queries.update(quickQuery._id, {$set: {string: "--sensor=S0 --proto=0-255 --type=all"}})
+      share.Queries.update(quickQuery._id, {$set: {string: "--sensor=S0 --proto=0-255 --type=all", stale: true}})
 
 #  serviceConfigurations = {}
 #  insertData(serviceConfigurations, ServiceConfiguration.configurations)

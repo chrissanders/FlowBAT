@@ -6,13 +6,12 @@ share.Queries.before.insert (userId, query) ->
   _.defaults(query,
     string: ""
     result: ""
-    startRecNum: 1
     stale: true
     isNew: true
     ownerId: userId
     updatedAt: now
     createdAt: now
-  )
+  , share.queryResetValues)
   queryPreSave.call(@, userId, query)
 
 share.Queries.before.update (userId, query, fieldNames, modifier, options) ->
@@ -20,3 +19,8 @@ share.Queries.before.update (userId, query, fieldNames, modifier, options) ->
   modifier.$set = modifier.$set or {}
   modifier.$set.updatedAt = modifier.$set.updatedAt or now
   queryPreSave.call(@, userId, modifier.$set)
+
+share.queryResetValues =
+  startRecNum: 1
+  sortField: ""
+  sortReverse: true

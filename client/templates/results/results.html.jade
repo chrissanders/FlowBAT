@@ -9,7 +9,13 @@ template(name="results")
       thead
         tr
           each header
-            th {{t fieldI18nString}}
+            th.sort(data-field="{{.}}")
+              | {{t fieldI18nString}}
+              if condition ../sortField "is" .
+                if ../sortReverse
+                  i.fa.fa-caret-down
+                else
+                  i.fa.fa-caret-up
       tbody
         each rows
           tr {{{tds}}}

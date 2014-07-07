@@ -8,8 +8,15 @@ share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   user = Meteor.users.findOne(userId)
   rwfilterArguments = query.string.split(" ")
   rwfilterArguments.push("--pass=stdout")
+  command = "rwfilter --site-config-file=/usr/local/etc/silk.conf " + rwfilterArguments.join(" ")
+  if query.sortField
+    rwsortArguments = ["--fields=" + query.sortField]
+    if query.sortReverse
+      rwsortArguments.push("--reverse")
+    command += " | " + "rwsort " + rwsortArguments.join(" ")
   rwcutArguments = ["--num-recs=" + user.profile.numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
-  Process.exec("ssh flowbat \"rwfilter --site-config-file=/usr/local/etc/silk.conf " + rwfilterArguments.join(" ") + " | " + "rwcut " + rwcutArguments.join(" ") + "\"", Meteor.bindEnvironment((err, stdout, stderr) ->
+  command += " | " + "rwcut " + rwcutArguments.join(" ")
+  Process.exec("ssh flowbat \"" + command + "\"", Meteor.bindEnvironment((err, stdout, stderr) ->
     result = stdout.trim()
     error = stderr.trim()
     code = if err then err.code else 0
