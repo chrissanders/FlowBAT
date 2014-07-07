@@ -1,4 +1,4 @@
 share.Queries.before.update (userId, query, fieldNames, modifier, options) ->
-  if "string" in fieldNames
+  if _.intersection(fieldNames, ["string", "startRecNum"]).length
     modifier.$set = modifier.$set or {}
-    modifier.$set.result = ""
+    modifier.$set.stale = true

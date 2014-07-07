@@ -12,8 +12,16 @@ template(name="results")
             th {{.}}
       tbody
         each rows
-          tr
-            each cells
-              td {{.}}
+          tr {{{tds}}}
+    .panel-body
+      ul.pager
+        li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
+          a(href='#')
+            i.fa.fa-angle-left
+            | Previous
+        li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
+          a(href='#')
+            | Next
+            i.fa.fa-angle-right
   else
     .panel-body Please type in the query.

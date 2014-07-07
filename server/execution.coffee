@@ -3,15 +3,14 @@ Process = Npm.require("child_process")
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   if not userId # fixtures
     return
-  if query.result or not query.string
+  if not query.stale or not query.string
     return
-  cl "here"
   user = Meteor.users.findOne(userId)
   result = ""
   error = ""
   rwfilterArguments = query.string.split(" ")
   rwfilterArguments.push("--pass=stdout")
-  rwcut = Process.spawn("rwcut", ["--num-recs=" + user.profile.resultsPerPage])
+  rwcut = Process.spawn("rwcut", ["--num-recs=" + user.profile.numRecs, "--start-rec-num=" + query.startRecNum])
   rwcut.stdout.setEncoding("utf8")
   rwcut.stderr.setEncoding("utf8")
   rwfilter = Process.spawn("rwfilter", rwfilterArguments)
@@ -41,5 +40,5 @@ share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   ))
   rwcut.on("close", Meteor.bindEnvironment((code) ->
 #    cl "rwcut.close"
-    share.Queries.update(query._id, {$set: {result: result, error: error, code: code}})
+    share.Queries.update(query._id, {$set: {result: result.trim(), error: error.trim(), code: code, stale: false}})
   ))

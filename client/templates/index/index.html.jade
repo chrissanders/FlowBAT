@@ -7,6 +7,9 @@ template(name="index")
             form.query-form
               .input-group
                 .input-group-addon
-                  span.fa.fa-search
+                  if query.stale
+                    i.fa.fa-fw.fa-spinner.fa-spin
+                  else
+                    i.fa.fa-fw.fa-search
                 input.form-control.query(type="text", placeholder="Query", value=query.string)
           +results(query)

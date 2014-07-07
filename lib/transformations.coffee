@@ -12,8 +12,8 @@ class share.Query
     _.extend(@, doc)
     @rows = []
     for row in @result.split("\n")
-      @rows.push({cells: row.split("|")})
-    @header = @rows.shift().cells
+      @rows.push(row.split("|"))
+    @header = @rows.shift()
   path: ->
     "/query/" + @_id
 

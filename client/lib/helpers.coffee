@@ -45,8 +45,9 @@ UI.registerHelper "t", (key, hash) ->
   result = i18n.t(key, params)
   new Spacebars.SafeString(result)
 
-UI.registerHelper("milliseconds2hourminutes", (duration, options) ->
-  share.milliseconds2hourminutes(duration)
+UI.registerHelper("tds", (duration, options) ->
+  if @
+    "<td>" + @.join("</td><td>") + "</td>"
 )
 
 UI.registerHelper "cl", (v) ->

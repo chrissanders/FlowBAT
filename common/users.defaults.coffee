@@ -20,7 +20,7 @@ Meteor.users.before.insert (userId, user) ->
     invitations: []
   )
   _.defaults(user.profile,
-    resultsPerPage: 50
+    numRecs: 10
     isRealName: false
   )
   userPreSave.call(@, userId, user)

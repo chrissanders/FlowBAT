@@ -6,8 +6,10 @@ share.Queries.before.insert (userId, query) ->
   _.defaults(query,
     string: ""
     result: ""
-    ownerId: userId
+    startRecNum: 1
+    stale: true
     isNew: true
+    ownerId: userId
     updatedAt: now
     createdAt: now
   )
