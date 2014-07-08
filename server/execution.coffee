@@ -18,10 +18,9 @@ share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   command += " | " + "rwcut " + rwcutArguments.join(" ")
   config = share.Configs.findOne()
   if config.isSSH
-    identityFile = process.env.PWD + "/settings/identity"
-    command = "ssh -i " + identityFile + " "+ config.user + "@" + config.host + " \"" + command + "\""
-    cl process.env.PWD
-    cl command
+    identityDir = process.env.PWD + "/settings"
+    identityFile = identityDir + "/identity"
+    command = "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=error -i " + identityFile + " "+ config.user + "@" + config.host + " \"" + command + "\""
   Process.exec(command, Meteor.bindEnvironment((err, stdout, stderr) ->
     result = stdout.trim()
     error = stderr.trim()
