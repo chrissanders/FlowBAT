@@ -42,5 +42,14 @@ share.loadFixtures = ->
       quickQuery = share.Queries.findOne({type: "quick", userId: _id})
       share.Queries.update(quickQuery._id, {$set: {string: "--sensor=S0 --proto=0-255 --type=all", stale: true}})
 
+  configs =
+    Default:
+      isSSH: true
+      host: "50.116.29.253"
+      port: "22"
+      user: "denis"
+      key: ""
+  insertData(configs, share.Configs)
+
 #  serviceConfigurations = {}
 #  insertData(serviceConfigurations, ServiceConfiguration.configurations)

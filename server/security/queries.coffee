@@ -1,13 +1,13 @@
 share.Queries.allow
-  insert: share.securityRulesWrapper (userId, meeting) ->
+  insert: share.securityRulesWrapper (userId, query) ->
     unless userId
       throw new Match.Error("Operation not allowed for unauthorized users")
     true
-  update: share.securityRulesWrapper (userId, meeting, fieldNames, modifier) ->
+  update: share.securityRulesWrapper (userId, query, fieldNames, modifier) ->
     unless userId
       throw new Match.Error("Operation not allowed for unauthorized users")
     true
-  remove: share.securityRulesWrapper (userId, meeting) ->
+  remove: share.securityRulesWrapper (userId, query) ->
     unless userId
       throw new Match.Error("Operation not allowed for unauthorized users")
     true
