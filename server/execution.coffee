@@ -14,7 +14,7 @@ share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
     if query.sortReverse
       rwsortArguments.push("--reverse")
     command += " | " + "rwsort " + rwsortArguments.join(" ")
-  rwcutArguments = ["--num-recs=" + user.profile.numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
+  rwcutArguments = ["--fields=" + query.fields.join(","), "--num-recs=" + user.profile.numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
   command += " | " + "rwcut " + rwcutArguments.join(" ")
   config = share.Configs.findOne()
   if config.isSSH

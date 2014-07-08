@@ -14,6 +14,25 @@ share.intval = (value) ->
 share.minute = 60 * 1000
 share.hour = 60 * share.minute
 
+share.rwcutFields = [
+  "sIP"
+  "dIP"
+  "sPort"
+  "dPort"
+  "protocol"
+  "packets"
+  "bytes"
+  "flags"
+  "sTime"
+  "duration"
+  "eTime"
+  "sensor"
+  "class"
+  "type"
+  "iType"
+  "iCode"
+]
+
 share.isDebug = Meteor.settings.public.isDebug
 
 object = if typeof(window) != "undefined" then window else GLOBAL

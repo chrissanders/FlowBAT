@@ -1,6 +1,10 @@
 Template.results.helpers
   fieldI18nString: ->
     "rwcut.fields." + @.trim()
+  fields: ->
+    share.rwcutFields
+  fieldIsSelected: (query) ->
+    @.toString() in query.fields
 
 Template.results.rendered = ->
 #  cl "results.rendered"
@@ -21,4 +25,10 @@ Template.results.events
         sortField = ""
         sortReverse = true
     share.Queries.update(template.data._id, {$set: {sortField: sortField, sortReverse: sortReverse}})
-
+  "change .field-checkbox": encapsulate (event, template) ->
+    # recollecting all checkboxes to maintain field order
+    fields = []
+    $(".field-checkbox").each (index, checkbox) ->
+      if checkbox.checked
+        fields.push(checkbox.value)
+    share.Queries.update(template.data._id, {$set: {fields: fields}})

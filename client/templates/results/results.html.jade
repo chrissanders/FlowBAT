@@ -29,5 +29,14 @@ template(name="results")
           a(href='#')
             | Next
             i.fa.fa-angle-right
+    .panel-body
+      form.display-fields-form
+        fieldset
+          legend Display fields
+          each fields
+            .checkbox
+              label
+                input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}")
+                | {{t fieldI18nString}}
   else
     .panel-body Please type in the query.
