@@ -37,3 +37,36 @@ Template.results.events
     numRecs = $numRecs.val()
     Meteor.users.update(Meteor.userId(), {$set: {"profile.numRecs": numRecs}})
     share.Queries.update(template.data._id, {$set: {stale: true}})
+  "click .download-csv": grab encapsulate (event, template) ->
+    _id = template.data._id
+    $target = $(event.currentTarget)
+    $target.find(".normal").hide()
+    $target.find(".loading").show()
+    Meteor.call("loadDataForCSV", _id, (error, data) ->
+      if error
+        share.Queries.update(_id, {$set: {error: error.toString()}})
+      else
+        if data
+          rows = []
+          for row, count in data.split("\n")
+            splinters = row.split("|")
+            if count is 0
+              for field, i in splinters
+                splinters[i] = i18n.t("rwcut.fields." + field)
+            rows.push(toCSV(splinters))
+          csv = rows.join("\n")
+          filename = "export.csv"
+          blob = new Blob([csv],
+            type: "text/csv;charset=utf-8;"
+          )
+          if jQuery.browser.msie
+            navigator.msSaveBlob(blob, filename)
+          else
+            link = document.createElement("a")
+            link.setAttribute "href", URL.createObjectURL(blob)
+            link.setAttribute "download", filename
+            document.body.appendChild(link)
+            link.click()
+      $target.find(".normal").show()
+      $target.find(".loading").hide()
+    )

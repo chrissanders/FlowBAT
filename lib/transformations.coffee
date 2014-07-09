@@ -10,11 +10,10 @@ class share.User
 class share.Query
   constructor: (doc) ->
     _.extend(@, doc)
-    @rows = []
     @header = []
+    @rows = []
     if @result
-      for row in @result.split("\n")
-        @rows.push(row.split("|"))
+      @rows = share.parseResult(@result)
       @header = @rows.shift()
   path: ->
     "/query/" + @_id

@@ -33,6 +33,12 @@ share.rwcutFields = [
   "iCode"
 ]
 
+share.parseResult = (result) ->
+  rows = []
+  for row in result.split("\n")
+    rows.push(row.split("|"))
+  rows
+
 share.isDebug = Meteor.settings.public.isDebug
 
 object = if typeof(window) != "undefined" then window else GLOBAL

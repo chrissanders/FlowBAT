@@ -1,4 +1,5 @@
 Process = Npm.require("child_process")
+Future = Npm.require('fibers/future')
 
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   if not userId # fixtures
@@ -8,6 +9,27 @@ share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   if not query.string
     share.Queries.update(query._id, {$set: {stale: false}})
   user = Meteor.users.findOne(userId)
+  numRecs = user.profile.numRecs
+  callback = (result, error, code) ->
+    share.Queries.update(query._id, {$set: {result: result, error: error, code: code, stale: false}})
+  run(query, numRecs, callback)
+
+Meteor.methods
+  loadDataForCSV: (queryId) ->
+    check(queryId, Match.App.QueryId)
+    @unblock()
+    query = share.Queries.findOne(queryId)
+    fut = new Future()
+    callback = (result, error, code) ->
+      if error
+        fut.throw(new Error(error))
+      else
+        fut.return(result)
+    query.startRecNum = 1
+    run(query, 0, callback)
+    fut.wait()
+
+run = (query, numRecs, callback) ->
   rwfilterArguments = query.string.split(" ")
   rwfilterArguments.push("--pass=stdout")
   command = "rwfilter --site-config-file=/usr/local/etc/silk.conf " + rwfilterArguments.join(" ")
@@ -16,7 +38,7 @@ share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
     if query.sortReverse
       rwsortArguments.push("--reverse")
     command += " | " + "rwsort " + rwsortArguments.join(" ")
-  rwcutArguments = ["--fields=" + query.fields.join(","), "--num-recs=" + user.profile.numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
+  rwcutArguments = ["--fields=" + query.fields.join(","), "--num-recs=" + numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
   command += " | " + "rwcut " + rwcutArguments.join(" ")
   config = share.Configs.findOne()
   if config.isSSH
@@ -31,5 +53,5 @@ share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
       # rwcut closes stdin after reading first --num-recs records
       error = ""
       code = 0
-    share.Queries.update(query._id, {$set: {result: result, error: error, code: code, stale: false}})
+    callback(result, error, code)
   ))

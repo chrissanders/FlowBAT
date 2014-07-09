@@ -35,7 +35,11 @@ template(name="results")
           a(href='#')
             | Next
             i.fa.fa-angle-right
-    .panel-body
+      .extras
+        a.download-csv(href="#")
+          i.normal.fa.fa-file-excel-o
+          i.loading.fa.fa-spinner.fa-spin(style="display: none;")
+          | Download full CSV
       form.display-fields-form
         fieldset
           legend Display fields
