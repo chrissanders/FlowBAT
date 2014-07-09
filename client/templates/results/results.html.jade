@@ -25,6 +25,12 @@ template(name="results")
           a(href='#')
             i.fa.fa-angle-left
             | Previous
+        li.dropdown
+          select.num-recs.form-control
+            option(value="10") 10 per page
+            option(value="25") 25 per page
+            option(value="50") 50 per page
+            option(value="100") 100 per page
         li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}} {{#if stale}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
           a(href='#')
             | Next

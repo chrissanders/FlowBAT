@@ -3,8 +3,10 @@ Process = Npm.require("child_process")
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   if not userId # fixtures
     return
-  if not query.stale or not query.string
+  if not query.stale
     return
+  if not query.string
+    share.Queries.update(query._id, {$set: {stale: false}})
   user = Meteor.users.findOne(userId)
   rwfilterArguments = query.string.split(" ")
   rwfilterArguments.push("--pass=stdout")

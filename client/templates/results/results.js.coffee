@@ -32,3 +32,8 @@ Template.results.events
       if checkbox.checked
         fields.push(checkbox.value)
     share.Queries.update(template.data._id, {$set: {fields: fields}})
+  "change .num-recs": encapsulate (event, template) ->
+    $numRecs = $(event.currentTarget)
+    numRecs = $numRecs.val()
+    Meteor.users.update(Meteor.userId(), {$set: {"profile.numRecs": numRecs}})
+    share.Queries.update(template.data._id, {$set: {stale: true}})
