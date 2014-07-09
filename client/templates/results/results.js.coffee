@@ -70,3 +70,21 @@ Template.results.events
       $target.find(".normal").show()
       $target.find(".loading").hide()
     )
+  "click .download-rwf": grab encapsulate (event, template) ->
+    _id = template.data._id
+    $target = $(event.currentTarget)
+    $target.find(".normal").hide()
+    $target.find(".loading").show()
+    Meteor.call("getRwfToken", _id, (error, token) ->
+      if error
+        share.Queries.update(_id, {$set: {error: error.toString()}})
+      else
+        link = document.createElement("a")
+        basename = token + ".rwf"
+        link.setAttribute "href", "/dump/" + token
+        link.setAttribute "download", basename
+        document.body.appendChild(link)
+        link.click()
+      $target.find(".normal").show()
+      $target.find(".loading").hide()
+    )

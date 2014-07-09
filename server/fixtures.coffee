@@ -49,6 +49,7 @@ share.loadFixtures = ->
       port: "22"
       user: "denis"
       key: ""
+      siteConfigFile: "/usr/local/etc/silk.conf"
   insertData(configs, share.Configs)
 
 #  serviceConfigurations = {}
