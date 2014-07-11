@@ -1,56 +1,120 @@
 template(name="results")
-  if string
-    if error
-      .panel-body
-        .alert.alert-danger(role='alert')
-          strong Oh snap!
-          pre {{error}}
-    table.results.table
-      thead
-        tr
-          each header
-            th.sort(data-field="{{.}}")
-              | {{t fieldI18nString}}
-              if condition ../sortField "is" .
-                if ../sortReverse
-                  i.fa.fa-caret-down
-                else
-                  i.fa.fa-caret-up
-      tbody
-        each rows
-          tr {{{tds}}}
-    .panel-body
-      ul.pager
-        li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if stale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
-          a(href='#')
-            i.fa.fa-angle-left
-            | Previous
-        li.dropdown
-          select.num-recs.form-control
-            option(value="10") 10 per page
-            option(value="25") 25 per page
-            option(value="50") 50 per page
-            option(value="100") 100 per page
-        li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}} {{#if stale}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
-          a(href='#')
-            | Next
-            i.fa.fa-angle-right
-      .extras
-        a.download-csv(href="#")
-          i.normal.fa.fa-file-excel-o
-          i.loading.fa.fa-spinner.fa-spin(style="display: none;")
-          | Download full CSV
-        a.download-rwf(href="#")
-          i.normal.fa.fa-file-archive-o
-          i.loading.fa.fa-spinner.fa-spin(style="display: none;")
-          | Download full RWF
-      form.display-fields-form
-        fieldset
-          legend Display fields
-          each fields
-            .checkbox
-              label
-                input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}")
+  .results.panel.panel-default
+    .panel-heading
+      +controlsForTheHeartOfTheSun
+      if isBuilderVisible
+        form.options-form
+          fieldset
+            legend Input options
+            .row
+              .col-xs-6
+                .form-group
+                  label.control-label Start date
+                  .input-group
+                    span.input-group-addon
+                      input(type='checkbox')
+                    input.form-control(type='text', placeholder='mm/dd/yyyy')
+                    span.input-group-addon
+                      i.glyphicon.glyphicon-calendar
+              .col-xs-6
+                .form-group
+                  label.control-label End date
+                  .input-group
+                    span.input-group-addon
+                      input(type='checkbox')
+                    input.form-control(type='text', placeholder='mm/dd/yyyy')
+                    span.input-group-addon
+                      i.glyphicon.glyphicon-calendar
+            .row
+              .col-xs-6
+                .form-group
+                  label.control-label Sensor
+                  .input-group
+                    span.input-group-addon
+                      input(type='checkbox')
+                    input.form-control(type='text')
+              .col-xs-6
+                .form-group
+                  label.control-label Type
+                  .input-group
+                    span.input-group-addon
+                      input(type='checkbox')
+                    input.form-control(type='text')
+          fieldset
+            legend Additional options
+            .row
+              .col-xs-6
+                .form-group
+                  .input-group
+                    span.input-group-addon
+                      +checkbox(family="query" _id=_id property="additionalParametersEnabled" value=additionalParametersEnabled isNew=false)
+                    +input(family="query" _id=_id property="additionalParameters" value=additionalParameters enabled=additionalParametersEnabled placeholder="Raw command-line options" isNew=false)
+          fieldset
+            legend Final query
+            .row
+              .col-xs-12
+                code.query-display
+                  if string
+                    | rwfilter {{string}}
+                  else
+                    em Please set some options to build the query
+          +controlsForTheHeartOfTheSun
+      else
+        code.query-display
+          if string
+            | rwfilter {{string}}
+          else
+            em Please open the builder to create query
+    if string
+      if error
+        .panel-body
+          .alert.alert-danger(role='alert')
+            strong Oh snap!
+            pre {{error}}
+      table.results-table.table
+        thead
+          tr
+            each header
+              th.sort(data-field="{{.}}")
                 | {{t fieldI18nString}}
-  else
-    .panel-body Please type in the query.
+                if condition ../sortField "is" .
+                  if ../sortReverse
+                    i.fa.fa-caret-down
+                  else
+                    i.fa.fa-caret-up
+        tbody
+          each rows
+            tr {{{tds}}}
+      .panel-body
+        ul.pager
+          li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if stale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
+            a(href='#')
+              i.fa.fa-angle-left
+              | Previous
+          li.dropdown
+            select.num-recs.form-control
+              each numRecsOptions
+                option(value="{{.}}", selected="{{condition . 'is' currentUser.profile.numRecs}}") {{.}} per page
+          li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}} {{#if stale}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
+            a(href='#')
+              | Next
+              i.fa.fa-angle-right
+        .extras
+          a.download-csv(href="#")
+            i.normal.fa.fa-file-excel-o
+            i.loading.fa.fa-spinner.fa-spin(style="display: none;")
+            | Download full CSV
+          a.download-rwf(href="#")
+            i.normal.fa.fa-file-archive-o
+            i.loading.fa.fa-spinner.fa-spin(style="display: none;")
+            | Download full RWF
+        form.display-fields-form
+          fieldset
+            legend Display fields
+            each fields
+              .checkbox
+                label
+                  input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}")
+                  | {{t fieldI18nString}}
+    //else
+    //  .panel-body Please type in the query.

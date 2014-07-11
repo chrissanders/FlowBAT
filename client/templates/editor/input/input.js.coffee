@@ -1,4 +1,8 @@
 Template.input.helpers
+  placeholder: ->
+    @placeholder or i18n.t(@placeholderI18n)
+  disabled: ->
+    not (if _.isBoolean(@enabled) then @enabled else true)
 
 Template.input.rendered = ->
   editor = @firstNode

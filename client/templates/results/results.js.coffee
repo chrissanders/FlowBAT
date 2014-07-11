@@ -1,4 +1,6 @@
 Template.results.helpers
+  numRecsOptions: ->
+    [10, 25, 50, 100]
   fieldI18nString: ->
     "rwcut.fields." + @.trim()
   fields: ->
@@ -10,6 +12,13 @@ Template.results.rendered = ->
 #  cl "results.rendered"
 
 Template.results.events
+  "click .execute": grab encapsulate (event, template) ->
+    event.currentTarget.blur()
+    $set = _.extend({stale: true}, share.queryResetValues)
+    share.Queries.update(template.data._id, {$set: $set})
+  "click .toggle-is-builder-visible": grab encapsulate (event, template) ->
+    event.currentTarget.blur()
+    share.Queries.update(template.data._id, {$set: {isBuilderVisible: not template.data.isBuilderVisible}})
   "click .increment-start-rec-num": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
     startRecNum = template.data.startRecNum + share.intval($target.attr("data-increment"))
@@ -34,7 +43,7 @@ Template.results.events
     share.Queries.update(template.data._id, {$set: {fields: fields}})
   "change .num-recs": encapsulate (event, template) ->
     $numRecs = $(event.currentTarget)
-    numRecs = $numRecs.val()
+    numRecs = share.intval($numRecs.val())
     Meteor.users.update(Meteor.userId(), {$set: {"profile.numRecs": numRecs}})
     share.Queries.update(template.data._id, {$set: {stale: true}})
   "click .download-csv": grab encapsulate (event, template) ->

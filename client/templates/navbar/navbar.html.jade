@@ -12,6 +12,9 @@ template(name="navbar")
             a.navbar-brand(href="/") FlowBAT
           #bs-example-navbar-collapse-1.collapse.navbar-collapse
             ul.nav.navbar-nav
+              if isDebug
+                li
+                  a(href="/query/create") Create query
             ul.nav.navbar-nav.navbar-right
               if currentUser
                 li.dropdown

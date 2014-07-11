@@ -16,9 +16,3 @@ share.loginCallback = (error) ->
       , 1000)
     $(document.body).trigger("popup.hide")
     share.userStartupOnce()
-
-share.saveQuery = (string, force = false) ->
-  quickQuery = share.Queries.findOne({type: "quick"})
-  if quickQuery.string isnt string or force
-    share.Queries.update(quickQuery._id, {$set: {"string": string}})
-share.debouncedSaveQuery = _.debounce(share.saveQuery, 500)

@@ -39,6 +39,16 @@ share.parseResult = (result) ->
     rows.push(row.split("|"))
   rows
 
+share.stringBuilderFields = [
+  "additionalParametersEnabled"
+  "additionalParameters"
+]
+share.buildQueryString = (query) ->
+  string = ""
+  if query.additionalParametersEnabled
+    string += query.additionalParameters
+  string
+
 share.isDebug = Meteor.settings.public.isDebug
 
 object = if typeof(window) != "undefined" then window else GLOBAL

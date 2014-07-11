@@ -1,10 +1,3 @@
-share.Queries.before.update (userId, query, fieldNames, modifier, options) ->
-  if _.intersection(fieldNames, ["string", "startRecNum", "sortField", "sortReverse", "fields"]).length
-    modifier.$set = modifier.$set or {}
-    modifier.$set.stale = true
-    if "string" in fieldNames
-      _.extend(modifier.$set, share.queryResetValues)
-
 Deps.autorun (computation) ->
   if share.queriesHandle.ready()
     share.Queries.find({stale: true}).forEach (query) ->

@@ -17,15 +17,23 @@ Router.map ->
   @route "index",
     path: "/"
     data: -> {}
+    action: ->
+      query = share.Queries.findOne()
+      Router.go("/query/" + query._id)
+  @route "createQuery",
+    path: "/query/create"
+    data: -> {}
+    action: ->
+      _id = share.Queries.insert({})
+      Router.go("/query/" + _id)
   @route "query",
     path: "/query/:_id"
-    template: "meetingView"
     data: ->
-      meeting = share.Queries.findOne(@params._id)
-      if not meeting
+      query = share.Queries.findOne(@params._id)
+      if not query
         return null
       _.defaults({}, @params,
-        query: meeting
+        query: query
       )
   @route "user",
     path: "/user/:_id"

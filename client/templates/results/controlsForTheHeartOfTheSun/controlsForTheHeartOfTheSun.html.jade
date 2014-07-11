@@ -1,0 +1,33 @@
+template(name="controlsForTheHeartOfTheSun")
+  div.controlsForTheHeartOfTheSun
+    .btn-group
+      button.execute.btn.btn-default(type="button")
+        if stale
+          i.fa.fa-fw.fa-spinner.fa-spin
+        else
+          i.fa.fa-fw.fa-search
+        | Execute
+      button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+        span.caret
+        span.sr-only Toggle Dropdown
+      ul.dropdown-menu(role='menu')
+        li
+          a(href='#') Execute each 15 minutes
+        li
+          a(href='#') Execute each hour
+        li
+          a(href='#') Execute periodically...
+        li.divider
+        li
+          a(href='#') Stop periodic execution
+    .btn-group
+      button.toggle-is-builder-visible.btn.btn-default(type="button")
+        if isBuilderVisible
+          i.fa.fa-cog
+          | &nbsp;
+          | Hide options
+        else
+          i.fa.fa-cog
+          | &nbsp;
+          | Show options
+

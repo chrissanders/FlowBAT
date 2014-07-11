@@ -10,6 +10,15 @@ UI.registerHelper("Session", (key) ->
   Session.get(key)
 )
 
+UI.registerHelper "isDebug", ->
+  Meteor.settings.public.isDebug
+
+UI.registerHelper "SessionEquals", (key, value) ->
+  Session.equals(key, value)
+
+UI.registerHelper "currentUserId", ->
+  Meteor.userId()
+
 UI.registerHelper("condition", (v1, operator, v2, options) ->
   switch operator
     when "==", "eq", "is"
