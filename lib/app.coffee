@@ -40,6 +40,10 @@ share.parseResult = (result) ->
   rows
 
 share.stringBuilderFields = [
+  "startDateEnabled"
+  "startDate"
+  "endDateEnabled"
+  "endDate"
   "sensorEnabled"
   "sensor"
   "typeEnabled"
@@ -49,11 +53,15 @@ share.stringBuilderFields = [
 ]
 share.buildQueryString = (query) ->
   parameters = []
-  if query.sensorEnabled
+  if query.startDateEnabled and query.startDate
+    parameters.push("--start-date=" + query.startDate)
+  if query.endDateEnabled and query.endDate
+    parameters.push("--end-date=" + query.endDate)
+  if query.sensorEnabled and query.sensor
     parameters.push("--sensor=" + query.sensor)
-  if query.typeEnabled
+  if query.typeEnabled and query.type
     parameters.push("--type=" + query.type)
-  if query.additionalParametersEnabled
+  if query.additionalParametersEnabled and query.additionalParameters
     parameters.push(query.additionalParameters)
   parameters.join(" ")
 

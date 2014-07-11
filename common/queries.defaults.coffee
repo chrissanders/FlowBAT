@@ -5,6 +5,10 @@ share.Queries.before.insert (userId, query) ->
   now = new Date()
   _.defaults(query,
     string: ""
+    startDateEnabled: false
+    startDate: ""
+    endDateEnabled: false
+    endDate: ""
     sensorEnabled: false
     sensor: ""
     typeEnabled: false
