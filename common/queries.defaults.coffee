@@ -5,11 +5,15 @@ share.Queries.before.insert (userId, query) ->
   now = new Date()
   _.defaults(query,
     string: ""
+    sensorEnabled: false
+    sensor: ""
+    typeEnabled: false
+    type: ""
     additionalParametersEnabled: false
     additionalParameters: ""
     fields: ["sIP", "dIP", "sPort", "dPort", "protocol", "packets", "bytes", "flags", "sTime", "dur", "eTime", "sensor"]
     result: ""
-    stale: true
+    stale: false
     isBuilderVisible: true
     isNew: true
     ownerId: userId

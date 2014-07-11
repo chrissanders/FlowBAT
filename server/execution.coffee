@@ -2,17 +2,15 @@ Process = Npm.require("child_process")
 Future = Npm.require('fibers/future')
 
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
-  if not userId # fixtures
-    return
   if not query.stale
     return
   if not query.string
     share.Queries.update(query._id, {$set: {stale: false}})
-  user = Meteor.users.findOne(userId)
+  user = Meteor.users.findOne(query.ownerId)
   numRecs = user.profile.numRecs
   callback = (result, error, code) ->
     share.Queries.update(query._id, {$set: {result: result, error: error, code: code, stale: false}})
-  run(query, numRecs, false, callback)
+  executeQuery(query, numRecs, false, callback)
 
 Meteor.methods
   loadDataForCSV: (queryId) ->
@@ -26,7 +24,7 @@ Meteor.methods
       else
         fut.return(result)
     query.startRecNum = 1
-    run(query, 0, false, callback)
+    executeQuery(query, 0, false, callback)
     fut.wait()
   getRwfToken: (queryId) ->
     check(queryId, Match.App.QueryId)
@@ -39,10 +37,10 @@ Meteor.methods
       else
         fut.return(token)
     query.startRecNum = 1
-    run(query, 0, true, callback)
+    executeQuery(query, 0, true, callback)
     fut.wait()
 
-run = (query, numRecs, binary, callback) ->
+executeQuery = (query, numRecs, binary, callback) ->
   config = share.Configs.findOne()
   token = Random.id()
   rwfilterArguments = query.string.split(" ")

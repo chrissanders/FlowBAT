@@ -9,6 +9,17 @@ insertData = (data, collection) ->
 share.loadFixtures = ->
   now = new Date()
   lastWeek = new Date(now.getTime() - 7 * 24 * 3600 * 1000)
+
+  configs =
+    Default:
+      isSSH: true
+      host: "50.116.29.253"
+      port: "22"
+      user: "denis"
+      key: ""
+      siteConfigFile: "/usr/local/etc/silk.conf"
+  insertData(configs, share.Configs)
+
   users =
     ChrisSanders:
       profile:
@@ -39,18 +50,9 @@ share.loadFixtures = ->
   if usersInserted
     for _id, user of users
       Accounts.setPassword(_id, "123123")
-      quickQuery = share.Queries.findOne({type: "quick", ownerId: _id})
-      share.Queries.update(quickQuery._id, {$set: {additionalParametersEnabled: true, additionalParameters: "--sensor=S0 --proto=0-255 --type=all", stale: true}})
-
-  configs =
-    Default:
-      isSSH: true
-      host: "50.116.29.253"
-      port: "22"
-      user: "denis"
-      key: ""
-      siteConfigFile: "/usr/local/etc/silk.conf"
-  insertData(configs, share.Configs)
+      query = share.Queries.findOne({ownerId: _id})
+      share.Queries.update(query._id, {$set: {sensorEnabled: true, sensor: "S0", typeEnabled: true, type: "all", additionalParametersEnabled: true, additionalParameters: "--proto=0-255"}})
+      share.Queries.update(query._id, {$set: {stale: true}})
 
 #  serviceConfigurations = {}
 #  insertData(serviceConfigurations, ServiceConfiguration.configurations)

@@ -40,14 +40,22 @@ share.parseResult = (result) ->
   rows
 
 share.stringBuilderFields = [
+  "sensorEnabled"
+  "sensor"
+  "typeEnabled"
+  "type"
   "additionalParametersEnabled"
   "additionalParameters"
 ]
 share.buildQueryString = (query) ->
-  string = ""
+  parameters = []
+  if query.sensorEnabled
+    parameters.push("--sensor=" + query.sensor)
+  if query.typeEnabled
+    parameters.push("--type=" + query.type)
   if query.additionalParametersEnabled
-    string += query.additionalParameters
-  string
+    parameters.push(query.additionalParameters)
+  parameters.join(" ")
 
 share.isDebug = Meteor.settings.public.isDebug
 

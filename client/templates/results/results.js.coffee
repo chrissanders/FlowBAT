@@ -12,8 +12,8 @@ Template.results.rendered = ->
 #  cl "results.rendered"
 
 Template.results.events
-  "click .execute": grab encapsulate (event, template) ->
-    event.currentTarget.blur()
+  "submit .options-form": grab encapsulate (event, template) ->
+    template.$(".execute").blur()
     $set = _.extend({stale: true}, share.queryResetValues)
     share.Queries.update(template.data._id, {$set: $set})
   "click .toggle-is-builder-visible": grab encapsulate (event, template) ->

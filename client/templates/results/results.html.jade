@@ -1,45 +1,45 @@
 template(name="results")
   .results.panel.panel-default
     .panel-heading
-      +controlsForTheHeartOfTheSun
-      if isBuilderVisible
-        form.options-form
+      form.options-form
+        +controlsForTheHeartOfTheSun
+        if isBuilderVisible
           fieldset
             legend Input options
-            .row
-              .col-xs-6
-                .form-group
-                  label.control-label Start date
-                  .input-group
-                    span.input-group-addon
-                      input(type='checkbox')
-                    input.form-control(type='text', placeholder='mm/dd/yyyy')
-                    span.input-group-addon
-                      i.glyphicon.glyphicon-calendar
-              .col-xs-6
-                .form-group
-                  label.control-label End date
-                  .input-group
-                    span.input-group-addon
-                      input(type='checkbox')
-                    input.form-control(type='text', placeholder='mm/dd/yyyy')
-                    span.input-group-addon
-                      i.glyphicon.glyphicon-calendar
+            //.row
+            //  .col-xs-6
+            //    .form-group
+            //      label.control-label Start date
+            //      .input-group
+            //        span.input-group-addon
+            //          input(type='checkbox')
+            //        input.form-control(type='text', placeholder='mm/dd/yyyy')
+            //        span.input-group-addon
+            //          i.glyphicon.glyphicon-calendar
+            //  .col-xs-6
+            //    .form-group
+            //      label.control-label End date
+            //      .input-group
+            //        span.input-group-addon
+            //          input(type='checkbox')
+            //        input.form-control(type='text', placeholder='mm/dd/yyyy')
+            //        span.input-group-addon
+            //          i.glyphicon.glyphicon-calendar
             .row
               .col-xs-6
                 .form-group
                   label.control-label Sensor
                   .input-group
                     span.input-group-addon
-                      input(type='checkbox')
-                    input.form-control(type='text')
+                      +checkbox(family="query" _id=_id property="sensorEnabled" value=sensorEnabled isNew=isNew)
+                    +input(family="query" _id=_id property="sensor" value=sensor enabled=sensorEnabled isNew=isNew)
               .col-xs-6
                 .form-group
                   label.control-label Type
                   .input-group
                     span.input-group-addon
-                      input(type='checkbox')
-                    input.form-control(type='text')
+                      +checkbox(family="query" _id=_id property="typeEnabled" value=typeEnabled isNew=isNew)
+                    +input(family="query" _id=_id property="type" value=type enabled=typeEnabled isNew=isNew)
           fieldset
             legend Additional options
             .row
@@ -47,8 +47,8 @@ template(name="results")
                 .form-group
                   .input-group
                     span.input-group-addon
-                      +checkbox(family="query" _id=_id property="additionalParametersEnabled" value=additionalParametersEnabled isNew=false)
-                    +input(family="query" _id=_id property="additionalParameters" value=additionalParameters enabled=additionalParametersEnabled placeholder="Raw command-line options" isNew=false)
+                      +checkbox(family="query" _id=_id property="additionalParametersEnabled" value=additionalParametersEnabled isNew=isNew)
+                    +input(family="query" _id=_id property="additionalParameters" value=additionalParameters enabled=additionalParametersEnabled placeholder="Raw command-line options" isNew=isNew)
           fieldset
             legend Final query
             .row
@@ -59,12 +59,12 @@ template(name="results")
                   else
                     em Please set some options to build the query
           +controlsForTheHeartOfTheSun
-      else
-        code.query-display
-          if string
-            | rwfilter {{string}}
-          else
-            em Please open the builder to create query
+        else
+          code.query-display
+            if string
+              | rwfilter {{string}}
+            else
+              em Please open the builder to create query
     if string
       if error
         .panel-body
