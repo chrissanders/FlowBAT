@@ -1,6 +1,6 @@
 Template.results.helpers
   numRecsOptions: ->
-    [10, 25, 50, 100]
+    [5, 10, 25, 50, 100]
   fieldI18nString: ->
     "rwcut.fields." + @.trim()
   fields: ->
