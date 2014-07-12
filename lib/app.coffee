@@ -48,6 +48,26 @@ share.stringBuilderFields = [
   "sensor"
   "typeEnabled"
   "type"
+  "daddressEnabled"
+  "daddress"
+  "saddressEnabled"
+  "saddress"
+  "anyAddressEnabled"
+  "anyAddress"
+  "dportEnabled"
+  "dport"
+  "sportEnabled"
+  "sport"
+  "aportEnabled"
+  "aport"
+  "dccEnabled"
+  "dcc"
+  "sccEnabled"
+  "scc"
+  "protocolEnabled"
+  "protocol"
+  "flagsAllEnabled"
+  "flagsAll"
   "additionalParametersEnabled"
   "additionalParameters"
 ]
@@ -61,6 +81,26 @@ share.buildQueryString = (query) ->
     parameters.push("--sensor=" + query.sensor)
   if query.typeEnabled and query.type
     parameters.push("--type=" + query.type)
+  if query.daddressEnabled and query.daddress
+    parameters.push("--daddress=" + query.daddress)
+  if query.saddressEnabled and query.saddress
+    parameters.push("--saddress=" + query.saddress)
+  if query.anyAddressEnabled and query.anyAddress
+    parameters.push("--any-address=" + query.anyAddress)
+  if query.dportEnabled and query.dport
+    parameters.push("--dport=" + query.dport)
+  if query.sportEnabled and query.sport
+    parameters.push("--sport=" + query.sport)
+  if query.aportEnabled and query.aport
+    parameters.push("--aport=" + query.aport)
+  if query.dccEnabled and query.dcc
+    parameters.push("--dcc=" + query.dcc)
+  if query.sccEnabled and query.scc
+    parameters.push("--scc=" + query.scc)
+  if query.protocolEnabled and query.protocol
+    parameters.push("--protocol=" + query.protocol)
+  if query.flagsAllEnabled and query.flagsAll
+    parameters.push("--flags-all=" + query.flagsAll)
   if query.additionalParametersEnabled and query.additionalParameters
     parameters.push(query.additionalParameters)
   parameters.join(" ")

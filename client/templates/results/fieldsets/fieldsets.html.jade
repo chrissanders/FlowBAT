@@ -36,6 +36,83 @@ template(name="fieldsets")
               +checkbox(family="query" _id=_id property="typeEnabled" value=typeEnabled isNew=isNew)
             +input(family="query" _id=_id property="type" value=type enabled=typeEnabled isNew=isNew)
   fieldset
+    legend Partitioning options
+    .row
+      .col-xs-6
+        .form-group
+          label.control-label Destination IP
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="daddressEnabled" value=daddressEnabled isNew=isNew)
+            +input(family="query" _id=_id property="daddress" value=daddress enabled=daddressEnabled isNew=isNew)
+      .col-xs-6
+        .form-group
+          label.control-label Destination port
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="dportEnabled" value=dportEnabled isNew=isNew)
+            +input(family="query" _id=_id property="dport" value=dport enabled=dportEnabled isNew=isNew)
+    .row
+      .col-xs-6
+        .form-group
+          label.control-label Source IP
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="saddressEnabled" value=saddressEnabled isNew=isNew)
+            +input(family="query" _id=_id property="saddress" value=saddress enabled=saddressEnabled isNew=isNew)
+      .col-xs-6
+        .form-group
+          label.control-label Source port
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="sportEnabled" value=sportEnabled isNew=isNew)
+            +input(family="query" _id=_id property="sport" value=sport enabled=sportEnabled isNew=isNew)
+    .row
+      .col-xs-6
+        .form-group
+          label.control-label Any IP
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="anyAddressEnabled" value=anyAddressEnabled isNew=isNew)
+            +input(family="query" _id=_id property="anyAddress" value=anyAddress enabled=anyAddressEnabled isNew=isNew)
+      .col-xs-6
+        .form-group
+          label.control-label Any port
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="aportEnabled" value=aportEnabled isNew=isNew)
+            +input(family="query" _id=_id property="aport" value=aport enabled=aportEnabled isNew=isNew)
+    .row
+      .col-xs-6
+        .form-group
+          label.control-label Destination country
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)
+            +input(family="query" _id=_id property="dcc" value=dcc enabled=dccEnabled isNew=isNew)
+      .col-xs-6
+        .form-group
+          label.control-label Protocol
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="protocolEnabled" value=protocolEnabled isNew=isNew)
+            +input(family="query" _id=_id property="protocol" value=protocol enabled=protocolEnabled isNew=isNew)
+    .row
+      .col-xs-6
+        .form-group
+          label.control-label Source country
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
+            +input(family="query" _id=_id property="scc" value=scc enabled=sccEnabled isNew=isNew)
+      .col-xs-6
+        .form-group
+          label.control-label Flags
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="flagsAllEnabled" value=flagsAllEnabled isNew=isNew)
+            +input(family="query" _id=_id property="flagsAll" value=flagsAll enabled=flagsAllEnabled isNew=isNew)
+  fieldset
     legend Additional options
     .row
       .col-xs-6

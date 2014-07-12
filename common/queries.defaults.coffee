@@ -13,6 +13,28 @@ share.Queries.before.insert (userId, query) ->
     sensor: ""
     typeEnabled: false
     type: ""
+    typeEnabled: false
+    type: ""
+    daddressEnabled: false
+    daddress: ""
+    saddressEnabled: false
+    saddress: ""
+    anyAddressEnabled: false
+    anyAddress: ""
+    dportEnabled: false
+    dport: ""
+    sportEnabled: false
+    sport: ""
+    aportEnabled: false
+    aport: ""
+    dccEnabled: false
+    dcc: ""
+    sccEnabled: false
+    scc: ""
+    protocolEnabled: false
+    protocol: ""
+    flagsAllEnabled: false
+    flagsAll: ""
     additionalParametersEnabled: false
     additionalParameters: ""
     fields: ["sIP", "dIP", "sPort", "dPort", "protocol", "packets", "bytes", "flags", "sTime", "dur", "eTime", "sensor"]
