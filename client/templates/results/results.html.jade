@@ -3,15 +3,11 @@ template(name="results")
     .panel-heading
       form.options-form
         +controlsForTheHeartOfTheSun
-        if isBuilderVisible
+        if condition interface "is" "cmd"
+          +cmd
+        else
           +fieldsets
           +controlsForTheHeartOfTheSun
-        else
-          code.query-display
-            if string
-              | rwfilter {{string}}
-            else
-              em Please open the builder to create query
     if string
       if error
         .panel-body

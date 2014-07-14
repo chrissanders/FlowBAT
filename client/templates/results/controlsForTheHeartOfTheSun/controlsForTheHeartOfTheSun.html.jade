@@ -21,13 +21,9 @@ template(name="controlsForTheHeartOfTheSun")
         li
           a(href='#') Stop periodic execution
     .btn-group
-      button.toggle-is-builder-visible.btn.btn-default(type="button")
-        if isBuilderVisible
-          i.fa.fa-cog
-          | &nbsp;
-          | Hide options
-        else
-          i.fa.fa-cog
-          | &nbsp;
-          | Show options
-
+      button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'cmd'}}active{{/if}}", data-interface="cmd", type="button")
+        i.fa.fa-space-shuttle
+        | Command line
+      button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'builder'}}active{{/if}}", data-interface="builder", type="button")
+        i.fa.fa-cog
+        | Query builder

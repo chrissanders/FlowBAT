@@ -16,9 +16,9 @@ Template.results.events
     template.$(".execute").blur()
     $set = _.extend({stale: true}, share.queryResetValues)
     share.Queries.update(template.data._id, {$set: $set})
-  "click .toggle-is-builder-visible": grab encapsulate (event, template) ->
-    event.currentTarget.blur()
-    share.Queries.update(template.data._id, {$set: {isBuilderVisible: not template.data.isBuilderVisible}})
+  "click .set-interface": grab encapsulate (event, template) ->
+    $target = $(event.currentTarget)
+    share.Queries.update(template.data._id, {$set: {stale: true, interface: $target.attr("data-interface")}})
   "click .increment-start-rec-num": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
     startRecNum = template.data.startRecNum + share.intval($target.attr("data-increment"))

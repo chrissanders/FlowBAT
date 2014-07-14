@@ -41,6 +41,8 @@ share.parseResult = (result) ->
 
 share.queryTypes = ["in", "out", "inweb", "outweb", "inicmp", "outicmp", "innull", "outnull"]
 share.stringBuilderFields = [
+  "interface"
+  "cmd"
   "startDateEnabled"
   "startDate"
   "endDateEnabled"
@@ -73,6 +75,8 @@ share.stringBuilderFields = [
   "additionalParameters"
 ]
 share.buildQueryString = (query) ->
+  if query.interface is "cmd"
+    return query.cmd
   parameters = []
   if query.startDateEnabled and query.startDate
     parameters.push("--start-date=" + query.startDate)

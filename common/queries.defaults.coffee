@@ -5,6 +5,7 @@ share.Queries.before.insert (userId, query) ->
   now = new Date()
   _.defaults(query,
     string: ""
+    cmd: ""
     startDateEnabled: false
     startDate: ""
     endDateEnabled: false
@@ -38,7 +39,7 @@ share.Queries.before.insert (userId, query) ->
     fields: ["sIP", "dIP", "sPort", "dPort", "protocol", "packets", "bytes", "flags", "sTime", "dur", "eTime", "sensor"]
     result: ""
     stale: false
-    isBuilderVisible: true
+    interface: "cmd"
     isNew: true
     ownerId: userId
     updatedAt: now
