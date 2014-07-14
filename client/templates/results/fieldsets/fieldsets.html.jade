@@ -23,18 +23,21 @@ template(name="fieldsets")
     .row
       .col-xs-6
         .form-group
+          label.control-label Types (<a href="#" class="for-all-types" data-operator="$addToSet">all</a>, <a href="#" class="for-all-types" data-operator="$pull">none</a>)
+          .row
+            each types
+              .col-xs-3
+                .checkbox
+                  label
+                    input(type="checkbox", class="type-checkbox", name="type[]", value="{{.}}", checked='{{condition . "in" ../types}}')
+                    | {{.}}
+      .col-xs-6
+        .form-group
           label.control-label Sensor
           .input-group
             span.input-group-addon
               +checkbox(family="query" _id=_id property="sensorEnabled" value=sensorEnabled isNew=isNew)
             +input(family="query" _id=_id property="sensor" value=sensor enabled=sensorEnabled isNew=isNew)
-      .col-xs-6
-        .form-group
-          label.control-label Type
-          .input-group
-            span.input-group-addon
-              +checkbox(family="query" _id=_id property="typeEnabled" value=typeEnabled isNew=isNew)
-            +input(family="query" _id=_id property="type" value=type enabled=typeEnabled isNew=isNew)
   fieldset
     legend Partitioning options
     .row

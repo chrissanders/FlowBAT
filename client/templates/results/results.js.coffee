@@ -34,13 +34,6 @@ Template.results.events
         sortField = ""
         sortReverse = true
     share.Queries.update(template.data._id, {$set: {sortField: sortField, sortReverse: sortReverse}})
-  "change .field-checkbox": encapsulate (event, template) ->
-    # recollecting all checkboxes to maintain field order
-    fields = []
-    $(".field-checkbox").each (index, checkbox) ->
-      if checkbox.checked
-        fields.push(checkbox.value)
-    share.Queries.update(template.data._id, {$set: {fields: fields}})
   "change .num-recs": encapsulate (event, template) ->
     $numRecs = $(event.currentTarget)
     numRecs = share.intval($numRecs.val())

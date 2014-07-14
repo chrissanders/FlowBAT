@@ -51,7 +51,7 @@ share.loadFixtures = ->
     for _id, user of users
       Accounts.setPassword(_id, "123123")
       query = share.Queries.findOne({ownerId: _id})
-      share.Queries.update(query._id, {$set: {sensorEnabled: true, sensor: "S0", typeEnabled: true, type: "all", additionalParametersEnabled: true, additionalParameters: "--proto=0-255"}})
+      share.Queries.update(query._id, {$set: {sensorEnabled: true, sensor: "S0", typesEnabled: true, types: share.queryTypes, additionalParametersEnabled: true, additionalParameters: "--proto=0-255"}})
       share.Queries.update(query._id, {$set: {stale: true}})
 
 #  serviceConfigurations = {}

@@ -41,6 +41,8 @@ UI.registerHelper("condition", (v1, operator, v2, options) ->
       v1 > v2
     when ">=", "gte"
       v1 >= v2
+    when "in"
+      v1 in v2
     else
       throw "Undefined operator \"" + operator + "\""
 )

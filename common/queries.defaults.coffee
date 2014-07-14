@@ -11,10 +11,8 @@ share.Queries.before.insert (userId, query) ->
     endDate: ""
     sensorEnabled: false
     sensor: ""
-    typeEnabled: false
-    type: ""
-    typeEnabled: false
-    type: ""
+    typesEnabled: true
+    types: []
     daddressEnabled: false
     daddress: ""
     saddressEnabled: false

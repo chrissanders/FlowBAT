@@ -39,6 +39,7 @@ share.parseResult = (result) ->
     rows.push(row.split("|"))
   rows
 
+share.queryTypes = ["in", "out", "inweb", "outweb", "inicmp", "outicmp", "innull", "outnull"]
 share.stringBuilderFields = [
   "startDateEnabled"
   "startDate"
@@ -46,8 +47,8 @@ share.stringBuilderFields = [
   "endDate"
   "sensorEnabled"
   "sensor"
-  "typeEnabled"
-  "type"
+  "typesEnabled"
+  "types"
   "daddressEnabled"
   "daddress"
   "saddressEnabled"
@@ -79,8 +80,12 @@ share.buildQueryString = (query) ->
     parameters.push("--end-date=" + query.endDate)
   if query.sensorEnabled and query.sensor
     parameters.push("--sensor=" + query.sensor)
-  if query.typeEnabled and query.type
-    parameters.push("--type=" + query.type)
+  if query.typesEnabled and query.types
+    if query.types.length and _.difference(share.queryTypes, query.types).length
+      value = query.types.join(",")
+    else
+      value = "all"
+    parameters.push("--type=" + value)
   if query.daddressEnabled and query.daddress
     parameters.push("--daddress=" + query.daddress)
   if query.saddressEnabled and query.saddress
