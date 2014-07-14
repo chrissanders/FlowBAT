@@ -1,4 +1,6 @@
 Template.results.helpers
+  isDynamic: ->
+    @type in ["sTime", "eTime"]
   numRecsOptions: ->
     [5, 10, 25, 50, 100]
   fieldI18nString: ->
@@ -7,6 +9,11 @@ Template.results.helpers
     share.rwcutFields
   fieldIsSelected: (query) ->
     @.toString() in query.fields
+  now: ->
+    m = moment(Session.get("now"))
+    if @isUTC
+      m.zone(0)
+    m.format("YYYY/MM/DD HH:mm")
 
 Template.results.rendered = ->
 #  cl "results.rendered"
@@ -19,6 +26,9 @@ Template.results.events
   "click .set-interface": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
     share.Queries.update(template.data._id, {$set: {stale: true, interface: $target.attr("data-interface")}})
+  "click .toggle-is-utc": grab encapsulate (event, template) ->
+    event.currentTarget.blur()
+    share.Queries.update(template.data._id, {$set: {isUTC: not template.data.isUTC}})
   "click .increment-start-rec-num": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
     startRecNum = template.data.startRecNum + share.intval($target.attr("data-increment"))

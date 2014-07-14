@@ -13,8 +13,13 @@ class share.Query
     @header = []
     @rows = []
     if @result
-      @rows = share.parseResult(@result)
-      @header = @rows.shift()
+      parsedResult = share.parseResult(@result)
+      @header = parsedResult.shift()
+      for parsedRow in parsedResult
+        row = []
+        for parsedValue, index in parsedRow
+          row.push({type: @header[index], value: parsedValue})
+        @rows.push(row)
   path: ->
     "/query/" + @_id
 

@@ -24,9 +24,11 @@ share.loadFixtures = ->
     ChrisSanders:
       profile:
         name: "Chris Sanders"
+#        timezone: 240 # US, Charleston
     DenisGorbachev:
       profile:
         name: "Denis Gorbachev"
+#        timezone: -240 # Russia, Moscow
   for _id, user of users
     _.defaults(user,
       username: _id

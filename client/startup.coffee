@@ -1,3 +1,8 @@
+Session.set("now", new Date())
+setInterval(->
+  Session.set("now", new Date())
+, 1000)
+
 Meteor.startup ->
   userId = Meteor.userId()
   if Meteor.settings.public.isDebug

@@ -40,6 +40,7 @@ share.Queries.before.insert (userId, query) ->
     result: ""
     stale: false
     interface: "cmd"
+    isUTC: true
     isNew: true
     ownerId: userId
     updatedAt: now

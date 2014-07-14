@@ -2,7 +2,18 @@ template(name="results")
   .results.panel.panel-default
     .panel-heading
       form.options-form
-        +controlsForTheHeartOfTheSun
+        .clearfix
+          .pull-left
+            +controlsForTheHeartOfTheSun
+          .pull-right
+            .btn-group
+              button.toggle-is-utc.btn.btn-default(type="button")
+                i.fa.fa-fw.fa-clock-o
+                if isUTC
+                  | UTC:
+                else
+                  | Local:
+                | {{now}}
         if condition interface "is" "cmd"
           +cmd
         else
@@ -28,7 +39,13 @@ template(name="results")
                       i.fa.fa-caret-up
           tbody
             each rows
-              tr {{{tds}}}
+              tr
+                each .
+                  td
+                    if isDynamic
+                      +UI.dynamic template=type
+                    else
+                      | {{value}}
       .panel-body
         ul.pager
           li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if stale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")

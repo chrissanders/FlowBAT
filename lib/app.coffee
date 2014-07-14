@@ -14,6 +14,7 @@ share.intval = (value) ->
 share.minute = 60 * 1000
 share.hour = 60 * share.minute
 
+share.datetimeFormat = "YYYY/MM/DD HH:mm:ss.SSS"
 share.rwcutFields = [
   "sIP"
   "dIP"
