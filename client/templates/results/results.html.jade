@@ -18,20 +18,21 @@ template(name="results")
           .alert.alert-danger(role='alert')
             strong Oh snap!
             pre {{error}}
-      table.results-table.table
-        thead
-          tr
-            each header
-              th.sort(data-field="{{.}}")
-                | {{t fieldI18nString}}
-                if condition ../sortField "is" .
-                  if ../sortReverse
-                    i.fa.fa-caret-down
-                  else
-                    i.fa.fa-caret-up
-        tbody
-          each rows
-            tr {{{tds}}}
+      .results-scroller
+        table.results-table.table
+          thead
+            tr
+              each header
+                th.sort(data-field="{{.}}")
+                  | {{t fieldI18nString}}
+                  if condition ../sortField "is" .
+                    if ../sortReverse
+                      i.fa.fa-caret-down
+                    else
+                      i.fa.fa-caret-up
+          tbody
+            each rows
+              tr {{{tds}}}
       .panel-body
         ul.pager
           li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if stale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")

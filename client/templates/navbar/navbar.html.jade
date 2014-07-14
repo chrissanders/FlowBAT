@@ -1,29 +1,27 @@
 template(name="navbar")
   nav.navbar.navbar-default.navbar-static-top.navbar-main(role="navigation")
-    .container
-      .row
-        .col-xs-12
-          .navbar-header
-            button.navbar-toggle(type="button", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1")
-              span.sr-only Toggle navigation
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            a.navbar-brand(href="/") FlowBAT
-          #bs-example-navbar-collapse-1.collapse.navbar-collapse
-            ul.nav.navbar-nav
-              if isDebug
-                li
-                  a(href="/query/create") Create query
-            ul.nav.navbar-nav.navbar-right
-              if currentUser
-                li.dropdown
-                  a.dropdown-toggle(href="#", data-toggle="dropdown")
-                    | {{currentUser.profile.name}}
-                    b.caret
-                  ul.dropdown-menu
-                    //li: a(href="/user/{{currentUser._id}}") Profile
-                    //li.divider
-                    li: a.logout(href="#") Logout
-              else
-                +login
+    .container-fluid
+      .navbar-header
+        button.navbar-toggle(type="button", data-toggle="collapse", data-target="#top-navbar-collapse")
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href="/") FlowBAT
+      #top-navbar-collapse.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          if isDebug
+            li
+              a(href="/query/create") Create query
+        ul.nav.navbar-nav.navbar-right
+          if currentUser
+            li.dropdown
+              a.dropdown-toggle(href="#", data-toggle="dropdown")
+                | {{currentUser.profile.name}}
+                b.caret
+              ul.dropdown-menu
+                //li: a(href="/user/{{currentUser._id}}") Profile
+                //li.divider
+                li: a.logout(href="#") Logout
+          else
+            +login
