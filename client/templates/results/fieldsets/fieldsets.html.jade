@@ -40,21 +40,6 @@ template(name="fieldsets")
     .row
       .col-xs-6
         .form-group
-          label.control-label Destination IP
-          .input-group
-            span.input-group-addon
-              +checkbox(family="query" _id=_id property="daddressEnabled" value=daddressEnabled isNew=isNew)
-            +input(family="query" _id=_id property="daddress" value=daddress enabled=daddressEnabled isNew=isNew)
-      .col-xs-6
-        .form-group
-          label.control-label Destination port
-          .input-group
-            span.input-group-addon
-              +checkbox(family="query" _id=_id property="dportEnabled" value=dportEnabled isNew=isNew)
-            +input(family="query" _id=_id property="dport" value=dport enabled=dportEnabled isNew=isNew)
-    .row
-      .col-xs-6
-        .form-group
           label.control-label Source IP
           .input-group
             span.input-group-addon
@@ -67,6 +52,21 @@ template(name="fieldsets")
             span.input-group-addon
               +checkbox(family="query" _id=_id property="sportEnabled" value=sportEnabled isNew=isNew)
             +input(family="query" _id=_id property="sport" value=sport enabled=sportEnabled isNew=isNew)
+    .row
+      .col-xs-6
+        .form-group
+          label.control-label Destination IP
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="daddressEnabled" value=daddressEnabled isNew=isNew)
+            +input(family="query" _id=_id property="daddress" value=daddress enabled=daddressEnabled isNew=isNew)
+      .col-xs-6
+        .form-group
+          label.control-label Destination port
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="dportEnabled" value=dportEnabled isNew=isNew)
+            +input(family="query" _id=_id property="dport" value=dport enabled=dportEnabled isNew=isNew)
     .row
       .col-xs-6
         .form-group
@@ -85,11 +85,11 @@ template(name="fieldsets")
     .row
       .col-xs-6
         .form-group
-          label.control-label Destination country
+          label.control-label Source country
           .input-group
             span.input-group-addon
-              +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)
-            +input(family="query" _id=_id property="dcc" value=dcc enabled=dccEnabled isNew=isNew)
+              +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
+            +input(family="query" _id=_id property="scc" value=scc enabled=sccEnabled isNew=isNew)
       .col-xs-6
         .form-group
           label.control-label Protocol
@@ -100,11 +100,11 @@ template(name="fieldsets")
     .row
       .col-xs-6
         .form-group
-          label.control-label Source country
+          label.control-label Destination country
           .input-group
             span.input-group-addon
-              +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
-            +input(family="query" _id=_id property="scc" value=scc enabled=sccEnabled isNew=isNew)
+              +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)
+            +input(family="query" _id=_id property="dcc" value=dcc enabled=dccEnabled isNew=isNew)
       .col-xs-6
         .form-group
           label.control-label Flags
