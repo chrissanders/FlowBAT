@@ -25,6 +25,10 @@ Template.chosen.rendered = ->
 Template.chosen.events
   "change .property-editor": encapsulate (event, template) ->
     $set = {}
-    $set[template.data.property] = $(event.currentTarget).val()
+    value = $(event.currentTarget).val()
+    if not value
+      if template.data.multiple
+        value = []
+    $set[template.data.property] = value
     editor = share.EditorCache.editors[template.data.family]
     editor.collection.update(template.data._id, {$set: $set})
