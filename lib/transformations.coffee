@@ -18,7 +18,7 @@ class share.Query
       for parsedRow in parsedResult
         row = []
         for parsedValue, index in parsedRow
-          row.push({type: @header[index], value: parsedValue})
+          row.push({_id: @header[index], value: parsedValue})
         @rows.push(row)
   path: ->
     "/query/" + @_id

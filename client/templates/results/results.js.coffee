@@ -1,12 +1,10 @@
 Template.results.helpers
   isDynamic: ->
-    @type in ["sTime", "eTime"]
+    @_id in ["sTime", "eTime"]
   numRecsOptions: ->
     [5, 10, 25, 50, 100]
   fieldI18nString: ->
     "rwcut.fields." + @.trim()
-  fields: ->
-    share.rwcutFields
   fieldIsSelected: (query) ->
     @.toString() in query.fields
   now: ->
@@ -17,6 +15,21 @@ Template.results.helpers
 
 Template.results.rendered = ->
 #  cl "results.rendered"
+  _id = @data._id
+  @$('.results-table').dragtable(
+    dataHeader: "data-field"
+    stop: (event, draginfo) ->
+      query = share.Queries.findOne(_id)
+      field = draginfo.order[draginfo.endIndex]
+      fieldsOrder = _.without(query.fieldsOrder, field)
+      if draginfo.endIndex
+        pivotField = draginfo.order[draginfo.endIndex - 1]
+        pivotFieldIndex = fieldsOrder.indexOf(pivotField)
+        fieldsOrder.splice(pivotFieldIndex + 1, 0, field)
+      else
+        fieldsOrder.splice(0, 0, field)
+      share.Queries.update(query._id, {$set: {fieldsOrder: fieldsOrder}})
+  )
 
 Template.results.events
   "submit .options-form": grab encapsulate (event, template) ->
@@ -25,7 +38,9 @@ Template.results.events
     share.Queries.update(template.data._id, {$set: $set})
   "click .set-interface": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
-    share.Queries.update(template.data._id, {$set: {stale: true, interface: $target.attr("data-interface")}})
+    query = template.data
+    query.interface = $target.attr("data-interface")
+    share.Queries.update(template.data._id, {$set: {interface: $target.attr("data-interface"), string: share.buildQueryString(query)}})
   "click .toggle-is-utc": grab encapsulate (event, template) ->
     event.currentTarget.blur()
     share.Queries.update(template.data._id, {$set: {isUTC: not template.data.isUTC}})
@@ -34,6 +49,14 @@ Template.results.events
     startRecNum = template.data.startRecNum + share.intval($target.attr("data-increment"))
     startRecNum = Math.max(1, startRecNum)
     share.Queries.update(template.data._id, {$set: {startRecNum: startRecNum}})
+  "change .field-checkbox": encapsulate (event, template) ->
+    checkbox = event.currentTarget
+    modifier = {}
+    if checkbox.checked
+      modifier.$addToSet = {"fields": checkbox.value}
+    else
+      modifier.$pull = {"fields": checkbox.value}
+    share.Queries.update(template.data._id, modifier)
   "click .sort": encapsulate (event, template) ->
     $target = $(event.currentTarget)
     sortField = $target.attr("data-field")

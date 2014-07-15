@@ -5,13 +5,6 @@ Template.fieldsets.helpers
 Template.fieldsets.rendered = ->
 
 Template.fieldsets.events
-  "change .field-checkbox": encapsulate (event, template) ->
-    # recollecting all checkboxes to maintain field order
-    fields = []
-    $(".field-checkbox").each (index, checkbox) ->
-      if checkbox.checked
-        fields.push(checkbox.value)
-    share.Queries.update(template.data._id, {$set: {fields: fields}})
   "change .type-checkbox": encapsulate (event, template) ->
     checkbox = event.currentTarget
     modifier = {}

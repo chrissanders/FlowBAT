@@ -19,12 +19,13 @@ template(name="results")
         else
           +fieldsets
           +controlsForTheHeartOfTheSun
-    if string
+    if not stale
       if error
         .panel-body
           .alert.alert-danger(role='alert')
             strong Oh snap!
             pre {{error}}
+    if result
       .results-scroller
         table.results-table.table.table-hover
           thead
@@ -43,7 +44,7 @@ template(name="results")
                 each .
                   td
                     if isDynamic
-                      +UI.dynamic template=type
+                      +UI.dynamic template=_id
                     else
                       | {{value}}
       .panel-body
@@ -72,7 +73,7 @@ template(name="results")
         form.display-fields-form
           fieldset
             legend Display fields
-            each fields
+            each fieldsOrder
               .checkbox
                 label
                   input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}")

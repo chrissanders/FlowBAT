@@ -6,6 +6,7 @@ share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
     return
   if not query.string
     share.Queries.update(query._id, {$set: {stale: false}})
+    return
   user = Meteor.users.findOne(query.ownerId)
   numRecs = user.profile.numRecs
   callback = (result, error, code) ->
@@ -57,7 +58,7 @@ executeQuery = (query, numRecs, binary, callback) ->
       if query.sortReverse
         rwsortArguments.push("--reverse")
       command += " | " + "rwsort " + rwsortArguments.join(" ")
-    rwcutArguments = ["--fields=" + query.fields.join(","), "--num-recs=" + numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
+    rwcutArguments = ["--fields=" + _.intersection(query.fieldsOrder, query.fields).join(","), "--num-recs=" + numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
     command += " | " + "rwcut " + rwcutArguments.join(" ")
   if config.isSSH
     identityDir = process.env.PWD + "/settings"
