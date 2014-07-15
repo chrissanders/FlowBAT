@@ -123,3 +123,6 @@ Template.results.events
       $target.find(".normal").show()
       $target.find(".loading").hide()
     )
+  "click .results-table tr": (event, template) ->
+    $tr = $(event.currentTarget)
+    $tr.toggleClass("highlighted")
