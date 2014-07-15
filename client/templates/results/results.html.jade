@@ -43,8 +43,10 @@ template(name="results")
               tr
                 each .
                   td
-                    if isDynamic
-                      +UI.dynamic template=_id
+                    if condition _id "is" "sTime"
+                      +time
+                    else if condition _id "is" "eTime"
+                      +time
                     else
                       | {{value}}
       .panel-body

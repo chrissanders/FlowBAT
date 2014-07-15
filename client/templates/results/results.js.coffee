@@ -1,6 +1,6 @@
 Template.results.helpers
   isDynamic: ->
-    @_id in ["sTime", "eTime"]
+    false # @_id in ["sTime", "eTime"]
   numRecsOptions: ->
     [5, 10, 25, 50, 100]
   fieldI18nString: ->

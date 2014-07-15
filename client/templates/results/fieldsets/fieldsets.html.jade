@@ -23,14 +23,11 @@ template(name="fieldsets")
     .row
       .col-xs-6
         .form-group
-          label.control-label Types (<a href="#" class="for-all-types" data-operator="$addToSet">all</a>, <a href="#" class="for-all-types" data-operator="$pull">none</a>)
-          .row
-            each types
-              .col-xs-3
-                .checkbox
-                  label
-                    input(type="checkbox", class="type-checkbox", name="type[]", value="{{.}}", checked='{{condition . "in" ../types}}')
-                    | {{.}}
+          label.control-label Types
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="typesEnabled" value=typesEnabled isNew=isNew)
+            +chosen(family="query" _id=_id property="types" value=types options=share.queryTypes multiple=true enabled=typesEnabled isNew=isNew)
       .col-xs-6
         .form-group
           label.control-label Sensor

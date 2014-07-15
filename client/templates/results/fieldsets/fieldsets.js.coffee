@@ -1,6 +1,4 @@
 Template.fieldsets.helpers
-  types: ->
-    share.queryTypes
 
 Template.fieldsets.rendered = ->
 
