@@ -14,3 +14,7 @@ Meteor.publish "currentUser", () ->
 Meteor.publish "queries", ->
   if not @userId then return []
   share.Queries.find({ownerId: @userId})
+
+Meteor.publish "ipsets", ->
+  if not @userId then return []
+  share.IPSets.find({ownerId: @userId})

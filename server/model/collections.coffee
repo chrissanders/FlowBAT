@@ -2,4 +2,5 @@
 
 share.Emails = new Meteor.Collection("emails")
 share.Queries = new Meteor.Collection("queries")
+share.IPSets = new Meteor.Collection("ipsets")
 share.Configs = new Meteor.Collection("configs")

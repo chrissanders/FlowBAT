@@ -35,6 +35,33 @@ Router.map ->
       _.defaults({}, @params,
         query: query
       )
+  @route "removeQuery",
+    path: "/query/:_id/remove"
+    data: -> {}
+    action: ->
+      share.Queries.remove(@params._id)
+      Router.go("/")
+  @route "createIPSet",
+    path: "/ipset/create"
+    data: -> {}
+    action: ->
+      _id = share.IPSets.insert({})
+      Router.go("/ipset/" + _id)
+  @route "ipset",
+    path: "/ipset/:_id"
+    data: ->
+      ipset = share.IPSets.findOne(@params._id)
+      if not ipset
+        return null
+      _.defaults({}, @params,
+        ipset: ipset
+      )
+  @route "removeIPSet",
+    path: "/ipset/:_id/remove"
+    data: -> {}
+    action: ->
+      share.IPSets.remove(@params._id)
+      Router.go("/")
   @route "user",
     path: "/user/:_id"
     data: ->

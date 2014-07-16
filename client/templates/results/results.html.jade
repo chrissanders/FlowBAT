@@ -4,7 +4,16 @@ template(name="results")
       form.options-form
         if not isQuick
           .form-group
-            +input(family="query" _id=_id property="name" value=name placeholder="Query name" isNew=isNew)
+            .input-group
+              +input(family="query" _id=_id property="name" value=name placeholder="Query name" isNew=isNew)
+              .input-group-btn
+                button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', type='button')
+                  span.caret
+                ul.dropdown-menu.pull-right
+                  li
+                    a.confirm(href="/query/{{_id}}/remove", data-confirmation="Are you sure you want to delete this query?")
+                      i.fa.fa-trash-o
+                      | Delete this query
         .clearfix
           .pull-left
             +controlsForTheHeartOfTheSun

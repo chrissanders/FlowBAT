@@ -1,0 +1,23 @@
+template(name="ipset")
+  .container-fluid.ipset
+    .row
+      .col-xs-12
+        with ipset
+          form.panel.panel-default
+            .panel-heading
+              .form-group
+                .input-group
+                  +input(family="ipset" _id=_id property="name" value=name placeholder="IP Set name" isNew=isNew)
+                  .input-group-btn
+                    button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', type='button')
+                      span.caret
+                    ul.dropdown-menu.pull-right
+                      li
+                        a.confirm(href="/ipset/{{_id}}/remove", data-confirmation="Are you sure you want to delete this IP Set?")
+                          i.fa.fa-trash-o
+                          | Delete this IP Set
+            .panel-body
+              .form-group
+                +textarea(family="ipset" _id=_id property="description" value=description placeholder="Description" isNew=isNew)
+              .form-group
+                +textarea(family="ipset" _id=_id property="contents" value=contents placeholder="IP addresses" isNew=isNew)

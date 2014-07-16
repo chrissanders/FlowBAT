@@ -1,4 +1,6 @@
 Template.textarea.helpers
+  placeholder: ->
+    @placeholder or i18n.t(@placeholderI18n)
 
 Template.textarea.rendered = ->
   editor = @firstNode

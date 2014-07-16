@@ -11,3 +11,4 @@ share.currentUserHandle = Meteor.subscribe("currentUser", ->
 )
 #share.friendsHandle = Meteor.subscribe("friends")
 share.queriesHandle = Meteor.subscribe("queries")
+share.ipsetsHandle = Meteor.subscribe("ipsets")

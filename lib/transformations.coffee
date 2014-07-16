@@ -23,6 +23,14 @@ class share.Query
   path: ->
     "/query/" + @_id
 
+class share.IPSet
+  constructor: (doc) ->
+    _.extend(@, doc)
+  path: ->
+    "/ipset/" + @_id
+
 share.Transformations =
   query: (query) ->
     if query instanceof share.Query or not query then query else new share.Query(query)
+  ipset: (ipset) ->
+    if ipset instanceof share.IPSet or not ipset then ipset else new share.IPSet(ipset)

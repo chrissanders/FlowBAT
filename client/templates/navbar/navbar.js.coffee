@@ -1,6 +1,8 @@
 Template.navbar.helpers
   queries: ->
     share.Queries.find({isQuick: false})
+  ipsets: ->
+    share.IPSets.find()
 
 Template.navbar.rendered = ->
 
