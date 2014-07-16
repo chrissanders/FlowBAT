@@ -4,6 +4,7 @@ share.Queries.before.insert (userId, query) ->
   query._id = query._id || Random.id()
   now = new Date()
   _.defaults(query,
+    name: ""
     string: ""
     cmd: ""
     startDateEnabled: false
@@ -42,11 +43,18 @@ share.Queries.before.insert (userId, query) ->
     stale: false
     interface: "cmd"
     isUTC: true
+    isQuick: false
     isNew: true
     ownerId: userId
     updatedAt: now
     createdAt: now
   , share.queryResetValues)
+  if not query.name
+    prefix = "New query"
+    count = share.Queries.find({ name: { $regex: "^" + prefix, $options: "i" } }).count()
+    query.name = prefix
+    if count
+      query.name += " (" + count + ")"
   queryPreSave.call(@, userId, query)
 
 share.Queries.before.update (userId, query, fieldNames, modifier, options) ->

@@ -1,4 +1,6 @@
 Template.navbar.helpers
+  queries: ->
+    share.Queries.find({isQuick: false})
 
 Template.navbar.rendered = ->
 

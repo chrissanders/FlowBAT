@@ -2,6 +2,9 @@ template(name="results")
   .results.panel.panel-default
     .panel-heading
       form.options-form
+        if not isQuick
+          .form-group
+            +input(family="query" _id=_id property="name" value=name placeholder="Query name" isNew=isNew)
         .clearfix
           .pull-left
             +controlsForTheHeartOfTheSun
