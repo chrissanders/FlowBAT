@@ -58,6 +58,12 @@ share.stringBuilderFields = [
   "saddress"
   "anyAddressEnabled"
   "anyAddress"
+  "dipSetEnabled"
+  "dipSet"
+  "sipSetEnabled"
+  "sipSet"
+  "anySetEnabled"
+  "anySet"
   "dportEnabled"
   "dport"
   "sportEnabled"
@@ -97,6 +103,12 @@ share.buildQueryString = (query) ->
     parameters.push("--saddress=" + query.saddress)
   if query.anyAddressEnabled and query.anyAddress
     parameters.push("--any-address=" + query.anyAddress)
+  if query.dipSetEnabled and query.dipSet
+    parameters.push("--dipset=/tmp/" + query.dipSet + ".rws")
+  if query.sipSetEnabled and query.sipSet
+    parameters.push("--sipset=/tmp/" + query.sipSet + ".rws")
+  if query.anySetEnabled and query.anySet
+    parameters.push("--anyset=/tmp/" + query.anySet + ".rws")
   if query.dportEnabled and query.dport
     parameters.push("--dport=" + query.dport)
   if query.sportEnabled and query.sport

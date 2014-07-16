@@ -1,4 +1,6 @@
 Template.fieldsets.helpers
+  ipsets: ->
+    share.IPSets.find()
 
 Template.fieldsets.rendered = ->
 
@@ -18,3 +20,12 @@ Template.fieldsets.events
       modifier = {}
       modifier[operator] = {"types": checkbox.value}
       share.Queries.update(template.data._id, modifier)
+  "click .create-ipset": grab encapsulate (event, template) ->
+    $target = $(event.currentTarget)
+    field = $target.attr("data-field")
+    _id = share.IPSets.insert({})
+    $set = {}
+    $set[field] = _id
+    $set[field + "Enabled"] = true
+    share.Queries.update(template.data._id, {$set: $set})
+    Router.go("/ipset/" + _id)

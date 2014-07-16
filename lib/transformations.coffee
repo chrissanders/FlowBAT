@@ -20,12 +20,20 @@ class share.Query
         for parsedValue, index in parsedRow
           row.push({_id: @header[index], value: parsedValue})
         @rows.push(row)
+  displayName: ->
+    @name or "#" + @_id
   path: ->
     "/query/" + @_id
 
 class share.IPSet
   constructor: (doc) ->
     _.extend(@, doc)
+  displayName: ->
+    @name or "#" + @_id
+  objectSelectName: ->
+    @displayName()
+  objectSelectValue: ->
+    @_id
   path: ->
     "/ipset/" + @_id
 

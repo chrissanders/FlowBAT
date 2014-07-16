@@ -85,26 +85,11 @@ template(name="fieldsets")
     .row
       .col-xs-6
         .form-group
-          label.control-label Source country
-          .input-group
-            span.input-group-addon
-              +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
-            +input(family="query" _id=_id property="scc" value=scc enabled=sccEnabled isNew=isNew)
-      .col-xs-6
-        .form-group
           label.control-label Protocol
           .input-group
             span.input-group-addon
               +checkbox(family="query" _id=_id property="protocolEnabled" value=protocolEnabled isNew=isNew)
             +input(family="query" _id=_id property="protocol" value=protocol enabled=protocolEnabled isNew=isNew)
-    .row
-      .col-xs-6
-        .form-group
-          label.control-label Destination country
-          .input-group
-            span.input-group-addon
-              +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)
-            +input(family="query" _id=_id property="dcc" value=dcc enabled=dccEnabled isNew=isNew)
       .col-xs-6
         .form-group
           label.control-label Flags
@@ -112,6 +97,53 @@ template(name="fieldsets")
             span.input-group-addon
               +checkbox(family="query" _id=_id property="flagsAllEnabled" value=flagsAllEnabled isNew=isNew)
             +input(family="query" _id=_id property="flagsAll" value=flagsAll enabled=flagsAllEnabled isNew=isNew)
+    .row
+      .col-xs-6
+        .form-group
+          label.control-label Source IP Set
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="sipSetEnabled" value=sipSetEnabled isNew=isNew)
+            +objectSelect(family="query" _id=_id property="sipSet" value=sipSet options=ipsets withEmptyOption=true enabled=sipSetEnabled isNew=isNew)
+            span.input-group-btn
+              button.create-ipset.btn.btn-near-select.btn-default(type='button', data-field="sipSet")
+                i.fa.fa-plus
+      .col-xs-6
+        .form-group
+          label.control-label Source country
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
+            +input(family="query" _id=_id property="scc" value=scc enabled=sccEnabled isNew=isNew)
+    .row
+      .col-xs-6
+        .form-group
+          label.control-label Destination IP Set
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="dipSetEnabled" value=dipSetEnabled isNew=isNew)
+            +objectSelect(family="query" _id=_id property="dipSet" value=dipSet options=ipsets withEmptyOption=true enabled=dipSetEnabled isNew=isNew)
+            span.input-group-btn
+              button.create-ipset.btn.btn-near-select.btn-default(type='button', data-field="dipSet")
+                i.fa.fa-plus
+      .col-xs-6
+        .form-group
+          label.control-label Destination country
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)
+            +input(family="query" _id=_id property="dcc" value=dcc enabled=dccEnabled isNew=isNew)
+    .row
+      .col-xs-6
+        .form-group
+          label.control-label Any IP Set
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="anySetEnabled" value=anySetEnabled isNew=isNew)
+            +objectSelect(family="query" _id=_id property="anySet" value=anySet options=ipsets withEmptyOption=true enabled=anySetEnabled isNew=isNew)
+            span.input-group-btn
+              button.create-ipset.btn.btn-near-select.btn-default(type='button', data-field="anySet")
+                i.fa.fa-plus
   fieldset
     legend Additional options
     .row

@@ -21,6 +21,12 @@ share.Queries.before.insert (userId, query) ->
     saddress: ""
     anyAddressEnabled: false
     anyAddress: ""
+    dipSetEnabled: false
+    dipSet: null
+    sipSetEnabled: false
+    sipSet: null
+    anySetEnabled: false
+    anySet: null
     dportEnabled: false
     dport: ""
     sportEnabled: false

@@ -18,7 +18,7 @@ template(name="navbar")
                 b.caret
               ul.dropdown-menu
                 each queries
-                  li: a(href=path) {{#if name}}{{name}}{{else}}#{{_id}}{{/if}}
+                  li: a(href=path) {{displayName}}
                 if queries.length
                   li.divider
                 li: a.insert-meeting(href="/query/create") <i class="fa fa-plus"></i> Create query
@@ -28,7 +28,7 @@ template(name="navbar")
                 b.caret
               ul.dropdown-menu
                 each ipsets
-                  li: a(href=path) {{#if name}}{{name}}{{else}}#{{_id}}{{/if}}
+                  li: a(href=path) {{displayName}}
                 if ipsets.length
                   li.divider
                 li: a.insert-meeting(href="/ipset/create") <i class="fa fa-plus"></i> Create IP Set

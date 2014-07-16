@@ -1,0 +1,6 @@
+template(name="objectSelect")
+  select(class="{{family}}-{{property}}-editor {{family}}-property-editor property-editor form-control {{#if isNew}}is-new{{/if}}", name="{{property}}", multiple="{{multiple}}", placeholder="{{placeholder}}", data-family=family, data-object-id=_id, disabled=disabled)
+    if withEmptyOption
+      option(value="", selected="{{not value}}")
+    each options
+      option(value="{{objectSelectValue}}", selected="{{optionSelected ..}}") {{objectSelectName}}
