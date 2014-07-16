@@ -1,11 +1,11 @@
 Template.userForm.helpers
-  locales: ->
-    currentLanguages = i18n.functions.toLanguages(i18n.lng())
-    for code, res of i18n.options.resStore
+  groups: ->
+    currentGroups = Object.keys(share.Security.effectiveRoles)
+    for group in currentGroups
       {
-        code: code
-        name: res.translation.name
-        isCurrent: code in currentLanguages
+        value: group
+        name: i18n.t("groups." + group)
+        isCurrent: group is @group
       }
 
 Template.userForm.rendered = ->
@@ -47,7 +47,7 @@ Template.userForm.events
       descriptionTemplateName: "changePasswordAlertDescription"
       descriptionTemplateData: {}
       buttonPanelTemplateName: "changePasswordAlertButtonsPanel"
-      buttonPanelTemplateData: {}
+      buttonPanelTemplateData: {user: template.data}
     ), document.body)
 
 debouncedUpdateProfile = _.debounce(->

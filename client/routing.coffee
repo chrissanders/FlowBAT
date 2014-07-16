@@ -66,10 +66,17 @@ Router.map ->
     path: "/user/:_id"
     data: ->
       user = Meteor.users.findOne(@params._id)
-      unless user
+      unless user and share.Security.currentUserHasRole("admin")
         return null
       _.defaults({}, @params,
         user: user
+      )
+  @route "users",
+    data: ->
+      unless share.Security.currentUserHasRole("admin")
+        return null
+      _.defaults({}, @params,
+        users: Meteor.users.find()
       )
 
 Router.onBeforeAction (pause) ->
