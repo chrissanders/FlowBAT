@@ -2,15 +2,15 @@ Process = Npm.require("child_process")
 Future = Npm.require('fibers/future')
 
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
-  if not query.stale
+  if not query.isStale
     return
   if not query.string
-    share.Queries.update(query._id, {$set: {stale: false}})
+    share.Queries.update(query._id, {$set: {isStale: false}})
     return
   user = Meteor.users.findOne(query.ownerId)
   numRecs = user.profile.numRecs
   callback = (result, error, code) ->
-    share.Queries.update(query._id, {$set: {result: result, error: error, code: code, stale: false}})
+    share.Queries.update(query._id, {$set: {result: result, error: error, code: code, isStale: false}})
   executeQuery(query, numRecs, false, callback)
 
 Meteor.methods

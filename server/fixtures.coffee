@@ -54,7 +54,29 @@ share.loadFixtures = ->
       Accounts.setPassword(_id, "123123")
       query = share.Queries.findOne({ownerId: _id})
       share.Queries.update(query._id, {$set: {sensorEnabled: true, sensor: "S0", typesEnabled: true, types: share.queryTypes, additionalParametersEnabled: true, additionalParameters: "--proto=0-255", cmd: "--sensor=S0 --dport=22"}})
-      share.Queries.update(query._id, {$set: {stale: true}})
+      share.Queries.update(query._id, {$set: {isStale: true}})
+
+  ipsets =
+    Local:
+      name: "Local addresses"
+      note: "John asked to create this"
+      contents: """
+        192.168.0.1
+        192.168.0.2
+        192.168.0.3
+      """
+      ownerId: "ChrisSanders"
+    DNS:
+      name: "DNS addresses"
+      note: "For testing purposes"
+      contents: """
+        8.8.8.8
+        8.8.4.4
+        208.67.222.222
+        208.67.220.220
+      """
+      ownerId: "ChrisSanders"
+  insertData(ipsets, share.IPSets)
 
 #  serviceConfigurations = {}
 #  insertData(serviceConfigurations, ServiceConfiguration.configurations)

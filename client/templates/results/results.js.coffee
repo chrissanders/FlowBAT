@@ -34,7 +34,7 @@ Template.results.rendered = ->
 Template.results.events
   "submit .options-form": grab encapsulate (event, template) ->
     template.$(".execute").blur()
-    $set = _.extend({stale: true}, share.queryResetValues)
+    $set = _.extend({isStale: true}, share.queryResetValues)
     share.Queries.update(template.data._id, {$set: $set})
   "click .set-interface": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
@@ -71,7 +71,7 @@ Template.results.events
     $numRecs = $(event.currentTarget)
     numRecs = share.intval($numRecs.val())
     Meteor.users.update(Meteor.userId(), {$set: {"profile.numRecs": numRecs}})
-    share.Queries.update(template.data._id, {$set: {stale: true}})
+    share.Queries.update(template.data._id, {$set: {isStale: true}})
   "click .download-csv": grab encapsulate (event, template) ->
     _id = template.data._id
     $target = $(event.currentTarget)

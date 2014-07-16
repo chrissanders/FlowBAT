@@ -18,6 +18,6 @@ template(name="ipset")
                           | Delete this IP Set
             .panel-body
               .form-group
-                +textarea(family="ipset" _id=_id property="description" value=description placeholder="Description" isNew=isNew)
+                +textarea(family="ipset" _id=_id property="note" value=note placeholder="Note" isNew=isNew)
               .form-group
                 +textarea(family="ipset" _id=_id property="contents" value=contents placeholder="IP addresses" isNew=isNew)

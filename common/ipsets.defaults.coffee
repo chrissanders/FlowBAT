@@ -5,8 +5,9 @@ share.IPSets.before.insert (userId, ipset) ->
   now = new Date()
   _.defaults(ipset,
     name: ""
-    description: ""
+    note: ""
     contents: ""
+    isStale: true
     isNew: true
     ownerId: userId
     updatedAt: now

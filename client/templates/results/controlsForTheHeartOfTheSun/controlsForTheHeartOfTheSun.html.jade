@@ -2,7 +2,7 @@ template(name="controlsForTheHeartOfTheSun")
   .controlsForTheHeartOfTheSun
     .btn-group
       button.execute.btn.btn-default(type="submit")
-        if stale
+        if isStale
           i.fa.fa-fw.fa-spinner.fa-spin
         else
           i.fa.fa-fw.fa-search
