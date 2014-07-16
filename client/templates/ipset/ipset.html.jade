@@ -21,3 +21,12 @@ template(name="ipset")
                 +textarea(family="ipset" _id=_id property="note" value=note placeholder="Note" isNew=isNew)
               .form-group
                 +textarea(family="ipset" _id=_id property="contents" value=contents placeholder="IP addresses" isNew=isNew)
+              p.text-muted
+                | Fields are saved automatically
+              if queries.count
+                hr
+                h4 Queries using this IP Set
+                ul
+                  each queries
+                    li
+                      a(href="{{path}}") {{displayName}}

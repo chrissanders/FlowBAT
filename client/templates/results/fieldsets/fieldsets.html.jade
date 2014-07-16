@@ -106,6 +106,9 @@ template(name="fieldsets")
               +checkbox(family="query" _id=_id property="sipSetEnabled" value=sipSetEnabled isNew=isNew)
             +objectSelect(family="query" _id=_id property="sipSet" value=sipSet options=ipsets withEmptyOption=true enabled=sipSetEnabled isNew=isNew)
             span.input-group-btn
+              if sipSet
+                a.btn.btn-near-select.btn-default(href="/ipset/{{sipSet}}")
+                  i.fa.fa-pencil
               button.create-ipset.btn.btn-near-select.btn-default(type='button', data-field="sipSet")
                 i.fa.fa-plus
       .col-xs-6
@@ -124,6 +127,9 @@ template(name="fieldsets")
               +checkbox(family="query" _id=_id property="dipSetEnabled" value=dipSetEnabled isNew=isNew)
             +objectSelect(family="query" _id=_id property="dipSet" value=dipSet options=ipsets withEmptyOption=true enabled=dipSetEnabled isNew=isNew)
             span.input-group-btn
+              if dipSet
+                a.btn.btn-near-select.btn-default(href="/ipset/{{dipSet}}")
+                  i.fa.fa-pencil
               button.create-ipset.btn.btn-near-select.btn-default(type='button', data-field="dipSet")
                 i.fa.fa-plus
       .col-xs-6
@@ -142,6 +148,9 @@ template(name="fieldsets")
               +checkbox(family="query" _id=_id property="anySetEnabled" value=anySetEnabled isNew=isNew)
             +objectSelect(family="query" _id=_id property="anySet" value=anySet options=ipsets withEmptyOption=true enabled=anySetEnabled isNew=isNew)
             span.input-group-btn
+              if anySet
+                a.btn.btn-near-select.btn-default(href="/ipset/{{anySet}}")
+                  i.fa.fa-pencil
               button.create-ipset.btn.btn-near-select.btn-default(type='button', data-field="anySet")
                 i.fa.fa-plus
   fieldset

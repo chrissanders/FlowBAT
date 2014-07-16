@@ -7,6 +7,16 @@ class share.User
     @firstName = @name.split(' ').slice(0, 1).join(' ')
     @lastName = @name.split(' ').slice(1).join(' ')
 
+class share.Config
+  constructor: (doc) ->
+    _.extend(@, doc)
+  wrapCommand: (command) ->
+    "ssh " + @getSSHOptions() + " " + @user + "@" + @host + " \"" + command + "\""
+  getSSHOptions: ->
+    "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=error -i " + @getIdentityFilename()
+  getIdentityFilename: ->
+    process.env.PWD + "/settings/identity"
+
 class share.Query
   constructor: (doc) ->
     _.extend(@, doc)
@@ -38,6 +48,8 @@ class share.IPSet
     "/ipset/" + @_id
 
 share.Transformations =
+  config: (config) ->
+    if config instanceof share.Config or not config then config else new share.Config(config)
   query: (query) ->
     if query instanceof share.Query or not query then query else new share.Query(query)
   ipset: (ipset) ->
