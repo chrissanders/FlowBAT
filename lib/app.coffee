@@ -125,7 +125,11 @@ share.buildQueryString = (query) ->
     parameters.push("--flags-all=" + query.flagsAll)
   if query.additionalParametersEnabled and query.additionalParameters
     parameters.push(query.additionalParameters)
-  parameters.join(" ")
+  string = parameters.join(" ")
+  for excludedParameter in ["--python-expr", "--python-file", "--pmap", "--dynamic-library", "--tuple-file", "--tuple-fields", "--tuple-direction", "--tuple-dilimter", "--all-destination", "--fail-destination", "--pass-destination", "--print-statistics", "--print-volume-statistics", "--xargs"]
+    string = string.replace(excludedParameter, "")
+  string = string.replace(/[^\s\=\-\/\,\.\:0-9a-z]/gi, "")
+  string
 
 share.isDebug = Meteor.settings.public.isDebug
 
