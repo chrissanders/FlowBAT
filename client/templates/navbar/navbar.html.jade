@@ -19,7 +19,7 @@ template(name="navbar")
               ul.dropdown-menu
                 each queries
                   li: a(href=path) {{displayName}}
-                if queries.length
+                if queries.count
                   li.divider
                 li: a.insert-meeting(href="/query/create") <i class="fa fa-plus"></i> Create query
             li.dropdown
@@ -29,7 +29,7 @@ template(name="navbar")
               ul.dropdown-menu
                 each ipsets
                   li: a(href=path) {{displayName}}
-                if ipsets.length
+                if ipsets.count
                   li.divider
                 li: a.insert-meeting(href="/ipset/create") <i class="fa fa-plus"></i> Create IP Set
         ul.nav.navbar-nav.navbar-right

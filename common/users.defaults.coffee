@@ -21,6 +21,7 @@ Meteor.users.before.insert (userId, user) ->
   )
   _.defaults(user.profile,
     numRecs: 10
+    dashboardQueryIds: []
     isRealName: false
   )
   userPreSave.call(@, userId, user)

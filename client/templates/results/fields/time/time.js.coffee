@@ -1,6 +1,6 @@
 Template.time.helpers
   value: ->
-    query = Router.current().data().query
+    query = share.Queries.findOne(@queryId, {fields: {isUTC: 1}})
     m = moment.utc(@value, "YYYY/MM/DDTHH:mm:ss.SSS")
     if query.isUTC
       m.format(share.datetimeFormat)

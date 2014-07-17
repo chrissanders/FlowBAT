@@ -1,96 +1,112 @@
 template(name="results")
-  .results.panel.panel-default
-    .panel-heading
-      form.options-form
-        if not isQuick
-          .form-group
-            .input-group
-              +input(family="query" _id=_id property="name" value=name placeholder="Query name" isNew=isNew)
-              .input-group-btn
-                button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', type='button')
-                  span.caret
-                ul.dropdown-menu.pull-right
-                  li
-                    a.confirm(href="/query/{{_id}}/remove", data-confirmation="Are you sure you want to delete this query?")
-                      i.fa.fa-trash-o
-                      | Delete this query
-        .clearfix
-          .pull-left
-            +controlsForTheHeartOfTheSun
-          .pull-right
-            .btn-group
-              button.toggle-is-utc.btn.btn-default(type="button")
-                i.fa.fa-fw.fa-clock-o
-                if isUTC
-                  | UTC:
-                else
-                  | Local:
-                | {{now}}
-        if condition interface "is" "cmd"
-          +cmd
-        else
-          +fieldsets
-          +controlsForTheHeartOfTheSun
-    if not isStale
-      if error
-        .panel-body
-          .alert.alert-danger(role='alert')
-            strong Oh snap!
-            pre {{error}}
-    if result
-      .results-scroller
-        table.results-table.table.table-hover
-          thead
-            tr
-              each header
-                th.sort(data-field="{{.}}")
-                  | {{t fieldI18nString}}
-                  if condition ../sortField "is" .
-                    if ../sortReverse
-                      i.fa.fa-caret-down
-                    else
-                      i.fa.fa-caret-up
-          tbody
-            each rows
+  with query
+    .results.panel.panel-default(class="{{#if ../isDashboard}}is-simple{{/if}}")
+      .panel-heading
+        form.options-form
+          if not isQuick
+            if ../isDashboard
+              h3.panel-title
+                a(href="{{path}}") {{displayName}}
+                | &nbsp;
+                a.remove-from-dashboard(href="#", title="Remove query from dashboard (but keep in system)")
+                  i.fa.fa-times.text-muted
+            else
+              .form-group
+                .input-group
+                  +input(family="query" _id=_id property="name" value=name placeholder="Query name" isNew=isNew)
+                  .input-group-btn
+                    button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', type='button')
+                      span.caret
+                    ul.dropdown-menu.pull-right
+                      li
+                        a.confirm(href="/query/{{_id}}/remove", data-confirmation="Are you sure you want to delete this query?")
+                          i.fa.fa-trash-o
+                          | Delete this query
+          if ../isDashboard
+            code.query-display
+              if string
+                | rwfilter {{string}}
+              else
+                em Please set some options to build the query
+          .results-buttons.clearfix
+            .pull-left
+              +controlsForTheHeartOfTheSun
+            .pull-right
+              .btn-group
+                button.toggle-is-utc.btn.btn-default(type="button")
+                  i.fa.fa-fw.fa-clock-o
+                  if isUTC
+                    | UTC:
+                  else
+                    | Local:
+                  | {{now}}
+          if not ../isDashboard
+            if condition interface "is" "cmd"
+              +cmd
+            else
+              +fieldsets
+              +controlsForTheHeartOfTheSun
+      if not isStale
+        if error
+          .panel-body
+            .alert.alert-danger(role='alert')
+              strong Oh snap!
+              pre {{error}}
+      if result
+        .results-scroller
+          table.results-table.table.table-hover
+            thead
               tr
-                each .
-                  td
-                    if condition _id "is" "sTime"
-                      +time
-                    else if condition _id "is" "eTime"
-                      +time
-                    else
-                      | {{value}}
-      .panel-body
-        ul.pager
-          li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if isStale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
-            a(href='#')
-              i.fa.fa-angle-left
-              | Previous
-          li.dropdown
-            select.num-recs.form-control
-              each numRecsOptions
-                option(value="{{.}}", selected="{{condition . 'is' currentUser.profile.numRecs}}") {{.}} per page
-          li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}} {{#if isStale}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
-            a(href='#')
-              | Next
-              i.fa.fa-angle-right
-        .extras
-          a.download-csv(href="#")
-            i.normal.fa.fa-file-excel-o
-            i.loading.fa.fa-spinner.fa-spin(style="display: none;")
-            | Download full CSV
-          a.download-rwf(href="#")
-            i.normal.fa.fa-file-archive-o
-            i.loading.fa.fa-spinner.fa-spin(style="display: none;")
-            | Download full RWF
-        form.display-fields-form
-          fieldset
-            legend Display fields
-            each fieldsOrder
-              .checkbox
-                label
-                  input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}")
-                  | {{t fieldI18nString}}
-    //else
-    //  .panel-body Please type in the query.
+                each header
+                  th.sort(data-field="{{.}}")
+                    | {{t fieldI18nString}}
+                    if condition ../sortField "is" .
+                      if ../sortReverse
+                        i.fa.fa-caret-down
+                      else
+                        i.fa.fa-caret-up
+            tbody
+              each rows
+                tr
+                  each .
+                    td
+                      if condition _id "is" "sTime"
+                        +time
+                      else if condition _id "is" "eTime"
+                        +time
+                      else
+                        | {{value}}
+        .panel-body
+          ul.pager
+            li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if isStale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
+              a(href='#')
+                i.fa.fa-angle-left
+                | Previous
+            li.dropdown
+              select.num-recs.form-control
+                each numRecsOptions
+                  option(value="{{.}}", selected="{{condition . 'is' currentUser.profile.numRecs}}") {{.}} per page
+            li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}} {{#if isStale}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
+              a(href='#')
+                | Next
+                i.fa.fa-angle-right
+          if not ../isDashboard
+            .extras
+              a.download-csv(href="#")
+                i.normal.fa.fa-file-excel-o
+                i.loading.fa.fa-spinner.fa-spin(style="display: none;")
+                | Download full CSV
+              a.download-rwf(href="#")
+                i.normal.fa.fa-file-archive-o
+                i.loading.fa.fa-spinner.fa-spin(style="display: none;")
+                | Download full RWF
+            form.display-fields-form
+              fieldset
+                legend Display fields
+                each fieldsOrder
+                  .checkbox
+                    label
+                      input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}")
+                      | {{t fieldI18nString}}
+      //else
+      //  .panel-body Please type in the query.

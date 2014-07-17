@@ -1,4 +1,6 @@
 Template.results.helpers
+  query: ->
+    share.Queries.findOne(@_id)
   isDynamic: ->
     false # @_id in ["sTime", "eTime"]
   numRecsOptions: ->
@@ -44,15 +46,16 @@ Template.results.events
     UI.insert(UI.renderWithData(Template.inputExecutingIntervalModal, {_id: template.data._id}), document.body)
   "click .set-interface": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
-    query = template.data
+    query = share.Queries.findOne(template.data._id)
     query.interface = $target.attr("data-interface")
     share.Queries.update(template.data._id, {$set: {interface: $target.attr("data-interface"), string: share.buildQueryString(query), result: "", error: ""}})
   "click .toggle-is-utc": grab encapsulate (event, template) ->
     event.currentTarget.blur()
-    share.Queries.update(template.data._id, {$set: {isUTC: not template.data.isUTC}})
+    share.Queries.update(template.data._id, {$set: {isUTC: not @isUTC}})
   "click .increment-start-rec-num": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
-    startRecNum = template.data.startRecNum + share.intval($target.attr("data-increment"))
+    query = share.Queries.findOne(template.data._id)
+    startRecNum = query.startRecNum + share.intval($target.attr("data-increment"))
     startRecNum = Math.max(1, startRecNum)
     share.Queries.update(template.data._id, {$set: {startRecNum: startRecNum}})
   "change .field-checkbox": encapsulate (event, template) ->
@@ -66,8 +69,9 @@ Template.results.events
   "click .sort": encapsulate (event, template) ->
     $target = $(event.currentTarget)
     sortField = $target.attr("data-field")
-    if sortField is template.data.sortField
-      if template.data.sortReverse
+    query = share.Queries.findOne(template.data._id)
+    if sortField is query.sortField
+      if query.sortReverse
         sortReverse = false
       else
         sortField = ""

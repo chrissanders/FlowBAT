@@ -70,6 +70,7 @@ share.loadFixtures = ->
     executingInterval = 5 * share.minute
 #    executingInterval /= 5 * 12 # debug
     share.Queries.update("Dashboard1", {$set: {executingInterval: executingInterval}})
+    Meteor.users.update("ChrisSanders", {$set: {"profile.dashboardQueryIds": ["Dashboard1"]}})
 
   ipsets =
     Local:

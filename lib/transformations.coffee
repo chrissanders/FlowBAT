@@ -28,10 +28,10 @@ class share.Query
       for parsedRow in parsedResult
         row = []
         for parsedValue, index in parsedRow
-          row.push({_id: @header[index], value: parsedValue})
+          row.push({_id: @header[index], value: parsedValue, queryId: @_id})
         @rows.push(row)
   displayName: ->
-    @name or "#" + @_id
+    if @isQuick then "Quick query #" + @_id else @name or "#" + @_id
   path: ->
     "/query/" + @_id
 

@@ -1,0 +1,22 @@
+template(name="dashboard")
+  .container-fluid.dashboard
+    .row
+      .col-xs-12
+        h1 Dashboard
+        each queries
+          +results(_id=_id isDashboard=true)
+        .panel
+          .panel-body
+            .btn-group.dropup
+              button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+                i.fa.fa-fw.fa-plus
+                | Add query to dashboard
+                span.caret
+              ul.dropdown-menu(role='menu')
+                each queriesNotOnDashboard
+                  li
+                    a.add-query(href='{{path}}', data-id="{{_id}}") {{displayName}}
+                if queriesNotOnDashboard.count
+                  li.divider
+                li
+                  a.insert-query(href='#') Add new query

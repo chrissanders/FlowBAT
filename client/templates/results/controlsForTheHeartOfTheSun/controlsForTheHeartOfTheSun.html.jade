@@ -21,10 +21,16 @@ template(name="controlsForTheHeartOfTheSun")
           li.divider
           li
             a.set-executing-interval(href='#', data-interval="0") Stop periodic execution
-    .btn-group
-      button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'cmd'}}active{{/if}}", data-interface="cmd", type="button")
-        i.fa.fa-space-shuttle
-        | Command line
-      button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'builder'}}active{{/if}}", data-interface="builder", type="button")
-        i.fa.fa-cog
-        | Query builder
+    if ../isDashboard
+      .btn-group
+        a(href="{{path}}").btn.btn-default
+          i.fa.fa-pencil
+          | Edit
+    else
+      .btn-group
+        button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'cmd'}}active{{/if}}", data-interface="cmd", type="button")
+          i.fa.fa-space-shuttle
+          | Command line
+        button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'builder'}}active{{/if}}", data-interface="builder", type="button")
+          i.fa.fa-cog
+          | Query builder

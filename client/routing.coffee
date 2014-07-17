@@ -14,12 +14,9 @@ Router.onBeforeAction((pause) ->
 Router.onBeforeAction("dataNotFound")
 
 Router.map ->
-  @route "index",
+  @route "dashboard",
     path: "/"
     data: -> {}
-    action: ->
-      query = share.Queries.findOne()
-      Router.go("/query/" + query._id)
   @route "createQuery",
     path: "/query/create"
     data: -> {}
