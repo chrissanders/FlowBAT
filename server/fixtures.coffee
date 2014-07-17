@@ -67,7 +67,9 @@ share.loadFixtures = ->
       query._id = _id
       query.isNew = false
       query.string = share.buildQueryString(query)
-      share.Queries.insert(query)
+      _id = share.Queries.insert(query)
+      query = share.Queries.findOne(_id)
+      share.Queries.update(_id, {$set: {string: share.buildQueryString(query)}})
     executingInterval = 5 * share.minute
 #    executingInterval /= 5 * 12 # debug
     share.Queries.update("Dashboard1", {$set: {executingInterval: executingInterval}})
