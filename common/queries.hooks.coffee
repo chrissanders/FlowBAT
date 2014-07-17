@@ -6,3 +6,4 @@ share.Queries.before.update (userId, query, fieldNames, modifier, options) ->
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   if _.intersection(fieldNames, share.stringBuilderFields).length
     share.Queries.update(query._id, {$set: {string: share.buildQueryString(query)}})
+
