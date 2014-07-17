@@ -62,21 +62,27 @@ Router.map ->
     action: ->
       share.IPSets.remove(@params._id)
       Router.go("/")
+  @route "users",
+    data: ->
+      unless share.Security.currentUserHasRole("admin")
+        return null
+      _.defaults({}, @params,
+        users: Meteor.users.find({}, {sort: {createdAt: 1}})
+      )
+  @route "newUser",
+    path: "users/new"
+    data: ->
+      unless share.Security.currentUserHasRole("admin")
+        return null
+      _.defaults({}, @params)
   @route "user",
-    path: "/user/:_id"
+    path: "/users/:_id"
     data: ->
       user = Meteor.users.findOne(@params._id)
       unless user and share.Security.currentUserHasRole("admin")
         return null
       _.defaults({}, @params,
         user: user
-      )
-  @route "users",
-    data: ->
-      unless share.Security.currentUserHasRole("admin")
-        return null
-      _.defaults({}, @params,
-        users: Meteor.users.find()
       )
 
 Router.onBeforeAction (pause) ->

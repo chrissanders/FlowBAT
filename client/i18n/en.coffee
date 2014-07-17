@@ -45,6 +45,7 @@ i18n.addResourceBundle("en",
       party: "Political party"
       partyPlaceholder: ""
       password: "Password"
+      passwordPlaceholder: "Password"
       passwordChange:
         link: "Change password"
         alert:
@@ -69,10 +70,18 @@ i18n.addResourceBundle("en",
       mode: "Mode"
       wrongVerificationCode: "Verification code doesn\'t match."
       messages:
+        email:
+          required: "Email is required."
+          email: "Please enter a valid email address."
+          uniqueEmail: "Email already exists."
         name:
-          required: "Please specify your name"
-        phone:
-          phone: "Please specify full phone number (with country code)"
+          required: "Name is required."
+        password:
+          required: "Password is required."
+        group:
+          required: "Group is required."
+        inserted: "User added successfully."
+        saved: "User updated successfully."
   serverErrors:
     "User not found": "User not found"
     "Email already exists": "Email already exists"

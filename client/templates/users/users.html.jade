@@ -23,4 +23,4 @@ template(name="users")
                     span.glyphicon.glyphicon-remove
                     | {{t "interface.remove"}}
 
-      button.btn.btn-primary.add-button(type="button") {{t "interface.insert"}}
+      a.btn.btn-primary(href="{{pathFor 'newUser'}}") {{t "interface.insert"}}

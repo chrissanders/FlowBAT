@@ -1,0 +1,22 @@
+template(name="newUser")
+  .container
+    .row
+      .col-xs-12.col-md-6
+        form.user-form
+          .form-group
+            label.control-label(for="user-email") {{t "forms.profile.email"}}
+            input#user-email.form-control.user-input(type="text", name="email", placeholder="{{t 'forms.profile.emailPlaceholder'}}", disabled="{{isCurrentUser}}")
+          .form-group
+            label.control-label(for="user-name") {{t "forms.profile.name"}}
+            input#user-name.form-control.user-input(type="text", name="name", placeholder="{{t 'forms.profile.namePlaceholder'}}")
+          .form-group
+            label.control-label(for="password") {{t "forms.profile.password"}}
+            input#password.form-control.user-input(type="password", name="password", placeholder="{{t 'forms.profile.passwordPlaceholder'}}")
+          .form-group
+            label.control-label(for="user-group") {{t "forms.profile.group"}}
+            select#user-group.form-control.user-input(name="group")
+              each groups
+                option(value="{{value}}", selected="{{isCurrent}}") {{name}}
+          .form-group
+            button.btn.btn-primary(type="submit") {{t "interface.save"}}
+            a.btn.btn-default(href="{{pathFor 'users'}}") {{t "interface.cancel"}}

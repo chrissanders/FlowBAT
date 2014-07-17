@@ -3,6 +3,8 @@ share.Security =
     admin: ["admin", "analyst", "user"]
     analyst: ["analyst", "user"]
     user: ["user"]
+  groups: ->
+    Object.keys(@effectiveRoles)
   currentUserHasRole: (role) ->
     share.Security.hasRole(Meteor.userId(), role)
   userIdCanChangeUserGroupOrRemove: (userId, user) ->
