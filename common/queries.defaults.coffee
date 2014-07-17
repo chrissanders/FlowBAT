@@ -34,9 +34,9 @@ share.Queries.before.insert (userId, query) ->
     aportEnabled: false
     aport: ""
     dccEnabled: false
-    dcc: ""
+    dcc: []
     sccEnabled: false
-    scc: ""
+    scc: []
     protocolEnabled: false
     protocol: ""
     flagsAllEnabled: false

@@ -1,6 +1,14 @@
 Template.fieldsets.helpers
   ipsets: ->
     share.IPSets.find({}, {sort: {createdAt: 1}})
+  typesOptions: ->
+    for type in share.queryTypes
+      {
+        name: type
+        value: type
+      }
+  countriesOptions: ->
+    window.countryCodesMap
 
 Template.fieldsets.rendered = ->
 

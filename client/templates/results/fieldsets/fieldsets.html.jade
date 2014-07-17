@@ -27,7 +27,7 @@ template(name="fieldsets")
           .input-group
             span.input-group-addon
               +checkbox(family="query" _id=_id property="typesEnabled" value=typesEnabled isNew=isNew)
-            +chosen(family="query" _id=_id property="types" value=types options=share.queryTypes multiple=true enabled=typesEnabled isNew=isNew)
+            +chosen(family="query" _id=_id property="types" value=types options=typesOptions multiple=true enabled=typesEnabled isNew=isNew)
       .col-xs-6
         .form-group
           label.control-label Sensor
@@ -117,7 +117,7 @@ template(name="fieldsets")
           .input-group
             span.input-group-addon
               +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
-            +input(family="query" _id=_id property="scc" value=scc enabled=sccEnabled isNew=isNew)
+            +chosen(family="query" _id=_id property="scc" value=scc options=countriesOptions multiple=true enabled=sccEnabled isNew=isNew)
     .row
       .col-xs-6
         .form-group
@@ -138,7 +138,7 @@ template(name="fieldsets")
           .input-group
             span.input-group-addon
               +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)
-            +input(family="query" _id=_id property="dcc" value=dcc enabled=dccEnabled isNew=isNew)
+            +chosen(family="query" _id=_id property="dcc" value=dcc options=countriesOptions multiple=true enabled=dccEnabled isNew=isNew)
     .row
       .col-xs-6
         .form-group

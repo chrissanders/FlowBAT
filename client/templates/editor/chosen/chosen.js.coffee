@@ -5,9 +5,9 @@ Template.chosen.helpers
     not (if _.isBoolean(@enabled) then @enabled else true)
   optionSelected: (context) ->
     if context.multiple
-      @toString() in context.value
+      @value in context.value
     else
-      @toString() is context.value
+      @value is context.value
 
 Template.chosen.rendered = ->
   editor = @firstNode

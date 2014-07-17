@@ -91,7 +91,7 @@ share.buildQueryString = (query) ->
     parameters.push("--end-date=" + query.endDate)
   if query.sensorEnabled and query.sensor
     parameters.push("--sensor=" + query.sensor)
-  if query.typesEnabled and query.types
+  if query.typesEnabled
     if query.types.length and _.difference(share.queryTypes, query.types).length
       value = query.types.join(",")
     else
@@ -115,10 +115,10 @@ share.buildQueryString = (query) ->
     parameters.push("--sport=" + query.sport)
   if query.aportEnabled and query.aport
     parameters.push("--aport=" + query.aport)
-  if query.dccEnabled and query.dcc
-    parameters.push("--dcc=" + query.dcc)
-  if query.sccEnabled and query.scc
-    parameters.push("--scc=" + query.scc)
+  if query.dccEnabled and query.dcc.length
+    parameters.push("--dcc=" + query.dcc.join(","))
+  if query.sccEnabled and query.scc.length
+    parameters.push("--scc=" + query.scc.join(","))
   if query.protocolEnabled and query.protocol
     parameters.push("--protocol=" + query.protocol)
   if query.flagsAllEnabled and query.flagsAll
