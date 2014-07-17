@@ -127,9 +127,9 @@ i18n.addResourceBundle("en",
       group: "Group"
       actions: "Actions"
     removeAlert:
-      name: "Remove user"
-      description: "Are you sure you want to remove user?"
-      remove: "Remove"
+      name: "Delete user"
+      description: "Are you sure you want to delete user?"
+      remove: "Delete"
   groups:
     admin: "Admin"
     analyst: "Analyst"
