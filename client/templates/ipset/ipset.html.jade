@@ -7,7 +7,8 @@ template(name="ipset")
             .panel-heading
               .form-group
                 .input-group
-                  +input(family="ipset" _id=_id property="name" value=name placeholder="IP Set name" isNew=isNew)
+                  label IP Set name
+                  +input(family="ipset" _id=_id property="name" value=name isNew=isNew)
                   .input-group-btn
                     button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', type='button')
                       span.caret
@@ -18,9 +19,11 @@ template(name="ipset")
                           | Delete this IP Set
             .panel-body
               .form-group
-                +textarea(family="ipset" _id=_id property="note" value=note placeholder="Note" isNew=isNew)
+                label Note
+                +textarea(family="ipset" _id=_id property="note" value=note isNew=isNew)
               .form-group
-                +textarea(family="ipset" _id=_id property="contents" value=contents placeholder="IP addresses" isNew=isNew)
+                label IP addresses
+                +textarea(family="ipset" _id=_id property="contents" value=contents isNew=isNew)
               p.text-muted
                 | Fields are saved automatically
               if queries.count
