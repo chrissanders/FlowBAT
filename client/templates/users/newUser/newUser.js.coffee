@@ -1,7 +1,3 @@
-Meteor.startup ->
-  $.validator.addMethod "uniqueEmail", (value, element) ->
-    value is $(element).data("value") or not Meteor.users.findOne({"emails.0.address": share.createTextSearchRegexp(value, true)})
-
 Template.newUser.helpers
   groups: ->
     for group in share.Security.groups()

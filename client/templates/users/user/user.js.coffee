@@ -14,6 +14,7 @@ Template.user.rendered = ->
       email:
         required: true
         email: true
+        uniqueEmail: true
       name:
         required: true
       group:

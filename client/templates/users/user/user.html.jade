@@ -6,23 +6,23 @@ template(name="user")
           .panel-heading
             h4.panel-title {{user.profile.name}}
           .panel-body
-              .form-group
-                label.control-label(for="user-email") {{t "forms.profile.email"}}
-                input#user-email.form-control.user-input(type="text", name="email", data-field="emails.0.address" value="{{user.emails.[0].address}}", placeholder="{{t 'forms.profile.emailPlaceholder'}}", disabled="{{isCurrentUser}}")
-              .form-group
-                label.control-label(for="user-name") {{t "forms.profile.name"}}
-                input#user-name.form-control.user-input(type="text", name="name", data-field="profile.name" value="{{user.profile.name}}", placeholder="{{t 'forms.profile.namePlaceholder'}}")
-              .form-group
-                label.control-label(for="password") {{t "forms.profile.password"}}
-                .input-group
-                  input#password.form-control.input-password(type="text", name="password", value="******", readonly, disabled)
-                  span.input-group-btn
-                    button.btn.btn-primary.change-password(type="button") {{t "forms.profile.passwordChange.link"}}
-              .form-group
-                label.control-label(for="user-group") {{t "forms.profile.group"}}
-                select#user-group.form-control.user-input(name="group", data-field="group" disabled="{{isCurrentUser}}")
-                  each groups
-                    option(value="{{value}}", selected="{{isCurrent}}") {{name}}
+            .form-group
+              label.control-label(for="user-email") {{t "forms.profile.email"}}
+              input#user-email.form-control.user-input(type="text", name="email", data-field="emails.0.address", data-value="{{user.emails.[0].address}}", value="{{user.emails.[0].address}}", placeholder="{{t 'forms.profile.emailPlaceholder'}}", disabled="{{isCurrentUser}}")
+            .form-group
+              label.control-label(for="user-name") {{t "forms.profile.name"}}
+              input#user-name.form-control.user-input(type="text", name="name", data-field="profile.name", value="{{user.profile.name}}", placeholder="{{t 'forms.profile.namePlaceholder'}}")
+            .form-group
+              label.control-label(for="password") {{t "forms.profile.password"}}
+              .input-group
+                input#password.form-control.input-password(type="text", name="password", value="******", readonly, disabled)
+                span.input-group-btn
+                  button.btn.btn-primary.change-password(type="button") {{t "forms.profile.passwordChange.link"}}
+            .form-group
+              label.control-label(for="user-group") {{t "forms.profile.group"}}
+              select#user-group.form-control.user-input(name="group", data-field="group" disabled="{{isCurrentUser}}")
+                each groups
+                  option(value="{{value}}", selected="{{isCurrent}}") {{name}}
           .panel-footer
             button.btn.btn-primary(type="submit") {{t "interface.save"}}
             a.btn.btn-default(href="{{pathFor 'users'}}") {{t "interface.cancel"}}

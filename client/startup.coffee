@@ -11,3 +11,7 @@ Meteor.startup ->
         Meteor.loginWithToken("ChrisSanders")
       if jQuery.browser.mozilla
         Meteor.loginWithToken("DenisGorbachev")
+
+Meteor.startup ->
+  $.validator.addMethod "uniqueEmail", (value, element) ->
+    value is $(element).data("value") or not Meteor.users.findOne({"emails.0.address": share.createTextSearchRegexp(value, true)})
