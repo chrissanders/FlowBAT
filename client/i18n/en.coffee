@@ -133,5 +133,4 @@ i18n.addResourceBundle("en",
   groups:
     admin: "Admin"
     analyst: "Analyst"
-    user: "User"
 )

@@ -1,8 +1,7 @@
 share.Security =
   effectiveRoles:
-    admin: ["admin", "analyst", "user"]
-    analyst: ["analyst", "user"]
-    user: ["user"]
+    admin: ["admin", "analyst"]
+    analyst: ["analyst"]
   groups: ->
     Object.keys(@effectiveRoles)
   currentUserHasRole: (role) ->

@@ -7,16 +7,16 @@ template(name="dashboard")
           +results(_id=_id isDashboard=true)
         .panel
           .panel-body
-            .btn-group.dropup
+            .btn-group
               button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
                 i.fa.fa-fw.fa-plus
                 | Add query to dashboard
                 span.caret
               ul.dropdown-menu(role='menu')
+                li
+                  a.insert-query(href='#') Add new query
+                if queriesNotOnDashboard.count
+                  li.divider
                 each queriesNotOnDashboard
                   li
                     a.add-query(href='{{path}}', data-id="{{_id}}") {{displayName}}
-                if queriesNotOnDashboard.count
-                  li.divider
-                li
-                  a.insert-query(href='#') Add new query
