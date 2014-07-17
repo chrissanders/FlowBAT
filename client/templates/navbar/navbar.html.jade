@@ -41,7 +41,7 @@ template(name="navbar")
               ul.dropdown-menu
                 //li: a(href="/user/{{currentUser._id}}") Profile
                 if currentUserHasRole "admin"
-                  li: a(href="/users") User List
+                  li: a(href="/users") User administration
                   li.divider
                 li: a.logout(href="#") Logout
           else
