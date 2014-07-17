@@ -32,6 +32,5 @@ Template.newUser.events
       unless error
         Router.go("user", {_id: userId})
         _.defer ->
-          $notice = $("<p>").addClass("bg-success").text(i18n.t("forms.profile.messages.inserted"))
-          $notice.appendTo($(".user-form")).delay(2000).fadeOut ->
-            $notice.remove()
+          $newNotice = $(".new-notice")
+          $newNotice.show().delay(2000).fadeOut()
