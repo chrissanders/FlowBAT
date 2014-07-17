@@ -5,8 +5,6 @@ Template.results.helpers
     false # @_id in ["sTime", "eTime"]
   numRecsOptions: ->
     [5, 10, 25, 50, 100]
-  fieldI18nString: ->
-    "rwcut.fields." + @.trim()
   fieldIsSelected: (query) ->
     @.toString() in query.fields
   now: ->
@@ -17,21 +15,6 @@ Template.results.helpers
 
 Template.results.rendered = ->
 #  cl "results.rendered"
-  _id = @data._id
-  @$('.results-table').dragtable(
-    dataHeader: "data-field"
-    stop: (event, draginfo) ->
-      query = share.Queries.findOne(_id)
-      field = draginfo.order[draginfo.endIndex]
-      fieldsOrder = _.without(query.fieldsOrder, field)
-      if draginfo.endIndex
-        pivotField = draginfo.order[draginfo.endIndex - 1]
-        pivotFieldIndex = fieldsOrder.indexOf(pivotField)
-        fieldsOrder.splice(pivotFieldIndex + 1, 0, field)
-      else
-        fieldsOrder.splice(0, 0, field)
-      share.Queries.update(query._id, {$set: {fieldsOrder: fieldsOrder}})
-  )
 
 Template.results.events
   "submit .options-form": grab encapsulate (event, template) ->

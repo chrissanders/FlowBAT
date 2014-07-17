@@ -54,28 +54,7 @@ template(name="results")
               pre {{error}}
       if result
         .results-scroller
-          table.results-table.table.table-hover
-            thead
-              tr
-                each header
-                  th.sort(data-field="{{.}}")
-                    | {{t fieldI18nString}}
-                    if condition ../sortField "is" .
-                      if ../sortReverse
-                        i.fa.fa-caret-down
-                      else
-                        i.fa.fa-caret-up
-            tbody
-              each rows
-                tr
-                  each .
-                    td
-                      if condition _id "is" "sTime"
-                        +time
-                      else if condition _id "is" "eTime"
-                        +time
-                      else
-                        | {{value}}
+          +table
         .panel-body
           ul.pager
             li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if isStale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
