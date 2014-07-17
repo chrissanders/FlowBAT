@@ -57,6 +57,21 @@ share.loadFixtures = ->
       share.Queries.update(query._id, {$set: {sensorEnabled: true, sensor: "S0", typesEnabled: true, types: share.queryTypes, additionalParametersEnabled: true, additionalParameters: "--proto=0-255", cmd: "--sensor=S0 --dport=22"}})
       share.Queries.update(query._id, {$set: {isStale: true}})
 
+  queries =
+    Dashboard1:
+      name: "Dashboard query"
+      cmd: "--sensor=S0 --type=all --sport=80"
+      ownerId: "ChrisSanders"
+  if share.Queries.find().count() is Meteor.users.find().count()
+    for _id, query of queries
+      query._id = _id
+      query.isNew = false
+      query.string = share.buildQueryString(query)
+      share.Queries.insert(query)
+    executingInterval = 5 * share.minute
+#    executingInterval /= 5 * 12 # debug
+    share.Queries.update("Dashboard1", {$set: {executingInterval: executingInterval}})
+
   ipsets =
     Local:
       name: "Local addresses"

@@ -1,6 +1,6 @@
 Template.fieldsets.helpers
   ipsets: ->
-    share.IPSets.find()
+    share.IPSets.find({}, {sort: {createdAt: 1}})
 
 Template.fieldsets.rendered = ->
 

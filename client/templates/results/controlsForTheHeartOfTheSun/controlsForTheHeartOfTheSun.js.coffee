@@ -1,5 +1,11 @@
 Template.controlsForTheHeartOfTheSun.helpers
-#  helper: ->
+  executingIntervalString: ->
+    if @executingInterval
+      minutes = Math.ceil(@executingInterval / share.minute)
+      if minutes is 1
+        "each minute"
+      else
+        "each " + minutes + " minutes"
 
 Template.controlsForTheHeartOfTheSun.rendered = ->
 

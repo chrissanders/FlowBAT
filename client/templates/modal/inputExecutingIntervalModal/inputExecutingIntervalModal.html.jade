@@ -1,0 +1,14 @@
+template(name="inputExecutingIntervalModal")
+  with query
+    form.executing-interval-form.modal.fade.bs-example-modal-sm(tabindex='-1', role='dialog', aria-hidden='false')
+      .modal-dialog.modal-sm
+        .modal-content
+          .modal-body
+            .form-group
+              .input-group
+                span.input-group-addon Each
+                input.executing-interval-in-minutes.form-control(type="number", name="executingIntervalInMinutes", value="{{executingIntervalInMinutes}}", size="5")
+                span.input-group-addon minutes
+          .modal-footer
+            button.btn.btn-default(type='button', data-dismiss='modal') Cancel
+            button.btn.btn-primary(type='submit') Save
