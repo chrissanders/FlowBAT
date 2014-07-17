@@ -5,16 +5,17 @@ template(name="users")
         table.table.table-striped
           thead
             tr
-              th {{t "users.fields.email"}}
               th {{t "users.fields.name"}}
+              th {{t "users.fields.email"}}
               th {{t "users.fields.group"}}
               th {{t "users.fields.actions"}}
           tbody
             each users
               tr
+                td
+                  a(href="{{pathFor 'user'}}") {{profile.name}}
                 td {{emails.[0].address}}
-                td {{profile.name}}
-                td {{group}}
+                td {{groupI18n}}
                 td
                   a.btn.btn-primary.btn-xs.edit-link(href="{{pathFor 'user'}}")
                     i.fa.fa-pencil

@@ -31,9 +31,8 @@ Template.user.events
       $set[$input.data("field")] = $input.val()
     Meteor.users.update template.data.user._id, {$set: $set}, (error) ->
       unless error
-        $notice = $("<p>").addClass("bg-success").text(i18n.t("forms.profile.messages.saved"))
-        $notice.appendTo($(form)).delay(2000).fadeOut ->
-          $notice.remove()
+        $saveNotice = template.$(".save-notice")
+        $saveNotice.show().delay(2000).fadeOut()
   "click .change-password": (event, template) ->
     UI.insert(UI.renderWithData(Template.alert,
       name: i18n.t("forms.profile.passwordChange.alert.name")

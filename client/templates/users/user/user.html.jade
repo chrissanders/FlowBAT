@@ -26,3 +26,4 @@ template(name="user")
           .panel-footer
             button.btn.btn-primary(type="submit") {{t "interface.save"}}
             a.btn.btn-default(href="{{pathFor 'users'}}") {{t "interface.cancel"}}
+            span.save-notice.text-success {{t "forms.profile.messages.saved"}}
