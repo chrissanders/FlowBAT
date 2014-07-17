@@ -25,13 +25,14 @@ share.loadFixtures = ->
       profile:
         name: "Chris Sanders"
 #        timezone: 240 # US, Charleston
+      group: "admin"
     DenisGorbachev:
       profile:
         name: "Denis Gorbachev"
 #        timezone: -240 # Russia, Moscow
+      group: "admin"
   for _id, user of users
     _.defaults(user,
-      username: _id
       emails: [
         {
           address: _id.toLowerCase() + "@flowbat.com"

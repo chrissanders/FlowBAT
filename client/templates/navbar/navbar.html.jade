@@ -40,7 +40,9 @@ template(name="navbar")
                 b.caret
               ul.dropdown-menu
                 //li: a(href="/user/{{currentUser._id}}") Profile
-                //li.divider
+                if currentUserHasRole "admin"
+                  li: a(href="/users") User List
+                  li.divider
                 li: a.logout(href="#") Logout
           else
             +login

@@ -38,11 +38,14 @@ i18n.addResourceBundle("en",
       setPassword: "Set your password to begin using the application:"
     profile:
       header: "Profile settings"
+      email: "Email"
+      emailPlaceholder: "Email address"
       name: "Name"
       namePlaceholder: "Name and surname"
       party: "Political party"
       partyPlaceholder: ""
       password: "Password"
+      passwordPlaceholder: "Password"
       passwordChange:
         link: "Change password"
         alert:
@@ -63,13 +66,22 @@ i18n.addResourceBundle("en",
       phoneVerify: "Verify"
       language: "Language"
       image: "Avatar"
+      group: "Group"
       mode: "Mode"
       wrongVerificationCode: "Verification code doesn\'t match."
       messages:
+        email:
+          required: "Email is required."
+          email: "Please enter a valid email address."
+          uniqueEmail: "Email already exists."
         name:
-          required: "Please specify your name"
-        phone:
-          phone: "Please specify full phone number (with country code)"
+          required: "Name is required."
+        password:
+          required: "Password is required."
+        group:
+          required: "Group is required."
+        inserted: "User added successfully."
+        saved: "User updated successfully."
   serverErrors:
     "User not found": "User not found"
     "Email already exists": "Email already exists"
@@ -107,4 +119,19 @@ i18n.addResourceBundle("en",
       "dur+msec": "duration of flow including milliseconds (milliseconds are always displayed)"
       "iType": "ICMP type"
       "iCode": "ICMP code"
+  users:
+    fields:
+      username: "Username"
+      email: "Email"
+      name: "Name"
+      group: "Group"
+      actions: "Actions"
+    removeAlert:
+      name: "Remove user"
+      description: "Are you sure you want to remove user?"
+      remove: "Remove"
+  groups:
+    admin: "Admin"
+    analyst: "Analyst"
+    user: "User"
 )

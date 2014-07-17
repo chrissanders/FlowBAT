@@ -2,7 +2,7 @@ Template.changePasswordAlertDescription.helpers
 #  helper: ->
 
 Template.changePasswordAlertDescription.rendered = ->
-  @$(".old-password").focus()
+  @$(".new-password").focus()
 
 Template.changePasswordAlertDescription.events
 #  "click .selector": (event, template) ->

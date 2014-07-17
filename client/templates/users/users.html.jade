@@ -1,0 +1,26 @@
+template(name="users")
+  .container
+    .row
+      table.table.table-striped
+        thead
+          tr
+            th {{t "users.fields.email"}}
+            th {{t "users.fields.name"}}
+            th {{t "users.fields.group"}}
+            th {{t "users.fields.actions"}}
+        tbody
+          each users
+            tr
+              td {{emails.[0].address}}
+              td {{profile.name}}
+              td {{group}}
+              td
+                a.btn.btn-default.btn-xs.edit-link(href="{{pathFor 'user'}}")
+                  span.glyphicon.glyphicon-edit
+                  | {{t "interface.update"}}
+                if condition currentUserId "isnt" _id
+                  button.btn.btn-danger.btn-xs.remove-button
+                    span.glyphicon.glyphicon-remove
+                    | {{t "interface.remove"}}
+
+      a.btn.btn-primary(href="{{pathFor 'newUser'}}") {{t "interface.insert"}}

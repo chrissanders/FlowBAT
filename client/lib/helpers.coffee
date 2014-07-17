@@ -47,6 +47,9 @@ UI.registerHelper("condition", (v1, operator, v2, options) ->
       throw "Undefined operator \"" + operator + "\""
 )
 
+UI.registerHelper "currentUserHasRole", (role) ->
+  share.Security.currentUserHasRole(role)
+
 UI.registerHelper "not", (value, options) ->
   not value
 
