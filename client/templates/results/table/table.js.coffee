@@ -14,7 +14,16 @@ Template.table.rendered = ->
         fieldsOrder.splice(pivotFieldIndex + 1, 0, field)
       else
         fieldsOrder.splice(0, 0, field)
-      share.Queries.update(query._id, {$set: {fieldsOrder: fieldsOrder}})
+      if _.isEqual(fieldsOrder, query.fieldsOrder)
+        if field is query.sortField
+          if query.sortReverse
+            sortReverse = false
+          else
+            field = ""
+            sortReverse = true
+        share.Queries.update(query._id, {$set: {sortField: field, sortReverse: sortReverse}})
+      else
+        share.Queries.update(query._id, {$set: {fieldsOrder: fieldsOrder}})
   )
 
 Template.table.events

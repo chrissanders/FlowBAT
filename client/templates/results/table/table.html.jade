@@ -3,7 +3,7 @@ template(name="table")
     thead
       tr
         each header
-          th.sort(data-field="{{.}}")
+          th(data-field="{{.}}")
             | {{t fieldI18nString}}
             if condition ../sortField "is" .
               if ../sortReverse

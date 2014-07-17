@@ -49,17 +49,6 @@ Template.results.events
     else
       modifier.$pull = {"fields": checkbox.value}
     share.Queries.update(template.data._id, modifier)
-  "click .sort": encapsulate (event, template) ->
-    $target = $(event.currentTarget)
-    sortField = $target.attr("data-field")
-    query = share.Queries.findOne(template.data._id)
-    if sortField is query.sortField
-      if query.sortReverse
-        sortReverse = false
-      else
-        sortField = ""
-        sortReverse = true
-    share.Queries.update(template.data._id, {$set: {sortField: sortField, sortReverse: sortReverse}})
   "change .num-recs": encapsulate (event, template) ->
     $numRecs = $(event.currentTarget)
     numRecs = share.intval($numRecs.val())
