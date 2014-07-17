@@ -68,7 +68,7 @@ share.loadFixtures = ->
       query.string = share.buildQueryString(query)
       share.Queries.insert(query)
     executingInterval = 5 * share.minute
-    executingInterval /= 5 * 12 # debug
+#    executingInterval /= 5 * 12 # debug
     share.Queries.update("Dashboard1", {$set: {executingInterval: executingInterval}})
 
   ipsets =

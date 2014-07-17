@@ -36,6 +36,12 @@ Template.results.events
     template.$(".execute").blur()
     $set = _.extend({isStale: true}, share.queryResetValues)
     share.Queries.update(template.data._id, {$set: $set})
+  "click .set-executing-interval": grab (event, template) ->
+    $target = $(event.currentTarget)
+    executingInterval = share.intval($target.attr("data-interval"))
+    share.Queries.update(template.data._id, {$set: {executingInterval: executingInterval}})
+  "click .input-executing-interval": grab (event, template) ->
+    UI.insert(UI.renderWithData(Template.inputExecutingIntervalModal, {_id: template.data._id}), document.body)
   "click .set-interface": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
     query = template.data

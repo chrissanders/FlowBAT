@@ -6,20 +6,21 @@ template(name="controlsForTheHeartOfTheSun")
           i.fa.fa-fw.fa-spinner.fa-spin
         else
           i.fa.fa-fw.fa-search
-        | Execute
+        | Execute {{executingIntervalString}}
       button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
         span.caret
         span.sr-only Toggle Dropdown
       ul.dropdown-menu(role='menu')
         li
-          a(href='#') Execute each 15 minutes
+          a.set-executing-interval(href='#', data-interval="900000") Execute each 15 minutes
         li
-          a(href='#') Execute each hour
+          a.set-executing-interval(href='#', data-interval="3600000") Execute each 60 minutes
         li
-          a(href='#') Execute periodically...
-        li.divider
-        li
-          a(href='#') Stop periodic execution
+          a.input-executing-interval(href='#') Execute periodically...
+        if executingInterval
+          li.divider
+          li
+            a.set-executing-interval(href='#', data-interval="0") Stop periodic execution
     .btn-group
       button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'cmd'}}active{{/if}}", data-interface="cmd", type="button")
         i.fa.fa-space-shuttle
