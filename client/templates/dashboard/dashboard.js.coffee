@@ -18,10 +18,12 @@ Template.dashboard.events
     $quickQueryInput = $form.find(".quick-query")
     quickQueryValue = $quickQueryInput.val().trim()
     if quickQueryValue
-      quickQuery = share.Queries.findOne({isQuick: true})
-      $set = _.extend({interface: "cmd", cmd: quickQueryValue, result: "", error: "", isStale: true}, share.queryResetValues)
-      share.Queries.update(quickQuery._id, {$set: $set})
-      Router.go(quickQuery.path())
+      _id = share.Queries.insert({
+        isQuick: true
+      })
+      share.Queries.update(_id, {$set: {interface: "cmd", cmd: quickQueryValue}})
+      share.Queries.update(_id, {$set: {isStale: true}})
+      Router.go("/query/" + _id)
     else
       $quickQueryInput.focus()
   "click .add-query": grab (event, template) ->

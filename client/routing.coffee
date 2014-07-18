@@ -18,10 +18,12 @@ Router.map ->
     path: "/"
     data: -> {}
   @route "createQuery",
-    path: "/query/create"
+    path: "/query/create/:isQuick?"
     data: -> {}
     action: ->
-      _id = share.Queries.insert({})
+      _id = share.Queries.insert({
+        isQuick: not not @params.isQuick
+      })
       Router.go("/query/" + _id)
   @route "query",
     path: "/query/:_id"
