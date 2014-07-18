@@ -112,6 +112,18 @@ Template.results.events
     value = $td.attr("data-value")
     query = share.Queries.findOne(template.data._id)
     share.Pivoting.execute(query, _id, value)
+  "click .new-query": grab (event, template) ->
+    $target = $(event.currentTarget)
+    $td = $target.closest("td")
+    _id = $td.attr("data-id")
+    value = $td.attr("data-value")
+    queryId = share.Queries.insert({
+      isQuick: true
+    })
+    query = share.Queries.findOne(queryId)
+    share.Pivoting.execute(query, _id, value)
+#    query = share.Queries.findOne(queryId) # get updated version
+    Router.go("/query/" + queryId)
   "click .results-table tr": (event, template) ->
     $tr = $(event.currentTarget)
     $tr.toggleClass("highlighted")
