@@ -86,52 +86,54 @@ share.stringBuilderFields = [
   "additionalParameters"
 ]
 share.buildQueryString = (query) ->
-  if query.interface is "cmd"
-    return query.cmd
-  parameters = []
-  if query.startDateEnabled and query.startDate
-    parameters.push("--start-date=" + query.startDate)
-  if query.endDateEnabled and query.endDate
-    parameters.push("--end-date=" + query.endDate)
-  if query.sensorEnabled and query.sensor
-    parameters.push("--sensor=" + query.sensor)
-  if query.typesEnabled
-    if query.types.length and _.difference(share.queryTypes, query.types).length
-      value = query.types.join(",")
-    else
-      value = "all"
-    parameters.push("--type=" + value)
-  if query.daddressEnabled and query.daddress
-    parameters.push("--daddress=" + query.daddress)
-  if query.saddressEnabled and query.saddress
-    parameters.push("--saddress=" + query.saddress)
-  if query.anyAddressEnabled and query.anyAddress
-    parameters.push("--any-address=" + query.anyAddress)
-  if query.dipSetEnabled and query.dipSet
-    parameters.push("--dipset=/tmp/" + query.dipSet + ".rws")
-  if query.sipSetEnabled and query.sipSet
-    parameters.push("--sipset=/tmp/" + query.sipSet + ".rws")
-  if query.anySetEnabled and query.anySet
-    parameters.push("--anyset=/tmp/" + query.anySet + ".rws")
-  if query.dportEnabled and query.dport
-    parameters.push("--dport=" + query.dport)
-  if query.sportEnabled and query.sport
-    parameters.push("--sport=" + query.sport)
-  if query.aportEnabled and query.aport
-    parameters.push("--aport=" + query.aport)
-  if query.dccEnabled and query.dcc.length
-    parameters.push("--dcc=" + query.dcc.join(","))
-  if query.sccEnabled and query.scc.length
-    parameters.push("--scc=" + query.scc.join(","))
-  if query.protocolEnabled and query.protocol
-    parameters.push("--protocol=" + query.protocol)
-  if query.flagsAllEnabled and query.flagsAll
-    parameters.push("--flags-all=" + query.flagsAll)
-  if query.additionalParametersEnabled and query.additionalParameters
-    parameters.push(query.additionalParameters)
-  string = parameters.join(" ")
+  if query.interface is "builder"
+    parameters = []
+    if query.startDateEnabled and query.startDate
+      parameters.push("--start-date=" + query.startDate)
+    if query.endDateEnabled and query.endDate
+      parameters.push("--end-date=" + query.endDate)
+    if query.sensorEnabled and query.sensor
+      parameters.push("--sensor=" + query.sensor)
+    if query.typesEnabled
+      if query.types.length and _.difference(share.queryTypes, query.types).length
+        value = query.types.join(",")
+      else
+        value = "all"
+      parameters.push("--type=" + value)
+    if query.daddressEnabled and query.daddress
+      parameters.push("--daddress=" + query.daddress)
+    if query.saddressEnabled and query.saddress
+      parameters.push("--saddress=" + query.saddress)
+    if query.anyAddressEnabled and query.anyAddress
+      parameters.push("--any-address=" + query.anyAddress)
+    if query.dipSetEnabled and query.dipSet
+      parameters.push("--dipset=/tmp/" + query.dipSet + ".rws")
+    if query.sipSetEnabled and query.sipSet
+      parameters.push("--sipset=/tmp/" + query.sipSet + ".rws")
+    if query.anySetEnabled and query.anySet
+      parameters.push("--anyset=/tmp/" + query.anySet + ".rws")
+    if query.dportEnabled and query.dport
+      parameters.push("--dport=" + query.dport)
+    if query.sportEnabled and query.sport
+      parameters.push("--sport=" + query.sport)
+    if query.aportEnabled and query.aport
+      parameters.push("--aport=" + query.aport)
+    if query.dccEnabled and query.dcc.length
+      parameters.push("--dcc=" + query.dcc.join(","))
+    if query.sccEnabled and query.scc.length
+      parameters.push("--scc=" + query.scc.join(","))
+    if query.protocolEnabled and query.protocol
+      parameters.push("--protocol=" + query.protocol)
+    if query.flagsAllEnabled and query.flagsAll
+      parameters.push("--flags-all=" + query.flagsAll)
+    if query.additionalParametersEnabled and query.additionalParameters
+      parameters.push(query.additionalParameters)
+    string = parameters.join(" ")
+  else
+    string = query.cmd
   for excludedParameter in ["--python-expr", "--python-file", "--pmap", "--dynamic-library", "--tuple-file", "--tuple-fields", "--tuple-direction", "--tuple-dilimter", "--all-destination", "--fail-destination", "--pass-destination", "--print-statistics", "--print-volume-statistics", "--xargs"]
-    string = string.replace(excludedParameter, "")
+    regexp = new RegExp(excludedParameter + "=?[^\\s]*", "gi")
+    string = string.replace(regexp, "")
   string = string.replace(/[^\s\=\-\/\,\.\:0-9a-z]/gi, "")
   string
 

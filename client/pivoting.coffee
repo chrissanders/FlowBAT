@@ -66,7 +66,7 @@ share.Pivoting =
           _.defer ->
             $(".query-" + _id + "-editor").trigger("chosen:updated")
   replace: (cmd, option, value) ->
-    regexp = new RegExp("--" + option + "=[^\s]+", "i")
+    regexp = new RegExp("--" + option + "=[^\\s]+", "i")
     replacement = "--" + option + "=" + value
     if cmd.match(regexp)
       cmd.replace(regexp, replacement)
