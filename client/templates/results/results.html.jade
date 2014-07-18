@@ -33,7 +33,7 @@ template(name="results")
               +controlsForTheHeartOfTheSun
             .pull-right
               .btn-group
-                button.toggle-is-utc.btn.btn-default(type="button")
+                button.toggle-is-utc.btn.btn-default(class="{{#if ../isDashboard}}btn-xs{{/if}}", type="button")
                   i.fa.fa-fw.fa-clock-o
                   if isUTC
                     | UTC:

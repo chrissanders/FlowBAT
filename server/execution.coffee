@@ -131,7 +131,9 @@ executeQuery = (query, numRecs, binary, callback) ->
       if query.sortReverse
         rwsortArguments.push("--reverse")
       command += " | " + "rwsort " + rwsortArguments.join(" ")
-    rwcutArguments = ["--fields=" + _.intersection(query.fieldsOrder, query.fields).join(","), "--num-recs=" + numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
+    rwcutArguments = ["--num-recs=" + numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
+    if query.fields.length
+      rwcutArguments.push("--fields=" + _.intersection(query.fieldsOrder, query.fields).join(","))
     command += " | " + "rwcut " + rwcutArguments.join(" ")
   if config.isSSH
     command = config.wrapCommand(command)

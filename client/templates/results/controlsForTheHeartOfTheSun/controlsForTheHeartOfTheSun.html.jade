@@ -1,13 +1,13 @@
 template(name="controlsForTheHeartOfTheSun")
   .controlsForTheHeartOfTheSun
     .btn-group
-      button.execute.btn.btn-default(type="submit")
+      button.execute.btn.btn-default(class="{{#if ../isDashboard}}btn-xs{{/if}}", type="submit")
         if isStale
           i.fa.fa-fw.fa-spinner.fa-spin
         else
           i.fa.fa-fw.fa-search
         | Execute {{executingIntervalString}}
-      button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+      button.btn.btn-default.dropdown-toggle(class="{{#if ../isDashboard}}btn-xs{{/if}}", type='button', data-toggle='dropdown')
         span.caret
         span.sr-only Toggle Dropdown
       ul.dropdown-menu(role='menu')
@@ -23,14 +23,14 @@ template(name="controlsForTheHeartOfTheSun")
             a.set-executing-interval(href='#', data-interval="0") Stop periodic execution
     if ../isDashboard
       .btn-group
-        a(href="{{path}}").btn.btn-default
+        a(href="{{path}}", class="{{#if ../isDashboard}}btn-xs{{/if}}").btn.btn-default
           i.fa.fa-pencil
           | Edit
     else
       .btn-group
-        button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'cmd'}}active{{/if}}", data-interface="cmd", type="button")
+        button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'cmd'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-interface="cmd", type="button")
           i.fa.fa-space-shuttle
           | Command line
-        button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'builder'}}active{{/if}}", data-interface="builder", type="button")
+        button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'builder'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-interface="builder", type="button")
           i.fa.fa-cog
           | Query builder

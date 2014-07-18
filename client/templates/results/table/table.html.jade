@@ -14,10 +14,16 @@ template(name="table")
       each rows
         tr
           each .
-            td
-              if condition _id "is" "sTime"
-                +time
-              else if condition _id "is" "eTime"
-                +time
-              else
-                | {{value}}
+            td.dropdown(data-id="{{_id}}", data-value="{{value}}")
+              .dropdown-toggle(data-toggle="dropdown")
+                if condition _id "is" "sTime"
+                  +time
+                else if condition _id "is" "eTime"
+                  +time
+                else
+                  | {{value}}
+              ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu1')
+                li(role='presentation')
+                  a.add-to-query(role='menuitem', tabindex='-1', href='#') Add to current query
+                li(role='presentation')
+                  a(role='menuitem', tabindex='-1', href='#') Query this value

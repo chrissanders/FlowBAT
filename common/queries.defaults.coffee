@@ -43,7 +43,7 @@ share.Queries.before.insert (userId, query) ->
     flagsAll: ""
     additionalParametersEnabled: false
     additionalParameters: ""
-    fields: ["sIP", "dIP", "sPort", "dPort", "protocol", "packets", "bytes", "flags", "sTime", "dur", "eTime", "sensor"]
+    fields: ["sIP", "dIP", "sPort", "dPort", "protocol", "packets", "bytes", "flags", "sTime", "duration", "eTime", "sensor"]
     fieldsOrder: share.rwcutFields
     result: ""
     interface: "cmd"
