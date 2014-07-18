@@ -46,9 +46,7 @@ share.Pivoting =
         value = value + "/" + value
       when "sTime", "eTime"
         value = moment.utc(value, "YYYY/MM/DDTHH:mm:ss.SSS").format("YYYY/MM/DD")
-      when "scc", "dcc"
-        value = [value]
-      when "type"
+      when "type", "scc", "dcc"
         value = [value]
     $set = {}
     if query.interface is "builder"
@@ -64,9 +62,8 @@ share.Pivoting =
     share.Queries.update(query._id, {$set: {isStale: true}})
     if query.interface is "builder"
       switch _id
-        when "scc", "dcc"
+        when "type", "scc", "dcc"
           _.defer ->
-            cl $(".query-" + _id + "-editor").val()
             $(".query-" + _id + "-editor").trigger("chosen:updated")
   replace: (cmd, option, value) ->
     regexp = new RegExp("--" + option + "=[^\s]+", "i")
