@@ -105,11 +105,13 @@ Template.results.events
       $target.find(".normal").show()
       $target.find(".loading").hide()
     )
-  "click .add-to-query": grab encapsulate (event, template) ->
+  "click .add-to-query": grab (event, template) ->
     $target = $(event.currentTarget)
     $td = $target.closest("td")
     _id = $td.attr("data-id")
     value = $td.attr("data-value")
+    query = share.Queries.findOne(template.data._id)
+    share.Pivoting.execute(query, _id, value)
   "click .results-table tr": (event, template) ->
     $tr = $(event.currentTarget)
     $tr.toggleClass("highlighted")

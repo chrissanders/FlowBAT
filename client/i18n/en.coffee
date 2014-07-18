@@ -113,12 +113,18 @@ i18n.addResourceBundle("en",
       "sensor": "Sensor"
       "sen": "$t(rwcut.fields.sensor)"
       "class": "Sensor class"
+      "scc": "Source country"
+      "dcc": "Destination country"
+      "initialFlags": "Initial flags"
+      "sessionFlags": "Session flags"
+      "application": "Application"
       "type": "Sensor type"
       "sTime+msec": "starting time of flow including milliseconds (milliseconds are always displayed)"
       "eTime+msec": "end time of flow including milliseconds (milliseconds are always displayed)"
       "dur+msec": "duration of flow including milliseconds (milliseconds are always displayed)"
       "iType": "ICMP type"
       "iCode": "ICMP code"
+      "icmpTypeCode": "ICMP type & code"
   users:
     fields:
       username: "Username"

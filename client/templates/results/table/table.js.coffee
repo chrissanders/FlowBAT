@@ -1,23 +1,6 @@
-#usedCodes = []
-#map = []
-#map.push({value: "--", name: "N/A (private and reserved)"})
-#map.push({value: "o1", name: "Other"})
-#map.push({value: "a1", name: "Anonymous proxy"})
-#map.push({value: "a2", name: "Satellite provider"})
-#for tr in $("tr")
-#  $tr = $(tr)
-#  $tds = $tr.find("td")
-#  codeTd = $tds.get(4)
-#  countryTd = $tds.get(5)
-#  code = codeTd.innerText.trim()
-#  lccode = code.toLowerCase()
-#  country = countryTd.innerText.trim()
-#  if usedCodes.indexOf(lccode) is -1
-#    usedCodes.push(lccode)
-#    map.push({value: lccode, name: country + " (" + code + ")"})
-#console.log JSON.stringify(map)
-
 Template.table.helpers
+  isPivotable: ->
+    true # _.has(share.Pivoting.fields2properties, @_id)
 
 Template.table.rendered = ->
   _id = @data._id

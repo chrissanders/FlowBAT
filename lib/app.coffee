@@ -29,9 +29,13 @@ share.rwcutFields = [
   "eTime"
   "sensor"
   "class"
+  "scc"
+  "dcc"
+  "initialFlags"
+  "sessionFlags"
+  "application"
   "type"
-  "iType"
-  "iCode"
+  "icmpTypeCode"
 ]
 
 share.parseResult = (result) ->
