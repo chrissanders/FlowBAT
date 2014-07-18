@@ -44,6 +44,7 @@ template(name="navbar")
                 //li: a(href="/user/{{currentUser._id}}") Profile
                 if currentUserHasRole "admin"
                   li: a(href="/users") User administration
+                  li: a(href="/config") SiLK server configuration
                   li.divider
                 li: a.logout(href="#") Logout
           else

@@ -59,6 +59,13 @@ Router.map ->
     action: ->
       share.IPSets.remove(@params._id)
       Router.go("/")
+  @route "config",
+    data: ->
+      unless share.Security.currentUserHasRole("admin")
+        return null
+      _.defaults({}, @params,
+        config: share.Configs.findOne({}, {sort: {createdAt: 1}})
+      )
   @route "users",
     data: ->
       unless share.Security.currentUserHasRole("admin")

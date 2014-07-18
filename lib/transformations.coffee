@@ -13,9 +13,9 @@ class share.Config
   wrapCommand: (command) ->
     "ssh " + @getSSHOptions() + " " + @user + "@" + @host + " \"" + command + "\""
   getSSHOptions: ->
-    "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=error -i " + @getIdentityFilename()
-  getIdentityFilename: ->
-    process.env.PWD + "/settings/identity"
+    "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=error -i " + @getIdentityFile()
+  getIdentityFile: ->
+    if @identityFile then @identityFile else process.env.PWD + "/settings/identity"
 
 class share.Query
   constructor: (doc) ->

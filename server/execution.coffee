@@ -72,24 +72,23 @@ executeQuery = (query, numRecs, binary, callback) ->
             scpFuture.return(result)
           ))
           scpFuture.wait()
+        rmCommand = "rm -f " + rwsFilename
         if config.isSSH
-          rmCommand = "rm -f " + rwsFilename
-          if config.isSSH
-            rmCommand = config.wrapCommand(rmCommand)
-          rmFuture = new Future()
-          Process.exec(rmCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
-            result = stdout.trim()
-            error = stderr.trim()
-            code = if err then err.code else 0
-            if error
-              rwsetbuildErrors.push(error)
-            if code is 0
-            else
-              if not error
-                throw "rm: code is \"" + code + "\" while stderr is \"" + error + "\""
-            rmFuture.return(result)
-          ))
-          rmFuture.wait()
+          rmCommand = config.wrapCommand(rmCommand)
+        rmFuture = new Future()
+        Process.exec(rmCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
+          result = stdout.trim()
+          error = stderr.trim()
+          code = if err then err.code else 0
+          if error
+            rwsetbuildErrors.push(error)
+          if code is 0
+          else
+            if not error
+              throw "rm: code is \"" + code + "\" while stderr is \"" + error + "\""
+          rmFuture.return(result)
+        ))
+        rmFuture.wait()
         writeFileFuture.resolve Meteor.bindEnvironment((err, result) ->
           if err
             rwsetbuildErrors.push(err)
@@ -146,7 +145,7 @@ executeQuery = (query, numRecs, binary, callback) ->
       code = 0
     if binary
       if config.isSSH
-        scp = "scp " + sshOptions + " " + config.user + "@" + config.host + ":/tmp/" + token + ".rwf /tmp/" + token + ".rwf"
+        scp = "scp " + config.getSSHOptions() + " " + config.user + "@" + config.host + ":/tmp/" + token + ".rwf /tmp/" + token + ".rwf"
         Process.exec(scp, Meteor.bindEnvironment((err, stdout, stderr) ->
           result = stdout.trim()
           error = stderr.trim()

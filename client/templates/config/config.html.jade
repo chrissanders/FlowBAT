@@ -1,0 +1,31 @@
+template(name="config")
+  with config
+    .container-fluid.config
+      .row
+        .col-xs-12
+          form.config.panel
+            .panel-heading
+              h4.panel-title SiLK server configuration
+            .panel-body
+              .checkbox
+                label
+                  +checkbox(family="config" _id=_id property="isSSH" value=isSSH isNew=isNew)
+                  | Use SSH for connecting to server
+              if isSSH
+                .form-group
+                  label.control-label Host
+                  +input(family="config" _id=_id property="host" value=host isNew=isNew)
+                .form-group
+                  label.control-label Port
+                  +input(family="config" _id=_id property="port" value=port isNew=isNew)
+                .form-group
+                  label.control-label User
+                  +input(family="config" _id=_id property="user" value=user isNew=isNew)
+                .form-group
+                  label.control-label Identity file (local filesystem path)
+                  +input(family="config" _id=_id property="identityFile" value=identityFile isNew=isNew)
+              .form-group
+                label.control-label Site config file (SiLK server filesystem path; leave blank for default)
+                +input(family="config" _id=_id property="siteConfigFile" value=siteConfigFile isNew=isNew)
+              p.text-muted
+                | Fields are saved automatically

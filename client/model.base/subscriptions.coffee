@@ -10,8 +10,10 @@ share.currentUserHandle = Meteor.subscribe("currentUser", ->
       share.userStartupOnce()
 )
 share.usersHandle = null
+share.configsHandle = null
 Deps.autorun ->
   if Meteor.user()?.group is "admin"
     share.usersHandle = Meteor.subscribe("users")
+    share.configsHandle = Meteor.subscribe("configs")
 share.queriesHandle = Meteor.subscribe("queries")
 share.ipsetsHandle = Meteor.subscribe("ipsets")

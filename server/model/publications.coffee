@@ -17,13 +17,21 @@ Meteor.publish "users", ->
   if share.Security.hasRole(@userId, "admin")
     Meteor.users.find({},
       fields:
-        "username": 1
         "group": 1
         "emails": 1
         "profile": 1
         "status": 1
         "createdAt": 1
     )
+  else
+    []
+
+Meteor.publish "configs", ->
+  if not @userId then return []
+  if share.Security.hasRole(@userId, "admin")
+    share.Configs.find()
+  else
+    []
 
 Meteor.publish "queries", ->
   if not @userId then return []
