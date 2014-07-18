@@ -66,6 +66,8 @@ Router.map ->
       _.defaults({}, @params,
         config: share.Configs.findOne({}, {sort: {createdAt: 1}})
       )
+  @route "help",
+    data: -> {}
   @route "users",
     data: ->
       unless share.Security.currentUserHasRole("admin")
