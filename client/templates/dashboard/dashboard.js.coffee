@@ -13,6 +13,17 @@ Template.dashboard.helpers
 Template.dashboard.rendered = ->
 
 Template.dashboard.events
+  "submit .quick-query-form": grab encapsulate (event, template) ->
+    $form = $(event.currentTarget)
+    $quickQueryInput = $form.find(".quick-query")
+    quickQueryValue = $quickQueryInput.val().trim()
+    if quickQueryValue
+      quickQuery = share.Queries.findOne({isQuick: true})
+      $set = _.extend({interface: "cmd", cmd: quickQueryValue, result: "", error: "", isStale: true}, share.queryResetValues)
+      share.Queries.update(quickQuery._id, {$set: $set})
+      Router.go(quickQuery.path())
+    else
+      $quickQueryInput.focus()
   "click .add-query": grab (event, template) ->
     Meteor.users.update(Meteor.userId(), {$addToSet: {"profile.dashboardQueryIds": @_id}})
   "click .insert-query": grab (event, template) ->

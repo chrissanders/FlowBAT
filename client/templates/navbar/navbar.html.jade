@@ -12,6 +12,8 @@ template(name="navbar")
       #top-navbar-collapse.collapse.navbar-collapse
         ul.nav.navbar-nav
           if currentUser
+            li
+              a(href="{{quickQuery.path}}") Quick Query
             li.dropdown
               a.dropdown-toggle(href="#", data-toggle="dropdown")
                 | Saved Queries

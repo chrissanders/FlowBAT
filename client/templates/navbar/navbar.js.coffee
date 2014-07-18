@@ -1,4 +1,6 @@
 Template.navbar.helpers
+  quickQuery: ->
+    share.Queries.findOne({isQuick: true})
   queries: ->
     share.Queries.find({isQuick: false}, {sort: {createdAt: 1}})
   ipsets: ->
