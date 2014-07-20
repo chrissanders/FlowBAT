@@ -6,8 +6,8 @@ template(name="ipset")
           form.panel.panel-default
             .panel-heading
               .form-group
+                label IP Set name
                 .input-group
-                  label IP Set name
                   +input(family="ipset" _id=_id property="name" value=name isNew=isNew)
                   .input-group-btn
                     button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', type='button')
