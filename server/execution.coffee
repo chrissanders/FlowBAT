@@ -118,22 +118,26 @@ executeQuery = (query, numRecs, binary, callback) ->
     callback("", rwsetbuildErrors.join("\n"), 255, token)
     return
   rwfilterArguments = query.string.split(" ")
-  if config.siteConfigFile
-    rwfilterArguments.push("--site-config-file=" + config.siteConfigFile)
   if binary
     rwfilterArguments.push("--pass=/tmp/" + token + ".rwf")
   else
     rwfilterArguments.push("--pass=stdout")
+  if config.siteConfigFile
+    rwfilterArguments.push("--site-config-file=" + config.siteConfigFile)
   command = "rwfilter " + rwfilterArguments.join(" ")
   if not binary
     if query.sortField
       rwsortArguments = ["--fields=" + query.sortField]
       if query.sortReverse
         rwsortArguments.push("--reverse")
+      if config.siteConfigFile
+        rwsortArguments.push("--site-config-file=" + config.siteConfigFile)
       command += " | " + "rwsort " + rwsortArguments.join(" ")
     rwcutArguments = ["--num-recs=" + numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
     if query.fields.length
       rwcutArguments.push("--fields=" + _.intersection(query.fieldsOrder, query.fields).join(","))
+    if config.siteConfigFile
+      rwcutArguments.push("--site-config-file=" + config.siteConfigFile)
     command += " | " + "rwcut " + rwcutArguments.join(" ")
   if config.isSSH
     command = config.wrapCommand(command)

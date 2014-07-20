@@ -62,7 +62,7 @@ share.loadFixtures = ->
       name: "Dashboard query"
       cmd: "--sensor=S0 --type=all --sport=80"
       ownerId: "ChrisSanders"
-  if share.Queries.find().count() is Meteor.users.find().count()
+  if share.Queries.find().count() is 0
     for _id, query of queries
       query._id = _id
       query.isNew = false
