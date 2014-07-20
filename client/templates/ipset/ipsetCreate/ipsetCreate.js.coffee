@@ -2,6 +2,14 @@ Template.ipsetCreate.helpers
 #  helper: ->
 
 Template.ipsetCreate.rendered = ->
+  @$("form").validate(
+    rules:
+      name:
+        required: true
+      contents:
+        required: true
+#    submitHandler: ->
+  )
 
 Template.ipsetCreate.events
   "submit form": grab encapsulate (event, template) ->
