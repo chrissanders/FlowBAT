@@ -5,4 +5,8 @@ Template.ipset.helpers
 Template.ipset.rendered = ->
 
 Template.ipset.events
-#  "click .selector": (event, template) ->
+  "submit form": grab encapsulate (event, template) ->
+    editor = share.EditorCache.editors["ipset"]
+    editor.saveObject(template.data._id)
+    $saveNotice = $(".save-notice")
+    $saveNotice.show().delay(2000).fadeOut()

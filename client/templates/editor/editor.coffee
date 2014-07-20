@@ -65,17 +65,24 @@ class share.Editor
     $set = {}
     $set[property] = @cleanProperty(property, value)
     @collection.update(_id, {$set: $set})
+  insertObject: ->
+    object = @findProperties("NEW")
+    object.isNew = false
+    @collection.insert(object)
   saveObject: (_id) ->
-    $set = {}
-    $(".property-editor[data-family='" + @family + "'][data-object-id='" + _id + "']").each (index, element) =>
-      $element = $(element)
-      property = $element.attr("name")
-      value = $element.val()
-      $set[property] = @cleanProperty(property, value)
+    $set = @findProperties(_id)
     object = @collection.findOne(_id)
     if object.isNew
       $set["isNew"] = false
     @collection.update(_id, {$set: $set})
+  findProperties: (_id) ->
+    properties = {}
+    $(".property-editor[data-family='" + @family + "'][data-object-id='" + _id + "']").each (index, element) =>
+      $element = $(element)
+      property = $element.attr("name")
+      value = $element.val()
+      properties[property] = @cleanProperty(property, value)
+    properties
   isSingleLine: (property) ->
     false
   remove: (_id) ->

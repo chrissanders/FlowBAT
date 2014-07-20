@@ -3,4 +3,8 @@ share.IPSetEditor = new share.Editor(
   family: "ipset"
   isSingleLine: (property) ->
     property not in [] # all properties
+  saveProperty: ->
+    # noop
+  debouncedSaveProperty: ->
+    # noop
 )

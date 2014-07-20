@@ -32,5 +32,5 @@ Template.newUser.events
       unless error
         Router.go("user", {_id: userId})
         _.defer ->
-          $newNotice = $(".new-notice")
+          $newNotice = $(".create-notice")
           $newNotice.show().delay(2000).fadeOut()

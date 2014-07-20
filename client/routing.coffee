@@ -46,10 +46,11 @@ Router.map ->
       Router.go("/")
   @route "createIPSet",
     path: "/ipset/create"
-    data: -> {}
-    action: ->
-      _id = share.IPSets.insert({})
-      Router.go("/ipset/" + _id)
+    template: "ipsetCreate"
+    data: ->
+      ipset:
+        _id: "NEW"
+        isNew: true
   @route "ipset",
     path: "/ipset/:_id"
     data: ->

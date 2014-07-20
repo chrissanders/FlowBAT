@@ -1,5 +1,5 @@
 template(name="ipset")
-  .container-fluid.ipset
+  .container-fluid.ipset-default.ipset
     .row
       .col-xs-12
         with ipset
@@ -24,8 +24,10 @@ template(name="ipset")
               .form-group
                 label IP addresses
                 +textarea(family="ipset" _id=_id property="contents" value=contents isNew=isNew)
-              p.text-muted
-                | Fields are saved automatically
+              .form-group
+                button.btn.btn-primary(type="submit") Save
+                span.save-notice.notice.text-success Successfully saved
+                span.create-notice.notice.text-success Successfully created
               if queries.count
                 hr
                 h4 Queries using this IP Set
