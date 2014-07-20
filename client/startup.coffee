@@ -16,6 +16,13 @@ Meteor.startup ->
   $.validator.addMethod "uniqueEmail", (value, element) ->
     value is $(element).data("value") or not Meteor.users.findOne({"emails.0.address": share.createTextSearchRegexp(value, true)})
 
+#$(window).on("beforeunload", ->
+#  data = Router.current().data()
+#  if data?.query?.isQuick
+#    share.Queries.remove(data.query._id)
+#  return
+#)
+
 #usedCodes = []
 #map = []
 #map.push({value: "--", name: "N/A (private and reserved)"})

@@ -34,6 +34,10 @@ Router.map ->
       _.defaults({}, @params,
         query: query
       )
+    onStop: ->
+      data = @data()
+      if data?.query?.isQuick
+        share.Queries.remove(data.query._id)
   @route "removeQuery",
     path: "/query/:_id/remove"
     data: -> {}
