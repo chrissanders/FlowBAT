@@ -1,0 +1,20 @@
+template(name="queryList")
+  .container-fluid.query-list.object-list
+    .row
+      .col-xs-12.col-md-6
+        .panel.panel-default.panel-alt.widget-messaging
+          .panel-heading
+            h4.panel-title Saved Queries
+          if queries.count
+            .panel-body
+              ul
+                each queries
+                  li
+                    a(href=path)
+                      h4.sender {{displayName}}
+                      if string
+                        small rwfilter {{string}}
+                      else
+                        small No parameters specified
+          .panel-footer
+            a.btn.btn-primary(href="/query/create") <i class="fa fa-plus"></i> Create query

@@ -25,6 +25,9 @@ Router.map ->
         isQuick: not not @params.isQuick
       })
       Router.go("/query/" + _id)
+  @route "queryList",
+    path: "/query/list"
+    data: -> {}
   @route "query",
     path: "/query/:_id"
     data: ->
@@ -51,6 +54,9 @@ Router.map ->
       ipset:
         _id: "NEW"
         isNew: true
+  @route "ipsetList",
+    path: "/ipset/list"
+    data: -> {}
   @route "ipset",
     path: "/ipset/:_id"
     data: ->

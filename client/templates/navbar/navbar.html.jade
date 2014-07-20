@@ -16,26 +16,10 @@ template(name="navbar")
               a(href="/") Dashboard
             li
               a(href="/query/create/quick") Quick Query
-            li.dropdown
-              a.dropdown-toggle(href="#", data-toggle="dropdown")
-                | Saved Queries
-                b.caret
-              ul.dropdown-menu
-                each queries
-                  li: a(href=path) {{displayName}}
-                if queries.count
-                  li.divider
-                li: a.insert-meeting(href="/query/create") <i class="fa fa-plus"></i> Create query
-            li.dropdown
-              a.dropdown-toggle(href="#", data-toggle="dropdown")
-                | IP Sets
-                b.caret
-              ul.dropdown-menu
-                each ipsets
-                  li: a(href=path) {{displayName}}
-                if ipsets.count
-                  li.divider
-                li: a.insert-meeting(href="/ipset/create") <i class="fa fa-plus"></i> Create IP Set
+            li
+              a(href="/query/list") Saved Queries
+            li
+              a(href="/ipset/list") IP Sets
         ul.nav.navbar-nav.navbar-right
           if currentUser
             li.dropdown

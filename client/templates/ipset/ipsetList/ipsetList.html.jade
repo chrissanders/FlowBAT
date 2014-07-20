@@ -1,0 +1,18 @@
+template(name="ipsetList")
+  .container-fluid.ipset-list.object-list
+    .row
+      .col-xs-12.col-md-6
+        .panel.panel-default.panel-alt.widget-messaging
+          .panel-heading
+            h4.panel-title IP Sets
+          if ipsets.count
+            .panel-body
+              ul
+                each ipsets
+                  li
+                    a(href=path)
+                      h4.sender {{displayName}}
+                      if note
+                        small {{note}}
+          .panel-footer
+            a.btn.btn-primary(href="/ipset/create") <i class="fa fa-plus"></i> Create IP Set
