@@ -1,15 +1,142 @@
 share.Queries.allow
   insert: share.securityRulesWrapper (userId, query) ->
-    # TODO: don't allow to insert string (always make it "")
     unless userId
       throw new Match.Error("Operation not allowed for unauthorized users")
+    query._id = query._id or Random.id()
+    query.ownerId = userId
+    query.string = ""
+    check(query,
+      _id: Match.App.Id
+      name: String
+      string: String
+      cmd: String
+      startDateEnabled: Boolean
+      startDate: String
+      endDateEnabled: Boolean
+      endDate: String
+      sensorEnabled: Boolean
+      sensor: String
+      typesEnabled: Boolean
+      types: [String]
+      daddressEnabled: Boolean
+      daddress: String
+      saddressEnabled: Boolean
+      saddress: String
+      anyAddressEnabled: Boolean
+      anyAddress: String
+      dipSetEnabled: Boolean
+      dipSet: Match.OneOf(null, Match.App.IPSetId)
+      sipSetEnabled: Boolean
+      sipSet: Match.OneOf(null, Match.App.IPSetId)
+      anySetEnabled: Boolean
+      anySet: Match.OneOf(null, Match.App.IPSetId)
+      dportEnabled: Boolean
+      dport: String
+      sportEnabled: Boolean
+      sport: String
+      aportEnabled: Boolean
+      aport: String
+      dccEnabled: Boolean
+      dcc: [String]
+      sccEnabled: Boolean
+      scc: [String]
+      protocolEnabled: Boolean
+      protocol: String
+      flagsAllEnabled: Boolean
+      flagsAll: String
+      additionalParametersEnabled: Boolean
+      additionalParameters: String
+      fields: [String]
+      fieldsOrder: [String]
+      result: String
+      error: String
+      interface: String
+      executingInterval: Match.Integer
+      executingAt: Match.OneOf(null, Date)
+      startRecNum: Match.Integer
+      sortField: String
+      sortReverse: Boolean
+      isStale: Boolean
+      isUTC: Boolean
+      isQuick: Boolean
+      isNew: Boolean
+      ownerId: Match.App.UserId
+      updatedAt: Date
+      createdAt: Date
+    )
     true
-  update: share.securityRulesWrapper (userId, query, fieldNames, modifier) ->
-    # TODO: don't allow to update string (should always be built)
+  update: share.securityRulesWrapper (userId, query, fieldNames, modifier, options) ->
     unless userId
       throw new Match.Error("Operation not allowed for unauthorized users")
+    unless userId is query.ownerId
+      throw new Match.Error("Operation not allowed for non-owners")
+    $set =
+      name: Match.Optional(String)
+      cmd: Match.Optional(String)
+      startDateEnabled: Match.Optional(Boolean)
+      startDate: Match.Optional(String)
+      endDateEnabled: Match.Optional(Boolean)
+      endDate: Match.Optional(String)
+      sensorEnabled: Match.Optional(Boolean)
+      sensor: Match.Optional(String)
+      typesEnabled: Match.Optional(Boolean)
+      types: Match.Optional([String])
+      daddressEnabled: Match.Optional(Boolean)
+      daddress: Match.Optional(String)
+      saddressEnabled: Match.Optional(Boolean)
+      saddress: Match.Optional(String)
+      anyAddressEnabled: Match.Optional(Boolean)
+      anyAddress: Match.Optional(String)
+      dipSetEnabled: Match.Optional(Boolean)
+      dipSet: Match.Optional(Match.OneOf(null, Match.App.IPSetId))
+      sipSetEnabled: Match.Optional(Boolean)
+      sipSet: Match.Optional(Match.OneOf(null, Match.App.IPSetId))
+      anySetEnabled: Match.Optional(Boolean)
+      anySet: Match.Optional(Match.OneOf(null, Match.App.IPSetId))
+      dportEnabled: Match.Optional(Boolean)
+      dport: Match.Optional(String)
+      sportEnabled: Match.Optional(Boolean)
+      sport: Match.Optional(String)
+      aportEnabled: Match.Optional(Boolean)
+      aport: Match.Optional(String)
+      dccEnabled: Match.Optional(Boolean)
+      dcc: Match.Optional([String])
+      sccEnabled: Match.Optional(Boolean)
+      scc: Match.Optional([String])
+      protocolEnabled: Match.Optional(Boolean)
+      protocol: Match.Optional(String)
+      flagsAllEnabled: Match.Optional(Boolean)
+      flagsAll: Match.Optional(String)
+      additionalParametersEnabled: Match.Optional(Boolean)
+      additionalParameters: Match.Optional(String)
+      fields: Match.Optional([String])
+      fieldsOrder: Match.Optional([String])
+      result: Match.Optional(String)
+      error: Match.Optional(String)
+      interface: Match.Optional(String)
+      executingInterval: Match.Optional(Match.Integer)
+      executingAt: Match.Optional(Match.OneOf(null, Date))
+      startRecNum: Match.Optional(Match.Integer)
+      sortField: Match.Optional(String)
+      sortReverse: Match.Optional(Boolean)
+      isStale: Match.Optional(Boolean)
+      isUTC: Match.Optional(Boolean)
+      isQuick: Match.Optional(Boolean)
+      isNew: Match.Optional(Match.App.isNewUpdate(query.isNew))
+      updatedAt: Date
+    $addToSet =
+      fields: Match.Optional(String)
+    $pull =
+      fields: Match.Optional(String)
+    check(modifier,
+      $set: Match.Optional($set)
+      $addToSet: Match.Optional($addToSet)
+      $pull: Match.Optional($pull)
+    )
     true
   remove: share.securityRulesWrapper (userId, query) ->
     unless userId
       throw new Match.Error("Operation not allowed for unauthorized users")
+    unless userId is query.ownerId
+      throw new Match.Error("Operation not allowed for non-owners")
     true

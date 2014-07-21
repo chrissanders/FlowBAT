@@ -4,6 +4,10 @@ Future = Npm.require('fibers/future')
 writeFile = Future.wrap(fs.writeFile)
 
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
+  if _.intersection(fieldNames, share.stringBuilderFields).length
+    share.Queries.update(query._id, {$set: {string: share.buildQueryString(query)}})
+
+share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   if not query.isStale
     return
   if not query.string

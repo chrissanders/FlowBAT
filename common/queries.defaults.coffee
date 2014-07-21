@@ -46,6 +46,7 @@ share.Queries.before.insert (userId, query) ->
     fields: ["sIP", "dIP", "sPort", "dPort", "protocol", "packets", "bytes", "flags", "sTime", "duration", "eTime", "sensor"]
     fieldsOrder: share.rwcutFields
     result: ""
+    error: ""
     interface: "cmd"
     executingInterval: 0
     executingAt: null

@@ -29,9 +29,7 @@ Template.results.events
     UI.insert(UI.renderWithData(Template.inputExecutingIntervalModal, {_id: template.data._id}), document.body)
   "click .set-interface": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
-    query = share.Queries.findOne(template.data._id)
-    query.interface = $target.attr("data-interface")
-    share.Queries.update(template.data._id, {$set: {interface: $target.attr("data-interface"), string: share.buildQueryString(query), result: "", error: ""}})
+    share.Queries.update(template.data._id, {$set: {interface: $target.attr("data-interface"), result: "", error: ""}})
   "click .toggle-is-utc": grab encapsulate (event, template) ->
     event.currentTarget.blur()
     share.Queries.update(template.data._id, {$set: {isUTC: not @isUTC}})

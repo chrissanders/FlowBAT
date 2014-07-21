@@ -16,6 +16,11 @@ Match.App =
     unless share.Queries.findOne(value)
       throw new Match.Error("Query with ID \"" + value + "\" doesn't exist")
     true
+  IPSetId: Match.Where (value) ->
+    check(value, Match.App.Id)
+    unless share.IPSets.findOne(value)
+      throw new Match.Error("IP Set with ID \"" + value + "\" doesn't exist")
+    true
   isNewUpdate: (oldValue) ->
     Match.Where (value) ->
       check(value, Boolean)
