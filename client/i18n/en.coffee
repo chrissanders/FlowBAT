@@ -99,8 +99,10 @@ i18n.addResourceBundle("en",
     fields:
       "sIP": "Source IP"
       "dIP": "Destination IP"
+      "aIP": "Any IP" # proxy
       "sPort": "Source port"
       "dPort": "Destination port"
+      "aPort": "Any port" # proxy
       "protocol": "IP protocol"
       "pro": "$t(rwcut.fields.protocol)"
       "packets": "Packet count"

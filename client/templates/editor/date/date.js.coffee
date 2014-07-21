@@ -7,6 +7,7 @@ Template.date.rendered = ->
     changeMonth: true
     changeYear: true
     dateFormat: "yy/mm/dd"
+    constrainInput: false
     onSelect: (date) ->
       $set = {}
       $set[template.data.property] = date

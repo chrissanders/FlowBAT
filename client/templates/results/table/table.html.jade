@@ -14,7 +14,7 @@ template(name="table")
       each rows
         tr
           each .
-            td.dropdown(data-id="{{_id}}", data-value="{{value}}")
+            td.dropdown
               div(class="{{#if isPivotable}}dropdown-toggle{{/if}}", data-toggle="dropdown")
                 if condition _id "is" "sTime"
                   +time
@@ -24,7 +24,31 @@ template(name="table")
                   | {{value}}
               if isPivotable
                 ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu1')
-                  li(role='presentation')
-                    a.add-to-query(role='menuitem', tabindex='-1', href='#') Add to current query
-                  li(role='presentation')
-                    a.new-query(role='menuitem', tabindex='-1', href='#') Query this value
+                  if condition _id "in" "sIP" "dIP"
+                    li(role='presentation')
+                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sIP"}}"
+                    li(role='presentation')
+                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="dIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.dIP"}}"
+                    li(role='presentation')
+                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="aIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.aIP"}}"
+                  else if condition _id "in" "sPort" "dPort"
+                    li(role='presentation')
+                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sPort"}}"
+                    li(role='presentation')
+                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="dPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.dPort"}}"
+                    li(role='presentation')
+                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="aPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.aPort"}}"
+                  else if condition _id "in" "sTime" "eTime"
+                    li(role='presentation')
+                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sTime", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sTime"}}"
+                    li(role='presentation')
+                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="eTime", data-value="{{value}}") Add to query as "{{t "rwcut.fields.eTime"}}"
+                    li(role='presentation')
+                      a.add-to-query-as-before-after-time(role='menuitem', tabindex='-1', href='#', data-spread="60000", data-value="{{value}}") Add to query as "Before/After Time (1 Minute)"
+                    li(role='presentation')
+                      a.add-to-query-as-before-after-time(role='menuitem', tabindex='-1', href='#', data-spread="300000", data-value="{{value}}") Add to query as "Before/After Time (5 Minutes)"
+                   else
+                    li(role='presentation')
+                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="{{_id}}", data-value="{{value}}") Add to query as "{{fieldI18n}}"
+                    //li(role='presentation')
+                    //  a.new-query(role='menuitem', tabindex='-1', href='#', data-id="{{_id}}", data-value="{{value}}") Query this value

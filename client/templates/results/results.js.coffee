@@ -107,16 +107,24 @@ Template.results.events
     )
   "click .add-to-query": grab (event, template) ->
     $target = $(event.currentTarget)
-    $td = $target.closest("td")
-    _id = $td.attr("data-id")
-    value = $td.attr("data-value")
+    _id = $target.attr("data-id")
+    value = $target.attr("data-value")
     query = share.Queries.findOne(template.data._id)
     share.Pivoting.execute(query, _id, value)
+  "click .add-to-query-as-before-after-time": grab (event, template) ->
+    $target = $(event.currentTarget)
+    spread = $target.attr("data-spread")
+    value = $target.attr("data-value")
+    valueAsMoment = moment.utc(value, "YYYY/MM/DDTHH:mm:ss.SSS")
+    sTimeValueAsMoment = valueAsMoment.clone().subtract(spread, 'milliseconds')
+    eTimeValueAsMoment = valueAsMoment.clone().add(spread, 'milliseconds')
+    query = share.Queries.findOne(template.data._id)
+    share.Pivoting.execute(query, "sTime", sTimeValueAsMoment.format("YYYY/MM/DDTHH:mm:ss.SSS"))
+    share.Pivoting.execute(query, "eTime", eTimeValueAsMoment.format("YYYY/MM/DDTHH:mm:ss.SSS"))
   "click .new-query": grab (event, template) ->
     $target = $(event.currentTarget)
-    $td = $target.closest("td")
-    _id = $td.attr("data-id")
-    value = $td.attr("data-value")
+    _id = $target.attr("data-id")
+    value = $target.attr("data-value")
     queryId = share.Queries.insert({
       isQuick: true
     })

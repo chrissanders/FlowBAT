@@ -2,8 +2,10 @@ share.Pivoting =
   fields2properties:
     "sIP": "saddress"
     "dIP": "daddress"
+    "aIP": "anyAddress" # proxy
     "sPort": "sport"
     "dPort": "dport"
+    "aPort": "aport" # proxy
     "protocol": "protocol"
     "flags": "flagsAll"
     "sTime": "startDate"
@@ -15,8 +17,10 @@ share.Pivoting =
   fields2options:
     "sIP": "saddress"
     "dIP": "daddress"
+    "aIP": "any-address" # proxy
     "sPort": "sport"
     "dPort": "dport"
+    "aPort": "aport" # proxy
     "protocol": "protocol"
     "pro": "protocol"
     "packets": "packets"
@@ -45,7 +49,7 @@ share.Pivoting =
       when "flags", "initialFlags", "sessionFlags"
         value = value + "/" + value
       when "sTime", "eTime"
-        value = moment.utc(value, "YYYY/MM/DDTHH:mm:ss.SSS").format("YYYY/MM/DD")
+        value = moment.utc(value, "YYYY/MM/DDTHH:mm:ss.SSS").format("YYYY/MM/DD:HH")
       when "type", "scc", "dcc"
         value = [value]
     $set = {}
