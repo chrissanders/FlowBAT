@@ -113,11 +113,11 @@ template(name="fieldsets")
                 i.fa.fa-plus
       .col-xs-6
         .form-group
-          label.control-label Source country
+          label.control-label Active time
           .input-group
             span.input-group-addon
-              +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
-            +chosen(family="query" _id=_id property="scc" value=scc options=countriesOptions multiple=true enabled=sccEnabled isNew=isNew)
+              +checkbox(family="query" _id=_id property="activeTimeEnabled" value=activeTimeEnabled isNew=isNew)
+            +input(family="query" _id=_id property="activeTime" value=activeTime enabled=activeTimeEnabled isNew=isNew)
     .row
       .col-xs-6
         .form-group
@@ -134,11 +134,11 @@ template(name="fieldsets")
                 i.fa.fa-plus
       .col-xs-6
         .form-group
-          label.control-label Destination country
+          label.control-label Source country
           .input-group
             span.input-group-addon
-              +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)
-            +chosen(family="query" _id=_id property="dcc" value=dcc options=countriesOptions multiple=true enabled=dccEnabled isNew=isNew)
+              +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
+            +chosen(family="query" _id=_id property="scc" value=scc options=countriesOptions multiple=true enabled=sccEnabled isNew=isNew)
     .row
       .col-xs-6
         .form-group
@@ -153,6 +153,13 @@ template(name="fieldsets")
                   i.fa.fa-pencil
               button.create-ipset.btn.btn-near-select.btn-default(type='button', data-field="anySet")
                 i.fa.fa-plus
+      .col-xs-6
+        .form-group
+          label.control-label Destination country
+          .input-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)
+            +chosen(family="query" _id=_id property="dcc" value=dcc options=countriesOptions multiple=true enabled=dccEnabled isNew=isNew)
   fieldset
     legend Additional options
     .row

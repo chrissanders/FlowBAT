@@ -82,6 +82,8 @@ share.stringBuilderFields = [
   "protocol"
   "flagsAllEnabled"
   "flagsAll"
+  "activeTimeEnabled"
+  "activeTime"
   "additionalParametersEnabled"
   "additionalParameters"
 ]
@@ -126,6 +128,8 @@ share.buildQueryString = (query) ->
       parameters.push("--protocol=" + query.protocol)
     if query.flagsAllEnabled and query.flagsAll
       parameters.push("--flags-all=" + query.flagsAll)
+    if query.activeTimeEnabled and query.activeTime
+      parameters.push("--active-time=" + query.activeTime)
     if query.additionalParametersEnabled and query.additionalParameters
       parameters.push(query.additionalParameters)
     string = parameters.join(" ")

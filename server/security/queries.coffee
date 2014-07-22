@@ -44,6 +44,8 @@ share.Queries.allow
       protocol: String
       flagsAllEnabled: Boolean
       flagsAll: String
+      activeTimeEnabled: Boolean
+      activeTime: String
       additionalParametersEnabled: Boolean
       additionalParameters: String
       fields: [String]
@@ -107,6 +109,8 @@ share.Queries.allow
       protocol: Match.Optional(String)
       flagsAllEnabled: Match.Optional(Boolean)
       flagsAll: Match.Optional(String)
+      activeTimeEnabled: Match.Optional(Boolean)
+      activeTime: Match.Optional(String)
       additionalParametersEnabled: Match.Optional(Boolean)
       additionalParameters: Match.Optional(String)
       fields: Match.Optional([String])

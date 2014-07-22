@@ -117,8 +117,7 @@ Template.results.events
     sTimeValueAsMoment = valueAsMoment.clone().subtract(spread, 'milliseconds')
     eTimeValueAsMoment = valueAsMoment.clone().add(spread, 'milliseconds')
     query = share.Queries.findOne(template.data._id)
-    share.Pivoting.execute(query, "sTime", sTimeValueAsMoment.format("YYYY/MM/DDTHH:mm:ss.SSS"))
-    share.Pivoting.execute(query, "eTime", eTimeValueAsMoment.format("YYYY/MM/DDTHH:mm:ss.SSS"))
+    share.Pivoting.execute(query, "aTime", sTimeValueAsMoment.format("YYYY/MM/DDTHH:mm:ss.SSS") + "-" + eTimeValueAsMoment.format("YYYY/MM/DDTHH:mm:ss.SSS"))
   "click .new-query": grab (event, template) ->
     $target = $(event.currentTarget)
     _id = $target.attr("data-id")

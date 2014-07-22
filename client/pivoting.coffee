@@ -10,6 +10,7 @@ share.Pivoting =
     "flags": "flagsAll"
     "sTime": "startDate"
     "eTime": "endDate"
+    "aTime": "activeTime" # auxiliary
     "sensor": "sensor"
     "scc": "scc"
     "dcc": "dcc"
@@ -26,10 +27,11 @@ share.Pivoting =
     "packets": "packets"
     "bytes": "bytes"
     "flags": "flags-all"
-    "sTime": "start-date"
     "duration": "duration"
     "dur": "duration"
+    "sTime": "start-date"
     "eTime": "end-date"
+    "aTime": "active-time" # auxiliary
     "sensor": "sensor"
     "sen": "sensor"
     "class": "class"

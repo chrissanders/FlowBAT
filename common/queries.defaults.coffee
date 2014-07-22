@@ -41,6 +41,8 @@ share.Queries.before.insert (userId, query) ->
     protocol: ""
     flagsAllEnabled: false
     flagsAll: ""
+    activeTimeEnabled: false
+    activeTime: ""
     additionalParametersEnabled: false
     additionalParameters: ""
     fields: ["sIP", "dIP", "sPort", "dPort", "protocol", "packets", "bytes", "flags", "sTime", "duration", "eTime", "sensor"]
