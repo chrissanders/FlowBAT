@@ -15,6 +15,7 @@ Meteor.methods
       name: String
       password: String
       group: Match.App.InArray(share.Security.groups())
+    newUser.email = newUser.email.toLowerCase()
     userId = Accounts.createUser
       email: newUser.email
       password: newUser.password
