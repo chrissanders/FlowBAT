@@ -90,18 +90,17 @@ share.stringBuilderFields = [
 share.buildQueryString = (query) ->
   if query.interface is "builder"
     parameters = []
+    if query.typesEnabled and query.types.length and _.difference(share.queryTypes, query.types).length
+      value = query.types.join(",")
+    else
+      value = "all"
+    parameters.push("--type=" + value)
     if query.startDateEnabled and query.startDate
       parameters.push("--start-date=" + query.startDate)
     if query.endDateEnabled and query.endDate
       parameters.push("--end-date=" + query.endDate)
     if query.sensorEnabled and query.sensor
       parameters.push("--sensor=" + query.sensor)
-    if query.typesEnabled
-      if query.types.length and _.difference(share.queryTypes, query.types).length
-        value = query.types.join(",")
-      else
-        value = "all"
-      parameters.push("--type=" + value)
     if query.daddressEnabled and query.daddress
       parameters.push("--daddress=" + query.daddress)
     if query.saddressEnabled and query.saddress
