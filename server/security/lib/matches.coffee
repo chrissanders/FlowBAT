@@ -1,7 +1,7 @@
 Match.App =
   Id: Match.Where (value) ->
     check(value, String)
-    if share.isDebug
+    if value in share.fixtureIds
       return true # verbose IDs
     if value.length isnt 17 or _.difference(value.split(""), ["2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]).length
       throw new Match.Error("Value \"" + value + "\" is not a valid ID")
