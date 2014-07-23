@@ -13,11 +13,7 @@ template(name="user")
               label.control-label(for="user-name") {{t "forms.profile.name"}}
               input#user-name.form-control.user-input(type="text", name="name", data-field="profile.name", value="{{user.profile.name}}", placeholder="{{t 'forms.profile.namePlaceholder'}}")
             .form-group
-              label.control-label(for="password") {{t "forms.profile.password"}}
-              .input-group
-                input#password.form-control.input-password(type="text", name="password", value="******", readonly, disabled)
-                span.input-group-btn
-                  button.btn.btn-primary.change-password(type="button") {{t "forms.profile.passwordChange.link"}}
+              +passwordChangeField
             .form-group
               label.control-label(for="user-group") {{t "forms.profile.group"}}
               select#user-group.form-control.user-input(name="group", data-field="group" disabled="{{isCurrentUser}}")
