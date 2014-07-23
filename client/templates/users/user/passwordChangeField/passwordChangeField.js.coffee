@@ -3,7 +3,7 @@ Template.passwordChangeField.events
     UI.insert(UI.renderWithData(Template.alert,
       name: i18n.t("forms.profile.passwordChange.alert.name")
       descriptionTemplateName: "changePasswordAlertDescription"
-      descriptionTemplateData: {}
+      descriptionTemplateData: {user: template.data.user}
       buttonPanelTemplateName: "changePasswordAlertButtonsPanel"
-      buttonPanelTemplateData: {user: template.data.user}
+      buttonPanelTemplateData: {}
     ), document.body)
