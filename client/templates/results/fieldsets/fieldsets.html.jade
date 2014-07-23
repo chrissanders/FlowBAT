@@ -104,12 +104,11 @@ template(name="fieldsets")
           .input-group
             span.input-group-addon
               +checkbox(family="query" _id=_id property="sipSetEnabled" value=sipSetEnabled isNew=isNew)
-            +objectSelect(family="query" _id=_id property="sipSet" value=sipSet options=ipsets withEmptyOption=true enabled=sipSetEnabled isNew=isNew)
+            +chosen(family="query" _id=_id property="sipSet" value=sipSet options=ipsets enabled=sipSetEnabled withEmptyOption=true isNew=isNew)
             span.input-group-btn
-              if sipSet
-                a.btn.btn-near-select.btn-default(href="/ipset/{{sipSet}}")
-                  i.fa.fa-pencil
-              button.create-ipset.btn.btn-near-select.btn-default(type='button', data-field="sipSet")
+              a.btn.btn-default(href="/ipset/{{sipSet}}", disabled="{{not sipSet}}")
+                i.fa.fa-pencil
+              a.btn.btn-default(href="/ipset/create")
                 i.fa.fa-plus
       .col-xs-6
         .form-group
@@ -125,12 +124,11 @@ template(name="fieldsets")
           .input-group
             span.input-group-addon
               +checkbox(family="query" _id=_id property="dipSetEnabled" value=dipSetEnabled isNew=isNew)
-            +objectSelect(family="query" _id=_id property="dipSet" value=dipSet options=ipsets withEmptyOption=true enabled=dipSetEnabled isNew=isNew)
+            +chosen(family="query" _id=_id property="dipSet" value=dipSet options=ipsets enabled=dipSetEnabled withEmptyOption=true isNew=isNew)
             span.input-group-btn
-              if dipSet
-                a.btn.btn-near-select.btn-default(href="/ipset/{{dipSet}}")
-                  i.fa.fa-pencil
-              button.create-ipset.btn.btn-near-select.btn-default(type='button', data-field="dipSet")
+              a.btn.btn-default(href="/ipset/{{dipSet}}", disabled="{{not dipSet}}")
+                i.fa.fa-pencil
+              a.btn.btn-default(href="/ipset/create")
                 i.fa.fa-plus
       .col-xs-6
         .form-group
@@ -146,12 +144,11 @@ template(name="fieldsets")
           .input-group
             span.input-group-addon
               +checkbox(family="query" _id=_id property="anySetEnabled" value=anySetEnabled isNew=isNew)
-            +objectSelect(family="query" _id=_id property="anySet" value=anySet options=ipsets withEmptyOption=true enabled=anySetEnabled isNew=isNew)
+            +chosen(family="query" _id=_id property="anySet" value=anySet options=ipsets enabled=anySetEnabled withEmptyOption=true isNew=isNew)
             span.input-group-btn
-              if anySet
-                a.btn.btn-near-select.btn-default(href="/ipset/{{anySet}}")
-                  i.fa.fa-pencil
-              button.create-ipset.btn.btn-near-select.btn-default(type='button', data-field="anySet")
+              a.btn.btn-default(href="/ipset/{{anySet}}", disabled="{{not anySet}}")
+                i.fa.fa-pencil
+              a.btn.btn-default(href="/ipset/create")
                 i.fa.fa-plus
       .col-xs-6
         .form-group

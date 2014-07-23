@@ -12,7 +12,10 @@ Template.chosen.helpers
 Template.chosen.rendered = ->
   editor = @firstNode
   $editor = $(editor)
-  $editor.chosen()
+  options =
+    allow_single_deselect: @data.withEmptyOption
+  _.defer ->
+    $editor.chosen(options)
 #  editor = share.EditorCache.editors[@data.family]
 #  if editor.isEditedProperty(@data._id, @data.property)
 #    $activeElement = $(document.activeElement)
@@ -29,6 +32,8 @@ Template.chosen.events
     if not value
       if template.data.multiple
         value = []
+      else
+        value = null
     $set[template.data.property] = value
     editor = share.EditorCache.editors[template.data.family]
     editor.collection.update(template.data._id, {$set: $set})

@@ -64,7 +64,7 @@
   display: block;
   width: 12px;
   height: 12px;
-  background: url('chosen-sprite.png') -42px 1px no-repeat;
+  background: url('/images/chosen-sprite.png') -42px 1px no-repeat;
   font-size: 1px;
 }
 .chosen-container-single .chosen-single abbr:hover {

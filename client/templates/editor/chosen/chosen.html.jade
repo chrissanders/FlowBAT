@@ -1,5 +1,7 @@
 template(name="chosen")
   select(class="{{family}}-{{property}}-editor {{family}}-property-editor property-editor form-control {{#if isNew}}is-new{{/if}}", name="{{property}}", multiple="{{multiple}}", placeholder="{{placeholder}}", data-family=family, data-object-id=_id)
+    if withEmptyOption
+      option(value="", selected="{{not value}}")
     each options
       option(value="{{value}}", selected="{{optionSelected ..}}") {{name}}
 
