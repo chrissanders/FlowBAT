@@ -6,8 +6,9 @@ Meteor.methods
   setPassword: (userId, password) ->
     check(userId, String)
     check(password, String)
-    unless share.Security.hasRole(@userId, "admin")
-      throw "Setting password is not allowed for non admins"
+    unless userId is @userId or share.Security.hasRole(@userId, "admin")
+      Meteor._debug("Setting password is not allowed for non admins")
+      return
     Accounts.setPassword(userId, password)
   addNewUser: (newUser) ->
     check newUser,

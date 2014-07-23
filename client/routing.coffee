@@ -103,6 +103,11 @@ Router.map ->
       _.defaults({}, @params,
         user: user
       )
+  @route "profile",
+    data: ->
+      _.defaults({}, @params,
+        user: Meteor.user()
+      )
 
 Router.onBeforeAction (pause) ->
   if Accounts._resetPasswordToken
