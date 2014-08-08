@@ -1,13 +1,13 @@
 share.fixtureIds = []
 
 insertData = (data, collection) ->
+  for _id of data when _id not in share.fixtureIds
+    share.fixtureIds.push(_id)
   if collection.find().count() is 0
     for _id, object of data
       object._id = _id
       object.isNew = false
       collection.insert(object)
-      if _id not in share.fixtureIds
-        share.fixtureIds.push(_id)
     return true
 
 share.loadFixtures = ->
