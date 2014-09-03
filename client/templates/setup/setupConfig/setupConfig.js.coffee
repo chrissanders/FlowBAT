@@ -2,7 +2,7 @@ Template.setupConfig.helpers
   configFormContext: ->
     options:
       title: "Nice to meet you, " + share.Transformations.user(Meteor.user()).firstName + "!"
-      description: "Please configure this FlowBAT installation:"
+      description: "Please configure your FlowBAT installation:"
       checkConnectionText: "Finish setup"
     config: share.Configs.findOne()
 
