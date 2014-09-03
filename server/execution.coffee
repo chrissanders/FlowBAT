@@ -25,8 +25,12 @@ share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
 Meteor.methods
   loadDataForCSV: (queryId) ->
     check(queryId, Match.App.QueryId)
-    @unblock()
+    unless @userId
+      throw new Match.Error("Operation not allowed for unauthorized users")
     query = share.Queries.findOne(queryId)
+    unless @userId is query.ownerId
+      throw new Match.Error("Operation not allowed for non-owners")
+    @unblock()
     fut = new Future()
     callback = (result, error, code) ->
       if error
@@ -38,8 +42,12 @@ Meteor.methods
     fut.wait()
   getRwfToken: (queryId) ->
     check(queryId, Match.App.QueryId)
-    @unblock()
+    unless @userId
+      throw new Match.Error("Operation not allowed for unauthorized users")
     query = share.Queries.findOne(queryId)
+    unless @userId is query.ownerId
+      throw new Match.Error("Operation not allowed for non-owners")
+    @unblock()
     fut = new Future()
     callback = (result, error, code, token) ->
       if error
