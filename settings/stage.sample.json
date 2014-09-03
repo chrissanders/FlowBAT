@@ -1,20 +1,21 @@
 {
-  "baseUrl": "http://localhost:3000",
+  "baseUrl": "http://flowbat.com",
   "mailUrl": "smtp://[username]:[password]@smtp.mailgun.org:465/",
   "isLoadingFixtures": true,
   "apm": {
-    "appId": "__disabled_for_dev__",
-    "secret": "__disabled_for_dev__"
+    "appId": "",
+    "secret": ""
   },
   "public": {
-    "isDebug": true,
+    "version": "__VERSION__",
+    "isDebug": false,
     "googleAnalytics": {
       "property": "",
       "disabled": true
     },
     "mixpanel": {
       "token": "",
-      "disabled": true
+      "disabled": false
     }
   }
 }

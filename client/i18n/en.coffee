@@ -38,12 +38,10 @@ i18n.addResourceBundle("en",
       setPassword: "Set your password to begin using the application:"
     profile:
       header: "Profile settings"
-      email: "Email"
+      email: "Email address"
       emailPlaceholder: "Email address"
-      name: "Name"
+      name: "Name and surname"
       namePlaceholder: "Name and surname"
-      party: "Political party"
-      partyPlaceholder: ""
       password: "Password"
       passwordPlaceholder: "Password"
       passwordChange:
@@ -89,6 +87,7 @@ i18n.addResourceBundle("en",
     "User has no password set": "Please, follow the link from the invitation email and set a new password"
     "Token expired": "Invitation link has expired"
   interface:
+    create: "Create"
     insert: "Add"
     update: "Edit"
     remove: "Delete"

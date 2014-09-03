@@ -11,11 +11,18 @@ insertData = (data, collection) ->
     return true
 
 share.loadFixtures = ->
+  if Meteor.settings.isLoadingFixtures
+    share.loadFixturesForCompleteSetup()
+  else
+    share.loadFixturesForIncompleteSetup()
+
+share.loadFixturesForCompleteSetup = ->
   now = new Date()
   lastWeek = new Date(now.getTime() - 7 * 24 * 3600 * 1000)
 
   configs =
     Default:
+      isSetupComplete: true
       isSSH: true
       host: "50.116.29.253"
       port: "22"
@@ -101,3 +108,9 @@ share.loadFixtures = ->
 
 #  serviceConfigurations = {}
 #  insertData(serviceConfigurations, ServiceConfiguration.configurations)
+
+share.loadFixturesForIncompleteSetup = ->
+  configs =
+    Default:
+      isSetupComplete: false
+  insertData(configs, share.Configs)

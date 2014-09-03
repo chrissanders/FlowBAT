@@ -23,3 +23,9 @@ user-status
 timesync
 handlebars-server
 /handlebars-server
+/notifications
+/iron-layout
+/sinon
+/chai
+/iron-core
+/iron-dynamic-template

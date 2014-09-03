@@ -4,7 +4,8 @@ FlowBAT uses [Meteor UP](https://github.com/arunoda/meteor-up) for deployment. B
 
 ### Target server setup
 
-``DEBUG=* mup setup # run normal Meteor UP setup; watch for errors!``
+1. Symlink ``settings.json`` to ``settings/prod.json``
+2. ``DEBUG=* mup setup # run normal Meteor UP setup; watch for errors!``
 
 ### App deployment
 

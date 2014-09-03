@@ -1,0 +1,24 @@
+template(name="newUserForm")
+  form.user-form.panel
+    .panel-heading
+      h4.panel-title {{title}}
+      if description
+        p {{description}}
+    .panel-body
+      .form-group.email-form-group
+        label.control-label(for="user-email") {{t "forms.profile.email"}}
+        input#user-email.form-control.user-input(type="text", name="email", disabled="{{isCurrentUser}}")
+      .form-group.name-form-group
+        label.control-label(for="user-name") {{t "forms.profile.name"}}
+        input#user-name.form-control.user-input(type="text", name="name")
+      .form-group.password-form-group
+        label.control-label(for="password") {{t "forms.profile.password"}}
+        input#password.form-control.user-input(type="password", name="password")
+      .form-group.group-form-group
+        label.control-label(for="user-group") {{t "forms.profile.group"}}
+        select#user-group.form-control.user-input(name="group")
+          each groups
+            option(value="{{value}}", selected="{{isCurrent}}") {{name}}
+    .panel-footer
+      button.btn.btn-primary(type="submit") {{submitText}}
+      a.btn.btn-default.cancel(href="{{pathFor 'users'}}") {{t "interface.cancel"}}

@@ -17,6 +17,17 @@ Meteor.methods
       password: String
       group: Match.App.InArray(share.Security.groups())
     newUser.email = newUser.email.toLowerCase()
+    if @userId
+      if not share.Security.hasRole(@userId, "admin")
+        Meteor._debug("Creating users is not allowed for non admins")
+        return
+    else
+      config = share.Configs.findOne()
+      if config.isSetupComplete
+        Meteor._debug("Creating users is not allowed for non admins")
+        return
+      else
+        newUser.group = "admin"
     userId = Accounts.createUser
       email: newUser.email
       password: newUser.password

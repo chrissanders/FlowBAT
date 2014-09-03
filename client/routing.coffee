@@ -7,9 +7,20 @@ Router.configure
 
 Router.onBeforeAction((pause) ->
   if not Meteor.user()
-    @render("welcome")
+    config = share.Configs.findOne()
+    if config and config.isSetupComplete
+      @render("welcome")
+    else
+      @render("setupAdminAccount")
     pause()
 , {except: []})
+
+Router.onBeforeAction((pause) ->
+  config = share.Configs.findOne()
+  if not config.isSetupComplete
+    @render("setupConfig")
+    pause()
+, except: ["setup"])
 
 Router.onBeforeAction("dataNotFound")
 
@@ -108,6 +119,12 @@ Router.map ->
       _.defaults({}, @params,
         user: Meteor.user()
       )
+  @route "setup",
+    path: "/setup"
+    data: -> {}
+    action: ->
+      if Meteor.users.findOne()
+        @render("config")
 
 Router.onBeforeAction (pause) ->
   if Accounts._resetPasswordToken
