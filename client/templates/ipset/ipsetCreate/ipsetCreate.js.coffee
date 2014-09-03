@@ -8,7 +8,6 @@ Template.ipsetCreate.rendered = ->
         required: true
       contents:
         required: true
-#    submitHandler: ->
   )
 
 Template.ipsetCreate.events
