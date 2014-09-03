@@ -14,6 +14,10 @@ share.Configs.allow
       dataRootdir: Match.Optional(String)
       isNew: Match.Optional(Match.App.isNewUpdate(config.isNew))
       updatedAt: Date
+    if not config.isSetupComplete
+      _.extend($set,
+        isSetupComplete: Match.Optional(Boolean)
+      )
     check(modifier,
       $set: $set
     )

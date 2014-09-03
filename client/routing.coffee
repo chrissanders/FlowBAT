@@ -8,10 +8,10 @@ Router.configure
 Router.onBeforeAction((pause) ->
   if not Meteor.user()
     config = share.Configs.findOne()
-    if config and config.isSetupComplete
-      @render("welcome")
-    else
+    if not config.isSetupComplete
       @render("setupAdminAccount")
+    else
+      @render("welcome")
     pause()
 , {except: []})
 

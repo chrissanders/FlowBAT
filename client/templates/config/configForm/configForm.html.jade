@@ -1,6 +1,6 @@
 template(name="configForm")
   with config
-    form.config-form.panel
+    form.config-form.panel(data-id="{{_id}}")
       .panel-heading
         h4.panel-title {{../options.title}}
         if ../options.description
@@ -30,14 +30,14 @@ template(name="configForm")
           label.control-label Data Root Directory location (SiLK server filesystem path)
           +input(family="config" _id=_id property="dataRootdir" value=dataRootdir isNew=isNew)
       .panel-footer
-        p.text-muted
+        p.text-muted.fields-saved-automatically
           | Fields are saved automatically
         button.check-connection.btn.btn-primary(type="button")
           if Session "checkingConnection"
             i.fa.fa-fw.fa-spin.fa-spinner
           else
             i.fa.fa-fw.fa-bolt
-          | Check connection
+          | {{../options.checkConnectionText}}
         span.connection-success-notice.notice.text-success Success!
         .connection-failure-notice.notice.alert.alert-danger(role='alert')
           strong Oh snap!

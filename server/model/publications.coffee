@@ -30,12 +30,12 @@ Meteor.publish "configs", ->
   if not @userId
     config = share.Configs.findOne()
     if not config.isSetupComplete
-      share.Configs.find()
+      return share.Configs.find()
     return []
   if share.Security.hasRole(@userId, "admin")
-    share.Configs.find()
+    return share.Configs.find()
   else
-    []
+    return []
 
 Meteor.publish "queries", ->
   if not @userId then return []

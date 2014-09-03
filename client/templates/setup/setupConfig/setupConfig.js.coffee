@@ -1,7 +1,19 @@
 Template.setupConfig.helpers
-#  helper: ->
+  configFormContext: ->
+    options:
+      title: "Nice to meet you, " + share.Transformations.user(Meteor.user()).firstName + "!"
+      description: "Please configure this FlowBAT installation:"
+      checkConnectionText: "Finish setup"
+    config: share.Configs.findOne()
 
 Template.setupConfig.rendered = ->
 
 Template.setupConfig.events
-#  "click .selector": (event, template) ->
+  "click .check-connection": (event, template) ->
+    $target = $(event.currentTarget)
+    if $target.closest("form").valid()
+      share.checkConnection(event, template, ->
+        config = share.Configs.findOne()
+        share.Configs.update(config._id, {$set: {isSetupComplete: true}})
+        Router.go("/")
+      )

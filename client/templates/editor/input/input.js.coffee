@@ -30,7 +30,7 @@ Template.input.events
         editor.stopEditing(data._id)
       else
       # noop
-  "keyup, paste .property-editor": (event, template) ->
+  "keyup .property-editor, paste .property-editor": (event, template) ->
     $editor = $(event.target)
     editor = share.EditorCache.editors[template.data.family]
     editor.debouncedSaveProperty(template.data._id, template.data.property, $editor.val())

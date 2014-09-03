@@ -48,6 +48,8 @@ class share.IPSet
     "/ipset/" + @_id
 
 share.Transformations =
+  user: (user) ->
+    if user instanceof share.User or not user then user else new share.User(user)
   config: (config) ->
     if config instanceof share.Config or not config then config else new share.Config(config)
   query: (query) ->
