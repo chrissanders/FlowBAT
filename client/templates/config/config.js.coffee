@@ -1,16 +1,9 @@
 Template.config.helpers
-#  helper: ->
+  configFormContext: ->
+    options:
+      title: "SiLK server configuration"
+    config: @config
 
 Template.config.rendered = ->
-  @$("form").validate(
-    rules:
-      siteConfigFile:
-        required: true
-      dataRootdir:
-        required: true
-  )
 
 Template.config.events
-  "keyup input": (event, template) ->
-    $input = $(event.currentTarget)
-    $input.valid()

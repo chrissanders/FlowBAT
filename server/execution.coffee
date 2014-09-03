@@ -23,6 +23,27 @@ share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   executeQuery(query, numRecs, false, callback)
 
 Meteor.methods
+  checkConnection: ->
+    unless @userId
+      throw new Match.Error("Operation not allowed for unauthorized users")
+    queryId = share.Queries.insert({
+      interface: "cmd"
+      cmd: "--protocol=0-255"
+      isQuick: true
+    })
+    query = share.Queries.findOne(queryId)
+    query.string = share.buildQueryString(query) # after defaults are applied
+    @unblock()
+    fut = new Future()
+    callback = (result, error, code) ->
+      if error
+        fut.throw(new Meteor.Error(500, error))
+      else
+        fut.return(result)
+    query.startRecNum = 1
+    executeQuery(query, 1, false, callback)
+    fut.wait()
+    # quick queries are cleaned up automatically
   loadDataForCSV: (queryId) ->
     check(queryId, Match.App.QueryId)
     unless @userId
@@ -72,7 +93,7 @@ executeQuery = (query, numRecs, binary, callback) ->
         rwsFilename = "/tmp/" + set._id + ".rws"
         writeFileFuture = writeFile(txtFilename, set.contents)
         if config.isSSH
-          scpCommand = "scp " + config.getSSHOptions() + " " + txtFilename + " " + config.user + "@" + config.host + ":" + txtFilename
+          scpCommand = "scp " + config.getSSHOptions() + " -P " + config.port + " " + txtFilename + " " + config.user + "@" + config.host + ":" + txtFilename
           scpFuture = new Future()
           Process.exec(scpCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
             result = stdout.trim()
@@ -168,7 +189,7 @@ executeQuery = (query, numRecs, binary, callback) ->
       code = 0
     if binary
       if config.isSSH
-        scp = "scp " + config.getSSHOptions() + " " + config.user + "@" + config.host + ":/tmp/" + token + ".rwf /tmp/" + token + ".rwf"
+        scp = "scp " + config.getSSHOptions() + " -P " + config.port + " " + config.user + "@" + config.host + ":/tmp/" + token + ".rwf /tmp/" + token + ".rwf"
         Process.exec(scp, Meteor.bindEnvironment((err, stdout, stderr) ->
           result = stdout.trim()
           error = stderr.trim()

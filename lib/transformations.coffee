@@ -11,7 +11,7 @@ class share.Config
   constructor: (doc) ->
     _.extend(@, doc)
   wrapCommand: (command) ->
-    "ssh " + @getSSHOptions() + " " + @user + "@" + @host + " \"" + command + "\""
+    "ssh " + @getSSHOptions() + " -p " + @port +  " " + @user + "@" + @host + " \"" + command + "\""
   getSSHOptions: ->
     "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=error -i " + @getIdentityFile()
   getIdentityFile: ->

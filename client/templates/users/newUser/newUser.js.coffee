@@ -1,5 +1,5 @@
 Template.newUser.helpers
-  newUserFormConfig: ->
+  newUserFormContext: ->
     title: "New user"
     submitText: i18n.t("interface.insert")
 

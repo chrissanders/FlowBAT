@@ -1,0 +1,44 @@
+template(name="configForm")
+  with config
+    form.config-form.panel
+      .panel-heading
+        h4.panel-title {{../options.title}}
+        if ../options.description
+          p {{../options.description}}
+      .panel-body
+        .checkbox
+          label
+            +checkbox(family="config" _id=_id property="isSSH" value=isSSH isNew=isNew)
+            | Use SSH for connecting to server
+        if isSSH
+          .form-group
+            label.control-label Host
+            +input(family="config" _id=_id property="host" value=host isNew=isNew)
+          .form-group
+            label.control-label Port
+            +input(family="config" _id=_id property="port" value=port isNew=isNew)
+          .form-group
+            label.control-label User
+            +input(family="config" _id=_id property="user" value=user isNew=isNew)
+          .form-group
+            label.control-label Identity file (local filesystem path)
+            +input(family="config" _id=_id property="identityFile" value=identityFile isNew=isNew)
+        .form-group
+          label.control-label Site config file (SiLK server filesystem path)
+          +input(family="config" _id=_id property="siteConfigFile" value=siteConfigFile isNew=isNew)
+        .form-group
+          label.control-label Data Root Directory location (SiLK server filesystem path)
+          +input(family="config" _id=_id property="dataRootdir" value=dataRootdir isNew=isNew)
+      .panel-footer
+        p.text-muted
+          | Fields are saved automatically
+        button.check-connection.btn.btn-primary(type="button")
+          if Session "checkingConnection"
+            i.fa.fa-fw.fa-spin.fa-spinner
+          else
+            i.fa.fa-fw.fa-bolt
+          | Check connection
+        span.connection-success-notice.notice.text-success Success!
+        .connection-failure-notice.notice.alert.alert-danger(role='alert')
+          strong Oh snap!
+          pre {{error}}
