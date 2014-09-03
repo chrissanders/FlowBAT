@@ -12,8 +12,11 @@ share.currentUserHandle = Meteor.subscribe("currentUser", ->
 share.usersHandle = null
 share.configsHandle = null
 Deps.autorun ->
-  if Meteor.user()?.group is "admin"
-    share.usersHandle = Meteor.subscribe("users")
-    share.configsHandle = Meteor.subscribe("configs")
+  # if group changes, resubscribe
+  user = share.user({group: 1})
+  group = if user then user.group else ""
+  # group argument needed to bust subscription cache
+  share.usersHandle = Meteor.subscribe("users", group)
+  share.configsHandle = Meteor.subscribe("configs", group)
 share.queriesHandle = Meteor.subscribe("queries")
 share.ipsetsHandle = Meteor.subscribe("ipsets")
