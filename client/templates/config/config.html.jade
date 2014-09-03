@@ -25,7 +25,10 @@ template(name="config")
                   label.control-label Identity file (local filesystem path)
                   +input(family="config" _id=_id property="identityFile" value=identityFile isNew=isNew)
               .form-group
-                label.control-label Site config file (SiLK server filesystem path; leave blank for default)
+                label.control-label Site config file (SiLK server filesystem path)
                 +input(family="config" _id=_id property="siteConfigFile" value=siteConfigFile isNew=isNew)
+              .form-group
+                label.control-label Data Root Directory location (SiLK server filesystem path)
+                +input(family="config" _id=_id property="dataRootdir" value=dataRootdir isNew=isNew)
               p.text-muted
                 | Fields are saved automatically

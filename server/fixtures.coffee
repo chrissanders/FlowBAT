@@ -22,6 +22,7 @@ share.loadFixtures = ->
       user: "denis"
       identityFile: ""
       siteConfigFile: "/usr/local/etc/silk.conf"
+      dataRootdir: "/data"
   insertData(configs, share.Configs)
 
   users =

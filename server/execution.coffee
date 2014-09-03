@@ -131,6 +131,8 @@ executeQuery = (query, numRecs, binary, callback) ->
     rwfilterArguments.push("--pass=stdout")
   if config.siteConfigFile
     rwfilterArguments.push("--site-config-file=" + config.siteConfigFile)
+  if config.dataRootdir
+    rwfilterArguments.push("--data-rootdir=" + config.dataRootdir)
   command = "rwfilter " + rwfilterArguments.join(" ")
   if not binary
     if query.sortField
