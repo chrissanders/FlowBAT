@@ -11,7 +11,7 @@ template(name="dashboard")
                   button.btn.btn-default(type='submit')
                     i.fa.fa-fw.fa-search
                     | Execute
-                input.quick-query.form-control(type="text", name="query", placeholder="Quick query")
+                input.quick-query.form-control(id="tags" type="text", name="query", placeholder="Quick query")
         each queries
           +results(_id=_id isDashboard=true)
         .panel
