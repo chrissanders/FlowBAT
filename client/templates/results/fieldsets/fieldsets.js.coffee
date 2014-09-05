@@ -17,5 +17,6 @@ Template.fieldsets.helpers
     window.countryCodesMap
 
 Template.fieldsets.rendered = ->
+  share.queryAutocomplete(@$(".input-group.additional-parameters-form-group input"))
 
 Template.fieldsets.events

@@ -162,7 +162,7 @@ template(name="fieldsets")
     .row
       .col-xs-6
         .form-group
-          .input-group
+          .input-group.additional-parameters-form-group
             span.input-group-addon
               +checkbox(family="query" _id=_id property="additionalParametersEnabled" value=additionalParametersEnabled isNew=isNew)
             +input(family="query" _id=_id property="additionalParameters" value=additionalParameters enabled=additionalParametersEnabled placeholder="Raw command-line options" isNew=isNew)
