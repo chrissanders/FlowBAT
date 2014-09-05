@@ -1,6 +1,7 @@
 share.queryAutocomplete = ($element) ->
   $element.autocomplete
     minLength: 0
+    delay: 0
     source: (request, response) ->
      response $.ui.autocomplete.filter(availableTags, extractLast(request.term))
     focus: ->
