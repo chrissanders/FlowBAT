@@ -20,3 +20,4 @@ Deps.autorun ->
   share.configsHandle = Meteor.subscribe("configs", group)
 share.queriesHandle = Meteor.subscribe("queries")
 share.ipsetsHandle = Meteor.subscribe("ipsets")
+share.exclusionsHangle = Meteor.subscribe("exclusions")

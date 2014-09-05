@@ -86,6 +86,18 @@ share.loadFixturesForCompleteSetup = ->
     share.Queries.update("Dashboard1", {$set: {executingInterval: executingInterval}})
     Meteor.users.update("ChrisSanders", {$set: {"profile.dashboardQueryIds": ["Dashboard1"]}})
 
+  exclusions =
+    ExclushionDashboard1:
+      ownerId: "ChrisSanders"
+      queryId: "Dashboard1"
+      string: "--proto=6"
+    ExclushionDashboard3:
+      ownerId: "ChrisSanders"
+      queryId: "Dashboard1"
+      string: "--proto=6"
+  insertData(exclusions, share.Exclusions)
+
+
   ipsets =
     Local:
       name: "Local addresses"
@@ -107,6 +119,7 @@ share.loadFixturesForCompleteSetup = ->
       """
       ownerId: "ChrisSanders"
   insertData(ipsets, share.IPSets)
+
 
 #  serviceConfigurations = {}
 #  insertData(serviceConfigurations, ServiceConfiguration.configurations)

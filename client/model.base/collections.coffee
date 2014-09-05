@@ -7,3 +7,6 @@ share.IPSets = window.IPSets = new Meteor.Collection("ipsets",
 share.Configs = window.Configs = new Meteor.Collection("configs",
   transform: share.Transformations.config
 )
+share.Exclusions = window.Exclusions = new Meteor.Collection("exclusions",
+  transform: share.Transformations.exclusion
+)
