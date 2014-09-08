@@ -56,7 +56,8 @@ share.Queries.before.insert (userId, query) ->
     interface: "cmd"
     executingInterval: 0
     executingAt: null
-    isStale: false
+    isStringStale: false
+    isResultStale: false
     isUTC: true
     isQuick: false
     isNew: true

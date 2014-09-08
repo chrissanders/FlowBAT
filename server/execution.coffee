@@ -9,19 +9,19 @@ share.Queries.before.insert (userId, query) ->
 
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   if _.intersection(fieldNames, share.stringBuilderFields).length
-    share.Queries.update(query._id, {$set: {string: share.buildQueryString(query), exclusions: share.buildQueryExclusions(query)}})
+    share.Queries.update(query._id, {$set: {isStringStale: true, string: share.buildQueryString(query), exclusions: share.buildQueryExclusions(query)}})
 
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
-  if not query.isStale
+  if not query.isResultStale
     return
   if not query.string
-    share.Queries.update(query._id, {$set: {isStale: false}})
+    share.Queries.update(query._id, {$set: {isStringStale: false, isResultStale: false}})
     return
   config = share.Configs.findOne({}, {transform: share.Transformations.config})
   user = Meteor.users.findOne(query.ownerId)
   numRecs = user.profile.numRecs
   callback = (result, error, code) ->
-    share.Queries.update(query._id, {$set: {result: result, error: error, code: code, isStale: false}})
+    share.Queries.update(query._id, {$set: {result: result, error: error, code: code, isStringStale: false, isResultStale: false}})
   loadQueryResult(query, config, numRecs, callback)
 
 Meteor.methods
@@ -99,10 +99,12 @@ Meteor.methods
 executeQuery = (query, config, callback) ->
   rwsetbuildErrors = []
   rwsetbuildFutures = []
+  isIpsetStale = false
   _.each(["dipSet", "sipSet", "anySet"], (field) ->
     if query[field + "Enabled"] and query[field]
       set = share.IPSets.findOne(query[field])
-      if set.isStale
+      if set.isResultStale
+        isIpsetStale = true
         rwsetbuildFuture = new Future()
         txtFilename = "/tmp/" + set._id + ".txt"
         rwsFilename = "/tmp/" + set._id + ".rws"
@@ -155,7 +157,7 @@ executeQuery = (query, config, callback) ->
               if error
                 rwsetbuildErrors.push(error)
               if code is 0
-                share.IPSets.update(set._id, {$set: {isStale: false}})
+                share.IPSets.update(set._id, {$set: {isResultStale: false}})
               else
                 if not error
                   throw "rwsetbuild: code is \"" + code + "\" while stderr is \"" + error + "\""
@@ -169,8 +171,12 @@ executeQuery = (query, config, callback) ->
   if rwsetbuildErrors.length
     callback("", rwsetbuildErrors.join("\n"), 255)
     return
-  rwfilterArguments = query.string.split(" ")
 
+  if not query.isStringStale and not isIpsetStale
+    callback("", "", 0)
+    return
+
+  rwfilterArguments = query.string.split(" ")
   if config.siteConfigFile
     rwfilterArguments.push("--site-config-file=" + config.siteConfigFile)
   if config.dataRootdir
@@ -224,6 +230,10 @@ loadQueryResult = (query, config, numRecs, callback) ->
       result = stdout.trim()
       error = stderr.trim()
       code = if err then err.code else 0
-      callback(result, error, code)
+      if error.indexOf("rwcut: Error opening file") is 0
+        query.isStringStale = true
+        loadQueryResult(query, config, numRecs, callback)
+      else
+        callback(result, error, code)
     ))
   ))

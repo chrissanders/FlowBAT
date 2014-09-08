@@ -81,7 +81,7 @@ share.loadFixturesForCompleteSetup = ->
       _id = share.Queries.insert(query)
       query = share.Queries.findOne(_id)
       share.Queries.update(_id, {$set: {string: share.buildQueryString(query)}}) # after defaults are applied
-      share.Queries.update(_id, {$set: {isStale: true}})
+      share.Queries.update(_id, {$set: {isResultStale: true}})
     executingInterval = 5 * share.minute
 #    executingInterval /= 5 * 12 # debug
     share.Queries.update("Dashboard1", {$set: {executingInterval: executingInterval}})

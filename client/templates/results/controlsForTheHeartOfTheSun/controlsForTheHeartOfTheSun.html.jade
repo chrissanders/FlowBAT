@@ -2,7 +2,7 @@ template(name="controlsForTheHeartOfTheSun")
   .controlsForTheHeartOfTheSun
     .btn-group
       button.execute.btn.btn-default(class="{{#if ../isDashboard}}btn-xs{{/if}}", type="submit")
-        if isStale
+        if isResultStale
           i.fa.fa-fw.fa-spinner.fa-spin
         else
           i.fa.fa-fw.fa-search

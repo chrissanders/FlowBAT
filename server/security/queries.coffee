@@ -62,7 +62,8 @@ share.Queries.allow
       startRecNum: Match.Integer
       sortField: String
       sortReverse: Boolean
-      isStale: Boolean
+      isStringStale: Boolean
+      isResultStale: Boolean
       isUTC: Boolean
       isQuick: Boolean
       isNew: Boolean
@@ -131,7 +132,8 @@ share.Queries.allow
       startRecNum: Match.Optional(Match.Integer)
       sortField: Match.Optional(String)
       sortReverse: Match.Optional(Boolean)
-      isStale: Match.Optional(Boolean)
+      isStringStale: Match.Optional(Boolean)
+      isResultStale: Match.Optional(Boolean)
       isUTC: Match.Optional(Boolean)
       isQuick: Match.Optional(Boolean)
       isNew: Match.Optional(Match.App.isNewUpdate(query.isNew))

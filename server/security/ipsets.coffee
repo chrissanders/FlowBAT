@@ -9,7 +9,7 @@ share.IPSets.allow
       name: String
       note: String
       contents: String
-      isStale: Boolean
+      isResultStale: Boolean
       isNew: Boolean
       ownerId: Match.App.UserId
       updatedAt: Date
@@ -29,7 +29,7 @@ share.IPSets.allow
       name: Match.Optional(String)
       note: Match.Optional(String)
       contents: Match.Optional(String)
-      isStale: Match.Optional(Boolean)
+      isResultStale: Match.Optional(Boolean)
       isNew: Match.Optional(Match.App.isNewUpdate(ipset.isNew))
       updatedAt: Date
     check(modifier,

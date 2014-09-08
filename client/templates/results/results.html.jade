@@ -47,7 +47,7 @@ template(name="results")
             else
               +fieldsets
               +controlsForTheHeartOfTheSun
-      if not isStale
+      if not isResultStale
         if error
           .panel-body
             .alert.alert-danger(role='alert')
@@ -58,7 +58,7 @@ template(name="results")
           +table
         .panel-body
           ul.pager
-            li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if isStale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
+            li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if isResultStale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
               a(href='#')
                 i.fa.fa-angle-left
                 | Previous
@@ -66,7 +66,7 @@ template(name="results")
               select.num-recs.form-control
                 each numRecsOptions
                   option(value="{{.}}", selected="{{condition . 'is' currentUser.profile.numRecs}}") {{.}} per page
-            li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}} {{#if isStale}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
+            li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}} {{#if isResultStale}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
               a(href='#')
                 | Next
                 i.fa.fa-angle-right
