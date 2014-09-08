@@ -69,7 +69,7 @@ share.loadFixturesForCompleteSetup = ->
   queries =
     Dashboard1:
       name: "Dashboard query"
-      cmd: "--sensor=S0 --type=all --sport=80"
+      cmd: "--sensor=S0 --type=all"
       ownerId: "ChrisSanders"
       exclusionsCmd: "--sensor=S0 --sport=80 OR --sport=70"
   for _id of queries when _id not in share.fixtureIds
