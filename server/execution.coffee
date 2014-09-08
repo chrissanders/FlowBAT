@@ -177,15 +177,13 @@ executeQuery = (query, config, callback) ->
     rwfilterArguments.push("--data-rootdir=" + config.dataRootdir)
   rwfilterArguments.push("--pass=stdout")
 
-  if query.exclusions
-    for orExclusion in query.exclusions
-      rwfilterArguments.push("| rwfilter --input-pipe=stdin")
-      rwfilterArguments.push(orExclusion)
-      if config.siteConfigFile
-        rwfilterArguments.push("--site-config-file=" + config.siteConfigFile)
-      if config.dataRootdir
-        rwfilterArguments.push("--data-rootdir=" + config.dataRootdir)
-      rwfilterArguments.push("--fail=stdout")
+  for exclusion in query.exclusions
+    rwfilterArguments.push("| rwfilter --input-pipe=stdin")
+    rwfilterArguments.push(exclusion)
+    if config.siteConfigFile
+      rwfilterArguments.push("--site-config-file=" + config.siteConfigFile)
+    # config.dataRootdir shouldn't be used with exclusions
+    rwfilterArguments.push("--fail=stdout")
 
   rwfilterArguments.push("> /tmp/" + query._id + ".rwf")
 
@@ -202,6 +200,8 @@ executeQuery = (query, config, callback) ->
 
 loadQueryResult = (query, config, numRecs, callback) ->
   executeQuery(query, config, Meteor.bindEnvironment((result, error, code) ->
+    if error
+      return callback(result, error, code)
     commands = []
     if query.sortField
       rwsortArguments = ["--fields=" + query.sortField]
