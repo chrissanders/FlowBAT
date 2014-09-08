@@ -50,6 +50,8 @@ share.Queries.allow
       activeTime: String
       additionalParametersEnabled: Boolean
       additionalParameters: String
+      additionalParametersQueryExclusionsEnabled: Boolean
+      additionalParametersQueryExclusions: String
       fields: [String]
       fieldsOrder: [String]
       result: String
@@ -117,6 +119,8 @@ share.Queries.allow
       activeTime: Match.Optional(String)
       additionalParametersEnabled: Match.Optional(Boolean)
       additionalParameters: Match.Optional(String)
+      additionalParametersQueryExclusionsEnabled: Match.Optional(Boolean)
+      additionalParametersQueryExclusions: Match.Optional(String)
       fields: Match.Optional([String])
       fieldsOrder: Match.Optional([String])
       result: Match.Optional(String)

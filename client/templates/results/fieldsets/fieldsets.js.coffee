@@ -15,6 +15,9 @@ Template.fieldsets.helpers
       }
   countriesOptions: ->
     window.countryCodesMap
+  finalString: ->
+    query = share.Queries.findOne(@_id)
+    share.buildNativeQuery(query)
 
 Template.fieldsets.rendered = ->
   share.queryAutocomplete(@$(".input-group.additional-parameters-form-group input"))

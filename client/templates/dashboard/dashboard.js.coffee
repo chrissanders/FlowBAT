@@ -18,11 +18,13 @@ Template.dashboard.events
     $form = $(event.currentTarget)
     $quickQueryInput = $form.find(".quick-query")
     quickQueryValue = $quickQueryInput.val().trim()
+    $quickQueryInput = $form.find(".input-group.exclusion input")
+    exclusionsCmdValue = $quickQueryInput.val().trim()
     if quickQueryValue
       _id = share.Queries.insert({
         isQuick: true
       })
-      share.Queries.update(_id, {$set: {interface: "cmd", cmd: quickQueryValue}})
+      share.Queries.update(_id, {$set: {interface: "cmd", cmd: quickQueryValue, exclusionsCmd: exclusionsCmdValue}})
       share.Queries.update(_id, {$set: {isStale: true}})
       Router.go("/query/" + _id)
     else

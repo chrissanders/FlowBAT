@@ -87,6 +87,8 @@ share.stringBuilderFields = [
   "activeTime"
   "additionalParametersEnabled"
   "additionalParameters"
+  "additionalParametersQueryExclusionsEnabled"
+  "additionalParametersQueryExclusions"
 ]
 share.buildQueryString = (query) ->
   if query.interface is "builder"
@@ -139,10 +141,23 @@ share.buildQueryString = (query) ->
   string
 
 share.buildQueryExclusions = (query) ->
-  exclusionsCmd = []
-  for exclusionCmd in query.exclusionsCmd.split(/\s+(?:OR|\|\|)\s+/i)
-    exclusionsCmd.push(share.filterCmd(exclusionCmd))
-  return exclusionsCmd
+  exclusionsCmd = ""
+  if query.interface is "builder"
+    cl "In builder"
+    if query.additionalParametersQueryExclusionsEnabled and query.additionalParametersQueryExclusions
+      cl "Yes!"
+      exclusionsCmd = query.additionalParametersQueryExclusions
+  else
+    cl "Not in builder"
+    exclusionsCmd = query.exclusionsCmd
+
+  exclusions = []
+  for singleExclusionCmd in exclusionsCmd.split(/\s+(?:OR|\|\|)\s+/i)
+    singleExclusionCmd = share.filterCmd(singleExclusionCmd)
+    if singleExclusionCmd
+      exclusions.push(singleExclusionCmd)
+  cl exclusions
+  return exclusions
 
 share.filterCmd = (string) ->
   for excludedParameter in ["--python-expr", "--python-file", "--pmap", "--dynamic-library", "--tuple-file", "--tuple-fields", "--tuple-direction", "--tuple-dilimter", "--all-destination", "--fail-destination", "--pass-destination", "--print-statistics", "--print-volume-statistics", "--xargs"]
@@ -159,3 +174,17 @@ if typeof(console) != "undefined" && console.log && _.isFunction(console.log)
   object.cl = _.bind(console.log, console)
 else
   object.cl = ->
+
+share.buildNativeQuery = (query) ->
+  stringBuilder = []
+  stringBuilder.push("rwfilter ")
+  stringBuilder.push(query.string)
+  stringBuilder.push("--pass=stdout")
+  for exclusion in query.exclusions
+    stringBuilder.push("|")
+    stringBuilder.push("rwfilter ")
+    stringBuilder.push("--input-pipe=stdin")
+    stringBuilder.push(exclusion)
+    stringBuilder.push("--fail=stdout")
+  stringBuilder.join(" ")
+

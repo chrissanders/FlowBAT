@@ -12,6 +12,9 @@ template(name="dashboard")
                     i.fa.fa-fw.fa-search
                     | Execute
                 input.quick-query.form-control(type="text", name="query", placeholder="Quick query")
+              .input-group.exclusion
+                .input-group-addon Exclusions
+                +input(family="query" _id=_id property="exclusionsCmd" value=exclusionsCmd isNew=isNew placeholder="Example: --sensor=50 --type=S OR --sensor=60 --type=7")
         each queries
           +results(_id=_id isDashboard=true)
         .panel

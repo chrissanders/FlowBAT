@@ -12,6 +12,9 @@ Template.results.helpers
     if @isUTC
       m.zone(0)
     m.format("YYYY/MM/DD HH:mm")
+  finalString: ->
+    query = share.Queries.findOne(@_id)
+    share.buildNativeQuery(query)
 
 Template.results.rendered = ->
 #  cl "results.rendered"

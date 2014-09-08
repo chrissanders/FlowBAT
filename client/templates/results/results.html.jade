@@ -25,9 +25,7 @@ template(name="results")
           if ../isDashboard
             code.query-display
               if string
-                | rwfilter {{string}}
-                if exclusionsCmd
-                  | Exlusions {{exclusionsCmd}}
+                | {{finalString}}
               else
                 em Please set some options to build the query
           .results-buttons.clearfix

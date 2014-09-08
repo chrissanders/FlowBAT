@@ -166,18 +166,20 @@ template(name="fieldsets")
             span.input-group-addon
               +checkbox(family="query" _id=_id property="additionalParametersEnabled" value=additionalParametersEnabled isNew=isNew)
             +input(family="query" _id=_id property="additionalParameters" value=additionalParameters enabled=additionalParametersEnabled placeholder="Raw command-line options" isNew=isNew)
+    legend Exclusions
+    .row
+      .col-xs-6
+        .form-group
+          .input-group.additional-parameters-form-group
+            span.input-group-addon
+              +checkbox(family="query" _id=_id property="additionalParametersQueryExclusionsEnabled" value=additionalParametersQueryExclusionsEnabled isNew=isNew)
+            +input(family="query" _id=_id property="additionalParametersQueryExclusions" value=additionalParametersQueryExclusions enabled=additionalParametersQueryExclusionsEnabled placeholder="Raw command-line options" isNew=isNew)
   fieldset
     legend Final query
     .row
       .col-xs-12
         code.query-display
           if string
-            | rwfilter {{string}}
+            | {{finalString}}
           else
             em Please set some options to build the query
-
-    .row
-      .col-xs-12
-        code.query-display
-          if exclusionsCmd
-            | Exclusions {{exclusionsCmd}}
