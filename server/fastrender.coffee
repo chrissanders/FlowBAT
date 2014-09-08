@@ -4,4 +4,3 @@ FastRender.onAllRoutes (params) ->
   @subscribe("configs")
   @subscribe("queries")
   @subscribe("ipsets")
-  @subscribe("exclusions")

@@ -10,6 +10,8 @@ share.Queries.allow
       name: String
       string: String
       cmd: String
+      exclusionsCmd: String
+      exclusions: [String]
       startDateEnabled: Boolean
       startDate: String
       endDateEnabled: Boolean
@@ -75,6 +77,8 @@ share.Queries.allow
     $set =
       name: Match.Optional(String)
       cmd: Match.Optional(String)
+      exclusionsCmd: Match.Optional(String)
+      exclusions: Match.Optional([String])
       startDateEnabled: Match.Optional(Boolean)
       startDate: Match.Optional(String)
       endDateEnabled: Match.Optional(Boolean)

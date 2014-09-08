@@ -5,10 +5,11 @@ writeFile = Future.wrap(fs.writeFile)
 
 share.Queries.before.insert (userId, query) ->
   query.string = share.buildQueryString(query)
+  query.exclusions = share.buildQueryExclusions(query)
 
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   if _.intersection(fieldNames, share.stringBuilderFields).length
-    share.Queries.update(query._id, {$set: {string: share.buildQueryString(query)}})
+    share.Queries.update(query._id, {$set: {string: share.buildQueryString(query), exclusions: share.buildQueryExclusions(query)}})
 
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   if not query.isStale
@@ -35,6 +36,7 @@ Meteor.methods
     config = share.Configs.findOne({}, {transform: share.Transformations.config})
     query = share.Queries.findOne(queryId)
     query.string = share.buildQueryString(query) # after defaults are applied
+    query.exclusions = share.buildQueryExclusions(query)
     @unblock()
     fut = new Future()
     callback = (result, error, code) ->
@@ -163,16 +165,32 @@ executeQuery = (query, config, callback) ->
         rwsetbuildFutures.push(rwsetbuildFuture)
   )
   Future.wait(rwsetbuildFutures)
+
   if rwsetbuildErrors.length
     callback("", rwsetbuildErrors.join("\n"), 255)
     return
   rwfilterArguments = query.string.split(" ")
+
   if config.siteConfigFile
     rwfilterArguments.push("--site-config-file=" + config.siteConfigFile)
   if config.dataRootdir
     rwfilterArguments.push("--data-rootdir=" + config.dataRootdir)
-  rwfilterArguments.push("--pass=stdout > /tmp/" + query._id + ".rwf")
+  rwfilterArguments.push("--pass=stdout")
+
+  if query.exclusions
+    for orExclusion in query.exclusions
+      rwfilterArguments.push("| rwfilter --input-pipe=stdin")
+      rwfilterArguments.push(orExclusion)
+      if config.siteConfigFile
+        rwfilterArguments.push("--site-config-file=" + config.siteConfigFile)
+      if config.dataRootdir
+        rwfilterArguments.push("--data-rootdir=" + config.dataRootdir)
+      rwfilterArguments.push("--fail=stdout")
+
+  rwfilterArguments.push("> /tmp/" + query._id + ".rwf")
+
   command = "rwfilter " + rwfilterArguments.join(" ")
+
   if config.isSSH
     command = config.wrapCommand(command)
   Process.exec(command, Meteor.bindEnvironment((err, stdout, stderr) ->

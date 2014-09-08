@@ -7,6 +7,8 @@ share.Queries.before.insert (userId, query) ->
     name: ""
     string: ""
     cmd: ""
+    exclusionsCmd: ""
+    exclusions: []
     startDateEnabled: false
     startDate: ""
     endDateEnabled: false

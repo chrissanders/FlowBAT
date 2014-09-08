@@ -13,6 +13,8 @@ template(name="queryList")
                       h4.sender {{displayName}}
                       if string
                         small rwfilter {{string}}
+                        if exclusionsCmd
+                          small Exclusions {{exclusionsCmd}}
                       else
                         small No parameters specified
           .panel-footer

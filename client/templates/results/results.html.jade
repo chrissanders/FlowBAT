@@ -26,6 +26,8 @@ template(name="results")
             code.query-display
               if string
                 | rwfilter {{string}}
+                if exclusionsCmd
+                  | Exlusions {{exclusionsCmd}}
               else
                 em Please set some options to build the query
           .results-buttons.clearfix
@@ -43,7 +45,7 @@ template(name="results")
           if not ../isDashboard
             if condition interface "is" "cmd"
               +cmd
-              +exclusions
+              +exclusionsCmd
             else
               +fieldsets
               +controlsForTheHeartOfTheSun

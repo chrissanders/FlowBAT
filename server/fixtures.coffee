@@ -71,6 +71,7 @@ share.loadFixturesForCompleteSetup = ->
       name: "Dashboard query"
       cmd: "--sensor=S0 --type=all --sport=80"
       ownerId: "ChrisSanders"
+      exclusionsCmd: "--sensor=S0 --sport=80 OR --sport=70"
   for _id of queries when _id not in share.fixtureIds
     share.fixtureIds.push(_id)
   if share.Queries.find().count() is 0
@@ -85,18 +86,6 @@ share.loadFixturesForCompleteSetup = ->
 #    executingInterval /= 5 * 12 # debug
     share.Queries.update("Dashboard1", {$set: {executingInterval: executingInterval}})
     Meteor.users.update("ChrisSanders", {$set: {"profile.dashboardQueryIds": ["Dashboard1"]}})
-
-  exclusions =
-    ExclushionDashboard1:
-      ownerId: "ChrisSanders"
-      queryId: "Dashboard1"
-      string: "--proto=6"
-    ExclushionDashboard3:
-      ownerId: "ChrisSanders"
-      queryId: "Dashboard1"
-      string: "--proto=6"
-  insertData(exclusions, share.Exclusions)
-
 
   ipsets =
     Local:

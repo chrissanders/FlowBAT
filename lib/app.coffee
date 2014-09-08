@@ -48,6 +48,7 @@ share.queryTypes = ["in", "out", "inweb", "outweb", "inicmp", "outicmp", "innull
 share.stringBuilderFields = [
   "interface"
   "cmd"
+  "exclusionsCmd"
   "startDateEnabled"
   "startDate"
   "endDateEnabled"
@@ -134,6 +135,16 @@ share.buildQueryString = (query) ->
     string = parameters.join(" ")
   else
     string = query.cmd
+  string = share.filterCmd(string)
+  string
+
+share.buildQueryExclusions = (query) ->
+  exclusionsCmd = []
+  for exclusionCmd in query.exclusionsCmd.split(/\s+(?:OR|\|\|)\s+/i)
+    exclusionsCmd.push(share.filterCmd(exclusionCmd))
+  return exclusionsCmd
+
+share.filterCmd = (string) ->
   for excludedParameter in ["--python-expr", "--python-file", "--pmap", "--dynamic-library", "--tuple-file", "--tuple-fields", "--tuple-direction", "--tuple-dilimter", "--all-destination", "--fail-destination", "--pass-destination", "--print-statistics", "--print-volume-statistics", "--xargs"]
     regexp = new RegExp(excludedParameter + "=?[^\\s]*", "gi")
     string = string.replace(regexp, "")
