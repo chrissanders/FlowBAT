@@ -12,22 +12,22 @@ template(name="configForm")
             | Use SSH for connecting to server
         if isSSH
           .form-group
-            label.control-label Host
+            label.control-label SiLK Server IP Address
             +input(family="config" _id=_id property="host" value=host isNew=isNew)
           .form-group
-            label.control-label Port
+            label.control-label SiLK Server Port
             +input(family="config" _id=_id property="port" value=port isNew=isNew)
           .form-group
-            label.control-label User
+            label.control-label SiLK Server User Account
             +input(family="config" _id=_id property="user" value=user isNew=isNew)
           .form-group
-            label.control-label Identity file (local filesystem path)
+            label.control-label SSH Private Key (Full Local System File Path)
             +input(family="config" _id=_id property="identityFile" value=identityFile isNew=isNew)
         .form-group
-          label.control-label Site config file (SiLK server filesystem path)
+          label.control-label SiLK Site Configuration File (Full Server File Path)
           +input(family="config" _id=_id property="siteConfigFile" value=siteConfigFile isNew=isNew)
         .form-group
-          label.control-label Data Root Directory location (SiLK server filesystem path)
+          label.control-label SiLK Root Directory (Full Server File Path)
           +input(family="config" _id=_id property="dataRootdir" value=dataRootdir isNew=isNew)
       .panel-footer
         p.text-muted.fields-saved-automatically
