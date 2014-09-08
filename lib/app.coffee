@@ -143,20 +143,15 @@ share.buildQueryString = (query) ->
 share.buildQueryExclusions = (query) ->
   exclusionsCmd = ""
   if query.interface is "builder"
-    cl "In builder"
     if query.additionalParametersQueryExclusionsEnabled and query.additionalParametersQueryExclusions
-      cl "Yes!"
       exclusionsCmd = query.additionalParametersQueryExclusions
   else
-    cl "Not in builder"
     exclusionsCmd = query.exclusionsCmd
-
   exclusions = []
   for singleExclusionCmd in exclusionsCmd.split(/\s+(?:OR|\|\|)\s+/i)
     singleExclusionCmd = share.filterCmd(singleExclusionCmd)
     if singleExclusionCmd
       exclusions.push(singleExclusionCmd)
-  cl exclusions
   return exclusions
 
 share.filterCmd = (string) ->
