@@ -172,8 +172,8 @@ template(name="fieldsets")
         .form-group
           .input-group.additional-parameters-form-group
             span.input-group-addon
-              +checkbox(family="query" _id=_id property="additionalParametersQueryExclusionsEnabled" value=additionalParametersQueryExclusionsEnabled isNew=isNew)
-            +input(family="query" _id=_id property="additionalParametersQueryExclusions" value=additionalParametersQueryExclusions enabled=additionalParametersQueryExclusionsEnabled placeholder="Use \"OR\" to separate exclusions, for example: --type=7 OR --dport=80" isNew=isNew)
+              +checkbox(family="query" _id=_id property="additionalExclusionsCmdEnabled" value=additionalExclusionsCmdEnabled isNew=isNew)
+            +input(family="query" _id=_id property="additionalExclusionsCmd" value=additionalExclusionsCmd enabled=additionalExclusionsCmdEnabled placeholder="Use \"OR\" to separate exclusions, for example: --type=7 OR --dport=80" isNew=isNew)
   fieldset
     legend Final query
     .row

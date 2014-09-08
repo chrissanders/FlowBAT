@@ -87,8 +87,8 @@ share.stringBuilderFields = [
   "activeTime"
   "additionalParametersEnabled"
   "additionalParameters"
-  "additionalParametersQueryExclusionsEnabled"
-  "additionalParametersQueryExclusions"
+  "additionalExclusionsCmdEnabled"
+  "additionalExclusionsCmd"
 ]
 share.buildQueryString = (query) ->
   if query.interface is "builder"
@@ -143,8 +143,8 @@ share.buildQueryString = (query) ->
 share.buildQueryExclusions = (query) ->
   exclusionsCmd = ""
   if query.interface is "builder"
-    if query.additionalParametersQueryExclusionsEnabled and query.additionalParametersQueryExclusions
-      exclusionsCmd = query.additionalParametersQueryExclusions
+    if query.additionalExclusionsCmdEnabled and query.additionalExclusionsCmd
+      exclusionsCmd = query.additionalExclusionsCmd
   else
     exclusionsCmd = query.exclusionsCmd
   exclusions = []

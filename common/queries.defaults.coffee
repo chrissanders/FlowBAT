@@ -47,8 +47,8 @@ share.Queries.before.insert (userId, query) ->
     activeTime: ""
     additionalParametersEnabled: false
     additionalParameters: ""
-    additionalParametersQueryExclusionsEnabled: false
-    additionalParametersQueryExclusions: ""
+    additionalExclusionsCmdEnabled: false
+    additionalExclusionsCmd: ""
     fields: ["sIP", "dIP", "sPort", "dPort", "protocol", "packets", "bytes", "flags", "sTime", "duration", "eTime", "sensor"]
     fieldsOrder: share.rwcutFields
     result: ""
