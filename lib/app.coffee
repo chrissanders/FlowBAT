@@ -169,17 +169,3 @@ if typeof(console) != "undefined" && console.log && _.isFunction(console.log)
   object.cl = _.bind(console.log, console)
 else
   object.cl = ->
-
-share.buildNativeQuery = (query) ->
-  stringBuilder = []
-  stringBuilder.push("rwfilter ")
-  stringBuilder.push(query.string)
-  stringBuilder.push("--pass=stdout")
-  for exclusion in query.exclusions
-    stringBuilder.push("|")
-    stringBuilder.push("rwfilter ")
-    stringBuilder.push("--input-pipe=stdin")
-    stringBuilder.push(exclusion)
-    stringBuilder.push("--fail=stdout")
-  stringBuilder.join(" ")
-

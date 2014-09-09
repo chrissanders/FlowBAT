@@ -32,6 +32,18 @@ class share.Query
         @rows.push(row)
   displayName: ->
     if @isQuick then "Quick query #" + @_id else @name or "#" + @_id
+  finalString: ->
+    finalStringBuilder = []
+    finalStringBuilder.push("rwfilter ")
+    finalStringBuilder.push(@string)
+    finalStringBuilder.push("--pass=stdout")
+    for exclusion in @exclusions
+      finalStringBuilder.push("|")
+      finalStringBuilder.push("rwfilter ")
+      finalStringBuilder.push("--input-pipe=stdin")
+      finalStringBuilder.push(exclusion)
+      finalStringBuilder.push("--fail=stdout")
+    finalStringBuilder.join(" ")
   path: ->
     "/query/" + @_id
 

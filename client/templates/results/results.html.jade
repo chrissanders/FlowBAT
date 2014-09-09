@@ -24,7 +24,7 @@ template(name="results")
                           | Delete this query
           if ../isDashboard
             code.query-display
-              if string
+              if finalString
                 | {{finalString}}
               else
                 em Please set some options to build the query

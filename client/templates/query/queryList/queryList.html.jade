@@ -11,8 +11,8 @@ template(name="queryList")
                   li
                     a(href=path)
                       h4.sender {{displayName}}
-                      if string
-                        small rwfilter {{string}}
+                      if finalString
+                        small {{finalString}}
                         if exclusionsCmd
                           small Exclusions {{exclusionsCmd}}
                       else
