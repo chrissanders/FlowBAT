@@ -30,6 +30,9 @@ Template.results.events
   "click .set-interface": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
     share.Queries.update(template.data._id, {$set: {interface: $target.attr("data-interface"), result: "", error: ""}})
+  "click .set-output": grab encapsulate (event, template) ->
+    $target = $(event.currentTarget)
+    share.Queries.update(template.data._id, {$set: {output: $target.attr("data-output"), result: "", error: ""}})
   "click .toggle-is-utc": grab encapsulate (event, template) ->
     event.currentTarget.blur()
     share.Queries.update(template.data._id, {$set: {isUTC: not @isUTC}})

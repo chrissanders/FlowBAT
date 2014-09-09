@@ -21,6 +21,7 @@ template(name="controlsForTheHeartOfTheSun")
           li.divider
           li
             a.set-executing-interval(href='#', data-interval="0") Stop periodic execution
+    | &nbsp;
     if ../isDashboard
       .btn-group
         a(href="{{path}}", class="{{#if ../isDashboard}}btn-xs{{/if}}").btn.btn-default
@@ -34,3 +35,14 @@ template(name="controlsForTheHeartOfTheSun")
         button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'builder'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-interface="builder", type="button")
           i.fa.fa-cog
           | Query builder
+      | &nbsp;&nbsp;
+      .btn-group
+        button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwcut'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwcut", type="button")
+          i.fa.fa-bars
+          | Records
+        button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwstats'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwstats", type="button")
+          i.fa.fa-tasks
+          | Stats
+        button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwcount'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwcount", type="button")
+          i.fa.fa-bar-chart-o
+          | Count

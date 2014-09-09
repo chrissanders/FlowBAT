@@ -54,6 +54,7 @@ share.Queries.before.insert (userId, query) ->
     result: ""
     error: ""
     interface: "cmd"
+    output: "rwcut"
     executingInterval: 0
     executingAt: null
     isStringStale: false
