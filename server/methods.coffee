@@ -3,12 +3,6 @@ share.getMailDomail = ->
   matches[2]
 
 Meteor.methods
-#  reset: ->
-#    Meteor.users.remove({}, {multi: true})
-#    share.Configs.remove({}, {multi: true})
-#    share.Configs.insert(
-#      isSetupComplete: false
-#    )
   setPassword: (userId, password) ->
     check(userId, String)
     check(password, String)

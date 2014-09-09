@@ -125,13 +125,6 @@ Router.map ->
     action: ->
       if Meteor.users.findOne()
         @render("config")
-#  @route "reset",
-#    path: "/reset"
-#    data: -> {}
-#    action: ->
-#      Meteor.call("reset", ->
-#        location.href = "/"
-#      )
 
 Router.onBeforeAction (pause) ->
   if Accounts._resetPasswordToken
