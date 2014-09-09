@@ -8,12 +8,12 @@ template(name="dashboard")
             .form-group
               .input-group
                 .input-group-btn
-                  button.btn.btn-default(type='submit')
+                  button.btn.btn-default.equiwidth(type='submit')
                     i.fa.fa-fw.fa-search
                     | Execute
                 input.quick-query.form-control(type="text", name="query", placeholder="Quick query")
               .input-group.exclusion
-                .input-group-addon Exclusions
+                .input-group-addon.equiwidth Exclusions
                 +input(family="query" _id=_id property="exclusionsCmd" value=exclusionsCmd isNew=isNew placeholder="Use \"OR\" to separate exclusions, for example: --type=7 OR --dport=80")
         each queries
           +results(_id=_id isDashboard=true)
