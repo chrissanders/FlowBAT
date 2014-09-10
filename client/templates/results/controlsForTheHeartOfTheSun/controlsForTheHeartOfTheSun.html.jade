@@ -37,12 +37,12 @@ template(name="controlsForTheHeartOfTheSun")
           | Query builder
       | &nbsp;&nbsp;
       .btn-group
-        button.set-output.btn.btn-default.rwcut(class="{{#if condition output 'is' 'rwcut'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwcut", type="button")
+        button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwcut'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwcut", type="button")
           i.fa.fa-bars
           | Records
-        button.set-output.btn.btn-default.rwstats(class="{{#if condition output 'is' 'rwstats'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwstats", type="button")
+        button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwstats'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwstats", type="button")
           i.fa.fa-tasks
           | Stats
-        button.set-output.btn.btn-default.rwcount(class="{{#if condition output 'is' 'rwcount'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwcount", type="button")
+        button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwcount'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwcount", type="button")
           i.fa.fa-bar-chart-o
           | Count
