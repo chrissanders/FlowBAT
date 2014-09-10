@@ -12,6 +12,8 @@ Template.results.helpers
     if @isUTC
       m.zone(0)
     m.format("YYYY/MM/DD HH:mm")
+  statistics_filter_type: ->
+    "Threshold"
 
 Template.results.rendered = ->
 #  cl "results.rendered"

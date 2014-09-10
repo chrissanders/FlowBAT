@@ -6,8 +6,11 @@ Template.controlsForTheHeartOfTheSun.helpers
         "each minute"
       else
         "each " + minutes + " minutes"
+  query: ->
+    share.Queries.findOne(@_id)
 
 Template.controlsForTheHeartOfTheSun.rendered = ->
 
 Template.controlsForTheHeartOfTheSun.events
-#  "click .selector": (event, template) ->
+  "click .set-output.btn.btn-default.rwstats": (event, template) ->
+#    query =

@@ -44,6 +44,30 @@ template(name="results")
             if condition interface "is" "cmd"
               +cmd
               +exclusionsCmd
+              if condition output "is" "rwstats"
+                .row.stats-type
+                  .col-xs-2
+                    .form-group
+                      .radio
+                        label Count
+                          input(type="radio", name="type_filter", checked="checked")
+                        input.stats-radio-input
+                  .col-xs-2
+                    .form-group
+                      .radio
+                        label Percentage
+                          input(type="radio", name="type_filter", checked="")
+                        input.stats-radio-input
+                  .col-xs-2
+                    .form-group
+                      .radio
+                        label Threshold
+                          input(type="radio", name="type_filter", checked="")
+                        input.stats-radio-input
+                  .col-xs-3
+                    .input-group
+                      label.bin-time Bin time
+                        input.stats-radio-input
             else
               +fieldsets
               +controlsForTheHeartOfTheSun
@@ -81,12 +105,28 @@ template(name="results")
                 i.loading.fa.fa-spinner.fa-spin(style="display: none;")
                 | Download full RWF
             form.display-fields-form
-              fieldset
-                legend Display fields
-                each fieldsOrder
-                  .checkbox
-                    label
-                      input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}")
-                      | {{t fieldI18nString}}
+              if condition output "is" "rwstats"
+                fieldset
+                  legend Keys
+                  each fieldsOrder
+                    .checkbox
+                      label
+                        input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}")
+                        | {{t rwstatsKeyFieldI18nString}}
+                fieldset
+                  legend Values
+                  each fieldsOrder
+                    .checkbox
+                      label
+                        input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}")
+                        | {{t fieldI18nString}}
+              else
+                fieldset
+                  legend Display fields
+                  each fieldsOrder
+                    .checkbox
+                      label
+                        input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}")
+                        | {{t fieldI18nString}}
       //else
       //  .panel-body Please type in the query.

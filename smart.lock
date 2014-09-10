@@ -6,7 +6,8 @@
       "collection-hooks": {},
       "fast-render": {},
       "jade": {},
-      "handlebars-server": {}
+      "handlebars-server": {},
+      "velocity-quick-start": {}
     },
     "packages": {
       "iron-router": {
@@ -34,10 +35,65 @@
         "tag": "v1.2.0",
         "commit": "1b72c4e9d82af66293e50be4516c487d15d97464"
       },
+      "velocity-quick-start": {
+        "git": "https://github.com/alanning/meteor-velocity-quick-start.git",
+        "tag": "v0.0.8",
+        "commit": "76975566981224c3440c4909e7b6a33bdfc294b2"
+      },
+      "iron-layout": {
+        "git": "https://github.com/EventedMind/iron-layout.git",
+        "tag": "v0.2.0",
+        "commit": "4a2d53e35ba036b0c189c7ceca34be494d4c6c97"
+      },
+      "velocity-html-reporter": {
+        "git": "https://github.com/rdickert/velocity-html-reporter.git",
+        "tag": "v0.1.5",
+        "commit": "741edd0caa8d0e491c53d597d34636f90cc64b88"
+      },
+      "jasmine-unit": {
+        "git": "https://github.com/xolvio/jasmine-unit.git",
+        "tag": "v0.1.24",
+        "commit": "885dde77a96390d0fd31b03756f837f482db2ef1"
+      },
+      "jasmine": {
+        "git": "https://github.com/Sanjo/meteor-jasmine.git",
+        "tag": "v0.1.17",
+        "commit": "e7aa40942fbfb4e1393c4b14ec5ba2c63bb7f899"
+      },
+      "mocha-web-velocity": {
+        "git": "https://github.com/mad-eye/meteor-mocha-web.git",
+        "tag": "v0.3.4",
+        "commit": "5b68e18104c00687748b190b04a7752478472d17"
+      },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",
         "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
+      },
+      "iron-core": {
+        "git": "https://github.com/EventedMind/iron-core.git",
+        "tag": "v0.2.0",
+        "commit": "0e48b5dc50d03f01025b7b900fb5ce2f13d52cad"
+      },
+      "iron-dynamic-template": {
+        "git": "https://github.com/EventedMind/iron-dynamic-template.git",
+        "tag": "v0.2.1",
+        "commit": "4dd1185c4d9d616c9abdb3f33e4a7d5a88db7e18"
+      },
+      "velocity": {
+        "git": "https://github.com/xolvio/velocity.git",
+        "tag": "v0.1.20",
+        "commit": "e1ac0a7b2a2130355a9b14e4f010655d3ef21f75"
+      },
+      "package-stubber": {
+        "git": "https://github.com/alanning/meteor-package-stubber.git",
+        "tag": "v0.0.16",
+        "commit": "e74747d1553044f2903fab0b33cbc6cada775f46"
+      },
+      "mirror": {
+        "git": "https://github.com/xdissent/meteor-mirror.git",
+        "tag": "v0.0.2",
+        "commit": "03d965dcab2f976a1fdc6ce513edcd4c17b75746"
       }
     }
   }

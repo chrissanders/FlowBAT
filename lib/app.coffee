@@ -37,6 +37,16 @@ share.rwcutFields = [
   "type"
   "icmpTypeCode"
 ]
+share.rwstatsKeyFields  = [
+  "sIP"
+  "dIP"
+  "sPort"
+  "dPort"
+  "protocol"
+]
+
+#share.rwstatsValuesFields
+
 
 share.parseResult = (result) ->
   rows = []
