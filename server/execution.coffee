@@ -259,6 +259,8 @@ outputRwstats = (query, config, numRecs, callback) ->
       if value not in share.rwstatsValues
         values[index] = "distinct:" + value
     rwstatsOptions.push("--values=" + values.join(","))
+    if values[0] not in share.rwstatsValues
+      rwstatsOptions.push("--no-percents")
   rwstatsOptions.push("--" + query.rwstatsDirection)
   switch query.rwstatsMode
     when "count"

@@ -3,13 +3,19 @@ template(name="table")
     thead
       tr
         each header
-          th(data-field="{{.}}")
-            | {{t fieldI18nString}}
-            if condition ../sortField "is" .
-              if ../sortReverse
-                i.fa.fa-caret-down
-              else
-                i.fa.fa-caret-up
+          th(data-field="{{name}}")
+            if isPercentage
+              | %
+            with name
+              | {{t fieldI18nString}}
+            if isDistinct
+              | (distinct)
+            if condition ../output "is" "rwcut"
+              if condition ../sortField "is" name
+                if ../sortReverse
+                  i.fa.fa-caret-down
+                else
+                  i.fa.fa-caret-up
     tbody
       each rows
         tr

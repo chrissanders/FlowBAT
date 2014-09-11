@@ -130,6 +130,7 @@ i18n.addResourceBundle("en",
       "Records": "Records"
       "Packets": "Packets"
       "Bytes": "Bytes"
+      "cumul_%": "% Cumulative"
   users:
     fields:
       username: "Username"

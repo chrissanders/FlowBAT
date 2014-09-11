@@ -24,11 +24,29 @@ class share.Query
     @rows = []
     if @result
       parsedResult = share.parseResult(@result)
-      @header = parsedResult.shift()
+      if @output is "rwstats"
+        parsedResult.shift()
+        parsedResult.shift()
+        # shift-shift outta here, you redundant rows
+      rawHeader = parsedResult.shift()
+      for name in rawHeader
+        spec =
+          _id: name
+          name: name.trim()
+          isDistinct: false
+          isPercentage: false
+        if spec.name.indexOf("%") is 0
+          spec.isPercentage = true
+          spec.name = spec.name.substr(1)
+        distinctRegex = /-D.*$/i
+        if spec.name.match(distinctRegex)
+          spec.isDistinct = true
+          spec.name = spec.name.replace(distinctRegex, "")
+        @header.push(spec)
       for parsedRow in parsedResult
         row = []
         for parsedValue, index in parsedRow
-          row.push({_id: @header[index], value: parsedValue, queryId: @_id})
+          row.push({_id: @header[index]._id, value: parsedValue, queryId: @_id})
         @rows.push(row)
   displayName: ->
     if @isQuick then "Quick query #" + @_id else @name or "#" + @_id
