@@ -5,8 +5,8 @@ Template.results.helpers
     false # @_id in ["sTime", "eTime"]
   numRecsOptions: ->
     [5, 10, 25, 50, 100]
-  fieldIsSelected: (query) ->
-    @.toString() in query.fields
+  fieldIsSelected: (query, property) ->
+    @.toString() in query[property]
   now: ->
     m = moment(Session.get("now"))
     if @isUTC

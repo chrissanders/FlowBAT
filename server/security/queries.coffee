@@ -162,8 +162,12 @@ share.Queries.allow
       updatedAt: Date
     $addToSet =
       fields: Match.Optional(String)
+      rwstatsFields: Match.Optional(String)
+      rwstatsValues: Match.Optional(String)
     $pull =
       fields: Match.Optional(String)
+      rwstatsFields: Match.Optional(String)
+      rwstatsValues: Match.Optional(String)
     check(modifier,
       $set: Match.Optional($set)
       $addToSet: Match.Optional($addToSet)

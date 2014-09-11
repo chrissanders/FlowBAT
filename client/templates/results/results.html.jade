@@ -79,7 +79,7 @@ template(name="results")
                     each rwstatsFieldsOrder
                       .checkbox
                         label
-                          input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}", data-property="rwstatsFields")
+                          input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsFields'}}", value="{{.}}", data-property="rwstatsFields")
                           | {{t fieldI18nString}}
                 .display-fields-block
                   fieldset
@@ -87,7 +87,7 @@ template(name="results")
                     each rwstatsValuesOrder
                       .checkbox
                         label
-                          input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}", data-property="rwstatsValues")
+                          input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsValues'}}", value="{{.}}", data-property="rwstatsValues")
                           if condition . "in" share.rwstatsValues
                             strong {{t fieldI18nString}}
                           else
@@ -135,7 +135,7 @@ template(name="results")
                   each fieldsOrder
                     .checkbox
                       label
-                        input.field-checkbox(type="checkbox", checked="{{fieldIsSelected ..}}", value="{{.}}", data-property="fields")
+                        input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'fields'}}", value="{{.}}", data-property="fields")
                         | {{t fieldI18nString}}
       //else
       //  .panel-body Please type in the query.
