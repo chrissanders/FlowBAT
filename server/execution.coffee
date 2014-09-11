@@ -253,12 +253,12 @@ outputRwstats = (query, config, numRecs, callback) ->
   rwstatsOptions = []
   if query.rwstatsFields.length
     rwstatsOptions.push("--fields=" + _.intersection(query.rwstatsFieldsOrder, query.rwstatsFields).join(","))
-  if query.rwstatsValues.length
-    rwstatsValues = query.rwstatsValues
-    rwstatsValuesOrder = query.rwstatsValuesOrder
-    if query.rwstatsPrimaryValue
-      rwstatsValues.unshift(query.rwstatsPrimaryValue)
-      rwstatsValuesOrder.unshift(query.rwstatsPrimaryValue)
+  rwstatsValues = query.rwstatsValues
+  rwstatsValuesOrder = query.rwstatsValuesOrder
+  if query.rwstatsPrimaryValue
+    rwstatsValues.unshift(query.rwstatsPrimaryValue)
+    rwstatsValuesOrder.unshift(query.rwstatsPrimaryValue)
+  if rwstatsValues.length
     values = _.intersection(rwstatsValuesOrder, rwstatsValues)
     for value, index in values
       if value not in share.rwstatsValues
