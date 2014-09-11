@@ -72,21 +72,21 @@ template(name="results")
                   | Next
                   i.fa.fa-angle-right
           if not ../isDashboard
-            .extras
-              a.download-csv(href="#")
-                i.normal.fa.fa-file-excel-o
-                i.loading.fa.fa-spinner.fa-spin(style="display: none;")
-                | Download full CSV
-              a.download-rwf(href="#")
-                i.normal.fa.fa-file-archive-o
-                i.loading.fa.fa-spinner.fa-spin(style="display: none;")
-                | Download full RWF
             if condition output "is" "rwcut"
-              form.display-fields-block
-                fieldset
-                  legend Display fields
-                  each fieldsOrder
-                    .checkbox
-                      label
-                        input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'fields'}}", value="{{.}}", data-property="fields")
-                        | {{t fieldI18nString}}
+              .extras
+                a.download-csv(href="#")
+                  i.normal.fa.fa-file-excel-o
+                  i.loading.fa.fa-spinner.fa-spin(style="display: none;")
+                  | Download full CSV
+                a.download-rwf(href="#")
+                  i.normal.fa.fa-file-archive-o
+                  i.loading.fa.fa-spinner.fa-spin(style="display: none;")
+                  | Download full RWF
+                form.display-fields-block
+                  fieldset
+                    legend Display fields
+                    each fieldsOrder
+                      .checkbox
+                        label
+                          input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'fields'}}", value="{{.}}", data-property="fields")
+                          | {{t fieldI18nString}}
