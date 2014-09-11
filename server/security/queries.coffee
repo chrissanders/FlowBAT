@@ -54,6 +54,16 @@ share.Queries.allow
       additionalExclusionsCmd: String
       fields: [String]
       fieldsOrder: [String]
+      rwstatsDirection: String
+      rwstatsMode: String
+      rwstatsCountModeValue: String
+      rwstatsThresholdModeValue: String
+      rwstatsPercentageModeValue: String
+      rwstatsBinTime: String
+      rwstatsFields: [String]
+      rwstatsFieldsOrder: [String]
+      rwstatsValues: [String]
+      rwstatsValuesOrder: [String]
       result: String
       error: String
       interface: String
@@ -125,6 +135,16 @@ share.Queries.allow
       additionalExclusionsCmd: Match.Optional(String)
       fields: Match.Optional([String])
       fieldsOrder: Match.Optional([String])
+      rwstatsDirection: Match.Optional(String)
+      rwstatsMode: Match.Optional(String)
+      rwstatsCountModeValue: Match.Optional(String)
+      rwstatsThresholdModeValue: Match.Optional(String)
+      rwstatsPercentageModeValue: Match.Optional(String)
+      rwstatsBinTime: Match.Optional(String)
+      rwstatsFields: Match.Optional([String])
+      rwstatsFieldsOrder: Match.Optional([String])
+      rwstatsValues: Match.Optional([String])
+      rwstatsValuesOrder: Match.Optional([String])
       result: Match.Optional(String)
       error: Match.Optional(String)
       interface: Match.Optional(String)

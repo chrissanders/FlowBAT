@@ -32,6 +32,12 @@ class share.Query
         @rows.push(row)
   displayName: ->
     if @isQuick then "Quick query #" + @_id else @name or "#" + @_id
+  rwstatsCountModeValueIsEnabled: (mode) ->
+    @rwstatsMode is "count"
+  rwstatsThresholdModeValueIsEnabled: ->
+    @rwstatsMode is "threshold"
+  rwstatsPercentageModeValueIsEnabled: ->
+    @rwstatsMode is "percentage"
   finalString: ->
     finalStringBuilder = []
     finalStringBuilder.push("rwfilter ")

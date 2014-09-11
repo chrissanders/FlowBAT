@@ -50,29 +50,29 @@ template(name="results")
                     .input-group
                       span.input-group-addon
                         label
-                          input(type="radio", name="rwstatsMode", value="count", checked="checked")
+                          +radio(family="query" _id=_id object=. property="rwstatsMode" value="count" isNew=isNew)
                           | Count
-                      input.form-control(type="text", name="rwstatsCountModeValue")
+                      +input(family="query" _id=_id property="rwstatsCountModeValue" value=rwstatsCountModeValue enabled=rwstatsCountModeValueIsEnabled isNew=isNew)
                   .col-xs-2
                     .input-group
                       span.input-group-addon
                         label
-                          input(type="radio", name="rwstatsMode", value="threshold")
+                          +radio(family="query" _id=_id object=. property="rwstatsMode" value="threshold" isNew=isNew)
                           | Threshold
-                      input.form-control(type="text", name="rwstatsThresholdModeValue", disabled="disabled")
+                      +input(family="query" _id=_id property="rwstatsThresholdModeValue" value=rwstatsThresholdModeValue enabled=rwstatsThresholdModeValueIsEnabled isNew=isNew)
                   .col-xs-2
                     .input-group
                       span.input-group-addon
                         label
-                          input(type="radio", name="rwstatsMode", value="percentage")
+                          +radio(family="query" _id=_id object=. property="rwstatsMode" value="percentage" isNew=isNew)
                           | Percentage
-                      input.form-control(type="text", name="rwstatsPercentageModeValue", disabled="disabled")
+                      +input(family="query" _id=_id property="rwstatsPercentageModeValue" value=rwstatsPercentageModeValue enabled=rwstatsPercentageModeValueIsEnabled isNew=isNew)
                   .col-xs-2.col-xs-offset-4
                     .input-group
                       span.input-group-addon
                         label
                           | Bin time
-                      input.form-control(type="text", name="rwstatsBinTime", value="60")
+                      +input(family="query" _id=_id property="rwstatsBinTime" value=rwstatsBinTime placeholder="60" isNew=isNew)
                 .display-fields-block
                   fieldset
                     legend Keys

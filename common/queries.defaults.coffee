@@ -56,6 +56,7 @@ share.Queries.before.insert (userId, query) ->
     rwstatsCountModeValue: "10"
     rwstatsThresholdModeValue: ""
     rwstatsPercentageModeValue: ""
+    rwstatsBinTime: "60"
     rwstatsFields: []
     rwstatsFieldsOrder: share.rwcutFields
     rwstatsValues: []
