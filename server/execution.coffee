@@ -208,32 +208,49 @@ loadQueryResult = (query, config, numRecs, callback) ->
   executeQuery(query, config, Meteor.bindEnvironment((result, error, code) ->
     if error
       return callback(result, error, code)
-    commands = []
-    if query.sortField
-      rwsortArguments = ["--fields=" + query.sortField]
-      if query.sortReverse
-        rwsortArguments.push("--reverse")
-      if config.siteConfigFile
-        rwsortArguments.push("--site-config-file=" + config.siteConfigFile)
-      commands.push("rwsort " + rwsortArguments.join(" "))
-    rwcutArguments = ["--num-recs=" + numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
-    if query.fields.length
-      rwcutArguments.push("--fields=" + _.intersection(query.fieldsOrder, query.fields).join(","))
-    if config.siteConfigFile
-      rwcutArguments.push("--site-config-file=" + config.siteConfigFile)
-    commands.push("rwcut " + rwcutArguments.join(" "))
-    commands[0] += " /tmp/" + query._id + ".rwf"
-    command = commands.join(" | ")
-    if config.isSSH
-      command = config.wrapCommand(command)
-    Process.exec(command, Meteor.bindEnvironment((err, stdout, stderr) ->
-      result = stdout.trim()
-      error = stderr.trim()
-      code = if err then err.code else 0
-      if error.indexOf("rwcut: Error opening file") is 0
-        query.isStringStale = true
-        loadQueryResult(query, config, numRecs, callback)
+    switch query.output
+      when "rwcut"
+        outputRwcut(query, config, numRecs, callback)
+      when "rwstats"
+        outputRwstats(query, config, numRecs, callback)
+      when "rwcount"
+        outputRwcount(query, config, numRecs, callback)
       else
-        callback(result, error, code)
-    ))
+        callback("", "Undefined output: \"" + query.output + "\"", 255)
   ))
+
+outputRwcut = (query, config, numRecs, callback) ->
+  commands = []
+  if query.sortField
+    rwsortArguments = ["--fields=" + query.sortField]
+    if query.sortReverse
+      rwsortArguments.push("--reverse")
+    if config.siteConfigFile
+      rwsortArguments.push("--site-config-file=" + config.siteConfigFile)
+    commands.push("rwsort " + rwsortArguments.join(" "))
+  rwcutArguments = ["--num-recs=" + numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
+  if query.fields.length
+    rwcutArguments.push("--fields=" + _.intersection(query.fieldsOrder, query.fields).join(","))
+  if config.siteConfigFile
+    rwcutArguments.push("--site-config-file=" + config.siteConfigFile)
+  commands.push("rwcut " + rwcutArguments.join(" "))
+  commands[0] += " /tmp/" + query._id + ".rwf"
+  command = commands.join(" | ")
+  if config.isSSH
+    command = config.wrapCommand(command)
+  Process.exec(command, Meteor.bindEnvironment((err, stdout, stderr) ->
+    result = stdout.trim()
+    error = stderr.trim()
+    code = if err then err.code else 0
+    if error.indexOf("rwcut: Error opening file") is 0
+      query.isStringStale = true
+      loadQueryResult(query, config, numRecs, callback)
+    else
+      callback(result, error, code)
+  ))
+
+outputRwstats = (query, config, numRecs, callback) ->
+  callback("INPUT: 32 Records for 1 Bin and 32 Total Records
+OUTPUT: Top 10 Bins by Records
+sPort|   Records|  %Records|   cumul_%|
+   80|        32|100.000000|100.000000|", "", 0)

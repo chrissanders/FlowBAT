@@ -74,7 +74,7 @@ share.loadFixturesForCompleteSetup = ->
       ownerId: "ChrisSanders"
     RwstatsTest:
       name: "Rwstats query"
-      cmd: "--sensor=S0 --type=all --dport=90"
+      cmd: "--sensor=S0 --type=all --sport=80"
       output: "rwstats"
       rwstatsFields: ["sIP"]
       rwstatsValues: ["Records", "dIP", "dPort"]
