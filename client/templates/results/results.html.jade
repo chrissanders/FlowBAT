@@ -44,54 +44,6 @@ template(name="results")
             if condition interface "is" "cmd"
               +cmd
               +exclusionsCmd
-              if condition output "is" "rwstats"
-                .row.rwstats-type-row
-                  .col-xs-2
-                    .input-group
-                      span.input-group-addon
-                        label
-                          +radio(family="query" _id=_id object=. property="rwstatsMode" value="count" isNew=isNew)
-                          | Count
-                      +input(family="query" _id=_id property="rwstatsCountModeValue" value=rwstatsCountModeValue enabled=rwstatsCountModeValueIsEnabled isNew=isNew)
-                  .col-xs-2
-                    .input-group
-                      span.input-group-addon
-                        label
-                          +radio(family="query" _id=_id object=. property="rwstatsMode" value="threshold" isNew=isNew)
-                          | Threshold
-                      +input(family="query" _id=_id property="rwstatsThresholdModeValue" value=rwstatsThresholdModeValue enabled=rwstatsThresholdModeValueIsEnabled isNew=isNew)
-                  .col-xs-2
-                    .input-group
-                      span.input-group-addon
-                        label
-                          +radio(family="query" _id=_id object=. property="rwstatsMode" value="percentage" isNew=isNew)
-                          | Percentage
-                      +input(family="query" _id=_id property="rwstatsPercentageModeValue" value=rwstatsPercentageModeValue enabled=rwstatsPercentageModeValueIsEnabled isNew=isNew)
-                  .col-xs-2.col-xs-offset-4
-                    .input-group
-                      span.input-group-addon
-                        label
-                          | Bin time
-                      +input(family="query" _id=_id property="rwstatsBinTime" value=rwstatsBinTime placeholder="60" isNew=isNew)
-                .display-fields-block
-                  fieldset
-                    legend Keys
-                    each rwstatsFieldsOrder
-                      .checkbox
-                        label
-                          input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsFields'}}", value="{{.}}", data-property="rwstatsFields")
-                          | {{t fieldI18nString}}
-                .display-fields-block
-                  fieldset
-                    legend Values
-                    each rwstatsValuesOrder
-                      .checkbox
-                        label
-                          input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsValues'}}", value="{{.}}", data-property="rwstatsValues")
-                          if condition . "in" share.rwstatsValues
-                            strong {{t fieldI18nString}}
-                          else
-                            | {{t fieldI18nString}}
             else
               +fieldsets
               +controlsForTheHeartOfTheSun

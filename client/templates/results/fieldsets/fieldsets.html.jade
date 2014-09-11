@@ -175,6 +175,69 @@ template(name="fieldsets")
               +checkbox(family="query" _id=_id property="additionalExclusionsCmdEnabled" value=additionalExclusionsCmdEnabled isNew=isNew)
             +input(family="query" _id=_id property="additionalExclusionsCmd" value=additionalExclusionsCmd enabled=additionalExclusionsCmdEnabled placeholder="Use \"OR\" to separate exclusions, for example: --type=7 OR --dport=80" isNew=isNew)
   fieldset
+    legend Output type
+    .row
+      .col-xs-6
+        .btn-group
+          button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwcut'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwcut", type="button")
+            i.fa.fa-bars
+            | Records
+          button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwstats'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwstats", type="button")
+            i.fa.fa-tasks
+            | Stats
+          button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwcount'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwcount", type="button")
+            i.fa.fa-bar-chart-o
+            | Count
+  if condition output "is" "rwstats"
+    fieldset.rwstats-parameters
+      legend Stats parameters
+      .row
+        .col-xs-2
+          .input-group
+            span.input-group-addon.rwstats-mode-input-group-addon
+              label
+                +radio(family="query" _id=_id object=. property="rwstatsMode" value="count" isNew=isNew)
+                | Count
+            +input(family="query" _id=_id property="rwstatsCountModeValue" value=rwstatsCountModeValue enabled=rwstatsCountModeValueIsEnabled isNew=isNew)
+        .col-xs-2
+          .input-group
+            span.input-group-addon.rwstats-mode-input-group-addon
+              label
+                +radio(family="query" _id=_id object=. property="rwstatsMode" value="threshold" isNew=isNew)
+                | Threshold
+            +input(family="query" _id=_id property="rwstatsThresholdModeValue" value=rwstatsThresholdModeValue enabled=rwstatsThresholdModeValueIsEnabled isNew=isNew)
+        .col-xs-2
+          .input-group
+            span.input-group-addon.rwstats-mode-input-group-addon
+              label
+                +radio(family="query" _id=_id object=. property="rwstatsMode" value="percentage" isNew=isNew)
+                | Percentage
+            +input(family="query" _id=_id property="rwstatsPercentageModeValue" value=rwstatsPercentageModeValue enabled=rwstatsPercentageModeValueIsEnabled isNew=isNew)
+        .col-xs-2.col-xs-offset-4
+          .input-group
+            span.input-group-addon
+              label
+                +checkbox(family="query" _id=_id property="rwstatsBinTimeEnabled" value=rwstatsBinTimeEnabled isNew=isNew)
+                | Bin time
+            +input(family="query" _id=_id property="rwstatsBinTime" value=rwstatsBinTime placeholder="60" enabled=rwstatsBinTimeEnabled isNew=isNew)
+    fieldset.display-fields-block
+      legend Stats keys
+      each rwstatsFieldsOrder
+        .checkbox
+          label
+            input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsFields'}}", value="{{.}}", data-property="rwstatsFields")
+            | {{t fieldI18nString}}
+    fieldset.display-fields-block
+      legend Stats values
+      each rwstatsValuesOrder
+        .checkbox
+          label
+            input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsValues'}}", value="{{.}}", data-property="rwstatsValues")
+            if condition . "in" share.rwstatsValues
+              strong {{t fieldI18nString}}
+            else
+              | {{t fieldI18nString}}
+  fieldset
     legend Final query
     .row
       .col-xs-12

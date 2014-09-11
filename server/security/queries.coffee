@@ -59,6 +59,7 @@ share.Queries.allow
       rwstatsCountModeValue: String
       rwstatsThresholdModeValue: String
       rwstatsPercentageModeValue: String
+      rwstatsBinTimeEnabled: Boolean
       rwstatsBinTime: String
       rwstatsFields: [String]
       rwstatsFieldsOrder: [String]
@@ -140,6 +141,7 @@ share.Queries.allow
       rwstatsCountModeValue: Match.Optional(String)
       rwstatsThresholdModeValue: Match.Optional(String)
       rwstatsPercentageModeValue: Match.Optional(String)
+      rwstatsBinTimeEnabled: Match.Optional(Boolean)
       rwstatsBinTime: Match.Optional(String)
       rwstatsFields: Match.Optional([String])
       rwstatsFieldsOrder: Match.Optional([String])
