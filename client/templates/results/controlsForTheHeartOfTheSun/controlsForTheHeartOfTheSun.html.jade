@@ -29,9 +29,9 @@ template(name="controlsForTheHeartOfTheSun")
           | Edit
     else
       .btn-group
-        button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'cmd'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-interface="cmd", type="button")
+        button.set-property.btn.btn-default(class="{{#if condition interface 'is' 'cmd'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="interface", data-value="cmd", type="button")
           i.fa.fa-space-shuttle
           | Command line
-        button.set-interface.btn.btn-default(class="{{#if condition interface 'is' 'builder'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-interface="builder", type="button")
+        button.set-property.btn.btn-default(class="{{#if condition interface 'is' 'builder'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="interface", data-value="builder", type="button")
           i.fa.fa-cog
           | Query builder

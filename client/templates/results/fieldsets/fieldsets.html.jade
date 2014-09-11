@@ -179,13 +179,13 @@ template(name="fieldsets")
     .row
       .col-xs-6
         .btn-group
-          button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwcut'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwcut", type="button")
+          button.set-property.btn.btn-default(class="{{#if condition output 'is' 'rwcut'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="output", data-value="rwcut", type="button")
             i.fa.fa-bars
             | Records
-          button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwstats'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwstats", type="button")
+          button.set-property.btn.btn-default(class="{{#if condition output 'is' 'rwstats'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="output", data-value="rwstats", type="button")
             i.fa.fa-tasks
             | Stats
-          button.set-output.btn.btn-default(class="{{#if condition output 'is' 'rwcount'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-output="rwcount", type="button")
+          button.set-property.btn.btn-default(class="{{#if condition output 'is' 'rwcount'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="output", data-value="rwcount", type="button")
             i.fa.fa-bar-chart-o
             | Count
   if condition output "is" "rwstats"
@@ -193,27 +193,40 @@ template(name="fieldsets")
       legend Stats parameters
       .row
         .col-xs-2
-          .input-group
-            span.input-group-addon.rwstats-mode-input-group-addon
-              label
-                +radio(family="query" _id=_id object=. property="rwstatsMode" value="count" isNew=isNew)
-                | Count
-            +input(family="query" _id=_id property="rwstatsCountModeValue" value=rwstatsCountModeValue enabled=rwstatsCountModeValueIsEnabled isNew=isNew)
+          .input-group.direction-input-group
+            .input-group-btn
+              .btn-group
+                button.set-property.btn.btn-default(class="{{#if condition rwstatsDirection 'is' 'top'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="rwstatsDirection", data-value="top", type="button")
+                  i.fa.fa-hand-o-up
+                  | Top
+                button.set-property.btn.btn-default(class="{{#if condition rwstatsDirection 'is' 'bottom'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="rwstatsDirection", data-value="bottom", type="button")
+                  i.fa.fa-hand-o-down
+                  | Bottom
         .col-xs-2
-          .input-group
-            span.input-group-addon.rwstats-mode-input-group-addon
-              label
-                +radio(family="query" _id=_id object=. property="rwstatsMode" value="threshold" isNew=isNew)
-                | Threshold
-            +input(family="query" _id=_id property="rwstatsThresholdModeValue" value=rwstatsThresholdModeValue enabled=rwstatsThresholdModeValueIsEnabled isNew=isNew)
+          .form-group
+            .input-group
+              span.input-group-addon.equisize-input-group-addon
+                label
+                  +radio(family="query" _id=_id object=. property="rwstatsMode" value="count" isNew=isNew)
+                  | Count
+              +input(family="query" _id=_id property="rwstatsCountModeValue" value=rwstatsCountModeValue enabled=rwstatsCountModeValueIsEnabled isNew=isNew)
         .col-xs-2
-          .input-group
-            span.input-group-addon.rwstats-mode-input-group-addon
-              label
-                +radio(family="query" _id=_id object=. property="rwstatsMode" value="percentage" isNew=isNew)
-                | Percentage
-            +input(family="query" _id=_id property="rwstatsPercentageModeValue" value=rwstatsPercentageModeValue enabled=rwstatsPercentageModeValueIsEnabled isNew=isNew)
-        .col-xs-2.col-xs-offset-4
+          .form-group
+            .input-group
+              span.input-group-addon.equisize-input-group-addon
+                label
+                  +radio(family="query" _id=_id object=. property="rwstatsMode" value="threshold" isNew=isNew)
+                  | Threshold
+              +input(family="query" _id=_id property="rwstatsThresholdModeValue" value=rwstatsThresholdModeValue enabled=rwstatsThresholdModeValueIsEnabled isNew=isNew)
+        .col-xs-2
+          .form-group
+            .input-group
+              span.input-group-addon.equisize-input-group-addon
+                label
+                  +radio(family="query" _id=_id object=. property="rwstatsMode" value="percentage" isNew=isNew)
+                  | Percentage
+              +input(family="query" _id=_id property="rwstatsPercentageModeValue" value=rwstatsPercentageModeValue enabled=rwstatsPercentageModeValueIsEnabled isNew=isNew)
+        .col-xs-2.col-xs-offset-2.equisize-input-group-addon
           .input-group
             span.input-group-addon
               label

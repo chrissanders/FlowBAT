@@ -25,12 +25,11 @@ Template.results.events
     share.Queries.update(template.data._id, {$set: {executingInterval: executingInterval}})
   "click .input-executing-interval": grab (event, template) ->
     UI.insert(UI.renderWithData(Template.inputExecutingIntervalModal, {_id: template.data._id}), document.body)
-  "click .set-interface": grab encapsulate (event, template) ->
+  "click .set-property": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
-    share.Queries.update(template.data._id, {$set: {interface: $target.attr("data-interface"), result: "", error: ""}})
-  "click .set-output": grab encapsulate (event, template) ->
-    $target = $(event.currentTarget)
-    share.Queries.update(template.data._id, {$set: {output: $target.attr("data-output"), result: "", error: ""}})
+    $set = {result: "", error: ""}
+    $set[$target.attr("data-property")] = $target.attr("data-value")
+    share.Queries.update(template.data._id, {$set: $set})
   "click .toggle-is-utc": grab encapsulate (event, template) ->
     event.currentTarget.blur()
     share.Queries.update(template.data._id, {$set: {isUTC: not @isUTC}})
