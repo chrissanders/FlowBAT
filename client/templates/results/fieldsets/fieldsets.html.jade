@@ -237,21 +237,29 @@ template(name="fieldsets")
             +input(family="query" _id=_id property="rwstatsBinTime" value=rwstatsBinTime placeholder="60" enabled=rwstatsBinTimeEnabled isNew=isNew)
     fieldset.display-fields-block
       legend Stats keys
-      each rwstatsFieldsOrder
-        .checkbox
-          label
-            input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsFields'}}", value="{{.}}", data-property="rwstatsFields")
-            | {{t fieldI18nString}}
+      .row
+        .col-xs-12
+          each rwstatsFieldsOrder
+            .checkbox
+              label
+                input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsFields'}}", value="{{.}}", data-property="rwstatsFields")
+                | {{t fieldI18nString}}
     fieldset.display-fields-block
       legend Stats values
-      each rwstatsValuesOrder
-        .checkbox
-          label
-            input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsValues'}}", value="{{.}}", data-property="rwstatsValues")
-            if condition . "in" share.rwstatsValues
-              strong {{t fieldI18nString}}
-            else
-              | {{t fieldI18nString}}
+      .row
+        .col-xs-12
+          each rwstatsValuesOrder
+            .checkbox
+              label
+                input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsValues'}}", value="{{.}}", data-property="rwstatsValues")
+                if condition . "in" share.rwstatsValues
+                  strong {{t fieldI18nString}}
+                else
+                  | {{t fieldI18nString}}
+      .row
+        .col-xs-4
+          .form-group
+            +chosen(family="query" _id=_id property="rwstatsPrimaryValue" value=rwstatsPrimaryValue options=rwstatsPrimaryValueOptions placeholder="Primary stats value" withEmptyOption=true isNew=isNew)
   fieldset
     legend Final query
     .row

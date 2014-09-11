@@ -15,6 +15,8 @@ Template.fieldsets.helpers
       }
   countriesOptions: ->
     window.countryCodesMap
+  rwstatsPrimaryValueOptions: ->
+    _.map(@rwstatsValuesOrder, (value) -> {value: value, name: i18n.t("rwcut.fields." + value)})
 
 Template.fieldsets.rendered = ->
   share.queryAutocomplete(@$(".input-group.additional-parameters-form-group input"))

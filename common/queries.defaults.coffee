@@ -62,6 +62,7 @@ share.Queries.before.insert (userId, query) ->
     rwstatsFieldsOrder: share.rwcutFields
     rwstatsValues: []
     rwstatsValuesOrder: share.rwstatsValues.concat(share.rwcutFields)
+    rwstatsPrimaryValue: ""
     result: ""
     error: ""
     interface: "cmd"
