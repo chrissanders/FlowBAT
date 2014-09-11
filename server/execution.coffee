@@ -176,24 +176,24 @@ executeQuery = (query, config, callback) ->
     callback("", "", 0)
     return
 
-  rwfilterArguments = query.string.split(" ")
+  rwfilterOptions = query.string.split(" ")
   if config.siteConfigFile
-    rwfilterArguments.push("--site-config-file=" + config.siteConfigFile)
+    rwfilterOptions.push("--site-config-file=" + config.siteConfigFile)
   if config.dataRootdir
-    rwfilterArguments.push("--data-rootdir=" + config.dataRootdir)
-  rwfilterArguments.push("--pass=stdout")
+    rwfilterOptions.push("--data-rootdir=" + config.dataRootdir)
+  rwfilterOptions.push("--pass=stdout")
 
   for exclusion in query.exclusions
-    rwfilterArguments.push("| rwfilter --input-pipe=stdin")
-    rwfilterArguments.push(exclusion)
+    rwfilterOptions.push("| rwfilter --input-pipe=stdin")
+    rwfilterOptions.push(exclusion)
     if config.siteConfigFile
-      rwfilterArguments.push("--site-config-file=" + config.siteConfigFile)
+      rwfilterOptions.push("--site-config-file=" + config.siteConfigFile)
     # config.dataRootdir shouldn't be used with exclusions
-    rwfilterArguments.push("--fail=stdout")
+    rwfilterOptions.push("--fail=stdout")
 
-  rwfilterArguments.push("> /tmp/" + query._id + ".rwf")
+  rwfilterOptions.push("> /tmp/" + query._id + ".rwf")
 
-  command = "rwfilter " + rwfilterArguments.join(" ")
+  command = "rwfilter " + rwfilterOptions.join(" ")
 
   if config.isSSH
     command = config.wrapCommand(command)
@@ -222,18 +222,18 @@ loadQueryResult = (query, config, numRecs, callback) ->
 outputRwcut = (query, config, numRecs, callback) ->
   commands = []
   if query.sortField
-    rwsortArguments = ["--fields=" + query.sortField]
+    rwsortOptions = ["--fields=" + query.sortField]
     if query.sortReverse
-      rwsortArguments.push("--reverse")
+      rwsortOptions.push("--reverse")
     if config.siteConfigFile
-      rwsortArguments.push("--site-config-file=" + config.siteConfigFile)
-    commands.push("rwsort " + rwsortArguments.join(" "))
-  rwcutArguments = ["--num-recs=" + numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
+      rwsortOptions.push("--site-config-file=" + config.siteConfigFile)
+    commands.push("rwsort " + rwsortOptions.join(" "))
+  rwcutOptions = ["--num-recs=" + numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
   if query.fields.length
-    rwcutArguments.push("--fields=" + _.intersection(query.fieldsOrder, query.fields).join(","))
+    rwcutOptions.push("--fields=" + _.intersection(query.fieldsOrder, query.fields).join(","))
   if config.siteConfigFile
-    rwcutArguments.push("--site-config-file=" + config.siteConfigFile)
-  commands.push("rwcut " + rwcutArguments.join(" "))
+    rwcutOptions.push("--site-config-file=" + config.siteConfigFile)
+  commands.push("rwcut " + rwcutOptions.join(" "))
   commands[0] += " /tmp/" + query._id + ".rwf"
   command = commands.join(" | ")
   if config.isSSH
@@ -242,7 +242,7 @@ outputRwcut = (query, config, numRecs, callback) ->
     result = stdout.trim()
     error = stderr.trim()
     code = if err then err.code else 0
-    if error.indexOf("rwcut: Error opening file") is 0
+    if error.indexOf("Error opening file") isnt -1
       query.isStringStale = true
       loadQueryResult(query, config, numRecs, callback)
     else
@@ -250,7 +250,42 @@ outputRwcut = (query, config, numRecs, callback) ->
   ))
 
 outputRwstats = (query, config, numRecs, callback) ->
-  callback("INPUT: 32 Records for 1 Bin and 32 Total Records
-OUTPUT: Top 10 Bins by Records
-sPort|   Records|  %Records|   cumul_%|
-   80|        32|100.000000|100.000000|", "", 0)
+  rwstatsOptions = []
+  if query.rwstatsFields.length
+    rwstatsOptions.push("--fields=" + _.intersection(query.rwstatsFieldsOrder, query.rwstatsFields).join(","))
+  if query.rwstatsValues.length
+    values = _.intersection(query.rwstatsValuesOrder, query.rwstatsValues)
+    for value, index in values
+      if value not in share.rwstatsValues
+        values[index] = "distinct:" + value
+    rwstatsOptions.push("--values=" + values.join(","))
+  rwstatsOptions.push("--" + query.rwstatsDirection)
+  switch query.rwstatsMode
+    when "count"
+      rwstatsOptions.push("--count=" + query.rwstatsCountModeValue)
+    when "threshold"
+      rwstatsOptions.push("--threshold=" + query.rwstatsThresholdModeValue)
+    when "percentage"
+      rwstatsOptions.push("--percentage=" + query.rwstatsPercentageModeValue)
+  if query.rwstatsBinTimeEnabled
+    if query.rwstatsBinTime
+      rwstatsOptions.push("--bin-time=" + query.rwstatsBinTime)
+    else
+      rwstatsOptions.push("--bin-time")
+  if config.siteConfigFile
+    rwstatsOptions.push("--site-config-file=" + config.siteConfigFile)
+  rwstatsOptionsString = rwstatsOptions.join(" ")
+  rwstatsOptionsString = share.filterOptions(rwstatsOptionsString)
+  command = "rwstats " + rwstatsOptionsString + " /tmp/" + query._id + ".rwf"
+  if config.isSSH
+    command = config.wrapCommand(command)
+  Process.exec(command, Meteor.bindEnvironment((err, stdout, stderr) ->
+    result = stdout.trim()
+    error = stderr.trim()
+    code = if err then err.code else 0
+    if error.indexOf("Error opening file") isnt -1
+      query.isStringStale = true
+      loadQueryResult(query, config, numRecs, callback)
+    else
+      callback(result, error, code)
+  ))

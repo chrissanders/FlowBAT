@@ -145,7 +145,7 @@ share.buildQueryString = (query) ->
     string = parameters.join(" ")
   else
     string = query.cmd
-  string = share.filterCmd(string)
+  string = share.filterOptions(string)
   string
 
 share.buildQueryExclusions = (query) ->
@@ -157,17 +157,17 @@ share.buildQueryExclusions = (query) ->
     exclusionsCmd = query.exclusionsCmd
   exclusions = []
   for singleExclusionCmd in exclusionsCmd.split(/\s+(?:OR|\|\|)\s+/i)
-    singleExclusionCmd = share.filterCmd(singleExclusionCmd)
+    singleExclusionCmd = share.filterOptions(singleExclusionCmd)
     if singleExclusionCmd
       exclusions.push(singleExclusionCmd)
   return exclusions
 
-share.filterCmd = (string) ->
-  for excludedParameter in ["--python-expr", "--python-file", "--pmap", "--dynamic-library", "--tuple-file", "--tuple-fields", "--tuple-direction", "--tuple-dilimter", "--all-destination", "--fail-destination", "--pass-destination", "--print-statistics", "--print-volume-statistics", "--xargs"]
-    regexp = new RegExp(excludedParameter + "=?[^\\s]*", "gi")
-    string = string.replace(regexp, "")
-  string = string.replace(/[^\s\=\-\/\,\.\:0-9a-z]/gi, "")
-  string
+share.filterOptions = (options) ->
+  for excludedOption in ["--python-expr", "--python-file", "--pmap", "--dynamic-library", "--tuple-file", "--tuple-fields", "--tuple-direction", "--tuple-dilimter", "--all-destination", "--fail-destination", "--pass-destination", "--print-statistics", "--print-volume-statistics", "--xargs"]
+    regexp = new RegExp(excludedOption + "=?[^\\s]*", "gi")
+    options = options.replace(regexp, "")
+  options = options.replace(/[^\s\=\-\/\,\.\:0-9a-z]/gi, "")
+  options
 
 share.isDebug = Meteor.settings.public.isDebug
 
