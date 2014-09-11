@@ -44,11 +44,14 @@ Template.results.events
     share.Queries.update(template.data._id, {$set: {startRecNum: startRecNum}})
   "change .field-checkbox": encapsulate (event, template) ->
     checkbox = event.currentTarget
+    property = $(checkbox).attr("data-property")
     modifier = {}
     if checkbox.checked
-      modifier.$addToSet = {"fields": checkbox.value}
+      modifier.$addToSet = {}
+      modifier.$addToSet[property] = checkbox.value
     else
-      modifier.$pull = {"fields": checkbox.value}
+      modifier.$pull = {}
+      modifier.$pull[property] = checkbox.value
     share.Queries.update(template.data._id, modifier)
   "change .num-recs": encapsulate (event, template) ->
     $numRecs = $(event.currentTarget)

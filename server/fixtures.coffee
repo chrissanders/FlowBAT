@@ -70,8 +70,15 @@ share.loadFixturesForCompleteSetup = ->
     Dashboard1:
       name: "Dashboard query"
       cmd: "--sensor=S0 --type=all --sport=80"
-      ownerId: "ChrisSanders"
       exclusionsCmd: "--daddress=192.168.0.1 OR --scc=au"
+      ownerId: "ChrisSanders"
+    RwstatsTest:
+      name: "Rwstats query"
+      cmd: "--sensor=S0 --type=all --dport=90"
+      output: "rwstats"
+      rwstatsFields: ["sIP"]
+      rwstatsValues: ["Records", "dIP", "dPort"]
+      ownerId: "ChrisSanders"
   for _id of queries when _id not in share.fixtureIds
     share.fixtureIds.push(_id)
   if share.Queries.find().count() is 0

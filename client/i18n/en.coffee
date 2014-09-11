@@ -126,14 +126,10 @@ i18n.addResourceBundle("en",
       "iType": "ICMP type"
       "iCode": "ICMP code"
       "icmpTypeCode": "ICMP type & code"
-  rwstats:
-    keyfields:
-      "sIP": "Source IP"
-      "dIP": "Destination IP"
-      "sPort": "Source port"
-      "dPort": "Destination port"
-      "protocol": "IP protocol"
-#      "icmp":
+      # rwstats values
+      "Records": "Records"
+      "Packets": "Packets"
+      "Bytes": "Bytes"
   users:
     fields:
       username: "Username"

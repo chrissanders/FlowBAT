@@ -37,12 +37,10 @@ share.rwcutFields = [
   "type"
   "icmpTypeCode"
 ]
-share.rwstatsKeyFields  = [
-  "sIP"
-  "dIP"
-  "sPort"
-  "dPort"
-  "protocol"
+share.rwstatsValues = [
+  "Records"
+  "Packets"
+  "Bytes"
 ]
 
 #share.rwstatsValuesFields

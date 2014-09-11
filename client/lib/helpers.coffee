@@ -42,7 +42,9 @@ UI.registerHelper("condition", (v1, operator, v2, options) ->
     when ">=", "gte"
       v1 >= v2
     when "in"
-      v1 in Array.prototype.slice.call(arguments, 2, arguments.length - 1)
+      if not _.isArray(v2)
+        v2 = Array.prototype.slice.call(arguments, 2, arguments.length - 1)
+      v1 in v2
     else
       throw "Undefined operator \"" + operator + "\""
 )

@@ -6,6 +6,9 @@
   form .form-group:last-child
     margin-bottom 15px
   .options-form
+    & > *
+      margin-top 7px
+      margin-bottom 7px
     .controlsForTheHeartOfTheSun + fieldset
       margin-top 10px
     fieldset + .controlsForTheHeartOfTheSun
@@ -14,11 +17,11 @@
     margin-top 0
   .dropdown-toggle
     cursor pointer
-
-.results.is-simple
   .results-buttons
+    margin-top 10px
+    margin-bottom 10px
     .btn-group
-      margin-bottom 0
+      margin 0
 
 .results-scroller
   overflow-x auto
@@ -31,9 +34,10 @@
     th
       cursor pointer
 
-.display-fields-form
+.display-fields-block
   .checkbox
     width 150px
+    height 25px
     float left
     margin-top 0 !important
 
@@ -56,8 +60,12 @@ input-group.bin-time
 input.stats-radio-input
   width 60px
 
-.stats-type
-  margin-left 102px
-
 .bin-time
   border-left: 2px solid #563d7c
+
+.rwstats-type-row
+  margin-top 5px
+  .input-group-addon
+    label
+      vertical-align top
+      margin 0 !important

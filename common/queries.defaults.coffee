@@ -51,6 +51,15 @@ share.Queries.before.insert (userId, query) ->
     additionalExclusionsCmd: ""
     fields: ["sIP", "dIP", "sPort", "dPort", "protocol", "packets", "bytes", "flags", "sTime", "duration", "eTime", "sensor"]
     fieldsOrder: share.rwcutFields
+    rwstatsDirection: "top"
+    rwstatsMode: "count"
+    rwstatsCountModeValue: "10"
+    rwstatsThresholdModeValue: ""
+    rwstatsPercentageModeValue: ""
+    rwstatsFields: []
+    rwstatsFieldsOrder: share.rwcutFields
+    rwstatsValues: []
+    rwstatsValuesOrder: share.rwstatsValues.concat(share.rwcutFields)
     result: ""
     error: ""
     interface: "cmd"
