@@ -42,9 +42,15 @@ share.rwstatsValues = [
   "Packets"
   "Bytes"
 ]
-
-#share.rwstatsValuesFields
-
+share.rwcountLoadSchemes = [
+  "bin-uniform"
+  "start-spike"
+  "end-spike"
+  "middle-spike"
+  "time-proportional"
+  "maximum-volume"
+  "minimum-volume"
+]
 
 share.parseResult = (result) ->
   rows = []

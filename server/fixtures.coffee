@@ -82,6 +82,18 @@ share.loadFixturesForCompleteSetup = ->
       rwstatsFields: ["sIP"]
       rwstatsValues: ["Records", "dIP", "dPort"]
       ownerId: "ChrisSanders"
+    RwcountTest:
+      name: "Rwcount query"
+      interface: "builder"
+      cmd: "--sensor=S0 --type=all --sport=80"
+      sportEnabled: true
+      sport: "80"
+      output: "rwcount"
+      rwcountBinSizeEnabled: true
+      rwcountBinSize: "10"
+      rwcountLoadSchemeEnabled: true
+      rwcountLoadScheme: "0"
+      ownerId: "ChrisSanders"
   for _id of queries when _id not in share.fixtureIds
     share.fixtureIds.push(_id)
   if share.Queries.find().count() is 0

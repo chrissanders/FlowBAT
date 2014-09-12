@@ -64,6 +64,12 @@ share.Queries.allow
       rwstatsValuesOrder: [String]
       rwstatsPrimaryValue: String
       rwstatsCmd: String
+      rwcountBinSizeEnabled: Boolean
+      rwcountBinSize: String
+      rwcountLoadSchemeEnabled: Boolean
+      rwcountLoadScheme: String
+      rwcountSkipZeroes: Boolean
+      rwcountCmd: String
       result: String
       error: String
       interface: String
@@ -147,6 +153,12 @@ share.Queries.allow
       rwstatsValuesOrder: Match.Optional([String])
       rwstatsPrimaryValue: Match.Optional(String)
       rwstatsCmd: Match.Optional(String)
+      rwcountBinSizeEnabled: Match.Optional(Boolean)
+      rwcountBinSize: Match.Optional(String)
+      rwcountLoadSchemeEnabled: Match.Optional(Boolean)
+      rwcountLoadScheme: Match.Optional(String)
+      rwcountSkipZeroes: Match.Optional(Boolean)
+      rwcountCmd: Match.Optional(String)
       result: Match.Optional(String)
       error: Match.Optional(String)
       interface: Match.Optional(String)

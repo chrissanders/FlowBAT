@@ -159,7 +159,7 @@ class share.Query
       command = config.wrapCommand(command)
     command
   outputRwstatsCommand: (config, profile) ->
-    if @inteface is "builder"
+    if @interface is "builder"
       rwstatsOptions = []
       if @rwstatsFields.length
         rwstatsOptions.push("--fields=" + _.intersection(@rwstatsFieldsOrder, @rwstatsFields).join(","))
@@ -196,6 +196,25 @@ class share.Query
       rwstatsOptionsString = @rwstatsCmd
     rwstatsOptionsString = share.filterOptions(rwstatsOptionsString)
     command = "rwstats " + rwstatsOptionsString + " /tmp/" + @_id + ".rwf"
+    if config and config.isSSH
+      command = config.wrapCommand(command)
+    command
+  outputRwcountCommand: (config, profile) ->
+    if @interface is "builder"
+      rwcountOptions = []
+      if @rwcountBinSizeEnabled
+        rwcountOptions.push("--bin-size=" + @rwcountBinSize)
+      if @rwcountLoadSchemeEnabled
+        rwcountOptions.push("--load-scheme=" + @rwcountLoadScheme)
+      if @rwcountSkipZeroes
+        rwcountOptions.push("--skip-zeroes")
+      if config and config.siteConfigFile
+        rwcountOptions.push("--site-config-file=" + config.siteConfigFile)
+      rwcountOptionsString = rwcountOptions.join(" ")
+    else
+      rwcountOptionsString = @rwcountCmd
+    rwcountOptionsString = share.filterOptions(rwcountOptionsString)
+    command = "rwcount " + rwcountOptionsString + " /tmp/" + @_id + ".rwf"
     if config and config.isSSH
       command = config.wrapCommand(command)
     command

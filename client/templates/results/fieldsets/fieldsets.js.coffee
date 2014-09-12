@@ -17,6 +17,14 @@ Template.fieldsets.helpers
     window.countryCodesMap
   rwstatsPrimaryValueOptions: ->
     _.map(@rwstatsValues, (value) -> {value: value, name: i18n.t("rwcut.fields." + value)})
+  rwcountLoadSchemeOptions: ->
+    options = []
+    for loadScheme, index in share.rwcountLoadSchemes
+      options.push(
+        value: index
+        name: loadScheme
+      )
+    options
 
 Template.fieldsets.rendered = ->
   share.initAutocomplete(@$(".input-group.additional-parameters-form-group input"), share.rwfilterAutocompleteOptions)

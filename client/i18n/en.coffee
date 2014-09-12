@@ -131,6 +131,7 @@ i18n.addResourceBundle("en",
       "Packets": "Packets"
       "Bytes": "Bytes"
       "cumul_%": "% Cumulative"
+      "Date": "Bin date and time"
   users:
     fields:
       username: "Username"

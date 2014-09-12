@@ -260,6 +260,31 @@ template(name="fieldsets")
         .col-xs-4
           .form-group
             +chosen(family="query" _id=_id property="rwstatsPrimaryValue" value=rwstatsPrimaryValue options=rwstatsPrimaryValueOptions placeholder="Primary stats value" withEmptyOption=true isNew=isNew)
+  if condition output "is" "rwcount"
+    fieldset.rwcount-parameters
+      legend Count parameters
+      .row
+        .col-xs-5
+          .form-group
+            label.control-label Bin size
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="rwcountBinSizeEnabled" value=rwcountBinSizeEnabled isNew=isNew)
+              +input(family="query" _id=_id property="rwcountBinSize" value=rwcountBinSize enabled=rwcountBinSizeEnabled isNew=isNew)
+        .col-xs-5
+          .form-group
+            label.control-label Load scheme
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="rwcountLoadSchemeEnabled" value=rwcountLoadSchemeEnabled isNew=isNew)
+              +chosen(family="query" _id=_id property="rwcountLoadScheme" value=rwcountLoadScheme options=rwcountLoadSchemeOptions enabled=rwcountLoadSchemeEnabled isNew=isNew)
+        .col-xs-2
+          .form-group
+            label.control-label Skip zeroes
+            .input-group.fake-input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="rwcountSkipZeroes" value=rwcountSkipZeroes isNew=isNew)
+              .fake-input
   fieldset
     legend Final query
     .row
