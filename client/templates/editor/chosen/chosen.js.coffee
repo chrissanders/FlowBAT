@@ -4,6 +4,7 @@ Template.chosen.helpers
   disabled: ->
     not (if _.isBoolean(@enabled) then @enabled else true)
   optionSelected: (context) ->
+    share.debouncedChosenUpdated()
     if context.multiple
       @value in context.value
     else
@@ -37,3 +38,7 @@ Template.chosen.events
     $set[template.data.property] = value
     editor = share.EditorCache.editors[template.data.family]
     editor.collection.update(template.data._id, {$set: $set})
+
+share.debouncedChosenUpdated = _.debounce(->
+  $("select").trigger("chosen:updated")
+, 200)

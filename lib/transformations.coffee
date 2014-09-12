@@ -162,8 +162,8 @@ class share.Query
     rwstatsOptions = []
     if @rwstatsFields.length
       rwstatsOptions.push("--fields=" + _.intersection(@rwstatsFieldsOrder, @rwstatsFields).join(","))
-    rwstatsValues = @rwstatsValues
-    rwstatsValuesOrder = @rwstatsValuesOrder
+    rwstatsValues = @rwstatsValues.slice(0)
+    rwstatsValuesOrder = @rwstatsValuesOrder.slice(0)
     if @rwstatsPrimaryValue
       rwstatsValues.unshift(@rwstatsPrimaryValue)
       rwstatsValuesOrder.unshift(@rwstatsPrimaryValue)
