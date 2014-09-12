@@ -1,9 +1,9 @@
-share.queryAutocomplete = ($element) ->
+share.initAutocomplete = ($element, availableTerms) ->
   $element.autocomplete
     minLength: 0
     delay: 0
     source: (request, response) ->
-     response $.ui.autocomplete.filter(availableTags, extractLast(request.term))
+     response $.ui.autocomplete.filter(availableTerms, extractLast(request.term))
     focus: ->
       false
     select: (event, ui) ->
@@ -19,7 +19,8 @@ split = (val) ->
   val.split /\s/
 extractLast = (term) ->
   split(term).pop()
-availableTags = [
+
+share.rwfilterAutocompleteTerms = [
   "--class"
   "--type"
   "--flowtype"
@@ -86,4 +87,15 @@ availableTags = [
   "--syn-flag"
   "--tcp-flags"
   "--urg-flag"
+]
+
+share.rwstatsAutocompleteTerms = [
+  "--fields"
+  "--values"
+  "--count"
+  "--threshold"
+  "--percentage"
+  "--top"
+  "--bottom"
+  "--bin-time"
 ]

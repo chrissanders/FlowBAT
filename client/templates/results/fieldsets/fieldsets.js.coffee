@@ -19,6 +19,6 @@ Template.fieldsets.helpers
     _.map(@rwstatsValues, (value) -> {value: value, name: i18n.t("rwcut.fields." + value)})
 
 Template.fieldsets.rendered = ->
-  share.queryAutocomplete(@$(".input-group.additional-parameters-form-group input"))
+  share.initAutocomplete(@$(".input-group.additional-parameters-form-group input"), share.rwfilterAutocompleteTerms)
 
 Template.fieldsets.events

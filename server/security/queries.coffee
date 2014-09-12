@@ -63,6 +63,7 @@ share.Queries.allow
       rwstatsValues: [String]
       rwstatsValuesOrder: [String]
       rwstatsPrimaryValue: String
+      rwstatsCmd: String
       result: String
       error: String
       interface: String
@@ -145,6 +146,7 @@ share.Queries.allow
       rwstatsValues: Match.Optional([String])
       rwstatsValuesOrder: Match.Optional([String])
       rwstatsPrimaryValue: Match.Optional(String)
+      rwstatsCmd: Match.Optional(String)
       result: Match.Optional(String)
       error: Match.Optional(String)
       interface: Match.Optional(String)

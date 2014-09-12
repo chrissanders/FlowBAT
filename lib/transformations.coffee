@@ -159,38 +159,41 @@ class share.Query
       command = config.wrapCommand(command)
     command
   outputRwstatsCommand: (config, profile) ->
-    rwstatsOptions = []
-    if @rwstatsFields.length
-      rwstatsOptions.push("--fields=" + _.intersection(@rwstatsFieldsOrder, @rwstatsFields).join(","))
-    rwstatsValues = @rwstatsValues.slice(0)
-    rwstatsValuesOrder = @rwstatsValuesOrder.slice(0)
-    if @rwstatsPrimaryValue
-      rwstatsValues.unshift(@rwstatsPrimaryValue)
-      rwstatsValuesOrder.unshift(@rwstatsPrimaryValue)
-    if rwstatsValues.length
-      values = _.intersection(rwstatsValuesOrder, rwstatsValues)
-      for value, index in values
-        if value not in share.rwstatsValues
-          values[index] = "distinct:" + value
-      rwstatsOptions.push("--values=" + values.join(","))
-      if values[0] not in share.rwstatsValues
-        rwstatsOptions.push("--no-percents")
-    rwstatsOptions.push("--" + @rwstatsDirection)
-    switch @rwstatsMode
-      when "count"
-        rwstatsOptions.push("--count=" + @rwstatsCountModeValue)
-      when "threshold"
-        rwstatsOptions.push("--threshold=" + @rwstatsThresholdModeValue)
-      when "percentage"
-        rwstatsOptions.push("--percentage=" + @rwstatsPercentageModeValue)
-    if @rwstatsBinTimeEnabled
-      if @rwstatsBinTime
-        rwstatsOptions.push("--bin-time=" + @rwstatsBinTime)
-      else
-        rwstatsOptions.push("--bin-time")
-    if config and config.siteConfigFile
-      rwstatsOptions.push("--site-config-file=" + config.siteConfigFile)
-    rwstatsOptionsString = rwstatsOptions.join(" ")
+    if @inteface is "builder"
+      rwstatsOptions = []
+      if @rwstatsFields.length
+        rwstatsOptions.push("--fields=" + _.intersection(@rwstatsFieldsOrder, @rwstatsFields).join(","))
+      rwstatsValues = @rwstatsValues.slice(0)
+      rwstatsValuesOrder = @rwstatsValuesOrder.slice(0)
+      if @rwstatsPrimaryValue
+        rwstatsValues.unshift(@rwstatsPrimaryValue)
+        rwstatsValuesOrder.unshift(@rwstatsPrimaryValue)
+      if rwstatsValues.length
+        values = _.intersection(rwstatsValuesOrder, rwstatsValues)
+        for value, index in values
+          if value not in share.rwstatsValues
+            values[index] = "distinct:" + value
+        rwstatsOptions.push("--values=" + values.join(","))
+        if values[0] not in share.rwstatsValues
+          rwstatsOptions.push("--no-percents")
+      rwstatsOptions.push("--" + @rwstatsDirection)
+      switch @rwstatsMode
+        when "count"
+          rwstatsOptions.push("--count=" + @rwstatsCountModeValue)
+        when "threshold"
+          rwstatsOptions.push("--threshold=" + @rwstatsThresholdModeValue)
+        when "percentage"
+          rwstatsOptions.push("--percentage=" + @rwstatsPercentageModeValue)
+      if @rwstatsBinTimeEnabled
+        if @rwstatsBinTime
+          rwstatsOptions.push("--bin-time=" + @rwstatsBinTime)
+        else
+          rwstatsOptions.push("--bin-time")
+      if config and config.siteConfigFile
+        rwstatsOptions.push("--site-config-file=" + config.siteConfigFile)
+      rwstatsOptionsString = rwstatsOptions.join(" ")
+    else
+      rwstatsOptionsString = @rwstatsCmd
     rwstatsOptionsString = share.filterOptions(rwstatsOptionsString)
     command = "rwstats " + rwstatsOptionsString + " /tmp/" + @_id + ".rwf"
     if config and config.isSSH
