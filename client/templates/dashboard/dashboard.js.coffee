@@ -11,7 +11,7 @@ Template.dashboard.helpers
     share.Queries.find({_id: {$nin: user.profile.dashboardQueryIds}, isQuick: false})
 
 Template.dashboard.rendered = ->
-  share.initAutocomplete(@$(".quick-query-form.panel input"), share.rwfilterAutocompleteTerms)
+  share.initAutocomplete(@$(".quick-query-form.panel input"), share.rwfilterAutocompleteOptions)
 
 Template.dashboard.events
   "submit .quick-query-form": grab encapsulate (event, template) ->

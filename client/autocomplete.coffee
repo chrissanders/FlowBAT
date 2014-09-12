@@ -1,27 +1,30 @@
-share.initAutocomplete = ($element, availableTerms) ->
+share.initAutocomplete = ($element, options, values = {}) ->
   $element.autocomplete
     minLength: 0
     delay: 0
     source: (request, response) ->
-     response $.ui.autocomplete.filter(availableTerms, extractLast(request.term))
+      terms = request.term.split(/\s/)
+      optvalue = terms.pop().split("=")
+      if optvalue.length is 2
+        response($.ui.autocomplete.filter(values[optvalue[0]] or [], optvalue[1]))
+      else
+        response($.ui.autocomplete.filter(options, optvalue[0]))
     focus: ->
       false
     select: (event, ui) ->
-      terms = split(@value)
-      terms.pop()
-      terms.push ui.item.value+"="
+      terms = @value.split(/\s/)
+      optvalue = terms.pop().split("=")
+      if optvalue.length is 2
+        terms.push(optvalue[0] + "=" + ui.item.value)
+      else
+        terms.push(ui.item.value + "=")
       @value = terms.join(" ")
       false
     autoFocus: ->
       true
 
-split = (val) ->
-  val.split /\s/
-extractLast = (term) ->
-  split(term).pop()
-
-share.rwfilterAutocompleteTerms = [
-  "--class"
+share.rwfilterAutocompleteOptions = [
+  "--class": []
   "--type"
   "--flowtype"
   "--sensors"
@@ -89,7 +92,7 @@ share.rwfilterAutocompleteTerms = [
   "--urg-flag"
 ]
 
-share.rwstatsAutocompleteTerms = [
+share.rwstatsAutocompleteOptions = [
   "--fields"
   "--values"
   "--count"
@@ -99,3 +102,7 @@ share.rwstatsAutocompleteTerms = [
   "--bottom"
   "--bin-time"
 ]
+
+share.rwstatsAutocompleteValues =
+  "--fields": share.rwcutFields
+  "--values": share.rwstatsValues.concat(share.rwcutFields)
