@@ -50,24 +50,158 @@ class share.Query
         @rows.push(row)
   displayName: ->
     if @isQuick then "Quick query #" + @_id else @name or "#" + @_id
+  inputCommand: (config) ->
+    command = "rwfilter"
+    command += " " + @inputOptions()
+    if config and config.siteConfigFile
+      command += " --site-config-file=" + config.siteConfigFile
+    if config and config.dataRootdir
+      command += " --data-rootdir=" + config.dataRootdir
+    command += " --pass=stdout"
+    for exclusion in @inputExclusions()
+      command += " | rwfilter --input-pipe=stdin"
+      command += " " + exclusion
+      if config and config.siteConfigFile
+        command += " --site-config-file=" + config.siteConfigFile
+      # config.dataRootdir shouldn't be used with exclusions
+      command += " --fail=stdout"
+    command += " > /tmp/" + @_id + ".rwf"
+    if config and config.isSSH
+      command = config.wrapCommand(command)
+    command
+  inputOptions: ->
+    if @interface is "builder"
+      parameters = []
+      if @typesEnabled and @types.length and _.difference(share.queryTypes, @types).length
+        value = @types.join(",")
+      else
+        value = "all"
+      parameters.push("--type=" + value)
+      if @startDateEnabled and @startDate
+        parameters.push("--start-date=" + @startDate)
+      if @endDateEnabled and @endDate
+        parameters.push("--end-date=" + @endDate)
+      if @sensorEnabled and @sensor
+        parameters.push("--sensor=" + @sensor)
+      if @daddressEnabled and @daddress
+        parameters.push("--daddress=" + @daddress)
+      if @saddressEnabled and @saddress
+        parameters.push("--saddress=" + @saddress)
+      if @anyAddressEnabled and @anyAddress
+        parameters.push("--any-address=" + @anyAddress)
+      if @dipSetEnabled and @dipSet
+        parameters.push("--dipset=/tmp/" + @dipSet + ".rws")
+      if @sipSetEnabled and @sipSet
+        parameters.push("--sipset=/tmp/" + @sipSet + ".rws")
+      if @anySetEnabled and @anySet
+        parameters.push("--anyset=/tmp/" + @anySet + ".rws")
+      if @dportEnabled and @dport
+        parameters.push("--dport=" + @dport)
+      if @sportEnabled and @sport
+        parameters.push("--sport=" + @sport)
+      if @aportEnabled and @aport
+        parameters.push("--aport=" + @aport)
+      if @dccEnabled and @dcc.length
+        parameters.push("--dcc=" + @dcc.join(","))
+      if @sccEnabled and @scc.length
+        parameters.push("--scc=" + @scc.join(","))
+      if @protocolEnabled and @protocol
+        parameters.push("--protocol=" + @protocol)
+      if @flagsAllEnabled and @flagsAll
+        parameters.push("--flags-all=" + @flagsAll)
+      if @activeTimeEnabled and @activeTime
+        parameters.push("--active-time=" + @activeTime)
+      if @additionalParametersEnabled and @additionalParameters
+        parameters.push(@additionalParameters)
+      string = parameters.join(" ")
+    else
+      string = @cmd
+    share.filterOptions(string)
+  inputExclusions: ->
+    exclusionsCmd = ""
+    if @interface is "builder"
+      if @additionalExclusionsCmdEnabled
+        exclusionsCmd = @additionalExclusionsCmd
+    else
+      exclusionsCmd = @exclusionsCmd
+    exclusionsCmd = share.filterOptions(exclusionsCmd)
+    _.compact(exclusionsCmd.split(/\s+(?:OR|\|\|)\s+/i))
+  outputCommand: (config, profile) ->
+    switch @output
+      when "rwcut"
+        @outputRwcutCommand(config, profile)
+      when "rwstats"
+        @outputRwstatsCommand(config, profile)
+      when "rwcount"
+        @outputRwcountCommand(config, profile)
+  outputRwcutCommand: (config, profile) ->
+    commands = []
+    if @sortField
+      rwsortOptions = ["--fields=" + @sortField]
+      if @sortReverse
+        rwsortOptions.push("--reverse")
+      if config and config.siteConfigFile
+        rwsortOptions.push("--site-config-file=" + config.siteConfigFile)
+      rwsortOptionsString = rwsortOptions.join(" ")
+      rwsortOptionsString = share.filterOptions(rwsortOptionsString)
+      commands.push("rwsort " + rwsortOptionsString)
+    rwcutOptions = ["--num-recs=" + profile.numRecs, "--start-rec-num=" + @startRecNum, "--delimited"]
+    if @fields.length
+      rwcutOptions.push("--fields=" + _.intersection(@fieldsOrder, @fields).join(","))
+    if config and config.siteConfigFile
+      rwcutOptions.push("--site-config-file=" + config.siteConfigFile)
+    rwcutOptionsString = rwcutOptions.join(" ")
+    rwcutOptionsString = share.filterOptions(rwcutOptionsString)
+    commands.push("rwcut " + rwcutOptionsString)
+    commands[0] += " /tmp/" + @_id + ".rwf"
+    command = commands.join(" | ")
+    if config and config.isSSH
+      command = config.wrapCommand(command)
+    command
+  outputRwstatsCommand: (config, profile) ->
+    rwstatsOptions = []
+    if @rwstatsFields.length
+      rwstatsOptions.push("--fields=" + _.intersection(@rwstatsFieldsOrder, @rwstatsFields).join(","))
+    rwstatsValues = @rwstatsValues
+    rwstatsValuesOrder = @rwstatsValuesOrder
+    if @rwstatsPrimaryValue
+      rwstatsValues.unshift(@rwstatsPrimaryValue)
+      rwstatsValuesOrder.unshift(@rwstatsPrimaryValue)
+    if rwstatsValues.length
+      values = _.intersection(rwstatsValuesOrder, rwstatsValues)
+      for value, index in values
+        if value not in share.rwstatsValues
+          values[index] = "distinct:" + value
+      rwstatsOptions.push("--values=" + values.join(","))
+      if values[0] not in share.rwstatsValues
+        rwstatsOptions.push("--no-percents")
+    rwstatsOptions.push("--" + @rwstatsDirection)
+    switch @rwstatsMode
+      when "count"
+        rwstatsOptions.push("--count=" + @rwstatsCountModeValue)
+      when "threshold"
+        rwstatsOptions.push("--threshold=" + @rwstatsThresholdModeValue)
+      when "percentage"
+        rwstatsOptions.push("--percentage=" + @rwstatsPercentageModeValue)
+    if @rwstatsBinTimeEnabled
+      if @rwstatsBinTime
+        rwstatsOptions.push("--bin-time=" + @rwstatsBinTime)
+      else
+        rwstatsOptions.push("--bin-time")
+    if config and config.siteConfigFile
+      rwstatsOptions.push("--site-config-file=" + config.siteConfigFile)
+    rwstatsOptionsString = rwstatsOptions.join(" ")
+    rwstatsOptionsString = share.filterOptions(rwstatsOptionsString)
+    command = "rwstats " + rwstatsOptionsString + " /tmp/" + @_id + ".rwf"
+    if config and config.isSSH
+      command = config.wrapCommand(command)
+    command
   rwstatsCountModeValueIsEnabled: (mode) ->
     @rwstatsMode is "count"
   rwstatsThresholdModeValueIsEnabled: ->
     @rwstatsMode is "threshold"
   rwstatsPercentageModeValueIsEnabled: ->
     @rwstatsMode is "percentage"
-  finalString: ->
-    finalStringBuilder = []
-    finalStringBuilder.push("rwfilter ")
-    finalStringBuilder.push(@string)
-    finalStringBuilder.push("--pass=stdout")
-    for exclusion in @exclusions
-      finalStringBuilder.push("|")
-      finalStringBuilder.push("rwfilter ")
-      finalStringBuilder.push("--input-pipe=stdin")
-      finalStringBuilder.push(exclusion)
-      finalStringBuilder.push("--fail=stdout")
-    finalStringBuilder.join(" ")
   path: ->
     "/query/" + @_id
 

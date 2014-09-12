@@ -7,7 +7,7 @@ share.IPSets.before.insert (userId, ipset) ->
     name: ""
     note: ""
     contents: ""
-    isResultStale: true
+    isOutputStale: true
     isNew: true
     ownerId: userId
     updatedAt: now

@@ -5,10 +5,8 @@ share.Queries.before.insert (userId, query) ->
   now = new Date()
   _.defaults(query,
     name: ""
-    string: ""
     cmd: ""
     exclusionsCmd: ""
-    exclusions: []
     startDateEnabled: false
     startDate: ""
     endDateEnabled: false
@@ -69,8 +67,8 @@ share.Queries.before.insert (userId, query) ->
     output: "rwcut"
     executingInterval: 0
     executingAt: null
-    isStringStale: false
-    isResultStale: false
+    isInputStale: false
+    isOutputStale: false
     isUTC: true
     isQuick: false
     isNew: true

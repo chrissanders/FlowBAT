@@ -53,7 +53,7 @@ share.parseResult = (result) ->
   rows
 
 share.queryTypes = ["in", "out", "inweb", "outweb", "inicmp", "outicmp", "innull", "outnull"]
-share.stringBuilderFields = [
+share.inputFields = [
   "interface"
   "cmd"
   "exclusionsCmd"
@@ -98,69 +98,6 @@ share.stringBuilderFields = [
   "additionalExclusionsCmdEnabled"
   "additionalExclusionsCmd"
 ]
-share.buildQueryString = (query) ->
-  if query.interface is "builder"
-    parameters = []
-    if query.typesEnabled and query.types.length and _.difference(share.queryTypes, query.types).length
-      value = query.types.join(",")
-    else
-      value = "all"
-    parameters.push("--type=" + value)
-    if query.startDateEnabled and query.startDate
-      parameters.push("--start-date=" + query.startDate)
-    if query.endDateEnabled and query.endDate
-      parameters.push("--end-date=" + query.endDate)
-    if query.sensorEnabled and query.sensor
-      parameters.push("--sensor=" + query.sensor)
-    if query.daddressEnabled and query.daddress
-      parameters.push("--daddress=" + query.daddress)
-    if query.saddressEnabled and query.saddress
-      parameters.push("--saddress=" + query.saddress)
-    if query.anyAddressEnabled and query.anyAddress
-      parameters.push("--any-address=" + query.anyAddress)
-    if query.dipSetEnabled and query.dipSet
-      parameters.push("--dipset=/tmp/" + query.dipSet + ".rws")
-    if query.sipSetEnabled and query.sipSet
-      parameters.push("--sipset=/tmp/" + query.sipSet + ".rws")
-    if query.anySetEnabled and query.anySet
-      parameters.push("--anyset=/tmp/" + query.anySet + ".rws")
-    if query.dportEnabled and query.dport
-      parameters.push("--dport=" + query.dport)
-    if query.sportEnabled and query.sport
-      parameters.push("--sport=" + query.sport)
-    if query.aportEnabled and query.aport
-      parameters.push("--aport=" + query.aport)
-    if query.dccEnabled and query.dcc.length
-      parameters.push("--dcc=" + query.dcc.join(","))
-    if query.sccEnabled and query.scc.length
-      parameters.push("--scc=" + query.scc.join(","))
-    if query.protocolEnabled and query.protocol
-      parameters.push("--protocol=" + query.protocol)
-    if query.flagsAllEnabled and query.flagsAll
-      parameters.push("--flags-all=" + query.flagsAll)
-    if query.activeTimeEnabled and query.activeTime
-      parameters.push("--active-time=" + query.activeTime)
-    if query.additionalParametersEnabled and query.additionalParameters
-      parameters.push(query.additionalParameters)
-    string = parameters.join(" ")
-  else
-    string = query.cmd
-  string = share.filterOptions(string)
-  string
-
-share.buildQueryExclusions = (query) ->
-  exclusionsCmd = ""
-  if query.interface is "builder"
-    if query.additionalExclusionsCmdEnabled and query.additionalExclusionsCmd
-      exclusionsCmd = query.additionalExclusionsCmd
-  else
-    exclusionsCmd = query.exclusionsCmd
-  exclusions = []
-  for singleExclusionCmd in exclusionsCmd.split(/\s+(?:OR|\|\|)\s+/i)
-    singleExclusionCmd = share.filterOptions(singleExclusionCmd)
-    if singleExclusionCmd
-      exclusions.push(singleExclusionCmd)
-  return exclusions
 
 share.filterOptions = (options) ->
   for excludedOption in ["--python-expr", "--python-file", "--pmap", "--dynamic-library", "--tuple-file", "--tuple-fields", "--tuple-direction", "--tuple-dilimter", "--all-destination", "--fail-destination", "--pass-destination", "--print-statistics", "--print-volume-statistics", "--xargs"]

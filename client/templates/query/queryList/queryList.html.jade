@@ -11,8 +11,8 @@ template(name="queryList")
                   li
                     a(href=path)
                       h4.sender {{displayName}}
-                      if finalString
-                        small {{finalString}}
+                      if inputCommand
+                        small $ {{inputCommand}}
                       else
                         small No parameters specified
           .panel-footer

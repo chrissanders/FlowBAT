@@ -4,14 +4,11 @@ share.Queries.allow
       throw new Match.Error("Operation not allowed for unauthorized users")
     query._id = query._id or Random.id()
     query.ownerId = userId
-    query.string = ""
     check(query,
       _id: Match.App.Id
       name: String
-      string: String
       cmd: String
       exclusionsCmd: String
-      exclusions: [String]
       startDateEnabled: Boolean
       startDate: String
       endDateEnabled: Boolean
@@ -75,8 +72,8 @@ share.Queries.allow
       startRecNum: Match.Integer
       sortField: String
       sortReverse: Boolean
-      isStringStale: Boolean
-      isResultStale: Boolean
+      isInputStale: Boolean
+      isOutputStale: Boolean
       isUTC: Boolean
       isQuick: Boolean
       isNew: Boolean
@@ -94,7 +91,6 @@ share.Queries.allow
       name: Match.Optional(String)
       cmd: Match.Optional(String)
       exclusionsCmd: Match.Optional(String)
-      exclusions: Match.Optional([String])
       startDateEnabled: Match.Optional(Boolean)
       startDate: Match.Optional(String)
       endDateEnabled: Match.Optional(Boolean)
@@ -158,8 +154,8 @@ share.Queries.allow
       startRecNum: Match.Optional(Match.Integer)
       sortField: Match.Optional(String)
       sortReverse: Match.Optional(Boolean)
-      isStringStale: Match.Optional(Boolean)
-      isResultStale: Match.Optional(Boolean)
+      isInputStale: Match.Optional(Boolean)
+      isOutputStale: Match.Optional(Boolean)
       isUTC: Match.Optional(Boolean)
       isQuick: Match.Optional(Boolean)
       isNew: Match.Optional(Match.App.isNewUpdate(query.isNew))

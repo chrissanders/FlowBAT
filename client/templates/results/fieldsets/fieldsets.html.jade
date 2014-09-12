@@ -264,8 +264,11 @@ template(name="fieldsets")
     legend Final query
     .row
       .col-xs-12
-        code.query-display
-          if finalString
-            | {{finalString}}
-          else
+        if inputCommand
+          code.query-display
+            | $ {{inputCommand}}
+          code.query-display
+            | $ {{outputCommand null currentUser.profile}}
+        else
+          code.query-display
             em Please set some options to build the query

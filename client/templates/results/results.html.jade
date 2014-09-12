@@ -23,10 +23,13 @@ template(name="results")
                           i.fa.fa-trash-o
                           | Delete this query
           if ../isDashboard
-            code.query-display
-              if finalString
-                | {{finalString}}
-              else
+            if inputCommand
+              code.query-display
+                | $ {{inputCommand}}
+              code.query-display
+                | $ {{outputCommand null currentUser.profile}}
+            else
+              code.query-display
                 em Please set some options to build the query
           .results-buttons.clearfix
             .pull-left
@@ -47,7 +50,7 @@ template(name="results")
             else
               +fieldsets
               +controlsForTheHeartOfTheSun
-      if not isResultStale
+      if not isOutputStale
         if error
           .panel-body
             .alert.alert-danger(role='alert')
@@ -59,7 +62,7 @@ template(name="results")
         .panel-body
           if condition output "is" "rwcut"
             ul.pager
-              li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if isResultStale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
+              li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if isOutputStale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
                 a(href='#')
                   i.fa.fa-angle-left
                   | Previous
@@ -67,7 +70,7 @@ template(name="results")
                 select.num-recs.form-control
                   each numRecsOptions
                     option(value="{{.}}", selected="{{condition . 'is' currentUser.profile.numRecs}}") {{.}} per page
-              li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}} {{#if isResultStale}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
+              li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}} {{#if isOutputStale}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
                 a(href='#')
                   | Next
                   i.fa.fa-angle-right
@@ -82,11 +85,11 @@ template(name="results")
                   i.normal.fa.fa-file-archive-o
                   i.loading.fa.fa-spinner.fa-spin(style="display: none;")
                   | Download full RWF
-                form.display-fields-block
-                  fieldset
-                    legend Display fields
-                    each fieldsOrder
-                      .checkbox
-                        label
-                          input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'fields'}}", value="{{.}}", data-property="fields")
-                          | {{t fieldI18nString}}
+              form.display-fields-block
+                fieldset
+                  legend Display fields
+                  each fieldsOrder
+                    .checkbox
+                      label
+                        input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'fields'}}", value="{{.}}", data-property="fields")
+                        | {{t fieldI18nString}}

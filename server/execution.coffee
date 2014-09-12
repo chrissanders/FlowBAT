@@ -3,26 +3,22 @@ Process = Npm.require("child_process")
 Future = Npm.require('fibers/future')
 writeFile = Future.wrap(fs.writeFile)
 
-share.Queries.before.insert (userId, query) ->
-  query.string = share.buildQueryString(query)
-  query.exclusions = share.buildQueryExclusions(query)
+share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
+  if _.intersection(fieldNames, share.inputFields).length
+    share.Queries.update(query._id, {$set: {isInputStale: true}})
 
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
-  if _.intersection(fieldNames, share.stringBuilderFields).length
-    share.Queries.update(query._id, {$set: {isStringStale: true, string: share.buildQueryString(query), exclusions: share.buildQueryExclusions(query)}})
-
-share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
-  if not query.isResultStale
+  if not query.isOutputStale
     return
-  if not query.string
-    share.Queries.update(query._id, {$set: {isStringStale: false, isResultStale: false}})
+  query = share.Transformations.query(query)
+  if not query.inputOptions()
+    share.Queries.update(query._id, {$set: {isInputStale: false, isOutputStale: false}})
     return
   config = share.Configs.findOne({}, {transform: share.Transformations.config})
-  user = Meteor.users.findOne(query.ownerId)
-  numRecs = user.profile.numRecs
+  profile = Meteor.users.findOne(query.ownerId).profile
   callback = (result, error, code) ->
-    share.Queries.update(query._id, {$set: {result: result, error: error, code: code, isStringStale: false, isResultStale: false}})
-  loadQueryResult(query, config, numRecs, callback)
+    share.Queries.update(query._id, {$set: {result: result, error: error, code: code, isInputStale: false, isOutputStale: false}})
+  loadQueryResult(query, config, profile, callback)
 
 Meteor.methods
   checkConnection: ->
@@ -34,9 +30,7 @@ Meteor.methods
       isQuick: true
     })
     config = share.Configs.findOne({}, {transform: share.Transformations.config})
-    query = share.Queries.findOne(queryId)
-    query.string = share.buildQueryString(query) # after defaults are applied
-    query.exclusions = share.buildQueryExclusions(query)
+    query = share.Queries.findOne(queryId, {transform: share.Transformations.query})
     @unblock()
     fut = new Future()
     callback = (result, error, code) ->
@@ -52,7 +46,7 @@ Meteor.methods
     unless @userId
       throw new Match.Error("Operation not allowed for unauthorized users")
     config = share.Configs.findOne({}, {transform: share.Transformations.config})
-    query = share.Queries.findOne(queryId)
+    query = share.Queries.findOne(queryId, {transform: share.Transformations.query})
     unless @userId is query.ownerId
       throw new Match.Error("Operation not allowed for non-owners")
     @unblock()
@@ -70,7 +64,7 @@ Meteor.methods
     unless @userId
       throw new Match.Error("Operation not allowed for unauthorized users")
     config = share.Configs.findOne({}, {transform: share.Transformations.config})
-    query = share.Queries.findOne(queryId)
+    query = share.Queries.findOne(queryId, {transform: share.Transformations.query})
     unless @userId is query.ownerId
       throw new Match.Error("Operation not allowed for non-owners")
     @unblock()
@@ -103,7 +97,7 @@ executeQuery = (query, config, callback) ->
   _.each(["dipSet", "sipSet", "anySet"], (field) ->
     if query[field + "Enabled"] and query[field]
       set = share.IPSets.findOne(query[field])
-      if set.isResultStale
+      if set.isOutputStale
         isIpsetStale = true
         rwsetbuildFuture = new Future()
         txtFilename = "/tmp/" + set._id + ".txt"
@@ -157,7 +151,7 @@ executeQuery = (query, config, callback) ->
               if error
                 rwsetbuildErrors.push(error)
               if code is 0
-                share.IPSets.update(set._id, {$set: {isResultStale: false}})
+                share.IPSets.update(set._id, {$set: {isOutputStale: false}})
               else
                 if not error
                   throw "rwsetbuild: code is \"" + code + "\" while stderr is \"" + error + "\""
@@ -172,31 +166,11 @@ executeQuery = (query, config, callback) ->
     callback("", rwsetbuildErrors.join("\n"), 255)
     return
 
-  if not query.isStringStale and not isIpsetStale
+  if not query.isInputStale and not isIpsetStale
     callback("", "", 0)
     return
 
-  rwfilterOptions = query.string.split(" ")
-  if config.siteConfigFile
-    rwfilterOptions.push("--site-config-file=" + config.siteConfigFile)
-  if config.dataRootdir
-    rwfilterOptions.push("--data-rootdir=" + config.dataRootdir)
-  rwfilterOptions.push("--pass=stdout")
-
-  for exclusion in query.exclusions
-    rwfilterOptions.push("| rwfilter --input-pipe=stdin")
-    rwfilterOptions.push(exclusion)
-    if config.siteConfigFile
-      rwfilterOptions.push("--site-config-file=" + config.siteConfigFile)
-    # config.dataRootdir shouldn't be used with exclusions
-    rwfilterOptions.push("--fail=stdout")
-
-  rwfilterOptions.push("> /tmp/" + query._id + ".rwf")
-
-  command = "rwfilter " + rwfilterOptions.join(" ")
-
-  if config.isSSH
-    command = config.wrapCommand(command)
+  command = query.inputCommand(config)
   Process.exec(command, Meteor.bindEnvironment((err, stdout, stderr) ->
     result = stdout.trim()
     error = stderr.trim()
@@ -204,95 +178,19 @@ executeQuery = (query, config, callback) ->
     callback(result, error, code)
   ))
 
-loadQueryResult = (query, config, numRecs, callback) ->
+loadQueryResult = (query, config, profile, callback) ->
   executeQuery(query, config, Meteor.bindEnvironment((result, error, code) ->
     if error
       return callback(result, error, code)
-    switch query.output
-      when "rwcut"
-        outputRwcut(query, config, numRecs, callback)
-      when "rwstats"
-        outputRwstats(query, config, numRecs, callback)
-      when "rwcount"
-        outputRwcount(query, config, numRecs, callback)
+    command = query.outputCommand(config, profile)
+    Process.exec(command, Meteor.bindEnvironment((err, stdout, stderr) ->
+      result = stdout.trim()
+      error = stderr.trim()
+      code = if err then err.code else 0
+      if error.indexOf("Error opening file") isnt -1
+        query.isInputStale = true
+        loadQueryResult(query, config, profile, callback)
       else
-        callback("", "Undefined output: \"" + query.output + "\"", 255)
-  ))
-
-outputRwcut = (query, config, numRecs, callback) ->
-  commands = []
-  if query.sortField
-    rwsortOptions = ["--fields=" + query.sortField]
-    if query.sortReverse
-      rwsortOptions.push("--reverse")
-    if config.siteConfigFile
-      rwsortOptions.push("--site-config-file=" + config.siteConfigFile)
-    commands.push("rwsort " + rwsortOptions.join(" "))
-  rwcutOptions = ["--num-recs=" + numRecs, "--start-rec-num=" + query.startRecNum, "--delimited"]
-  if query.fields.length
-    rwcutOptions.push("--fields=" + _.intersection(query.fieldsOrder, query.fields).join(","))
-  if config.siteConfigFile
-    rwcutOptions.push("--site-config-file=" + config.siteConfigFile)
-  commands.push("rwcut " + rwcutOptions.join(" "))
-  commands[0] += " /tmp/" + query._id + ".rwf"
-  command = commands.join(" | ")
-  if config.isSSH
-    command = config.wrapCommand(command)
-  Process.exec(command, Meteor.bindEnvironment((err, stdout, stderr) ->
-    result = stdout.trim()
-    error = stderr.trim()
-    code = if err then err.code else 0
-    if error.indexOf("Error opening file") isnt -1
-      query.isStringStale = true
-      loadQueryResult(query, config, numRecs, callback)
-    else
-      callback(result, error, code)
-  ))
-
-outputRwstats = (query, config, numRecs, callback) ->
-  rwstatsOptions = []
-  if query.rwstatsFields.length
-    rwstatsOptions.push("--fields=" + _.intersection(query.rwstatsFieldsOrder, query.rwstatsFields).join(","))
-  rwstatsValues = query.rwstatsValues
-  rwstatsValuesOrder = query.rwstatsValuesOrder
-  if query.rwstatsPrimaryValue
-    rwstatsValues.unshift(query.rwstatsPrimaryValue)
-    rwstatsValuesOrder.unshift(query.rwstatsPrimaryValue)
-  if rwstatsValues.length
-    values = _.intersection(rwstatsValuesOrder, rwstatsValues)
-    for value, index in values
-      if value not in share.rwstatsValues
-        values[index] = "distinct:" + value
-    rwstatsOptions.push("--values=" + values.join(","))
-    if values[0] not in share.rwstatsValues
-      rwstatsOptions.push("--no-percents")
-  rwstatsOptions.push("--" + query.rwstatsDirection)
-  switch query.rwstatsMode
-    when "count"
-      rwstatsOptions.push("--count=" + query.rwstatsCountModeValue)
-    when "threshold"
-      rwstatsOptions.push("--threshold=" + query.rwstatsThresholdModeValue)
-    when "percentage"
-      rwstatsOptions.push("--percentage=" + query.rwstatsPercentageModeValue)
-  if query.rwstatsBinTimeEnabled
-    if query.rwstatsBinTime
-      rwstatsOptions.push("--bin-time=" + query.rwstatsBinTime)
-    else
-      rwstatsOptions.push("--bin-time")
-  if config.siteConfigFile
-    rwstatsOptions.push("--site-config-file=" + config.siteConfigFile)
-  rwstatsOptionsString = rwstatsOptions.join(" ")
-  rwstatsOptionsString = share.filterOptions(rwstatsOptionsString)
-  command = "rwstats " + rwstatsOptionsString + " /tmp/" + query._id + ".rwf"
-  if config.isSSH
-    command = config.wrapCommand(command)
-  Process.exec(command, Meteor.bindEnvironment((err, stdout, stderr) ->
-    result = stdout.trim()
-    error = stderr.trim()
-    code = if err then err.code else 0
-    if error.indexOf("Error opening file") isnt -1
-      query.isStringStale = true
-      loadQueryResult(query, config, numRecs, callback)
-    else
-      callback(result, error, code)
+        callback(result, error, code)
+    ))
   ))

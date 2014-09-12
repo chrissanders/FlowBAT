@@ -25,7 +25,7 @@ Template.dashboard.events
         isQuick: true
       })
       share.Queries.update(_id, {$set: {interface: "cmd", cmd: quickQueryValue, exclusionsCmd: exclusionsCmdValue}})
-      share.Queries.update(_id, {$set: {isResultStale: true}})
+      share.Queries.update(_id, {$set: {isOutputStale: true}})
       Router.go("/query/" + _id)
     else
       $quickQueryInput.focus()
