@@ -214,14 +214,15 @@ class share.Query
     else
       rwcountOptionsString = @rwcountCmd
     rwcountOptionsString = share.filterOptions(rwcountOptionsString)
-    rwcountCommand = "rwcount " + rwcountOptionsString + " /tmp/" + @_id + ".rwf"
-    headOptions = "--lines=" + (@startRecNum + profile.numRecs)
-    headOptions = share.filterOptions(headOptions)
-    headCommand = "head " + headOptions
-    tailOptions = "--lines=" + profile.numRecs
-    tailOptions = share.filterOptions(tailOptions)
-    tailCommand = "tail " + tailOptions
-    command = rwcountCommand + " | { head --lines=1; " + headCommand + " | " + tailCommand + "; }"
+    command = "rwcount " + rwcountOptionsString + " /tmp/" + @_id + ".rwf"
+    if profile.numRecs
+      headOptions = "--lines=" + (@startRecNum + profile.numRecs)
+      headOptions = share.filterOptions(headOptions)
+      headCommand = "head " + headOptions
+      tailOptions = "--lines=" + profile.numRecs
+      tailOptions = share.filterOptions(tailOptions)
+      tailCommand = "tail " + tailOptions
+      command = command + " | { head --lines=1; " + headCommand + " | " + tailCommand + "; }"
     if config and config.isSSH
       command = config.wrapCommand(command)
     command

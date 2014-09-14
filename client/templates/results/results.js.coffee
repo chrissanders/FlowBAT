@@ -57,22 +57,31 @@ Template.results.events
     share.Queries.update(template.data._id, {$set: {isOutputStale: true}})
   "click .download-csv": grab encapsulate (event, template) ->
     _id = template.data._id
+    query = share.Queries.findOne(template.data._id)
+    output = query.output
     $target = $(event.currentTarget)
     $target.find(".normal").hide()
     $target.find(".loading").show()
-    Meteor.call("loadDataForCSV", _id, (error, data) ->
+    Meteor.call("loadDataForCSV", _id, (error, result) ->
       if error
         share.Queries.update(_id, {$set: {error: error.toString()}})
       else
-        if data
-          rows = []
-          for row, count in data.split("\n")
-            splinters = row.split("|")
-            if count is 0
-              for field, i in splinters
-                splinters[i] = i18n.t("rwcut.fields." + field)
-            rows.push(toCSV(splinters))
-          csv = rows.join("\n")
+        if result
+          tmpquery = new share.Query({output: output, result: result})
+          csvRows = []
+          headerCsvRow = []
+          for spec in tmpquery.header
+            headerString = ""
+            if spec.isPercentage
+              headerString += "% "
+            headerString += i18n.t("rwcut.fields." + spec.name)
+            if spec.isDistinct
+              headerString += " (distinct)"
+            headerCsvRow.push(headerString)
+          csvRows.push(headerCsvRow)
+          for row in tmpquery.rows
+            csvRows.push(toCSV(_.pluck(row, "value")))
+          csv = csvRows.join("\n")
           filename = "export.csv"
           blob = new Blob([csv],
             type: "text/csv;charset=utf-8;"

@@ -57,7 +57,7 @@ Meteor.methods
       else
         fut.return(result)
     query.startRecNum = 1
-    loadQueryResult(query, config, 0, callback)
+    loadQueryResult(query, config, {numRecs: 0}, callback)
     fut.wait()
   getRwfToken: (queryId) ->
     check(queryId, Match.App.QueryId)
