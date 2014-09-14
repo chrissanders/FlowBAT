@@ -3,10 +3,12 @@ share.initAutocomplete = ($element, options, values = {}) ->
     minLength: 0
     delay: 0
     source: (request, response) ->
-      terms = request.term.split(/\s/)
-      optvalue = terms.pop().split("=")
+      optvalues = request.term.split(/\s/)
+      optvalue = optvalues.pop().split("=")
       if optvalue.length is 2
-        response($.ui.autocomplete.filter(values[optvalue[0]] or [], optvalue[1]))
+        valueSplinters = optvalue[1].split(",")
+        valueSplinter = valueSplinters.pop()
+        response($.ui.autocomplete.filter(values[optvalue[0]] or [], valueSplinter))
       else
         response($.ui.autocomplete.filter(options, optvalue[0]))
     focus: ->
@@ -15,7 +17,10 @@ share.initAutocomplete = ($element, options, values = {}) ->
       terms = @value.split(/\s/)
       optvalue = terms.pop().split("=")
       if optvalue.length is 2
-        terms.push(optvalue[0] + "=" + ui.item.value)
+        valueSplinters = optvalue[1].split(",")
+        valueSplinters.pop() # remove last incomplete one
+        valueSplinters.push(ui.item.value) # add new one
+        terms.push(optvalue[0] + "=" + valueSplinters.join(","))
       else
         terms.push(ui.item.value + "=")
       @value = terms.join(" ")
@@ -104,5 +109,8 @@ share.rwstatsAutocompleteOptions = [
 ]
 
 share.rwstatsAutocompleteValues =
-  "--fields": share.rwcutFields
-  "--values": share.rwstatsValues.concat(share.rwcutFields)
+  "--fields": _.clone(share.rwcutFields)
+  "--values": _.clone(share.rwstatsValues) # more coming below
+
+for field in share.rwcutFields
+  share.rwstatsAutocompleteValues["--values"].push("distinct:" + field)
