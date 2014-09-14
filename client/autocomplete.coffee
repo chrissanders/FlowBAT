@@ -1,4 +1,4 @@
-share.initAutocomplete = ($element, options, values = {}) ->
+share.initAutocomplete = ($element, options, values = {}, optionsWithoutValues = []) ->
   $element.autocomplete
     minLength: 0
     delay: 0
@@ -22,7 +22,7 @@ share.initAutocomplete = ($element, options, values = {}) ->
         valueSplinters.push(ui.item.value) # add new one
         terms.push(optvalue[0] + "=" + valueSplinters.join(","))
       else
-        terms.push(ui.item.value + "=")
+        terms.push(ui.item.value + (if ui.item.value in optionsWithoutValues then " " else "="))
       @value = terms.join(" ")
       false
     autoFocus: ->
@@ -114,3 +114,15 @@ share.rwstatsAutocompleteValues =
 
 for field in share.rwcutFields
   share.rwstatsAutocompleteValues["--values"].push("distinct:" + field)
+
+share.rwcountAutocompleteOptions = [
+  "--bin-size"
+  "--load-scheme"
+  "--skip-zeroes"
+]
+
+share.rwcountAutocompleteValues = {}
+
+share.rwcountOptionsWithoutValues = [
+  "--skip-zeroes"
+]

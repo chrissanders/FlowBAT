@@ -19,3 +19,7 @@ template(name="cmdFieldsets")
       .row
         .col-xs-12
           +rwstatsCmd
+    if condition output "is" "rwcount"
+      .row
+        .col-xs-12
+          +rwcountCmd
