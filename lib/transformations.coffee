@@ -160,7 +160,7 @@ class share.Query
     command
   outputRwstatsCommand: (config, profile) ->
     if @interface is "builder"
-      rwstatsOptions = []
+      rwstatsOptions = ["--delimited"]
       if @rwstatsFields.length
         rwstatsOptions.push("--fields=" + _.intersection(@rwstatsFieldsOrder, @rwstatsFields).join(","))
       rwstatsValues = @rwstatsValues.slice(0)
@@ -201,7 +201,7 @@ class share.Query
     command
   outputRwcountCommand: (config, profile) ->
     if @interface is "builder"
-      rwcountOptions = []
+      rwcountOptions = ["--delimited"]
       if @rwcountBinSizeEnabled
         rwcountOptions.push("--bin-size=" + @rwcountBinSize)
       if @rwcountLoadSchemeEnabled
@@ -214,7 +214,14 @@ class share.Query
     else
       rwcountOptionsString = @rwcountCmd
     rwcountOptionsString = share.filterOptions(rwcountOptionsString)
-    command = "rwcount " + rwcountOptionsString + " /tmp/" + @_id + ".rwf"
+    rwcountCommand = "rwcount " + rwcountOptionsString + " /tmp/" + @_id + ".rwf"
+    headOptions = "--lines=" + (@startRecNum + profile.numRecs)
+    headOptions = share.filterOptions(headOptions)
+    headCommand = "head " + headOptions
+    tailOptions = "--lines=" + profile.numRecs
+    tailOptions = share.filterOptions(tailOptions)
+    tailCommand = "tail " + tailOptions
+    command = rwcountCommand + " | { head --lines=1; " + headCommand + " | " + tailCommand + "; }"
     if config and config.isSSH
       command = config.wrapCommand(command)
     command

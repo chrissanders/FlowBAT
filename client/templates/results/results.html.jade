@@ -61,7 +61,7 @@ template(name="results")
         .results-scroller
           +table
         .panel-body
-          if condition output "is" "rwcut"
+          if condition output "in" "rwcut" "rwcount"
             ul.pager
               li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if isOutputStale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
                 a(href='#')
@@ -76,8 +76,8 @@ template(name="results")
                   | Next
                   i.fa.fa-angle-right
           if not ../isDashboard
-            if condition output "is" "rwcut"
-              .extras
+            .extras
+              if condition output "in" "rwcut"
                 a.download-csv(href="#")
                   i.normal.fa.fa-file-excel-o
                   i.loading.fa.fa-spinner.fa-spin(style="display: none;")
@@ -86,11 +86,12 @@ template(name="results")
                   i.normal.fa.fa-file-archive-o
                   i.loading.fa.fa-spinner.fa-spin(style="display: none;")
                   | Download full RWF
-              form.display-fields-block
-                fieldset
-                  legend Display fields
-                  each fieldsOrder
-                    .checkbox
-                      label
-                        input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'fields'}}", value="{{.}}", data-property="fields")
-                        | {{t fieldI18nString}}
+              if condition output "in" "rwcut"
+                form.display-fields-block
+                  fieldset
+                    legend Display fields
+                    each fieldsOrder
+                      .checkbox
+                        label
+                          input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'fields'}}", value="{{.}}", data-property="fields")
+                          | {{t fieldI18nString}}

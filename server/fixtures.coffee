@@ -71,6 +71,8 @@ share.loadFixturesForCompleteSetup = ->
       name: "Dashboard query"
       cmd: "--sensor=S0 --type=all --sport=80"
       exclusionsCmd: "--daddress=192.168.0.1 OR --scc=au"
+      sportEnabled: true
+      sport: "80"
       ownerId: "ChrisSanders"
     RwstatsTest:
       name: "Rwstats query"

@@ -26,6 +26,8 @@ template(name="table")
                   +time
                 else if condition _id "is" "eTime"
                   +time
+                else if condition _id "is" "Date"
+                  +time
                 else
                   | {{value}}
               if isPivotable
@@ -56,5 +58,3 @@ template(name="table")
                    else
                     li(role='presentation')
                       a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="{{_id}}", data-value="{{value}}") Add to query as "{{fieldI18n}}"
-                    //li(role='presentation')
-                    //  a.new-query(role='menuitem', tabindex='-1', href='#', data-id="{{_id}}", data-value="{{value}}") Query this value
