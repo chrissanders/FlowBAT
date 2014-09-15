@@ -25,6 +25,8 @@ Template.input.events
     editor = share.EditorCache.editors[template.data.family]
     data = template.data
     switch event.keyCode
+      when 13 # Enter
+        editor.saveProperty(template.data._id, template.data.property, $editor.val())
       when 27 # Escape
         event.preventDefault()
         editor.stopEditing(data._id)
@@ -33,4 +35,8 @@ Template.input.events
   "keyup .property-editor, paste .property-editor": (event, template) ->
     $editor = $(event.target)
     editor = share.EditorCache.editors[template.data.family]
-    editor.debouncedSaveProperty(template.data._id, template.data.property, $editor.val())
+    switch event.keyCode
+      when 13 # Enter
+        # handled in keydown
+      else
+        editor.debouncedSaveProperty(template.data._id, template.data.property, $editor.val())
