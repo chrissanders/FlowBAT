@@ -21,7 +21,7 @@ template(name="table")
         tr
           each .
             td.dropdown
-              div(class="{{#if isPivotable}}dropdown-toggle{{/if}}", data-toggle="dropdown")
+              div(class="{{#if isPivotable ../../output}}dropdown-toggle{{/if}}", data-toggle="dropdown")
                 if condition _id "is" "sTime"
                   +time
                 else if condition _id "is" "eTime"
@@ -30,7 +30,7 @@ template(name="table")
                   +time
                 else
                   | {{value}}
-              if isPivotable
+              if isPivotable ../../output
                 ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu1')
                   if condition _id "in" "sIP" "dIP"
                     li(role='presentation')

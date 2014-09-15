@@ -1,6 +1,6 @@
 Template.table.helpers
-  isPivotable: ->
-    true # _.has(share.Pivoting.fields2properties, @_id)
+  isPivotable: (output) ->
+    output is "rwcut"
   fieldI18n: ->
     i18n.t("rwcut.fields." + @_id)
 
