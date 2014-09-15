@@ -12,8 +12,9 @@ template(name="queryList")
                     a(href=path)
                       h4.sender {{displayName}}
                       if inputCommand
-                        small $ {{inputCommand}}
+                        code.query-display $ {{inputCommand}}
+                        code.query-display $ {{outputCommand null currentUser.profile}}
                       else
-                        small No parameters specified
+                        code.query-display No parameters specified
           .panel-footer
             a.btn.btn-primary(href="/query/create") <i class="fa fa-plus"></i> Create query
