@@ -6,3 +6,4 @@ DIRNAME=$(cd `dirname $0` && pwd)
 ssh sp.technical ~/dropFlowbatDatabase
 mup deploy
 $DIRNAME/logs
+notify-send -u normal -i face-glasses "Deployed to flowbat.com"
