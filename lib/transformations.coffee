@@ -28,6 +28,8 @@ class share.Query
         parsedResult.shift()
         parsedResult.shift()
         # shift-shift outta here, you redundant rows
+      if @output is "rwcount"
+        parsedResult.unshift(["Date", "Records", "Bytes", "Packets"])
       rawHeader = parsedResult.shift()
       for name in rawHeader
         spec =
@@ -159,8 +161,9 @@ class share.Query
       command = config.wrapCommand(command)
     command
   outputRwstatsCommand: (config, profile) ->
+    defaultRwstatsOptions = ["--delimited"]
     if @interface is "builder"
-      rwstatsOptions = ["--delimited"]
+      rwstatsOptions = defaultRwstatsOptions
       if @rwstatsFields.length
         rwstatsOptions.push("--fields=" + _.intersection(@rwstatsFieldsOrder, @rwstatsFields).join(","))
       rwstatsValues = @rwstatsValues.slice(0)
@@ -193,15 +196,16 @@ class share.Query
         rwstatsOptions.push("--site-config-file=" + config.siteConfigFile)
       rwstatsOptionsString = rwstatsOptions.join(" ")
     else
-      rwstatsOptionsString = @rwstatsCmd
-    rwstatsOptionsString = share.filterOptions(rwstatsOptionsString)
+      rwstatsOptionsString = @rwstatsCmd + " " + defaultRwstatsOptions.join(" ")
+      rwstatsOptionsString = share.filterOptions(rwstatsOptionsString)
     command = "rwstats " + rwstatsOptionsString + " /tmp/" + @_id + ".rwf"
     if config and config.isSSH
       command = config.wrapCommand(command)
     command
   outputRwcountCommand: (config, profile) ->
+    defaultRwcountOptions = ["--delimited", "--no-titles"] # --no-titles is necessary, because header is added later
     if @interface is "builder"
-      rwcountOptions = ["--delimited"]
+      rwcountOptions = defaultRwcountOptions
       if @rwcountBinSizeEnabled
         rwcountOptions.push("--bin-size=" + @rwcountBinSize)
       if @rwcountLoadSchemeEnabled
@@ -212,17 +216,17 @@ class share.Query
         rwcountOptions.push("--site-config-file=" + config.siteConfigFile)
       rwcountOptionsString = rwcountOptions.join(" ")
     else
-      rwcountOptionsString = @rwcountCmd
+      rwcountOptionsString = @rwcountCmd + " " + defaultRwcountOptions.join(" ")
     rwcountOptionsString = share.filterOptions(rwcountOptionsString)
     command = "rwcount " + rwcountOptionsString + " /tmp/" + @_id + ".rwf"
     if profile.numRecs
-      headOptions = "--lines=" + (@startRecNum + profile.numRecs)
+      headOptions = "--lines=" + (@startRecNum + profile.numRecs - 1)
       headOptions = share.filterOptions(headOptions)
       headCommand = "head " + headOptions
       tailOptions = "--lines=" + profile.numRecs
       tailOptions = share.filterOptions(tailOptions)
       tailCommand = "tail " + tailOptions
-      command = command + " | { head --lines=1; " + headCommand + " | " + tailCommand + "; }"
+      command = command + " | " + headCommand + " | " + tailCommand
     if config and config.isSSH
       command = config.wrapCommand(command)
     command
