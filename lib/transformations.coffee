@@ -29,7 +29,7 @@ class share.Query
         parsedResult.shift()
         # shift-shift outta here, you redundant rows
       if @output is "rwcount"
-        parsedResult.unshift(["Date", "Records", "Bytes", "Packets"])
+        parsedResult.unshift(share.rwcountFields)
       rawHeader = parsedResult.shift()
       for name in rawHeader
         spec =
@@ -219,6 +219,12 @@ class share.Query
       rwcountOptionsString = @rwcountCmd + " " + defaultRwcountOptions.join(" ")
     rwcountOptionsString = share.filterOptions(rwcountOptionsString)
     command = "rwcount " + rwcountOptionsString + " /tmp/" + @_id + ".rwf"
+    if @sortField
+      fieldIndex = share.rwcountFields.indexOf(@sortField)
+      sortOptions = "--field-separator=\\\| --key=+" + (fieldIndex + 1) + "n" + (if @sortReverse then "r" else "")
+      sortOptions = share.filterOptions(sortOptions, "\\\\\\|\\+")
+      sortCommand = "sort " + sortOptions
+      command += " | " + sortCommand
     if profile.numRecs
       headOptions = "--lines=" + (@startRecNum + profile.numRecs - 1)
       headOptions = share.filterOptions(headOptions)
@@ -226,7 +232,7 @@ class share.Query
       tailOptions = "--lines=" + profile.numRecs
       tailOptions = share.filterOptions(tailOptions)
       tailCommand = "tail " + tailOptions
-      command = command + " | " + headCommand + " | " + tailCommand
+      command += " | " + headCommand + " | " + tailCommand
     if config and config.isSSH
       command = config.wrapCommand(command)
     command

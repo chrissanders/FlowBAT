@@ -10,7 +10,7 @@ template(name="table")
               | {{t fieldI18nString}}
             if isDistinct
               | (distinct)
-            if condition ../output "is" "rwcut"
+            if condition ../output "in" "rwcut" "rwcount"
               if condition ../sortField "is" name
                 if ../sortReverse
                   i.fa.fa-caret-down

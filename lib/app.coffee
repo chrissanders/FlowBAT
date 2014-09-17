@@ -42,6 +42,12 @@ share.rwstatsValues = [
   "Packets"
   "Bytes"
 ]
+share.rwcountFields = [
+  "Date"
+  "Records"
+  "Bytes"
+  "Packets"
+]
 share.rwcountLoadSchemes = [
   "bin-uniform"
   "start-spike"
@@ -105,11 +111,12 @@ share.inputFields = [
   "additionalExclusionsCmd"
 ]
 
-share.filterOptions = (options) ->
+share.filterOptions = (options, additionalPermittedCharacters = "") ->
   for excludedOption in ["--python-expr", "--python-file", "--pmap", "--dynamic-library", "--tuple-file", "--tuple-fields", "--tuple-direction", "--tuple-dilimter", "--all-destination", "--fail-destination", "--pass-destination", "--print-statistics", "--print-volume-statistics", "--xargs"]
     regexp = new RegExp(excludedOption + "=?[^\\s]*", "gi")
     options = options.replace(regexp, "")
-  options = options.replace(/[^\s\=\-\/\,\.\:0-9a-z]/gi, "")
+  filter = new RegExp("[^\\s\\=\\-\\/\\,\\.\\:0-9a-z" + additionalPermittedCharacters + "]", "gi")
+  options = options.replace(filter, "")
   options
 
 share.isDebug = Meteor.settings.public.isDebug

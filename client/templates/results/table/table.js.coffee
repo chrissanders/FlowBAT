@@ -20,16 +20,25 @@ Template.table.rendered = ->
         else
           fieldsOrder.splice(0, 0, field)
         if _.isEqual(fieldsOrder, query.fieldsOrder)
-          if field is query.sortField
-            if query.sortReverse
-              sortReverse = false
-            else
-              field = ""
-              sortReverse = true
-          share.Queries.update(query._id, {$set: {sortField: field, sortReverse: sortReverse}})
+          share.changeQuerySorting(query, field)
         else
           share.Queries.update(query._id, {$set: {fieldsOrder: fieldsOrder}})
     )
 
 Template.table.events
-#  "click .selector": (event, template) ->
+  "click th": encapsulate (event, template) ->
+    if template.data.output isnt "rwcount"
+      return # rwcut has its own code in rendered
+    $target = $(event.currentTarget)
+    field = $target.attr("data-field")
+    share.changeQuerySorting(template.data, field)
+
+share.changeQuerySorting = (query, field) ->
+  sortReverse = query.sortReverse
+  if field is query.sortField
+    if query.sortReverse
+      sortReverse = false
+    else
+      field = ""
+      sortReverse = true
+  share.Queries.update(query._id, {$set: {sortField: field, sortReverse: sortReverse}})
