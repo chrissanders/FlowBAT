@@ -57,6 +57,22 @@ share.rwcountLoadSchemes = [
   "maximum-volume"
   "minimum-volume"
 ]
+share.chartFieldTypes =
+  "sPort": "number"
+  "dPort": "number"
+  "protocol": "number"
+  "pro": "number"
+  "packets": "number"
+  "bytes": "number"
+  "sTime": "datetime"
+  "duration": "number"
+  "dur": "number"
+  "eTime": "datetime"
+  "Records": "number"
+  "Packets": "number"
+  "Bytes": "number"
+  "Date": "datetime"
+  "cumul_%": "number"
 
 share.parseResult = (result) ->
   rows = []

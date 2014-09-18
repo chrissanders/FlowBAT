@@ -58,23 +58,28 @@ template(name="results")
               strong Oh snap!
               pre {{error}}
       if result
-        .results-scroller
-          +table
+        if condition presentation "is" "table"
+          .results-scroller
+            +table
+        else
+          if not isOutputStale
+            +chart
         .panel-body
-          if condition output "in" "rwcut" "rwcount"
-            ul.pager
-              li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if isOutputStale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
-                a(href='#')
-                  i.fa.fa-angle-left
-                  | Previous
-              li.dropdown
-                select.num-recs.form-control
-                  each numRecsOptions
-                    option(value="{{.}}", selected="{{condition . 'is' currentUser.profile.numRecs}}") {{.}} per page
-              li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}} {{#if isOutputStale}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
-                a(href='#')
-                  | Next
-                  i.fa.fa-angle-right
+          if condition presentation "is" "table"
+            if condition output "in" "rwcut" "rwcount"
+              ul.pager
+                li.increment-start-rec-num(class="{{#if condition startRecNum 'lte' 1}}disabled{{/if}} {{#if isOutputStale}}disabled{{/if}}", data-increment="-{{currentUser.profile.numRecs}}")
+                  a(href='#')
+                    i.fa.fa-angle-left
+                    | Previous
+                li.dropdown
+                  select.num-recs.form-control
+                    each numRecsOptions
+                      option(value="{{.}}", selected="{{condition . 'is' currentUser.profile.numRecs}}") {{.}} per page
+                li.increment-start-rec-num(class="{{#if not rows.length}}disabled{{/if}} {{#if isOutputStale}}disabled{{/if}}", data-increment="{{currentUser.profile.numRecs}}")
+                  a(href='#')
+                    | Next
+                    i.fa.fa-angle-right
           if not ../isDashboard
             .extras
               a.download-csv(href="#")

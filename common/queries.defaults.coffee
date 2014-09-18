@@ -72,6 +72,7 @@ share.Queries.before.insert (userId, query) ->
     error: ""
     interface: "cmd"
     output: "rwcut"
+    presentation: "table"
     executingInterval: 0
     executingAt: null
     isInputStale: false

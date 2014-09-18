@@ -44,12 +44,30 @@ class share.Query
         if spec.name.match(distinctRegex)
           spec.isDistinct = true
           spec.name = spec.name.replace(distinctRegex, "")
+        if spec.isDistinct
+          spec.chartType = "number"
+        else
+          spec.chartType = share.chartFieldTypes[spec.name] or "string"
         @header.push(spec)
-      for parsedRow in parsedResult
-        row = []
-        for parsedValue, index in parsedRow
-          row.push({_id: @header[index]._id, value: parsedValue, queryId: @_id})
-        @rows.push(row)
+      if @presentation is "chart"
+        for parsedRow in parsedResult
+          row = []
+          for parsedValue, index in parsedRow
+            spec = @header[index]
+            switch spec.chartType
+              when "number"
+                parsedValue = parseFloat(parsedValue)
+              when "date", "datetime"
+                m = moment.utc(parsedValue, "YYYY/MM/DDTHH:mm:ss.SSS")
+                parsedValue = m.toDate()
+            row.push(parsedValue)
+          @rows.push(row)
+      else
+        for parsedRow in parsedResult
+          row = []
+          for parsedValue, index in parsedRow
+            row.push({_id: @header[index]._id, value: parsedValue, queryId: @_id})
+          @rows.push(row)
   displayName: ->
     if @isQuick then "Quick query #" + @_id else @name or "#" + @_id
   inputCommand: (config) ->
@@ -219,20 +237,21 @@ class share.Query
       rwcountOptionsString = @rwcountCmd + " " + defaultRwcountOptions.join(" ")
     rwcountOptionsString = share.filterOptions(rwcountOptionsString)
     command = "rwcount " + rwcountOptionsString + " /tmp/" + @_id + ".rwf"
-    if @sortField
-      fieldIndex = share.rwcountFields.indexOf(@sortField)
-      sortOptions = "--field-separator=\\\| --key=+" + (fieldIndex + 1) + "n" + (if @sortReverse then "r" else "")
-      sortOptions = share.filterOptions(sortOptions, "\\\\\\|\\+")
-      sortCommand = "sort " + sortOptions
-      command += " | " + sortCommand
-    if profile.numRecs
-      headOptions = "--lines=" + (@startRecNum + profile.numRecs - 1)
-      headOptions = share.filterOptions(headOptions)
-      headCommand = "head " + headOptions
-      tailOptions = "--lines=" + profile.numRecs
-      tailOptions = share.filterOptions(tailOptions)
-      tailCommand = "tail " + tailOptions
-      command += " | " + headCommand + " | " + tailCommand
+    if @presentation is "table"
+      if @sortField
+        fieldIndex = share.rwcountFields.indexOf(@sortField)
+        sortOptions = "--field-separator=\\\| --key=+" + (fieldIndex + 1) + "n" + (if @sortReverse then "r" else "")
+        sortOptions = share.filterOptions(sortOptions, "\\\\\\|\\+")
+        sortCommand = "sort " + sortOptions
+        command += " | " + sortCommand
+      if profile.numRecs
+        headOptions = "--lines=" + (@startRecNum + profile.numRecs - 1)
+        headOptions = share.filterOptions(headOptions)
+        headCommand = "head " + headOptions
+        tailOptions = "--lines=" + profile.numRecs
+        tailOptions = share.filterOptions(tailOptions)
+        tailCommand = "tail " + tailOptions
+        command += " | " + headCommand + " | " + tailCommand
     if config and config.isSSH
       command = config.wrapCommand(command)
     command

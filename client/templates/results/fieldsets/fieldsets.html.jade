@@ -182,13 +182,13 @@ template(name="fieldsets")
           .input-group-btn
             .btn-group
               button.set-property.btn.btn-default(class="{{#if condition output 'is' 'rwcut'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="output", data-value="rwcut", type="button")
-                i.fa.fa-bars
+                i.fa.fa-beer
                 | Records
               button.set-property.btn.btn-default(class="{{#if condition output 'is' 'rwstats'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="output", data-value="rwstats", type="button")
-                i.fa.fa-tasks
+                i.fa.fa-birthday-cake
                 | Stats
               button.set-property.btn.btn-default(class="{{#if condition output 'is' 'rwcount'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="output", data-value="rwcount", type="button")
-                i.fa.fa-bar-chart-o
+                i.fa.fa-glass
                 | Count
   if condition output "is" "rwstats"
     fieldset.rwstats-parameters
@@ -285,6 +285,19 @@ template(name="fieldsets")
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="rwcountSkipZeroes" value=rwcountSkipZeroes isNew=isNew)
               .fake-input
+  fieldset
+    legend Presentation
+    .row
+      .col-xs-6
+        .input-group
+          .input-group-btn
+            .btn-group
+              button.set-property.btn.btn-default(class="{{#if condition presentation 'is' 'table'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="presentation", data-value="table", type="button")
+                i.fa.fa-bars
+                | Table
+              button.set-property.btn.btn-default(class="{{#if condition presentation 'is' 'chart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="presentation", data-value="chart", type="button")
+                i.fa.fa-line-chart
+                | Chart
   fieldset
     legend Final query
     .row

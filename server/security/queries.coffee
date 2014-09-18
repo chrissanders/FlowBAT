@@ -74,6 +74,7 @@ share.Queries.allow
       error: String
       interface: String
       output: String
+      presentation: String
       executingInterval: Match.Integer
       executingAt: Match.OneOf(null, Date)
       startRecNum: Match.Integer
@@ -163,6 +164,7 @@ share.Queries.allow
       error: Match.Optional(String)
       interface: Match.Optional(String)
       output: Match.Optional(String)
+      presentation: Match.Optional(String)
       executingInterval: Match.Optional(Match.Integer)
       executingAt: Match.Optional(Match.OneOf(null, Date))
       startRecNum: Match.Optional(Match.Integer)
