@@ -304,16 +304,16 @@ template(name="fieldsets")
           .input-group
             .input-group-btn
               .btn-group
-                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'LineChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="LineChart", type="button")
+                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'LineChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="LineChart", data-preserve-result="true", type="button")
                   i.fa.fa-line-chart
                   | Line chart
-                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'BarChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="BarChart", type="button")
+                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'BarChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="BarChart", data-preserve-result="true", type="button")
                   i.fa.fa-bar-chart
                   | Bar chart
-                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'ColumnChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="ColumnChart", type="button")
+                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'ColumnChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="ColumnChart", data-preserve-result="true", type="button")
                   i.fa.fa-columns
                   | Column chart
-                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'PieChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="PieChart", type="button")
+                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'PieChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="PieChart", data-preserve-result="true", type="button")
                   i.fa.fa-pie-chart
                   | Pie chart
   fieldset
