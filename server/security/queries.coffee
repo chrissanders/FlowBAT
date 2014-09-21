@@ -75,6 +75,7 @@ share.Queries.allow
       interface: String
       output: String
       presentation: String
+      chartType: String
       executingInterval: Match.Integer
       executingAt: Match.OneOf(null, Date)
       startRecNum: Match.Integer
@@ -165,6 +166,7 @@ share.Queries.allow
       interface: Match.Optional(String)
       output: Match.Optional(String)
       presentation: Match.Optional(String)
+      chartType: Match.Optional(String)
       executingInterval: Match.Optional(Match.Integer)
       executingAt: Match.Optional(Match.OneOf(null, Date))
       startRecNum: Match.Optional(Match.Integer)

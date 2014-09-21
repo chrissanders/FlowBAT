@@ -73,6 +73,7 @@ share.Queries.before.insert (userId, query) ->
     interface: "cmd"
     output: "rwcut"
     presentation: "table"
+    chartType: "LineChart"
     executingInterval: 0
     executingAt: null
     isInputStale: false
