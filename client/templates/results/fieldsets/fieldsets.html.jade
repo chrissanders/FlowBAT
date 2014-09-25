@@ -10,7 +10,7 @@ template(name="fieldsets")
               +checkbox(family="query" _id=_id property="startDateEnabled" value=startDateEnabled isNew=isNew)
             +date(family="query" _id=_id property="startDate" value=startDate enabled=startDateEnabled placeholder="yyyy/mm/dd" isNew=isNew)
             span.input-group-addon
-              i.glyphicon.glyphicon-calendar
+              i.fa.fa-calendar.open-calendar
       .col-xs-6
         .form-group
           label.control-label End date
@@ -19,7 +19,7 @@ template(name="fieldsets")
               +checkbox(family="query" _id=_id property="endDateEnabled" value=endDateEnabled isNew=isNew)
             +date(family="query" _id=_id property="endDate" value=endDate enabled=endDateEnabled placeholder="yyyy/mm/dd" isNew=isNew)
             span.input-group-addon
-              i.glyphicon.glyphicon-calendar
+              i.fa.fa-calendar.open-calendar
     .row
       .col-xs-6
         .form-group
