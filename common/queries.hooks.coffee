@@ -7,7 +7,7 @@ share.Queries.before.update (userId, query, fieldNames, modifier, options) ->
     _.extend(modifier.$set, share.queryResetValues)
 
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
-  if "output" in fieldNames
+  if _.intersection(fieldNames, ["interface", "output", "presentation"]).length
     transformedQuery = share.Transformations.query(query)
     availableChartTypes = transformedQuery.availableChartTypes()
     if query.chartType not in availableChartTypes
