@@ -5,10 +5,6 @@ Template.chart.helpers
         return spec
   reactivityHack: ->
     _.defer =>
-      $chart = $(".chart[data-id='" + @_id + "']")
-      $chart.empty()
-      $chartContainer = $("<div class='chart-container'></div>")
-      $chart.append($chartContainer)
       data = new google.visualization.DataTable()
       for spec in @header
         if @output is "rwstats" and (spec.isPercentage or spec.name is "cumul_%")
@@ -22,16 +18,18 @@ Template.chart.helpers
             continue
           values.push(value)
         data.addRow(values)
-      chart = new google.visualization[@chartType]($chartContainer.get(0))
-      chart.draw(data,
+      share.chartWrapper.setDataTable(data)
+      share.chartWrapper.setChartType(@chartType)
+      share.chartWrapper.setOptions(
         height: @chartHeight
         curveType: "function"
         vAxis:
           logScale: true
       )
+      share.chartWrapper.draw($(".chart-container").get(0))
+    null
 
 Template.chart.rendered = ->
-
 
 Template.chart.events
 #  "click .selector": (event, template) ->
