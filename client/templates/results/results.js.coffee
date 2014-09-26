@@ -27,11 +27,10 @@ Template.results.events
     UI.insert(UI.renderWithData(Template.inputExecutingIntervalModal, {_id: template.data._id}), document.body)
   "click .set-property": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
-    $set = {}
+    editor = share.EditorCache.editors["query"]
+    editor.saveProperty(template.data._id, $target.attr("data-property"), $target.attr("data-value"))
     if not $target.attr("data-preserve-result")
-      $set = {result: "", error: ""}
-    $set[$target.attr("data-property")] = $target.attr("data-value")
-    share.Queries.update(template.data._id, {$set: $set})
+      share.Queries.update(template.data._id, {$set: {result: "", error: ""}})
   "click .toggle-is-utc": grab encapsulate (event, template) ->
     event.currentTarget.blur()
     share.Queries.update(template.data._id, {$set: {isUTC: not @isUTC}})

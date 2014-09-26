@@ -1,25 +1,45 @@
 template(name="fieldsets")
   fieldset
     legend Input options
-    .row
-      .col-xs-6
-        .form-group
-          label.control-label Start date
-          .input-group
-            span.input-group-addon
-              +checkbox(family="query" _id=_id property="startDateEnabled" value=startDateEnabled isNew=isNew)
-            +date(family="query" _id=_id property="startDate" value=startDate enabled=startDateEnabled placeholder="yyyy/mm/dd" isNew=isNew)
-            span.input-group-addon
-              i.fa.fa-calendar.open-calendar
-      .col-xs-6
-        .form-group
-          label.control-label End date
-          .input-group
-            span.input-group-addon
-              +checkbox(family="query" _id=_id property="endDateEnabled" value=endDateEnabled isNew=isNew)
-            +date(family="query" _id=_id property="endDate" value=endDate enabled=endDateEnabled placeholder="yyyy/mm/dd" isNew=isNew)
-            span.input-group-addon
-              i.fa.fa-calendar.open-calendar
+    if condition startDateType "is" "interval"
+      .row
+        .col-xs-6
+          .form-group
+            label.control-label Start date (<a href="#" class="set-property dashed" data-property="startDateType" data-value="offset">switch to offset</a>)
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="startDateEnabled" value=startDateEnabled isNew=isNew)
+              +date(family="query" _id=_id property="startDate" value=startDate enabled=startDateEnabled placeholder="yyyy/mm/dd" isNew=isNew)
+              span.input-group-addon
+                i.fa.fa-calendar.open-calendar
+        .col-xs-6
+          .form-group
+            label.control-label End date
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="endDateEnabled" value=endDateEnabled isNew=isNew)
+              +date(family="query" _id=_id property="endDate" value=endDate enabled=endDateEnabled placeholder="yyyy/mm/dd" isNew=isNew)
+              span.input-group-addon
+                i.fa.fa-calendar.open-calendar
+    if condition startDateType "is" "offset"
+      .row
+        .col-xs-6
+          .form-group
+            label.control-label Start date offset (<a href="#" class="set-property dashed" data-property="startDateType" data-value="interval">switch to interval</a>)
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="startDateOffsetEnabled" value=startDateOffsetEnabled isNew=isNew)
+              +input(family="query" _id=_id property="startDateOffset" value=startDateOffset enabled=startDateEnabled isNew=isNew)
+              span.input-group-addon minutes
+        .col-xs-6
+          .form-group
+            label.control-label Predefined offsets
+            .input-group
+              .input-group-btn
+                .btn-group
+                  each startDateOffsets
+                    button.set-property.btn.btn-default(class="{{#if condition ../startDateOffset 'is' value}}active{{/if}}", data-property="startDateOffset", data-value=value, type="button")
+                      | {{name}}
     .row
       .col-xs-6
         .form-group

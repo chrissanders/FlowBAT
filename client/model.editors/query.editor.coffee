@@ -4,7 +4,7 @@ share.QueryEditor = new share.Editor(
   isSingleLine: (property) ->
     property not in [] # all properties
   cleanProperty: (property, value) ->
-    if property in ["chartHeight"]
+    if property in ["startDateOffset", "chartHeight"]
       return share.intval(value)
     return value
   stopEditing: ->

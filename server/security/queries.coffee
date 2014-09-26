@@ -9,6 +9,9 @@ share.Queries.allow
       name: String
       cmd: String
       exclusionsCmd: String
+      startDateType: String
+      startDateOffsetEnabled: Boolean
+      startDateOffset: Match.Integer
       startDateEnabled: Boolean
       startDate: String
       endDateEnabled: Boolean
@@ -101,6 +104,9 @@ share.Queries.allow
       name: Match.Optional(String)
       cmd: Match.Optional(String)
       exclusionsCmd: Match.Optional(String)
+      startDateType: Match.Optional(String)
+      startDateOffsetEnabled: Match.Optional(Boolean)
+      startDateOffset: Match.Optional(Match.Integer)
       startDateEnabled: Match.Optional(Boolean)
       startDate: Match.Optional(String)
       endDateEnabled: Match.Optional(Boolean)

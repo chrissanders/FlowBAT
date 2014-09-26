@@ -77,7 +77,7 @@ template(name="results")
                 .form-group
                   label.control-label.col-xs-4 Chart height
                   .input-group.col-xs-4
-                    +input(family="query" _id=_id property="chartHeight" value=chartHeight isNew=isNew cleanFunction="intval")
+                    +input(family="query" _id=_id property="chartHeight" value=chartHeight isNew=isNew)
                     span.input-group-addon px
           if not ../isDashboard
             .extras

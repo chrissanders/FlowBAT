@@ -25,6 +25,8 @@ Template.fieldsets.helpers
         name: loadScheme
       )
     options
+  startDateOffsets: ->
+    _.map(share.startDateOffsets, (value, name) -> {value: value, name: name})
 
 Template.fieldsets.rendered = ->
   share.initAutocomplete(@$(".input-group.additional-parameters-form-group input"), share.rwfilterAutocompleteOptions)
