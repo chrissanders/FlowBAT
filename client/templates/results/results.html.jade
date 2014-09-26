@@ -75,8 +75,8 @@ template(name="results")
             .row.form-horizontal
               .col-xs-4.col-xs-offset-4
                 .form-group
-                  label.control-label.col-xs-4 Chart height
-                  .input-group.col-xs-4
+                  label.control-label.col-xs-4 Chart height:
+                  .input-group.col-xs-6
                     +input(family="query" _id=_id property="chartHeight" value=chartHeight isNew=isNew)
                     span.input-group-addon px
           if not ../isDashboard
