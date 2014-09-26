@@ -1,4 +1,12 @@
 Template.chart.helpers
+  prettyRwstatsFields: ->
+    fields = _.intersection(@rwstatsFieldsOrder, @rwstatsFields)
+    if @interface is "builder"
+      for field, index in fields
+        fields[index] = i18n.t("rwcut.fields." + field)
+      fields.join(", ")
+    else
+      fields.join(",")
   reactivityHack: ->
     _.defer =>
       $chart = $(".chart[data-id='" + @_id + "']")

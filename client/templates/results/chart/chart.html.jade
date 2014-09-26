@@ -1,2 +1,9 @@
 template(name="chart")
-  .chart(data-id="{{_id}}") {{reactivityHack}}
+  .chart(data-id="{{_id}}")
+    if condition rwstatsFields.length ">" 1
+      .panel-body
+        .alert.alert-danger(role='alert')
+          strong Oh snap!
+          pre You have selected multiple input fields ({{prettyRwstatsFields}}). However, chart supports only one input field. Please select a single input field and press "Execute".
+    else
+      | {{reactivityHack}}
