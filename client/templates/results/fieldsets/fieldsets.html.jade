@@ -274,7 +274,8 @@ template(name="fieldsets")
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="rwcountSkipZeroes" value=rwcountSkipZeroes isNew=isNew)
               .fake-input
-  +presentationFieldset
+  if availableChartTypes.length
+    +presentationFieldset
   fieldset
     legend Final query
     .row
