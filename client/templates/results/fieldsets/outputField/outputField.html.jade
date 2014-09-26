@@ -1,0 +1,13 @@
+template(name="outputField")
+  .input-group
+    .input-group-btn
+      .btn-group
+        button.set-property.btn.btn-default(class="{{#if condition output 'is' 'rwcut'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="output", data-value="rwcut", type="button")
+          i.fa.fa-beer
+          | Records
+        button.set-property.btn.btn-default(class="{{#if condition output 'is' 'rwstats'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="output", data-value="rwstats", type="button")
+          i.fa.fa-birthday-cake
+          | Stats
+        button.set-property.btn.btn-default(class="{{#if condition output 'is' 'rwcount'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="output", data-value="rwcount", type="button")
+          i.fa.fa-glass
+          | Count
