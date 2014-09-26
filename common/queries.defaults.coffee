@@ -74,6 +74,7 @@ share.Queries.before.insert (userId, query) ->
     output: "rwcut"
     presentation: "table"
     chartType: "LineChart"
+    chartHeight: 400
     executingInterval: 0
     executingAt: null
     isInputStale: false

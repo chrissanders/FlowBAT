@@ -76,6 +76,7 @@ share.Queries.allow
       output: String
       presentation: String
       chartType: String
+      chartHeight: Match.Integer
       executingInterval: Match.Integer
       executingAt: Match.OneOf(null, Date)
       startRecNum: Match.Integer
@@ -167,6 +168,7 @@ share.Queries.allow
       output: Match.Optional(String)
       presentation: Match.Optional(String)
       chartType: Match.Optional(String)
+      chartHeight: Match.Optional(Match.Integer)
       executingInterval: Match.Optional(Match.Integer)
       executingAt: Match.Optional(Match.OneOf(null, Date))
       startRecNum: Match.Optional(Match.Integer)

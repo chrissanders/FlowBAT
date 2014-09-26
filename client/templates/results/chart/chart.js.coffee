@@ -24,6 +24,7 @@ Template.chart.helpers
         data.addRow(values)
       chart = new google.visualization[@chartType]($chartContainer.get(0))
       chart.draw(data,
+        height: @chartHeight
         curveType: "function"
         vAxis:
           logScale: true

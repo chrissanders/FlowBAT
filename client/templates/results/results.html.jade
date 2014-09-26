@@ -71,6 +71,14 @@ template(name="results")
                   a(href='#')
                     | Next
                     i.fa.fa-angle-right
+          if condition presentation "is" "chart"
+            .row.form-horizontal
+              .col-xs-4.col-xs-offset-4
+                .form-group
+                  label.control-label.col-xs-4 Chart height
+                  .input-group.col-xs-4
+                    +input(family="query" _id=_id property="chartHeight" value=chartHeight isNew=isNew cleanFunction="intval")
+                    span.input-group-addon px
           if not ../isDashboard
             .extras
               a.download-csv(href="#")
