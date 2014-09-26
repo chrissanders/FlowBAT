@@ -1,9 +1,17 @@
 template(name="chart")
   .chart(data-id="{{_id}}")
-    if condition rwstatsFields.length ">" 1
+    if nonNumberDataColumnSpec
       .panel-body
         .alert.alert-danger(role='alert')
           strong Oh snap!
-          pre You have selected multiple input fields ({{prettyRwstatsFields}}). However, chart supports only one input field. Please select a single input field and press "Execute".
+          pre
+            | Can't build a chart using non-number data column ("{{nonNumberDataColumnSpec.name}}").
+            | &nbsp;
+            | A chart is drawn using the same table you would normally see in its place.
+            | The first column represents X axis. It can be anything: IP, datetime, number.
+            | All other columns represent Y axis. They can only be numbers.
+            | However, "{{nonNumberDataColumnSpec.name}}" column isn't a number.
+            | &nbsp;
+            | To draw a chart, please remove this column from output.
     else
       | {{reactivityHack}}
