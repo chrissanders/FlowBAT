@@ -261,6 +261,8 @@ class share.Query
     @rwstatsMode is "threshold"
   rwstatsPercentageModeValueIsEnabled: ->
     @rwstatsMode is "percentage"
+  availableChartTypes: ->
+    share.availableChartTypes[@output]
   path: ->
     "/query/" + @_id
 

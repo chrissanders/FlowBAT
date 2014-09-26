@@ -13,20 +13,25 @@ template(name="presentationFieldset")
                 i.fa.fa-line-chart
                 | Chart
     if condition presentation 'is' 'chart'
-      .row
-        .col-xs-6
-          .input-group
-            .input-group-btn
-              .btn-group
-                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'LineChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="LineChart", data-preserve-result="true", type="button")
-                  i.fa.fa-line-chart
-                  | Line chart
-                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'BarChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="BarChart", data-preserve-result="true", type="button")
-                  i.fa.fa-bar-chart
-                  | Bar chart
-                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'ColumnChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="ColumnChart", data-preserve-result="true", type="button")
-                  i.fa.fa-columns
-                  | Column chart
-                button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'PieChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="PieChart", data-preserve-result="true", type="button")
-                  i.fa.fa-pie-chart
-                  | Pie chart
+      if condition availableChartTypes.length ">" 1
+        .row
+          .col-xs-6
+            .input-group
+              .input-group-btn
+                .btn-group
+                  if condition 'LineChart' 'in' availableChartTypes
+                    button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'LineChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="LineChart", data-preserve-result="true", type="button")
+                      i.fa.fa-line-chart
+                      | Line chart
+                  if condition 'BarChart' 'in' availableChartTypes
+                    button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'BarChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="BarChart", data-preserve-result="true", type="button")
+                      i.fa.fa-bar-chart
+                      | Bar chart
+                  if condition 'ColumnChart' 'in' availableChartTypes
+                    button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'ColumnChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="ColumnChart", data-preserve-result="true", type="button")
+                      i.fa.fa-columns
+                      | Column chart
+                  if condition 'PieChart' 'in' availableChartTypes
+                    button.set-property.btn.btn-default(class="{{#if condition chartType 'is' 'PieChart'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="chartType", data-value="PieChart", data-preserve-result="true", type="button")
+                      i.fa.fa-pie-chart
+                      | Pie chart

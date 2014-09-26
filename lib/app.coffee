@@ -57,6 +57,10 @@ share.rwcountLoadSchemes = [
   "maximum-volume"
   "minimum-volume"
 ]
+share.availableChartTypes =
+  "rwcut": []
+  "rwstats": ["BarChart", "ColumnChart",  "PieChart"]
+  "rwcount": ["LineChart"]
 share.chartFieldTypes =
   "sPort": "number"
   "dPort": "number"
