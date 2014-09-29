@@ -78,10 +78,10 @@ share.chartFieldTypes =
   "Date": "datetime"
   "cumul_%": "number"
 share.startDateOffsets =
-  "Hour": share.hour
-  "Day": 24 * share.hour
-  "Week": 7 * 24 * share.hour
-  "Month": 30 * 24 * share.hour
+  "Hour": (60).toString()
+  "Day": (24 * 60).toString()
+  "Week": (7 * 24 * 60).toString()
+  "Month": (30 * 24 * 60).toString()
 
 share.parseResult = (result) ->
   rows = []

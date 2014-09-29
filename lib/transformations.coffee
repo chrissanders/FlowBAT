@@ -97,10 +97,20 @@ class share.Query
       else
         value = "all"
       parameters.push("--type=" + value)
-      if @startDateEnabled and @startDate
-        parameters.push("--start-date=" + @startDate)
-      if @endDateEnabled and @endDate
-        parameters.push("--end-date=" + @endDate)
+      if @startDateType is "interval"
+        if @startDateEnabled and @startDate
+          parameters.push("--start-date=" + @startDate)
+        if @endDateEnabled and @endDate
+          parameters.push("--end-date=" + @endDate)
+        if @activeTimeEnabled and @activeTime
+          parameters.push("--active-time=" + @activeTime)
+      else
+        if @startDateOffsetEnabled and @startDateOffset
+          startDateOffsetNumber = share.intval(@startDateOffset)
+          eTimeMoment = moment.utc()
+          sTimeMoment = eTimeMoment.clone().subtract(startDateOffsetNumber, 'minutes')
+          parameters.push("--start-date=" + sTimeMoment.format("YYYY/MM/DD:HH"))
+          parameters.push("--active-time=" + sTimeMoment.format("YYYY/MM/DDTHH:mm:ss.SSS") + "-" + eTimeMoment.format("YYYY/MM/DDTHH:mm:ss.SSS"))
       if @sensorEnabled and @sensor
         parameters.push("--sensor=" + @sensor)
       if @daddressEnabled and @daddress
@@ -129,8 +139,6 @@ class share.Query
         parameters.push("--protocol=" + @protocol)
       if @flagsAllEnabled and @flagsAll
         parameters.push("--flags-all=" + @flagsAll)
-      if @activeTimeEnabled and @activeTime
-        parameters.push("--active-time=" + @activeTime)
       if @additionalParametersEnabled and @additionalParameters
         parameters.push(@additionalParameters)
       string = parameters.join(" ")
