@@ -5,7 +5,7 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Start date (<a href="#" class="set-property dashed" data-property="startDateType" data-value="offset">switch to offset</a>)
+            label.control-label Start date (<a href="#" class="set-property dashed" data-property="startDateType" data-value="offset">switch to rolling</a>)
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="startDateEnabled" value=startDateEnabled isNew=isNew)
@@ -25,7 +25,7 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Start date offset (<a href="#" class="set-property dashed" data-property="startDateType" data-value="interval">switch to interval</a>)
+            label.control-label Start date rolling offset from moment of query execution (<a href="#" class="set-property dashed" data-property="startDateType" data-value="interval">switch to interval</a>)
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="startDateOffsetEnabled" value=startDateOffsetEnabled isNew=isNew)
