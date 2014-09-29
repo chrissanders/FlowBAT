@@ -29,7 +29,7 @@ template(name="fieldsets")
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="startDateOffsetEnabled" value=startDateOffsetEnabled isNew=isNew)
-              +input(family="query" _id=_id property="startDateOffset" value=startDateOffset enabled=startDateEnabled isNew=isNew)
+              +input(family="query" _id=_id property="startDateOffset" value=startDateOffset enabled=startDateOffsetEnabled isNew=isNew)
               span.input-group-addon minutes
         .col-xs-6
           .form-group
@@ -170,13 +170,14 @@ template(name="fieldsets")
                 i.fa.fa-pencil
               a.btn.btn-default(href="/ipset/create")
                 i.fa.fa-plus
-      .col-xs-6
-        .form-group
-          label.control-label Active time
-          .input-group
-            span.input-group-addon
-              +checkbox(family="query" _id=_id property="activeTimeEnabled" value=activeTimeEnabled isNew=isNew)
-            +input(family="query" _id=_id property="activeTime" value=activeTime enabled=activeTimeEnabled isNew=isNew)
+      if condition startDateType "is" "interval"
+        .col-xs-6
+          .form-group
+            label.control-label Active time
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="activeTimeEnabled" value=activeTimeEnabled isNew=isNew)
+              +input(family="query" _id=_id property="activeTime" value=activeTime enabled=activeTimeEnabled isNew=isNew)
   fieldset
     legend Additional options
     .row

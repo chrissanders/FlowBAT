@@ -9,7 +9,7 @@ share.Queries.before.insert (userId, query) ->
     exclusionsCmd: ""
     startDateType: "interval"
     startDateOffsetEnabled: false
-    startDateOffset: 60
+    startDateOffset: "60"
     startDateEnabled: false
     startDate: ""
     endDateEnabled: false

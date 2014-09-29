@@ -11,7 +11,7 @@ share.Queries.allow
       exclusionsCmd: String
       startDateType: String
       startDateOffsetEnabled: Boolean
-      startDateOffset: Match.Integer
+      startDateOffset: String
       startDateEnabled: Boolean
       startDate: String
       endDateEnabled: Boolean
@@ -106,7 +106,7 @@ share.Queries.allow
       exclusionsCmd: Match.Optional(String)
       startDateType: Match.Optional(String)
       startDateOffsetEnabled: Match.Optional(Boolean)
-      startDateOffset: Match.Optional(Match.Integer)
+      startDateOffset: Match.Optional(String)
       startDateEnabled: Match.Optional(Boolean)
       startDate: Match.Optional(String)
       endDateEnabled: Match.Optional(Boolean)
