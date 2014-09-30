@@ -51,7 +51,7 @@ share.Queries.before.insert (userId, query) ->
     additionalExclusionsCmdEnabled: false
     additionalExclusionsCmd: ""
     fields: ["sIP", "dIP", "sPort", "dPort", "protocol", "packets", "bytes", "flags", "sTime", "duration", "eTime", "sensor"]
-    fieldsOrder: share.rwcutFields
+    fieldsOrder: _.clone(share.rwcutFields)
     rwstatsDirection: "top"
     rwstatsMode: "count"
     rwstatsCountModeValue: "10"
@@ -60,7 +60,7 @@ share.Queries.before.insert (userId, query) ->
     rwstatsBinTimeEnabled: false
     rwstatsBinTime: "60"
     rwstatsFields: []
-    rwstatsFieldsOrder: share.rwcutFields
+    rwstatsFieldsOrder: _.clone(share.rwcutFields)
     rwstatsValues: []
     rwstatsValuesOrder: share.rwstatsValues.concat(share.rwcutFields)
     rwstatsPrimaryValue: ""
@@ -70,6 +70,7 @@ share.Queries.before.insert (userId, query) ->
     rwcountLoadSchemeEnabled: false
     rwcountLoadScheme: ""
     rwcountSkipZeroes: true
+    rwcountFields: _.clone(share.rwcountFields)
     rwcountCmd: ""
     result: ""
     error: ""

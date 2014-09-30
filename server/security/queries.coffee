@@ -168,6 +168,7 @@ share.Queries.allow
       rwcountLoadScheme: Match.Optional(String)
       rwcountSkipZeroes: Match.Optional(Boolean)
       rwcountCmd: Match.Optional(String)
+      rwcountFields: Match.Optional([String])
       result: Match.Optional(String)
       error: Match.Optional(String)
       interface: Match.Optional(String)
@@ -190,10 +191,12 @@ share.Queries.allow
       fields: Match.Optional(String)
       rwstatsFields: Match.Optional(String)
       rwstatsValues: Match.Optional(String)
+      rwcountFields: Match.Optional(String)
     $pull =
       fields: Match.Optional(String)
       rwstatsFields: Match.Optional(String)
       rwstatsValues: Match.Optional(String)
+      rwcountFields: Match.Optional(String)
     check(modifier,
       $set: Match.Optional($set)
       $addToSet: Match.Optional($addToSet)

@@ -54,6 +54,8 @@ class share.Query
           row = []
           for parsedValue, index in parsedRow
             spec = @header[index]
+            if @output is "rwcount" and spec.name not in @rwcountFields
+              continue
             switch spec.chartType
               when "number"
                 parsedValue = parseFloat(parsedValue)
@@ -66,8 +68,17 @@ class share.Query
         for parsedRow in parsedResult
           row = []
           for parsedValue, index in parsedRow
-            row.push({_id: @header[index]._id, value: parsedValue, queryId: @_id})
+            spec = @header[index]
+            if @output is "rwcount" and spec.name not in @rwcountFields
+              continue
+            row.push({_id: spec._id, value: parsedValue, queryId: @_id})
           @rows.push(row)
+      filteredHeader = []
+      for spec in @header
+        if @output is "rwcount" and spec.name not in @rwcountFields
+          continue
+        filteredHeader.push(spec)
+      @header = filteredHeader
   displayName: ->
     if @isQuick then "Quick query #" + @_id else @name or "#" + @_id
   inputCommand: (config) ->
