@@ -4,6 +4,8 @@ Template.chart.helpers
       if spec.chartType isnt "number"
         return spec
   reactivityHack: ->
+    if not Session.get("chartsLoaded")
+      return
     _.defer =>
       data = new google.visualization.DataTable()
       for spec in @header
@@ -18,15 +20,16 @@ Template.chart.helpers
             continue
           values.push(value)
         data.addRow(values)
-      share.chartWrapper.setDataTable(data)
-      share.chartWrapper.setChartType(@chartType)
-      share.chartWrapper.setOptions(
+      chartWrapper = share.chartWrappers.get(@_id)
+      chartWrapper.setDataTable(data)
+      chartWrapper.setChartType(@chartType)
+      chartWrapper.setOptions(
         height: @chartHeight
         curveType: "function"
         vAxis:
           logScale: true
       )
-      share.chartWrapper.draw($(".chart-container").get(0))
+      chartWrapper.draw($(".chart[data-id='"+@_id+"'] .chart-container").get(0))
     null
 
 Template.chart.rendered = ->
