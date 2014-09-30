@@ -110,6 +110,7 @@ class share.Query
           eTimeMoment = moment.utc()
           sTimeMoment = eTimeMoment.clone().subtract(startDateOffsetNumber, 'minutes')
           parameters.push("--start-date=" + sTimeMoment.format("YYYY/MM/DD:HH"))
+          parameters.push("--end-date=" + eTimeMoment.format("YYYY/MM/DD:HH"))
           parameters.push("--active-time=" + sTimeMoment.format("YYYY/MM/DDTHH:mm:ss.SSS") + "-" + eTimeMoment.format("YYYY/MM/DDTHH:mm:ss.SSS"))
       if @sensorEnabled and @sensor
         parameters.push("--sensor=" + @sensor)
