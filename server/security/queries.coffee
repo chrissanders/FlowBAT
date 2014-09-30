@@ -73,6 +73,7 @@ share.Queries.allow
       rwcountLoadScheme: String
       rwcountSkipZeroes: Boolean
       rwcountCmd: String
+      rwcountFields: [String]
       result: String
       error: String
       interface: String
