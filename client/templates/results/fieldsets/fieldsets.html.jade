@@ -167,21 +167,6 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Sensor
-            .input-group
-              span.input-group-addon
-                +checkbox(family="query" _id=_id property="sensorEnabled" value=sensorEnabled isNew=isNew)
-              +input(family="query" _id=_id property="sensor" value=sensor enabled=sensorEnabled isNew=isNew)
-        .col-xs-6
-          .form-group
-            label.control-label Source country
-            .input-group
-              span.input-group-addon
-                +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
-              +chosen(family="query" _id=_id property="scc" value=scc options=countriesOptions multiple=true enabled=sccEnabled isNew=isNew)
-      .row
-        .col-xs-6
-          .form-group
             label.control-label Types
             .input-group
               span.input-group-addon
@@ -189,21 +174,37 @@ template(name="fieldsets")
               +chosen(family="query" _id=_id property="types" value=types options=typesOptions multiple=true enabled=typesEnabled isNew=isNew)
         .col-xs-6
           .form-group
+            label.control-label Sensor
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="sensorEnabled" value=sensorEnabled isNew=isNew)
+              +input(family="query" _id=_id property="sensor" value=sensor enabled=sensorEnabled isNew=isNew)
+      .row
+        .col-xs-6
+          .form-group
+            label.control-label Source country
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
+              +chosen(family="query" _id=_id property="scc" value=scc options=countriesOptions multiple=true enabled=sccEnabled isNew=isNew)
+        .col-xs-6
+          .form-group
+            label.control-label Additional parameters
+            .input-group.additional-parameters-form-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="additionalParametersEnabled" value=additionalParametersEnabled isNew=isNew)
+              +input(family="query" _id=_id property="additionalParameters" value=additionalParameters enabled=additionalParametersEnabled placeholder="Raw command-line options" isNew=isNew)
+      .row
+        .col-xs-6
+          .form-group
             label.control-label Destination country
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)
               +chosen(family="query" _id=_id property="dcc" value=dcc options=countriesOptions multiple=true enabled=dccEnabled isNew=isNew)
-      .row
-        .col-xs-6
-          .form-group
-            .input-group.additional-parameters-form-group
-              span.input-group-addon
-                +checkbox(family="query" _id=_id property="additionalParametersEnabled" value=additionalParametersEnabled isNew=isNew)
-              +input(family="query" _id=_id property="additionalParameters" value=additionalParameters enabled=additionalParametersEnabled placeholder="Raw command-line options" isNew=isNew)
     legend Exclusions
     .row
-      .col-xs-6
+      .col-xs-12
         .form-group
           .input-group.additional-parameters-form-group
             span.input-group-addon
