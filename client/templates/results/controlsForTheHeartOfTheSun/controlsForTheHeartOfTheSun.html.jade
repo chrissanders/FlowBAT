@@ -28,7 +28,7 @@ template(name="controlsForTheHeartOfTheSun")
           i.fa.fa-pencil
           | Edit
     else
-      .btn-group
+      .btn-group.interface-toggle-btn-group
         button.set-property.btn.btn-default(class="{{#if condition interface 'is' 'cmd'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="interface", data-value="cmd", type="button")
           i.fa.fa-space-shuttle
           | Command line

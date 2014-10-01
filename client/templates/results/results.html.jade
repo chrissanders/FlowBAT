@@ -41,7 +41,8 @@ template(name="results")
               +cmdFieldsets
             else
               +fieldsets
-              +controlsForTheHeartOfTheSun
+              .secondary-controls
+                +controlsForTheHeartOfTheSun
       if not isOutputStale
         if error
           .panel-body
