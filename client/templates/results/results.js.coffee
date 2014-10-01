@@ -51,6 +51,18 @@ Template.results.events
       modifier.$pull = {}
       modifier.$pull[property] = checkbox.value
     share.Queries.update(template.data._id, modifier)
+  "click .fieldset-toggle": encapsulate (event, template) ->
+    $target = $(event.currentTarget)
+    fieldset = $target.attr("data-fieldset")
+    query = share.Queries.findOne(template.data._id)
+    modifier = {}
+    if fieldset in query.expandedFieldsets
+      modifier.$pull = {}
+      modifier.$pull["expandedFieldsets"] = fieldset
+    else
+      modifier.$addToSet = {}
+      modifier.$addToSet["expandedFieldsets"] = fieldset
+    share.Queries.update(template.data._id, modifier)
   "change .num-recs": encapsulate (event, template) ->
     $numRecs = $(event.currentTarget)
     numRecs = share.intval($numRecs.val())

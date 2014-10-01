@@ -79,6 +79,7 @@ share.Queries.before.insert (userId, query) ->
     presentation: "table"
     chartType: "LineChart"
     chartHeight: 400
+    expandedFieldsets: []
     executingInterval: 0
     executingAt: null
     isInputStale: false
