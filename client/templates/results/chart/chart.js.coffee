@@ -28,6 +28,8 @@ Template.chart.helpers
         curveType: "function"
         vAxis:
           logScale: true
+        hAxis:
+          logScale: true
       )
       chartWrapper.draw($(".chart[data-id='"+@_id+"'] .chart-container").get(0))
     null
