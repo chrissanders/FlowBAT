@@ -29,8 +29,6 @@ Template.results.events
     $target = $(event.currentTarget)
     editor = share.EditorCache.editors["query"]
     editor.saveProperty(template.data._id, $target.attr("data-property"), $target.attr("data-value"))
-    if not $target.attr("data-preserve-result")
-      share.Queries.update(template.data._id, {$set: {result: "", error: ""}})
   "click .toggle-is-utc": grab encapsulate (event, template) ->
     event.currentTarget.blur()
     share.Queries.update(template.data._id, {$set: {isUTC: not @isUTC}})

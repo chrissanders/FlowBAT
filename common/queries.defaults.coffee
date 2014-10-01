@@ -73,8 +73,6 @@ share.Queries.before.insert (userId, query) ->
     rwcountSkipZeroes: true
     rwcountFields: _.clone(share.rwcountFields)
     rwcountCmd: ""
-    result: ""
-    error: ""
     interface: "cmd"
     output: "rwcut"
     presentation: "table"
@@ -107,6 +105,8 @@ share.Queries.before.update (userId, query, fieldNames, modifier, options) ->
   queryPreSave.call(@, userId, modifier.$set)
 
 share.queryResetValues =
+  result: ""
+  error: ""
   startRecNum: 1
   sortField: ""
   sortReverse: true
