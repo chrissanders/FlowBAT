@@ -14,6 +14,8 @@ Template.date.rendered = ->
       editor = share.EditorCache.editors[template.data.family]
       editor.collection.update(template.data._id, {$set: $set})
   )
-  $editor.datepicker("setDate", @data.value)
+  date = @data.value.replace(/\:.+$/i, "") # actually, the format is yy/mm/dd:hh, but ":hh" part should be stripped for datepicker
+  $editor.datepicker("setDate", date)
+  $editor.val(@data.value)
 
 Template.date.events
