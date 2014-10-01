@@ -3,6 +3,7 @@ queryPreSave = (userId, changes) ->
 share.Queries.before.insert (userId, query) ->
   query._id = query._id || Random.id()
   now = new Date()
+  startDate = moment.utc().format("YYYY/MM/DD:HH")
   _.defaults(query,
     name: ""
     cmd: ""
@@ -10,8 +11,8 @@ share.Queries.before.insert (userId, query) ->
     startDateType: "interval"
     startDateOffsetEnabled: false
     startDateOffset: "60"
-    startDateEnabled: false
-    startDate: ""
+    startDateEnabled: true
+    startDate: startDate
     endDateEnabled: false
     endDate: ""
     sensorEnabled: false
