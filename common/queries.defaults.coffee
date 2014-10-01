@@ -40,8 +40,8 @@ share.Queries.before.insert (userId, query) ->
     dcc: []
     sccEnabled: false
     scc: []
-    protocolEnabled: false
-    protocol: ""
+    protocolEnabled: true
+    protocol: "0-255"
     flagsAllEnabled: false
     flagsAll: ""
     activeTimeEnabled: false
@@ -79,7 +79,7 @@ share.Queries.before.insert (userId, query) ->
     presentation: "table"
     chartType: "LineChart"
     chartHeight: 400
-    expandedFieldsets: []
+    expandedFieldsets: ["time"]
     executingInterval: 0
     executingAt: null
     isInputStale: false

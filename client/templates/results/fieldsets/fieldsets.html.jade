@@ -202,14 +202,13 @@ template(name="fieldsets")
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)
               +chosen(family="query" _id=_id property="dcc" value=dcc options=countriesOptions multiple=true enabled=dccEnabled isNew=isNew)
-    legend Exclusions
-    .row
-      .col-xs-12
-        .form-group
-          .input-group.additional-parameters-form-group
-            span.input-group-addon
-              +checkbox(family="query" _id=_id property="additionalExclusionsCmdEnabled" value=additionalExclusionsCmdEnabled isNew=isNew)
-            +input(family="query" _id=_id property="additionalExclusionsCmd" value=additionalExclusionsCmd enabled=additionalExclusionsCmdEnabled placeholder="Use \"OR\" to separate exclusions, for example: --type=7 OR --dport=80" isNew=isNew)
+      .row
+        .col-xs-12
+          .form-group
+            .input-group.additional-parameters-form-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="additionalExclusionsCmdEnabled" value=additionalExclusionsCmdEnabled isNew=isNew)
+              +input(family="query" _id=_id property="additionalExclusionsCmd" value=additionalExclusionsCmd enabled=additionalExclusionsCmdEnabled placeholder="Use \"OR\" to separate exclusions, for example: --type=7 OR --dport=80" isNew=isNew)
   fieldset
     legend Output type
     .row
