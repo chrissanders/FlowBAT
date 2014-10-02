@@ -8,7 +8,9 @@ template(name="fieldsets")
         .row
           .col-xs-6
             .form-group
-              label.control-label Start date (<a href="#" class="set-property dashed" data-property="startDateType" data-value="offset">switch to rolling</a>)
+              label.control-label
+                | Start date (<a href="#" class="set-property dashed" data-property="startDateType" data-value="offset">switch to rolling</a>)
+                i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Start date", data-content="Used to view flow records ranging from a specific start date. Takes the form of YYYY/MM/DD[:HH], where the hour is optional. If specified with an end date, it this will return data for that range. If specified by itself, it will only return data for the start date selected. If no start date is specified, records for the current day will be returned.")
               .input-group
                 span.input-group-addon
                   +checkbox(family="query" _id=_id property="startDateEnabled" value=startDateEnabled isNew=isNew)
@@ -17,7 +19,9 @@ template(name="fieldsets")
                   i.fa.fa-calendar.open-calendar
           .col-xs-6
             .form-group
-              label.control-label End date
+              label.control-label
+                | End date
+                i.fa.fa-question-circle.text-muted(data-toggle="popover", title="End Date", data-content="Using in conjunction with Start Date to filter based on data returned for a specific time range. Takes the form of YYYY/MM/DD[:HH], where the hour is optional.")
               .input-group
                 span.input-group-addon
                   +checkbox(family="query" _id=_id property="endDateEnabled" value=endDateEnabled isNew=isNew)
@@ -27,7 +31,9 @@ template(name="fieldsets")
         .row
           .col-xs-6
             .form-group
-              label.control-label Active time
+              label.control-label
+                | Active time
+                i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Active time", data-content="Used to view flow records within a specific time range. Takes the form of YYYY/MM/DD[:HH[:MM[:SS[.ssssss]]]]-YYYY/MM/DD[:HH[:MM[:SS[.ssssss]]]]. Both a start and ending time period must be specified.")
               .input-group
                 span.input-group-addon
                   +checkbox(family="query" _id=_id property="activeTimeEnabled" value=activeTimeEnabled isNew=isNew)
@@ -36,7 +42,9 @@ template(name="fieldsets")
         .row
           .col-xs-6
             .form-group
-              label.control-label Start date rolling offset from moment of query execution (<a href="#" class="set-property dashed" data-property="startDateType" data-value="interval">switch to interval</a>)
+              label.control-label
+                | Start date rolling offset from moment of query execution (<a href="#" class="set-property dashed" data-property="startDateType" data-value="interval">switch to interval</a>)
+                i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Start date rolling offset", data-content='The Rolling Offset mechanism alters the start and end time upon successive query execution such that the time period of interest is the previous X-minutes from the time of execution. This feature is ideal for generating dashboards for static time intervals where you only care to know what is happening "in the past x-minutes."')
               .input-group
                 span.input-group-addon
                   +checkbox(family="query" _id=_id property="startDateOffsetEnabled" value=startDateOffsetEnabled isNew=isNew)
@@ -44,7 +52,8 @@ template(name="fieldsets")
                 span.input-group-addon minutes
           .col-xs-6
             .form-group
-              label.control-label Predefined offsets
+              label.control-label
+                | Predefined offsets
               .input-group
                 .input-group-btn
                   .btn-group
@@ -59,14 +68,18 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Source IP
+            label.control-label
+              | Source IP
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Source IP", data-content='Used to view flow records matching a specific source IP address. Can be expressed in the form of a single IP address like "192.168.1.25", or a range of IP addresses in CIDR notation, such as "192.168.1.0/24".')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="saddressEnabled" value=saddressEnabled isNew=isNew)
               +input(family="query" _id=_id property="saddress" value=saddress enabled=saddressEnabled isNew=isNew)
         .col-xs-6
           .form-group
-            label.control-label Source IP Set
+            label.control-label
+              | Source IP Set
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Source IP Set", data-content='Used to view flow records matching a group of source IP addresses specified in a saved IP Set. IP Sets can be created from the “IP Sets” page and used to reference commonly filtered hosts. This is often used for referencing local device ranges or specific groupings of devices based on their function, such as HTTP servers.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="sipSetEnabled" value=sipSetEnabled isNew=isNew)
@@ -79,14 +92,18 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Destination IP
+            label.control-label
+              | Destination IP
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Destination IP", data-content='Used to view flow records matching a specific destination IP address. Can be expressed in the form of a single IP address like "192.168.1.25", or a range of IP addresses in CIDR notation, such as "192.168.1.0/24".')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="daddressEnabled" value=daddressEnabled isNew=isNew)
               +input(family="query" _id=_id property="daddress" value=daddress enabled=daddressEnabled isNew=isNew)
         .col-xs-6
           .form-group
-            label.control-label Destination IP Set
+            label.control-label
+              | Destination IP Set
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Destination IP Set", data-content='Used to view flow records matching a group of destination IP addresses specified in a saved IP Set. IP Sets can be created from the “IP Sets” page and used to reference commonly filtered hosts. This is often used for referencing local device ranges or specific groupings of devices based on their function, such as HTTP servers.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="dipSetEnabled" value=dipSetEnabled isNew=isNew)
@@ -99,14 +116,18 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Any IP
+            label.control-label
+              | Any IP
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Any IP", data-content='Used to view flow records matching a specific source or destination IP address. Can be expressed in the form of a single IP address like “192.168.1.25", or a range of IP addresses in CIDR notation, such as "192.168.1.0/24".')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="anyAddressEnabled" value=anyAddressEnabled isNew=isNew)
               +input(family="query" _id=_id property="anyAddress" value=anyAddress enabled=anyAddressEnabled isNew=isNew)
         .col-xs-6
           .form-group
-            label.control-label Any IP Set
+            label.control-label
+              | Any IP Set
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Any IP Set", data-content='Used to view flow records matching a group of source or destination IP addresses specified in a saved IP Set. IP Sets can be created from the “IP Sets” page and used to reference commonly filtered hosts. This is often used for referencing local device ranges or specific groupings of devices based on their function, such as HTTP servers.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="anySetEnabled" value=anySetEnabled isNew=isNew)
@@ -124,14 +145,18 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Source port
+            label.control-label
+              | Source port
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Source port", data-content='Used to view flow records matching a source port or group of source ports. Can be expressed as a single port like “80”, or a range of ports like “6300-6309”.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="sportEnabled" value=sportEnabled isNew=isNew)
               +input(family="query" _id=_id property="sport" value=sport enabled=sportEnabled isNew=isNew)
         .col-xs-6
           .form-group
-            label.control-label Flags
+            label.control-label
+              | Flags
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Flags", data-content='Used to view flow records for TCP traffic that contains specified TCP flag values such as SYN, ACK, PSH, etc.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="flagsAllEnabled" value=flagsAllEnabled isNew=isNew)
@@ -139,14 +164,18 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Destination port
+            label.control-label
+              | Destination port
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Destination port", data-content='Used to view flow records matching a destination port or group of destination ports. Can be expressed as a single port like “80”, or a range of ports like “6300-6309”.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="dportEnabled" value=dportEnabled isNew=isNew)
               +input(family="query" _id=_id property="dport" value=dport enabled=dportEnabled isNew=isNew)
         .col-xs-6
           .form-group
-            label.control-label Protocol
+            label.control-label
+              | Protocol
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Protocol", data-content='Used to view flow records associated with specific Layer 4 protocols. These values are specified by the protocol’s decimal identification code. For example, TCP is identified by “6” and UDP is identified by “17”. If this field is left blank, all protocols are selected by default.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="protocolEnabled" value=protocolEnabled isNew=isNew)
@@ -154,7 +183,9 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Any port
+            label.control-label
+              | Any port
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Any port", data-content='Used to view flow records matching a source or destination port or group of source or destination ports. Can be expressed as a single port like “80”, or a range of ports like “6300-6309”.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="aportEnabled" value=aportEnabled isNew=isNew)
@@ -167,14 +198,18 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Types
+            label.control-label
+              | Types
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Types", data-content='Used to view flow records based on how they are categorized by SiLK. This traffic can fall into multiple buckets, but the most commonly used types include “in” (inbound traffic), "inweb" (inbound web traffic), "out" (outbound traffic), "outweb" (outbound web traffic). Internal and external network segments are defined in your SiLK silk.conf configuration file. If this field is left blank, all types are selected by default.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="typesEnabled" value=typesEnabled isNew=isNew)
               +chosen(family="query" _id=_id property="types" value=types options=typesOptions multiple=true enabled=typesEnabled isNew=isNew)
         .col-xs-6
           .form-group
-            label.control-label Sensor
+            label.control-label
+              | Sensor
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Sensor", data-content='Used to view flow records associated with a specific sensor or group of sensors. Sensors are configured in your SiLK sensors.conf configuration file. If this field is left blank, all sensors are selected by default.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="sensorEnabled" value=sensorEnabled isNew=isNew)
@@ -182,14 +217,18 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Source country
+            label.control-label
+              | Source country
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Source country", data-content='Used to view flow records from a specific source country. Counties are identified by their official country code. For instance, the United States would be identified by “us”.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
               +chosen(family="query" _id=_id property="scc" value=scc options=countriesOptions multiple=true enabled=sccEnabled isNew=isNew)
         .col-xs-6
           .form-group
-            label.control-label Additional parameters
+            label.control-label
+              | Additional parameters
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Additional parameters", data-content='Used to specify additional SiLK rwfilter command line options not made available through the FlowBAT interface. This should be used by advanced users only.')
             .input-group.additional-parameters-form-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="additionalParametersEnabled" value=additionalParametersEnabled isNew=isNew)
@@ -197,7 +236,9 @@ template(name="fieldsets")
       .row
         .col-xs-6
           .form-group
-            label.control-label Destination country
+            label.control-label
+              | Destination country
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Destination country", data-content='Used to view flow records to a specific destination country. Counties are identified by their official country code. For instance, the United States would be identified by “us”.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)

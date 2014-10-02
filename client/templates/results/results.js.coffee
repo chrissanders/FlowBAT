@@ -13,6 +13,10 @@ Template.results.helpers
 
 Template.results.rendered = ->
 #  cl "results.rendered"
+  @$(".results.panel").popover(
+    selector: "*[data-toggle='popover']"
+    trigger: "hover"
+  )
 
 Template.results.events
   "submit .options-form": grab encapsulate (event, template) ->
