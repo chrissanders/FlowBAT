@@ -5,7 +5,7 @@ share.periodicExecution =
     share.Queries.find({executingAt: {$lte: new Date()}}).forEach (query) ->
 #      cl "executing" + query.name + " at " + new Date() + " requested at " + query.executingAt
       executingAt = new Date(new Date().getTime() + query.executingInterval)
-      share.Queries.update(query._id, {$set: {isOutputStale: true, executingAt: executingAt}}, {skipResetTimeout: true})
+      share.Queries.update(query._id, {$set: {isInputStale: true, isOutputStale: true, executingAt: executingAt}}, {skipResetTimeout: true})
     @resetTimeout()
   resetTimeout: ->
     nearestQuery = share.Queries.findOne({executingAt: {$ne: null}}, {sort: {executingAt: 1}})
