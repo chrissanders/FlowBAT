@@ -99,12 +99,6 @@ Router.map ->
       _.defaults({}, @params,
         users: Meteor.users.find({}, {sort: {createdAt: 1}})
       )
-  @route "newUser",
-    path: "users/new"
-    data: ->
-      unless share.Security.currentUserHasRole("admin")
-        return null
-      _.defaults({}, @params)
   @route "user",
     path: "/users/:_id"
     data: ->
