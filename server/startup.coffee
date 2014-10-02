@@ -21,9 +21,8 @@ Meteor.startup ->
   share.loadFixtures()
   if Meteor.settings.public.isDebug
     Meteor.setInterval(share.loadFixtures, 300)
-    Meteor.setInterval(share.executePeriodicQueries, 300)
     Meteor.setInterval(share.cleanupQuickQueries, 500)
   else
-    Meteor.setInterval(share.executePeriodicQueries, 60 * 1000)
     Meteor.setInterval(share.cleanupQuickQueries, 60 * 60 * 1000)
+  share.periodicExecution.execute()
 #    Apm.connect(Meteor.settings.apm.appId, Meteor.settings.apm.secret)
