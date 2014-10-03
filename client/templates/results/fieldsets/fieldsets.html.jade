@@ -246,6 +246,8 @@ template(name="fieldsets")
       .row
         .col-xs-12
           .form-group
+            label.control-label
+              | Exclusions
             .input-group.additional-parameters-form-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="additionalExclusionsCmdEnabled" value=additionalExclusionsCmdEnabled isNew=isNew)
