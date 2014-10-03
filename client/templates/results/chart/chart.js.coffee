@@ -32,6 +32,8 @@ Template.chart.helpers
         height: @chartHeight
         curveType: "function"
         series: series
+        legend:
+          position: "bottom"
         vAxis:
           logScale: true
         hAxis:
