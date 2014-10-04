@@ -16,6 +16,7 @@ Template.results.rendered = ->
   @$(".results.panel").popover(
     selector: "*[data-toggle='popover']"
     trigger: "hover"
+    delay: {show: 300, hide: 100}
   )
 
 Template.results.events
