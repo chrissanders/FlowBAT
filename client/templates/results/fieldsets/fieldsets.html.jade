@@ -1,8 +1,9 @@
 template(name="fieldsets")
   fieldset
-    legend(class="fieldset-toggle", data-fieldset="time")
-      i.fa.fa-fw(class="{{#if condition 'time' 'in' expandedFieldsets}}fa-caret-down{{else}}fa-caret-right{{/if}}")
-      | Time Range
+    legend
+      span(class="fieldset-toggle", data-fieldset="time")
+        i.fa.fa-fw(class="{{#if condition 'time' 'in' expandedFieldsets}}fa-caret-down{{else}}fa-caret-right{{/if}}")
+        | Time Range
     if condition "time" "in" expandedFieldsets
       if condition startDateType "is" "interval"
         .row
@@ -61,9 +62,10 @@ template(name="fieldsets")
                       button.set-property.btn.btn-default(class="{{#if condition ../startDateOffset 'is' value}}active{{/if}}", data-property="startDateOffset", data-value=value, type="button")
                         | {{name}}
   fieldset
-    legend(class="fieldset-toggle", data-fieldset="host")
-      i.fa.fa-fw(class="{{#if condition 'host' 'in' expandedFieldsets}}fa-caret-down{{else}}fa-caret-right{{/if}}")
-      | Host
+    legend
+      span(class="fieldset-toggle", data-fieldset="host")
+        i.fa.fa-fw(class="{{#if condition 'host' 'in' expandedFieldsets}}fa-caret-down{{else}}fa-caret-right{{/if}}")
+        | Host
     if condition "host" "in" expandedFieldsets
       .row
         .col-xs-6
@@ -138,9 +140,10 @@ template(name="fieldsets")
                 a.btn.btn-default(href="/ipset/create")
                   i.fa.fa-plus
   fieldset
-    legend(class="fieldset-toggle", data-fieldset="port")
-      i.fa.fa-fw(class="{{#if condition 'port' 'in' expandedFieldsets}}fa-caret-down{{else}}fa-caret-right{{/if}}")
-      | Port and protocol
+    legend
+      span(class="fieldset-toggle", data-fieldset="port")
+        i.fa.fa-fw(class="{{#if condition 'port' 'in' expandedFieldsets}}fa-caret-down{{else}}fa-caret-right{{/if}}")
+        | Port and protocol
     if condition "port" "in" expandedFieldsets
       .row
         .col-xs-6
@@ -191,9 +194,10 @@ template(name="fieldsets")
                 +checkbox(family="query" _id=_id property="aportEnabled" value=aportEnabled isNew=isNew)
               +input(family="query" _id=_id property="aport" value=aport enabled=aportEnabled isNew=isNew)
   fieldset
-    legend(class="fieldset-toggle", data-fieldset="additional")
-      i.fa.fa-fw(class="{{#if condition 'additional' 'in' expandedFieldsets}}fa-caret-down{{else}}fa-caret-right{{/if}}")
-      | Additional options
+    legend
+      span(class="fieldset-toggle", data-fieldset="additional")
+        i.fa.fa-fw(class="{{#if condition 'additional' 'in' expandedFieldsets}}fa-caret-down{{else}}fa-caret-right{{/if}}")
+        | Additional options
     if condition "additional" "in" expandedFieldsets
       .row
         .col-xs-6
