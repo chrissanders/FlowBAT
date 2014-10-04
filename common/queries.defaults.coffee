@@ -110,3 +110,4 @@ share.queryResetValues =
   startRecNum: 1
   sortField: ""
   sortReverse: true
+  chartHiddenFields: []

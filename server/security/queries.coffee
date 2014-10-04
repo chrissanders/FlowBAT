@@ -81,6 +81,7 @@ share.Queries.allow
       presentation: String
       chartType: String
       chartHeight: Match.Integer
+      chartHiddenFields: [String]
       expandedFieldsets: [String]
       executingInterval: Match.Integer
       executingAt: Match.OneOf(null, Date)
@@ -178,6 +179,7 @@ share.Queries.allow
       presentation: Match.Optional(String)
       chartType: Match.Optional(String)
       chartHeight: Match.Optional(Match.Integer)
+      chartHiddenFields: Match.Optional([String])
       expandedFieldsets: Match.Optional([String])
       executingInterval: Match.Optional(Match.Integer)
       executingAt: Match.Optional(Match.OneOf(null, Date))
@@ -196,12 +198,14 @@ share.Queries.allow
       rwstatsValues: Match.Optional(String)
       rwcountFields: Match.Optional(String)
       expandedFieldsets: Match.Optional(String)
+      chartHiddenFields: Match.Optional(String)
     $pull =
       fields: Match.Optional(String)
       rwstatsFields: Match.Optional(String)
       rwstatsValues: Match.Optional(String)
       rwcountFields: Match.Optional(String)
       expandedFieldsets: Match.Optional(String)
+      chartHiddenFields: Match.Optional(String)
     check(modifier,
       $set: Match.Optional($set)
       $addToSet: Match.Optional($addToSet)

@@ -15,34 +15,35 @@ share.chartWrappers =
     chart = chartWrapper.getChart()
     data = chartWrapper.getDataTable()
     view = chartWrapper.getView()
-    sel = chart.getSelection()
+    selection = chart.getSelection()
     columns = view.columns
     series = chartWrapper.getOption("series")
 
     # if selection length is 0, we deselected an element
-    if sel.length > 0
+    if selection.length > 0
       # if row is undefined, we clicked on the legend
-      if not sel[0].row
-        columnIndex = sel[0].column
+      if not selection[0].row
+        columnIndex = selection[0].column
         if typeof columns[columnIndex] is "number"
-          src = columns[columnIndex]
-
-          # hide the data series
-          columns[columnIndex] =
-            label: data.getColumnLabel(src)
-            type: data.getColumnType(src)
-            sourceColumn: src
-            calc: ->
-              null
-
-
-          # grey out the legend entry
-          series[src - 1].color = "#CCCCCC"
+          entry = series[columnIndex - 1]
+          share.Queries.update(entry.queryId, {$addToSet: {chartHiddenFields: entry.chartField}})
         else
-          src = columns[columnIndex].sourceColumn
-
-          # show the data series
-          columns[columnIndex] = src
-          series[src - 1].color = null
+          entry = series[columnIndex - 1]
+          share.Queries.update(entry.queryId, {$pull: {chartHiddenFields: entry.chartField}})
         view.columns = columns
         chartWrapper.draw(chartWrapper.container)
+  hideColumn: (chartWrapper, columnIndex) ->
+    chart = chartWrapper.getChart()
+    data = chartWrapper.getDataTable()
+    view = chartWrapper.getView()
+    columns = view.columns
+    series = chartWrapper.getOption("series")
+    sourceColumnIndex = columns[columnIndex]
+    columns[columnIndex] =
+      label: data.getColumnLabel(sourceColumnIndex)
+      type: data.getColumnType(sourceColumnIndex)
+      sourceColumn: sourceColumnIndex
+      calc: ->
+        null
+    entry = series[columnIndex - 1]
+    entry.color = "#CCCCCC"

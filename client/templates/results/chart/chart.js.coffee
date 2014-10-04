@@ -13,7 +13,8 @@ Template.chart.helpers
         if @output is "rwstats" and (spec.isPercentage or spec.name is "cumul_%")
           continue
         data.addColumn(spec.chartType, i18n.t("rwcut.fields." + spec.name))
-        series.push({})
+        series.push({queryId: @_id, chartField: spec.name})
+      series.shift() # 0-th column is hAxis, so it can't have a series
       for row in @rows
         values = []
         for value, index in row
@@ -41,6 +42,9 @@ Template.chart.helpers
       )
       container = $(".chart[data-id='" + @_id + "'] .chart-container").get(0)
       chartWrapper.container = container
+      for entry, columnIndex in series
+        if entry.chartField in @chartHiddenFields
+          share.chartWrappers.hideColumn(chartWrapper, columnIndex + 1, true)
       chartWrapper.draw(container)
     null
 
