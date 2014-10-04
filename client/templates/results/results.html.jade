@@ -99,12 +99,3 @@ template(name="results")
                       label
                         input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'fields'}}", value="{{.}}", data-property="fields")
                         | {{t fieldI18nString}}
-            if condition output "in" "rwcount"
-              form.display-fields-block
-                fieldset
-                  legend Display fields
-                  each share.rwcountFields
-                    .checkbox
-                      label
-                        input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwcountFields'}}", value="{{.}}", data-property="rwcountFields")
-                        | {{t fieldI18nString}}

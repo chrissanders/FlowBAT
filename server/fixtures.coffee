@@ -96,6 +96,11 @@ share.loadFixturesForCompleteSetup = ->
       rwcountLoadSchemeEnabled: true
       rwcountLoadScheme: "0"
       ownerId: "ChrisSanders"
+  for _id, query of queries
+    _.extend(query,
+      startDateEnabled: false
+      startDate: ""
+    )
   for _id of queries when _id not in share.fixtureIds
     share.fixtureIds.push(_id)
   if share.Queries.find().count() is 0

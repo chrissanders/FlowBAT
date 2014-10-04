@@ -34,7 +34,7 @@ Template.chart.helpers
         curveType: "function"
         series: series
         legend:
-          position: "bottom"
+          position: "right"
         vAxis:
           logScale: true
         hAxis:
