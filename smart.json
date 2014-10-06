@@ -4,7 +4,6 @@
     "collection-hooks": {},
     "fast-render": {},
     "jade": {},
-    "handlebars-server": {},
-    "velocity-quick-start": {}
+    "handlebars-server": {}
   }
 }

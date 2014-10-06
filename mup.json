@@ -6,15 +6,15 @@
       "pem": "~/.ssh/id_rsa_for_mup"
     }
   ],
-  "setupMongo": true,
-  "setupNode": true,
-  "nodeVersion": "0.10.28",
-  "setupPhantom": false,
-  "appName": "flowbat",
   "app": "/home/starfall/workspace/flowbat",
   "env": {
     "PORT": 8080,
     "ROOT_URL": "http://flowbat.pintask.me"
   },
+  "appName": "flowbat",
+  "setupMongo": true,
+  "setupNode": true,
+  "nodeVersion": "0.10.28",
+  "setupPhantom": false,
   "deployCheckWaitTime": 15
 }
