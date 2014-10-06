@@ -1,8 +1,14 @@
 ## Deployment
 
-FlowBAT uses [Meteor UP](https://github.com/arunoda/meteor-up) for deployment. Below is a basic plan of deploying the application to brand new server.
+To run FlowBAT, you need to:
+ 
+1. Clone this repository to your local machine.
+2. Setup target server.
+3. Deploy from your local machine to target server.
 
-### Target server setup
+FlowBAT uses [Meteor UP](https://github.com/arunoda/meteor-up) both for target server setup and deployment.
+
+###  Setup target server
 
 1. ``rm settings.json # we'll start with brand new settings``
 1. ``cp settings/prod.sample.json settings.json``
@@ -14,6 +20,6 @@ FlowBAT uses [Meteor UP](https://github.com/arunoda/meteor-up) for deployment. B
 
 The ``DEBUG=* mup setup`` command may yield errors in case there's something wrong with your deployment server. It is necessary to fix those and re-run ``DEBUG=* mup setup`` until there are no errors before deploying FlowBAT.
 
-### App deployment
+### Deploy FlowBAT
 
 ``mup deploy``
