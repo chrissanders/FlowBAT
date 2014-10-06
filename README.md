@@ -16,6 +16,7 @@ FlowBAT uses [Meteor UP](https://github.com/arunoda/meteor-up) both for target s
 1. Installing Node.js should also leave you with npm already installed. Check it by running ``npm --version``. In case the command is not found, please [install npm](https://github.com/npm/npm).
 1. ``sudo npm install -g meteorite``
 1. ``sudo npm install -g mup``
+1. ``curl https://install.meteor.com | /bin/sh``
 
 ###  Edit deployment settings
 
