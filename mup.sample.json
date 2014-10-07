@@ -1,12 +1,12 @@
 {
   "servers": [
     {
-      "host": "hostname",
-      "username": "username",
-      "pem": "~/.ssh/id_rsa_for_mup"
+      "host": "127.0.0.1",
+      "username": "fbusername",
+      "password": "fbpassword"
     }
   ],
-  "app": "/path/to/flowbat",
+  "app": "fbpath",
   "env": {
     "PORT": 1800,
     "ROOT_URL": "http://127.0.0.1"
