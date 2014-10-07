@@ -17,7 +17,7 @@ FlowBAT uses [Meteor UP](https://github.com/arunoda/meteor-up) both for target s
 1. ``sudo npm install -g meteorite``
 1. ``sudo npm install -g mup@0.5.2``
 1. ``curl https://install.meteor.com | /bin/sh``
-1. ``Add the following to /etc/sudoers: sanders ALL=(ALL) NOPASSWD: ALL`` 
+1. Add the following to /etc/sudoers, substituting in your username: ``username ALL=(ALL) NOPASSWD: ALL`` 
 
 ###  Edit deployment settings
 
