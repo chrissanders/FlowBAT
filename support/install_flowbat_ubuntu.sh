@@ -54,6 +54,9 @@ if [[ $REPLY =~ ^[Nn]$ ]]
 	exit 1
 fi
 
+# Add FlowBAT User as a NOPASSWD required sudoer
+echo '$acctusername ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+
 # Install GIT
 echo -e "Installing Git..."
 sudo apt-get install -y git
@@ -77,15 +80,19 @@ curl https://install.meteor.com | /bin/sh
 
 # Clone FlowBAT Repo
 echo -e "Cloning FlowBAT Repository"
-git clone https://github.com/chrissanders/FlowBAT.git /opt/src/FlowBAT/
-
+git clone https://github.com/chrissanders/FlowBAT.git
 
 # Configuring FlowBAT Settings
-cd /opt/src/FlowBAT/
+cd FlowBAT/
+srcdir=$(echo $PWD)
+
 rm settings.json
-cp settings/prod.sample.json settings.json
+cat settings/prod.sample.json | sed 's/flowbat.com/127.0.0.1/;' > settings.json
+cat mup.sample.json | sed 's/fbusername/$acctusername/;' | sed 's/fbpassword/$acctpassword/;' | sed 's,fbpath,$srcdir,;' > mup.json
 
+# Configure Target Server
+mrt install
+DEBUG=* mup setup
 
-cat settings/prod.sample.json | sed 's/flowbat.com/127.0.0.1/;' > setting.json
-
-
+# Deploy FlowBAT
+mup deploy
