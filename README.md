@@ -17,6 +17,7 @@ FlowBAT uses [Meteor UP](https://github.com/arunoda/meteor-up) both for target s
 1. ``sudo npm install -g meteorite``
 1. ``sudo npm install -g mup@0.5.2``
 1. ``curl https://install.meteor.com | /bin/sh``
+1. ``Add the following to /etc/sudoers: sanders ALL=(ALL) NOPASSWD: ALL`` 
 
 ###  Edit deployment settings
 
@@ -25,7 +26,7 @@ FlowBAT uses [Meteor UP](https://github.com/arunoda/meteor-up) both for target s
 1. Edit ``settings.json``:
     1. ``baseUrl`` is the URL that user shall visit in his browser to access FlowBAT.
     1. ``mailUrl`` is the SMTP connection string that overrides [MAIL_URL](http://docs.meteor.com/#email) environment variable. For demo setups, you can use the same ``mailUrl`` as in ``settings/prod.json``. For production setups, it is necessary to use a dedicated ``mailUrl`` pointing to your own server. If you don't have an SMTP server, we recommend [Mailgun](http://www.mailgun.com/).
-1. Edit ``mup.json`` (format described on [Meteor UP page](https://github.com/arunoda/meteor-up)): change at least ``servers``, ``app``, ``env`` parameters.
+1. Edit ``mup.json`` (format described on [Meteor UP page](https://github.com/arunoda/meteor-up)): change at least ``servers``, ``app``, ``env`` parameters. Also change pem option to password and provide the user accounts password.
 
 ###  Setup target server
 
