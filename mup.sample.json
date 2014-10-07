@@ -1,0 +1,20 @@
+{
+  "servers": [
+    {
+      "host": "hostname",
+      "username": "username",
+      "pem": "~/.ssh/id_rsa_for_mup"
+    }
+  ],
+  "app": "/path/to/flowbat",
+  "env": {
+    "PORT": 1800,
+    "ROOT_URL": "http://127.0.0.1"
+  },
+  "appName": "flowbat",
+  "setupMongo": true,
+  "setupNode": true,
+  "nodeVersion": "0.10.28",
+  "setupPhantom": false,
+  "deployCheckWaitTime": 15
+}
