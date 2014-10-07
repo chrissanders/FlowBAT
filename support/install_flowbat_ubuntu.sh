@@ -47,9 +47,45 @@ echo -e "\n\nYou have entered the following information:"
 echo -e "Username: $acctusername\nPassword: $acctpassword\nRun Directory: $rundir\n"
 
 
-read -p "Do you wish to proceed(y/n)?" -n 1 -r
+read -p "Everything is all set! You will be prompted to enter your sudo password during this installation. Do you wish to proceed(y/n)?" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Nn]$ ]]
 	then
 	exit 1
 fi
+
+# Install GIT
+echo -e "Installing Git..."
+sudo apt-get install -y git
+
+# Install Node
+echo -e "Install Nodejs..."
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install -y nodejs
+
+# Install Meteorite
+echo -e "Installing Meteorite..."
+sudo npm install -g meteorite
+
+#Install MUP
+echo -e "Installing MUP..."
+sudo npm install -g mup@0.5.2
+
+# Install Meteor
+echo -e "Installing Meteor..."
+curl https://install.meteor.com | /bin/sh
+
+# Clone FlowBAT Repo
+echo -e "Cloning FlowBAT Repository"
+git clone https://github.com/chrissanders/FlowBAT.git /opt/src/FlowBAT/
+
+
+# Configuring FlowBAT Settings
+cd /opt/src/FlowBAT/
+rm settings.json
+cp settings/prod.sample.json settings.json
+
+
+cat settings/prod.sample.json | sed 's/flowbat.com/127.0.0.1/;' > setting.json
+
+
