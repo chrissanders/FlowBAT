@@ -1,6 +1,8 @@
 share.getMailDomail = ->
-  matches = Meteor.settings.mailUrl.match(/\/\/(.+)%40(.+):(.+)@(.+):(\d+)/)
-  matches[2]
+  if process.env.MAIL_URL
+    matches = process.env.MAIL_URL.match(/\/\/(.+)%40(.+):(.+)@(.+):(\d+)/)
+    return matches[2]
+  return ""
 
 Meteor.methods
   setPassword: (userId, password) ->
