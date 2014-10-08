@@ -33,14 +33,6 @@ if [ -z "$acctpassword" ]
 	exit 1
 fi
 
-echo -e "\nPlease provide the directory you wish to run FlowBAT from. This should be the directory you cloned the FlowBAT GitHub repo into:"
-read rundir
-if [ -z "$rundir" ]
-	then
-	echo "Run Directory is Required to Proceed!"
-	exit 1
-fi
-
 fbhostname=$(echo $hostname)
 
 echo -e "\n\nYou have entered the following information:"
@@ -55,7 +47,7 @@ if [[ $REPLY =~ ^[Nn]$ ]]
 fi
 
 # Add FlowBAT User as a NOPASSWD required sudoer
-echo '$acctusername ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+echo -e "$acctusername ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
 
 # Install GIT
 echo -e "Installing Git..."
@@ -78,6 +70,10 @@ sudo npm install -g mup@0.5.2
 echo -e "Installing Meteor..."
 curl https://install.meteor.com | /bin/sh
 
+# Install SSHPass
+echo -e "Installing SSHPass..."
+sudo apt-get -y install sshpass
+
 # Clone FlowBAT Repo
 echo -e "Cloning FlowBAT Repository"
 git clone https://github.com/chrissanders/FlowBAT.git
@@ -87,12 +83,16 @@ cd FlowBAT/
 srcdir=$(echo $PWD)
 
 rm settings.json
-cat settings/prod.sample.json | sed 's/flowbat.com/127.0.0.1/;' > settings.json
-cat mup.sample.json | sed 's/fbusername/$acctusername/;' | sed 's/fbpassword/$acctpassword/;' | sed 's,fbpath,$srcdir,;' > mup.json
+cat settings/prod.sample.json | sed 's/flowbat.com/127.0.0.1/;' | sed 's$mailUrl.*$mailUrl": "",$;' > settings.json
+cat mup.sample.json | sed -e "s/fbusername/$acctusername/;" | sed "s/fbpassword/$acctpassword/;" | sed "s,fbpath,$srcdir,;" > mup.json
 
 # Configure Target Server
 mrt install
 DEBUG=* mup setup
 
 # Deploy FlowBAT
-mup deploy
+sudo mup deploy
+
+echo -e "\n***********************************************************"
+echo -e "Setup is complete! You should be able to access FlowBAT at 127.0.0.1:1800. Once you access this page, you will be prompted to create a user account and configure your mode of operation."
+echo -e "\n***********************************************************"
