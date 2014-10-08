@@ -30,6 +30,8 @@ FlowBAT uses [Meteor UP](https://github.com/arunoda/meteor-up) both for target s
 
 ###  Setup target server
 
+Be sure to create keys to communicate with 127.0.0.1 to streamline the setup.
+
 1. ``mrt install``
 1. ``DEBUG=* mup setup``
 
