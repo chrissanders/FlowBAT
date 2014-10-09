@@ -17,8 +17,7 @@ FlowBAT uses [Meteor UP](https://github.com/arunoda/meteor-up) both for target s
 1. Installing Node.js should also leave you with npm already installed. Check it by running ``npm --version``. In case the command is not found, please [install npm](https://github.com/npm/npm).
 1. ``sudo npm install -g meteorite``
 1. ``sudo npm install -g mup@0.5.2``
-1. ``curl https://install.meteor.com | /bin/sh``
-1. Add the following to /etc/sudoers, substituting in your username: ``username ALL=(ALL) NOPASSWD: ALL`` 
+1. ``curl https://install.meteor.com | /bin/sh`` 
 
 ###  Edit deployment settings
 
@@ -36,8 +35,9 @@ FlowBAT uses [Meteor UP](https://github.com/arunoda/meteor-up) both for target s
 
 Be sure to create keys to communicate with 127.0.0.1 to streamline the setup.
 
-1. ``mrt install``
-1. ``DEBUG=* mup setup``
+1. On target server, add the following to /etc/sudoers, substituting in your username: ``username ALL=(ALL) NOPASSWD: ALL``
+1. On local machine, execute ``mrt install`` in FlowBAT directory.
+1. On local machine, execute ``DEBUG=* mup setup`` in FlowBAT directory.
 
 If you have unstable internet connection, ``mrt install`` may fail to download some packages. In this case, just re-run  ``mrt install``.
 
