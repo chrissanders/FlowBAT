@@ -1,5 +1,18 @@
 #!/bin/bash
 
+if [ "$1" = "--update" ]; then
+echo "$(tput setaf 3)This script will install flowbat updates automatically. If it is not up-to-date, it will require a FlowBAT restart.$(tput sgr0)"
+        read -p "Are you sure you want to update? " -n 1 -r
+        echo    # (optional) move to a new line
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                exit 1
+        else
+		cd /home/$USER/opt/FlowBAT/
+		git pull
+		exit
+	fi
+fi
+
 if [ ! -d "/home/$USER/opt/FlowBAT/" ]; then
 echo "$(tput setaf 3)This script will install flowbat locally, to be accessed at http://localhost:1800$(tput sgr0)"
 	read -p "Are you sure you want to install? " -n 1 -r
