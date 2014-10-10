@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -d "/home/$USER/opt/FlowBAT/" ]; then
-	echo "This script will install flowbat locally, to be accessed at http://localhost:1800. Are you sure you want to install?"
+echo "$(tput setaf 3)This script will install flowbat locally, to be accessed at http://localhost:1800$(tput sgr0)"
 	read -p "Are you sure you want to install? " -n 1 -r
 	echo    # (optional) move to a new line
 	if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -33,19 +33,27 @@ if [ ! -d "/home/$USER/opt/FlowBAT/" ]; then
 fi
 cd FlowBAT/
 
-echo "Checking for nodejs..."
+echo""
+echo "$(tput setaf 3)Checking for nodejs...$(tput sgr0)"
 dpkg -s nodejs &> /dev/null || {
 	printf '%s\n' "nodejs not installed. Attempting install." >&2
 	curl -sL https://deb.nodesource.com/setup | sudo bash -
 	sudo apt-get install -qq -y nodejs
         }
 
-echo "Checking for meteorite..."
-
+echo""
+echo "$(tput setaf 3)Checking for meteorite...$(tput sgr0)"
 if ! which mrt > /dev/null; then
 	echo -e "Meteorite not found! Installing..."
 	sudo npm install --silent -g meteorite
 fi
+echo ""
+echo "$(tput setaf 3)Checking for meteor...$(tput sgr0)"
+if ! which meteor > /dev/null; then
+        echo -e "Meteor not installed. Attempting Install."
+        curl https://install.meteor.com | /bin/sh
+fi
+
 
 cat settings/prod.sample.json |  sed 's/flowbat.com/127.0.0.1:1800/' | sed 's/mailUrl.*/mailUrl": "",/' > settings/dev.json
 
@@ -53,4 +61,7 @@ cd /home/$USER/opt/FlowBAT
 mrt install
 
 sudo chown -R $USER:$USER /home/$USER/
+
+echo "$(tput setaf 2)Attempting startup. This may take a few minutes if it is the first time.$(tput sgr0)"
+
 meteor --port 1800 run --settings settings/dev.json "$@"
