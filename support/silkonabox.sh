@@ -32,7 +32,7 @@ echo "$(tput setaf 3)Which interface do you wish to monitor?$(tput sgr0)"
 read interface
 
 #!/bin/bash
-interfaceFound=$(grep "$interface" /proc/net/dev)
+interfaceFound=$(grep " $interface" /proc/net/dev)
 
 if  [ ! -n "$interfaceFound" ] ; then
 echo "$(tput setaf 1)The interface that you have chosen does not exist. Please verify. Exiting$(tput sgr0)"
@@ -115,10 +115,10 @@ if which rwp2yaf2silk > /dev/null; then
 	make
 	sudo make install
 
-echo "$(tput setaf 4)Cleaning up tar files...$(tput sgr0)"
-rm libfixbuf-1.6.0.tar.gz
-rm yaf-2.6.0.tar.gz
-rm silk-3.9.0.tar.gz
+  echo "$(tput setaf 4)Cleaning up tar files...$(tput sgr0)"
+  rm libfixbuf-1.6.0.tar.gz
+  rm yaf-2.6.0.tar.gz
+  rm silk-3.9.0.tar.gz
 
 	# Configure SiLK
   cat > silk.conf << "EOF"
@@ -202,4 +202,3 @@ echo -e "$(tput setaf 3)$onBoot\n$startNow\n$rwflowpackstatus\n$yafstatus$(tput 
 echo
 echo -e "$(tput setaf 3)Config files\n---/data/silk.conf\n---/data/sensors.conf\n---root-directory=/data/$(tput sgr0)"
 exit 0
-
