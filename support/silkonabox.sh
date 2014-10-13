@@ -188,7 +188,7 @@ echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
         exit 1
 else
-  startNow=$(echo "---Collection Interface = $interface.")
+  startNow=$(echo "---Collection Interface = $interface")
   sudo /usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack
   sudo nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=eth0 --applabel --max-payload=384 &
   pidrwflowpack=$(pidof rwflowpack)
