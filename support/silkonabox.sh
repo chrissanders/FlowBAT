@@ -39,9 +39,12 @@ echo "$(tput setaf 1)The interface that you have chosen does not exist. Please v
 exit 1
 fi
 
+echo "$(tput setaf 4)Checking installed packages...$(tput sgr0)"
+sudo apt-get update -qq
+
 # Install Prerequisites
 echo -e "$(tput setaf 4)Installing Prerequisites. This might require your password and take a few minutes.$(tput sgr0)"
-sudo apt-get -qq -y install glib2.0 libglib2.0-dev libpcap-dev g++ python-dev make
+sudo apt-get -qq -y install glib2.0 libglib2.0-dev libpcap-dev g++ python-dev make gcc
 
 if which rwp2yaf2silk > /dev/null; then
         echo -e "$(tput setaf 2)It looks like SiLK might already be installed.$(tput sgr0)"
@@ -112,6 +115,11 @@ if which rwp2yaf2silk > /dev/null; then
 	make
 	sudo make install
 
+echo "$(tput setaf 4)Cleaning up tar files...$(tput sgr0)"
+rm libfixbuf-1.6.0.tar.gz
+rm yaf-2.6.0.tar.gz
+rm silk-3.9.0.tar.gz
+
 	# Configure SiLK
   cat > silk.conf << "EOF"
 	  /usr/local/lib
@@ -169,6 +177,7 @@ if grep -q 'rwflowpack' /etc/rc.local; then
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
                 exit 0
         else
+		onBoot=$(echo "---YAF and rwflowpack start on boot")
                 sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
 		sudo sed -i '$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=eth0 --applabel --max-payload=384 \&\nexit 0,' /etc/rc.local
         fi
@@ -179,7 +188,18 @@ echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
         exit 1
 else
+  startNow=$(echo "---Collection Interface = $interface.")
   sudo /usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack
   sudo nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=eth0 --applabel --max-payload=384 &
+  pidrwflowpack=$(pidof rwflowpack)
+  pidyaf=$(pidof yaf)
+  rwflowpackstatus=$(echo "---rwflowpack pid = $pidrwflowpack")
+  yafstatus=$(echo "---yaf pid = $pidyaf")
 fi
+
+echo -e "$(tput setaf 3)SiLK and YAF installation finished.$(tput sgr0)"
+echo -e "$(tput setaf 3)$onBoot\n$startNow\n$rwflowpackstatus\n$yafstatus$(tput sgr0)"
+echo
+echo -e "$(tput setaf 3)Config files\n---/data/silk.conf\n---/data/sensors.conf\n---root-directory=/data/$(tput sgr0)"
 exit 0
+
