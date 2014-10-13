@@ -183,7 +183,7 @@ if grep -q 'rwflowpack' /etc/rc.local; then
         fi
 fi
 
-read -p "$(tput setaf 2)Would you like to go ahead and start collecting data now?$(tput sgr0)" -n 1 -r
+read -p "$(tput setaf 3)Would you like to go ahead and start collecting data now?$(tput sgr0)" -n 1 -r
 echo
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
         exit 1
@@ -197,9 +197,9 @@ else
   yafstatus=$(echo "---yaf pid = $pidyaf")
 fi
 
-echo -e "$(tput setaf 3)SiLK and YAF installation finished.$(tput sgr0)"
-echo -e "$(tput setaf 3)$onBoot\n$startNow\n$rwflowpackstatus\n$yafstatus$(tput sgr0)"
+echo -e "$(tput setaf 2)SiLK and YAF installation finished.$(tput sgr0)"
+echo -e "$(tput setaf 2)$onBoot\n$startNow\n$rwflowpackstatus\n$yafstatus$(tput sgr0)"
 echo
-echo -e "$(tput setaf 3)Config files\n---/data/silk.conf\n---/data/sensors.conf\n---root-directory=/data/$(tput sgr0)"
+echo -e "$(tput setaf 2)Config files\n---/data/silk.conf\n---/data/sensors.conf\n---root-directory=/data/$(tput sgr0)"
 exit 0
 
