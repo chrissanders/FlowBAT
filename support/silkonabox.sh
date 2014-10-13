@@ -3,9 +3,43 @@
 # Automatic SiLK Installation Script
 # Chris Sanders & Jason Smith
 
-echo "$(tput setaf 4)This script will install SiLK and YAF with default options, logging data to the /data directory."
+#!/bin/bash
+ask() {
+    # http://djm.me/ask
+    while true; do
+
+        if [ "${2:-}" = "Y" ]; then
+            prompt="Y/n"
+            default=Y
+        elif [ "${2:-}" = "N" ]; then
+            prompt="y/N"
+            default=N
+        else
+            prompt="y/n"
+            default=
+        fi
+
+        # Ask the question
+        read -p "$1 [$prompt] " REPLY
+
+        # Default?
+        if [ -z "$REPLY" ]; then
+            REPLY=$default
+        fi
+
+        # Check if the reply is valid
+        case "$REPLY" in
+            Y|y) return 0 ;;
+            N|n) return 1 ;;
+        *) echo "You must give a y or n answer." ;;
+        esac
+
+    done
+}
+
+echo "$(tput setaf 6)This script will install SiLK and YAF with default options, logging data to the /data directory."
 echo "You will be prompted to enter your password in order to gain the appropriate priviledges to perform this install."
-echo "!!!!!An internet connection IS $(tput sgr0)$(tput setaf 1)required$(tput sgr0)$(tput setaf 4) in order to complete this installation!!!!!$(tput sgr0)"
+echo "!!!!!An internet connection IS $(tput sgr0)$(tput setaf 1)required$(tput sgr0)$(tput setaf 6) in order to complete this installation!!!!!$(tput sgr0)"
 
 #Check if there is an internet connection
 wget -q --tries=10 --timeout=20 --spider http://google.com
@@ -13,79 +47,81 @@ if [[ $? -eq 0 ]]; then
         echo "$(tput setaf 2)It appears that you do have an internet connection.$(tput sgr0)"
 else
         echo "$(tput setaf 1)It appears that you do not have an internet connection! This installation will fail.$(tput sgr0)"
-	read -p "$(tput setaf 2)Do you want to try this anyways?$(tput sgr0)$(tput setaf 1)Success is unlikely.$(tput sgr0)" -n 1 -r
-	echo
-	if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        	exit 1
-	fi
+        if ask "$(tput setaf 2)Do you want to do such-and-such?$(tput sgr0)$(tput setaf 1)Success is unlikely.$(tput sgr0)"; then
+          echo ""
+        else
+          echo "That was probably a good choice if this is your first time running this install."
+          exit 1
+        fi
 fi
 
-read -p "$(tput setaf 3)Do you wish to proceed?$(tput sgr0)" -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]
-	then
-	exit
+if ask "$(tput setaf 3)Do you wish to proceed?$(tput sgr0)"; then
+  echo
+else
+  exit 1
 fi
 
 #Set interface variable
+while true; do
+echo "$(tput setaf 6)These appear to be your current interfaces."
+ifconfig -a | grep -oP '^[a-zA-Z0-9]{1,} '
+tput sgr0
 echo "$(tput setaf 3)Which interface do you wish to monitor?$(tput sgr0)"
 read interface
-
-#!/bin/bash
 interfaceFound=$(grep " $interface" /proc/net/dev)
-
 if  [ ! -n "$interfaceFound" ] ; then
-echo "$(tput setaf 1)The interface that you have chosen does not exist. Please verify. Exiting$(tput sgr0)"
-exit 1
+        case "$interface" in
+        *) echo  "$(tput setaf 1)The interface that you have chosen does not exist. Please verify.$(tput sgr0)" ;;
+        esac
+else
+        break
 fi
+done
 
-echo "$(tput setaf 4)Checking installed packages...$(tput sgr0)"
+echo "$(tput setaf 6)Checking installed packages...$(tput sgr0)"
 sudo apt-get update -qq
 
 # Install Prerequisites
-echo -e "$(tput setaf 4)Installing Prerequisites. This might require your password and take a few minutes.$(tput sgr0)"
+echo -e "$(tput setaf 6)Installing Prerequisites. This might require your password and take a few minutes.$(tput sgr0)"
 sudo apt-get -qq -y install glib2.0 libglib2.0-dev libpcap-dev g++ python-dev make gcc
 
 if which rwp2yaf2silk > /dev/null; then
         echo -e "$(tput setaf 2)It looks like SiLK might already be installed.$(tput sgr0)"
-        read -p "$(tput setaf 3)Do you wish to proceed and try installing anyways?$(tput sgr0)" -n 1 -r
-        echo
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-                exit 1
+        if ask "$(tput setaf 3)Do you wish to proceed and try installing anyways?$(tput sgr0)"; then
+          echo
+          else
+          exit 1
         fi
-      else
+        else
 	# Download and Extract SiLK Components
 	if [ ! -f libfixbuf-1.6.0.tar.gz ]; then
-    		echo -e "$(tput setaf 4)libfixbuf-1.6.0.tar.gz not found. Downloading.$(tput sgr0)"
+    		echo -e "$(tput setaf 6)libfixbuf-1.6.0.tar.gz not found. Downloading.$(tput sgr0)"
     		wget http://tools.netsa.cert.org/releases/libfixbuf-1.6.0.tar.gz
       else
-        read -p "$(tput setaf 3)libfixbuf-1.6.0.tar.gz found. Remove original and download again?$(tput sgr0)" -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-              rm libfixbuf-1.6.0.tar.gz
-              wget http://tools.netsa.cert.org/releases/libfixbuf-1.6.0.tar.gz
+        if ask "$(tput setaf 3)libfixbuf-1.6.0.tar.gz found. Remove original and download again?$(tput sgr0)"; then
+            echo
+            rm libfixbuf-1.6.0.tar.gz
+            wget http://tools.netsa.cert.org/releases/libfixbuf-1.6.0.tar.gz
         fi
 	fi
 	if [ ! -f yaf-2.6.0.tar.gz ]; then
-    		echo -e "$(tput setaf 4)yaf-2.6.0.tar.gz not found. Downloading.$(tput sgr0)"
+    		echo -e "$(tput setaf 6)yaf-2.6.0.tar.gz not found. Downloading.$(tput sgr0)"
     		wget http://tools.netsa.cert.org/releases/yaf-2.6.0.tar.gz
       else
-          read -p "$(tput setaf 3)yaf-2.6.0.tar.gz found. Remove original and download again?$(tput sgr0)" -n 1 -r
-          echo
-          if [[ $REPLY =~ ^[Yy]$ ]]; then
-                rm yaf-2.6.0.tar.gz
-                wget http://tools.netsa.cert.org/releases/yaf-2.6.0.tar.gz
+          if ask "$(tput setaf 3)yaf-2.6.0.tar.gz found. Remove original and download again?$(tput sgr0)"; then
+              echo
+              rm yaf-2.6.0.tar.gz
+              wget http://tools.netsa.cert.org/releases/yaf-2.6.0.tar.gz
           fi
 	fi
 	if [ ! -f silk-3.9.0.tar.gz ]; then
-    		echo -e "$(tput setaf 4)silk-3.9.0.tar.gz not found. Downloading.$(tput sgr0)"
+    		echo -e "$(tput setaf 6)silk-3.9.0.tar.gz not found. Downloading.$(tput sgr0)"
     		wget http://tools.netsa.cert.org/releases/silk-3.9.0.tar.gz
       else
-            read -p "$(tput setaf 3)silk-3.9.0.tar.gz found. Remove original and download again?$(tput sgr0)" -n 1 -r
-            echo
-            if [[ $REPLY =~ ^[Yy]$ ]]; then
-                  rm silk-3.9.0.tar.gz
-                  wget http://tools.netsa.cert.org/releases/silk-3.9.0.tar.gz
+            if ask "$(tput setaf 3)silk-3.9.0.tar.gz found. Remove original and download again?$(tput sgr0)"; then
+                echo
+                rm silk-3.9.0.tar.gz
+                wget http://tools.netsa.cert.org/releases/silk-3.9.0.tar.gz
             fi
 	fi
 	tar zxvf libfixbuf-1.6.0.tar.gz
@@ -93,14 +129,14 @@ if which rwp2yaf2silk > /dev/null; then
 	tar zxvf silk-3.9.0.tar.gz
 
 	# Install Libfixbuf
-  echo -e "$(tput setaf 4)Building libfixbuf...$(tput sgr0)"
+  echo -e "$(tput setaf 6)Building libfixbuf...$(tput sgr0)"
 	cd libfixbuf-1.6.0/
 	./configure
 	make
 	sudo make install
 
 	# Install YAF
-  echo -e "$(tput setaf 4)Building YAF...$(tput sgr0)"
+  echo -e "$(tput setaf 6)Building YAF...$(tput sgr0)"
 	cd ../yaf-2.6.0/
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 	./configure --enable-applabel
@@ -109,16 +145,16 @@ if which rwp2yaf2silk > /dev/null; then
 
 	# Create Data Directory and Install SiLK
 	sudo mkdir /data
-	echo -e "$(tput setaf 4)Building SiLK...$(tput sgr0)"
+	echo -e "$(tput setaf 6)Building SiLK...$(tput sgr0)"
   cd ../silk-3.9.0/
 	./configure --with-libfixbuf=/usr/local/lib/pkgconfig/ --with-python
 	make
 	sudo make install
 
-  echo "$(tput setaf 4)Cleaning up tar files...$(tput sgr0)"
-  rm libfixbuf-1.6.0.tar.gz
-  rm yaf-2.6.0.tar.gz
-  rm silk-3.9.0.tar.gz
+  echo "$(tput setaf 6)Cleaning up tar files...$(tput sgr0)"
+  rm ../libfixbuf-1.6.0.tar.gz
+  rm ../yaf-2.6.0.tar.gz
+  rm ../silk-3.9.0.tar.gz
 
 	# Configure SiLK
   cat > silk.conf << "EOF"
@@ -163,31 +199,23 @@ fi
 
 if grep -q 'rwflowpack' /etc/rc.local; then
         echo "$(tput setaf 2)It appears you already have flow collection enabled at boot.$(tput sgr0)"
-        read -p "$(tput setaf 3)Do you wish to skip putting in redundant commands in /etc/rc.local? Saying no to this question could result in duplicate entries in /etc/rc.local.(tput sgr0)" -n 1 -r
-        echo
-        if [[ ! $REPLY =~ ^[Nn]$ ]]; then
-                exit 0
-        else
+        if ask "$(tput setaf 3)Do you wish to skip putting in redundant commands in /etc/rc.local? Saying no to this question could result in duplicate entries in /etc/rc.local.(tput sgr0)"; then
                 sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
-		            sudo sed -i '$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=eth0 --applabel --max-payload=384 \&\nexit 0,' /etc/rc.local
+                sudo sed -i '$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=eth0 --applabel --max-payload=384 \&\nexit 0,' /etc/rc.local
+        else
+                exit 0
         fi
       else
-        read -p "$(tput setaf 3)Do you wish to setup flow collection on boot?$(tput sgr0)" -n 1 -r
-        echo
-        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-                exit 0
+        if ask "$(tput setaf 3)Do you wish to setup flow collection on boot?$(tput sgr0)"; then
+              onBoot=$(echo "---YAF and rwflowpack start on boot")
+              sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
+              sudo sed -i '$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=eth0 --applabel --max-payload=384 \&\nexit 0,' /etc/rc.local
         else
-		onBoot=$(echo "---YAF and rwflowpack start on boot")
-                sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
-		sudo sed -i '$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=eth0 --applabel --max-payload=384 \&\nexit 0,' /etc/rc.local
+              exit 0
         fi
 fi
 
-read -p "$(tput setaf 3)Would you like to go ahead and start collecting data now?$(tput sgr0)" -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        exit 1
-else
+if ask "$(tput setaf 3)Would you like to go ahead and start collecting data now?$(tput sgr0)"; then
   startNow=$(echo "---Collection Interface = $interface")
   sudo /usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack
   sudo nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=eth0 --applabel --max-payload=384 &
