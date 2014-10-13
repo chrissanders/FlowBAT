@@ -32,7 +32,7 @@ echo "$(tput setaf 3)Which interface do you wish to monitor?$(tput sgr0)"
 read interface
 
 #!/bin/bash
-interfaceFound=$(grep "$interface" /proc/net/dev)
+interfaceFound=$(grep " $interface" /proc/net/dev)
 
 if  [ ! -n "$interfaceFound" ] ; then
 echo "$(tput setaf 1)The interface that you have chosen does not exist. Please verify. Exiting$(tput sgr0)"
