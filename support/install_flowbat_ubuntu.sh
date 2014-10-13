@@ -1,98 +1,127 @@
 #!/bin/bash
 
-# Automatic FlowBAT Installation Script
-# Chris Sanders & Jason Smith
-
-clear
-echo -e "-- FlowBAT: Network Flow Basic Analysis Tool -- \n\n"
-echo -e "This script will install FlowBAT on to an Ubuntu system.\n"
-echo -e "It has been tested with Ubuntu 12.04 and 14.04.\n"
-echo -e "You will be prompted to enter your password to perform this install.\n"
-echo -e "!!!!! An internet connection IS required in order to complete this installation !!!!!\n\n\n"
-
-read -p "Do you wish to proceed(y/n)?" -n 1 -r
-echo
-if [[ $REPLY =~ ^[Nn]$ ]]
-	then
-	exit 1
+if [ "$1" = "--update" ]; then
+echo "$(tput setaf 4)This script will install flowbat updates automatically. If it is not up-to-date, it will require a FlowBAT restart.$(tput sgr0)"
+        read -p "$(tput setaf 3)Are you sure you want to update?$(tput sgr0)" -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                exit 1
+        else
+		cd /home/"$USER"/opt/FlowBAT/
+		git pull
+		exit
+	fi
 fi
 
-echo -e "\nPlease provide the username that FlowBAT will run as. We recommend a service account be used for this purpose, as the account will require the ability to perform sudo without entering a password:"
-read acctusername
-if [ -z "$acctusername" ]
-	then
-	echo "Account Username is Required to Proceed!"
-	exit 1
+if [ ! -d "/home/$USER/opt/FlowBAT/" ]; then
+  echo "$(tput setaf 4)This script will install flowbat locally, to be accessed at http://localhost:1800$(tput sgr0)"
+	read -p "$(tput setaf 3)Are you sure you want to install?$(tput sgr0)" -n 1 -r
+	echo    # (optional) move to a new line
+	if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+		exit 1
+	fi
 fi
 
-echo -e "\nPlease provide the password that the FlowBAT user account will use:"
-read acctpassword
-if [ -z "$acctpassword" ]
-	then
-	echo "Account Password is Required to Proceed!"
-	exit 1
+echo "$(tput setaf 4)Checking installed packages...$(tput sgr0)"
+sudo apt-get update -qq
+function testinstall {
+	dpkg -s "$1" &> /dev/null || {
+	    printf '%s\n' "$(tput setaf 4)$1 not installed. Attempting install.$(tput sgr0)" >&2
+	    sudo apt-get install -qq -y "$1"
+	}
+}
+
+testinstall build-essential
+testinstall checkinstall
+testinstall curl
+testinstall git-core
+
+if [ ! -d "/home/$USER/opt/FlowBAT/" ]; then
+  mkdir opt
 fi
 
-fbhostname=$(echo $hostname)
+cd opt/
 
-echo -e "\n\nYou have entered the following information:"
-echo -e "Username: $acctusername\nPassword: $acctpassword\nRun Directory: $rundir\n"
-
-
-read -p "Everything is all set! You will be prompted to enter your sudo password during this installation. Do you wish to proceed(y/n)?" -n 1 -r
-echo
-if [[ $REPLY =~ ^[Nn]$ ]]
-	then
-	exit 1
+if [ ! -d "/home/$USER/opt/FlowBAT/" ]; then
+	echo "$(tput setaf 4)Downloading FlowBAT...$(tput sgr0)"
+	git clone https://github.com/chrissanders/FlowBAT.git
 fi
-
-# Add FlowBAT User as a NOPASSWD required sudoer
-echo -e "$acctusername ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
-
-# Install GIT
-echo -e "Installing Git..."
-sudo apt-get install -y git
-
-# Install Node
-echo -e "Install Nodejs..."
-curl -sL https://deb.nodesource.com/setup | sudo bash -
-sudo apt-get install -y nodejs
-
-# Install Meteorite
-echo -e "Installing Meteorite..."
-sudo npm install -g meteorite
-
-#Install MUP
-echo -e "Installing MUP..."
-sudo npm install -g mup@0.5.2
-
-# Install Meteor
-echo -e "Installing Meteor..."
-curl https://install.meteor.com | /bin/sh
-
-# Install SSHPass
-echo -e "Installing SSHPass..."
-sudo apt-get -y install sshpass
-
-# Clone FlowBAT Repo
-echo -e "Cloning FlowBAT Repository"
-git clone https://github.com/chrissanders/FlowBAT.git
-
-# Configuring FlowBAT Settings
 cd FlowBAT/
-srcdir=$(echo $PWD)
 
-rm settings.json
-cat settings/prod.sample.json | sed 's/flowbat.com/127.0.0.1/;' | sed 's$mailUrl.*$mailUrl": "",$;' > settings.json
-cat mup.sample.json | sed -e "s/fbusername/$acctusername/;" | sed "s/fbpassword/$acctpassword/;" | sed "s,fbpath,$srcdir,;" > mup.json
+echo""
+echo "$(tput setaf 4)Checking for nodejs...$(tput sgr0)"
+dpkg -s nodejs &> /dev/null || {
+	printf '%s\n' "nodejs not installed. Attempting install." >&2
+	curl -sL https://deb.nodesource.com/setup | sudo bash -
+  printf '%s\n' "$(tput setaf 4)nodejs installing. This may take a minute.$(tput sgr0)" >&2
+	sudo apt-get install -qq -y nodejs
+        }
 
-# Configure Target Server
+echo""
+echo "$(tput setaf 4)Checking for meteorite...$(tput sgr0)"
+if ! which mrt > /dev/null; then
+	echo -e "$(tput setaf 4)Meteorite not found! Installing...$(tput sgr0)"
+	sudo npm install --silent -g meteorite
+fi
+echo ""
+echo "$(tput setaf 4)Checking for meteor...$(tput sgr0)"
+if ! which meteor > /dev/null; then
+        echo -e "$(tput setaf 4)Meteor not installed. Attempting Install.$(tput sgr0)"
+        curl https://install.meteor.com | /bin/sh
+fi
+
+#Arranging for localhost configuration
+cat settings/prod.sample.json |  sed 's/flowbat.com/127.0.0.1:1800/' | sed 's/mailUrl.*/mailUrl": "",/' > settings/dev.json
+
+cd /home/"$USER"/opt/FlowBAT
 mrt install
-DEBUG=* mup setup
 
-# Deploy FlowBAT
-sudo mup deploy
+#Generating upstart configuration for FlowBAT
+cat > flowbat.conf << "EOF"
+# meteorjs - FlowBAT job file
 
-echo -e "\n***********************************************************"
-echo -e "Setup is complete! You should be able to access FlowBAT at 127.0.0.1:1800. Once you access this page, you will be prompted to create a user account and configure your mode of operation."
-echo -e "\n***********************************************************"
+description "FlowBAT"
+
+# When to start the service
+start on runlevel [2345]
+
+# When to stop the service
+stop on runlevel [016]
+
+# Automatically restart process if crashed
+respawn
+
+# Essentially lets upstart know the process will detach itself to the background
+expect fork
+
+chdir /home/$USER/opt/FlowBAT
+
+script
+
+cd /home/$USER/opt/FlowBAT
+exec sudo -u $USER meteor --port 1800 run --settings /home/$USER/opt/FlowBAT/settings/dev.json "$@"
+
+end script
+EOF
+
+if [ ! -f /etc/init/flowbat.conf ]; then
+	read -p "$(tput setaf 3)Do you wish to have FlowBAT start on boot in the background?$(tput sgr0)" -n 1 -r
+        	echo
+	        if [[ $REPLY =~ ^[Yy]$ ]]; then
+	                sudo cp flowbat.conf /etc/init/
+		else
+			echo "$(tput setaf 2)For future reference, move flowbat.conf to /etc/init/ if you would like to have FlowBAT start on boot.$(tput sgr0)".
+		fi
+fi
+
+sudo chown -R "$USER":"$USER" /home/"$USER"/
+
+echo -e "$(tput setaf 2)To manually run FlowBAT, cd to /home/$USER/opt/FlowBAT and run:"
+echo -e 'meteor --port 1800 run --settings settings/dev.json "$@"'
+echo -e 'or in the background:'
+echo -e 'nohup meteor --port 1800 run --settings /home/$USER/opt/FlowBAT/settings/dev.json "$@" &'
+echo -e "$(tput sgr0)"
+
+echo "$(tput setaf 2)Attempting startup. This may take a few minutes if it is the first time. Press ctrl+c to stop FlowBAT after the application says it is running or proceed to 127.0.0.1:1800 in a browser.$(tput sgr0)"
+
+meteor --port 1800 run --settings settings/dev.json "$@"
