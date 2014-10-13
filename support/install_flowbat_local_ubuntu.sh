@@ -109,7 +109,7 @@ read -p "$(tput setaf 3)Do you wish to have FlowBAT start on boot?$(tput sgr0)" 
         if [[ $REPLY =~ ^[Yy]$ ]]; then
                 sudo cp flowbat.conf /etc/init/
 	else
-		echo "$(tput setaf 2)For future reference, move flowbat.conf to /etc/init/ if you would like to have flowbat start on boot.$(tput sgr0)".
+		echo "$(tput setaf 2)For future reference, move flowbat.conf to /etc/init/ if you would like to have FlowBAT start on boot.$(tput sgr0)".
 	fi
 
 sudo chown -R "$USER":"$USER" /home/"$USER"/
@@ -117,3 +117,7 @@ sudo chown -R "$USER":"$USER" /home/"$USER"/
 echo "$(tput setaf 2)Attempting startup. This may take a few minutes if it is the first time. Press ctrl+c to stop FlowBAT after the application says it is running or proceed to 127.0.0.1:1800 in a browser.$(tput sgr0)"
 
 meteor --port 1800 run --settings settings/dev.json "$@"
+
+echo -e "$(tput setaf 2)To manually run FlowBAT again, cd to /home/$USER/opt/FlowBAT and run:"
+echo -e 'meteor --port 1800 run --settings settings/dev.json "$@"'
+echo -e "$(tput sgr0)"
