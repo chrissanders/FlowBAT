@@ -141,7 +141,8 @@ if [ ! -f /etc/init/flowbat.conf ]; then
 		fi
 fi
 
-sudo chown -R "$USER":"$USER" /home/"$USER"/
+sudo chown -R "$USER":"$USER" $workingDir/FlowBAT/
+sudo chown -R "$USER":"$USER" $workingDir/.npm
 
 echo -e "$(tput setaf 2)To manually run FlowBAT, cd to $workingDir/FlowBAT and run:"
 echo -e 'meteor --port 1800 run --settings settings/dev.json "$@"'
