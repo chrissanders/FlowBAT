@@ -201,7 +201,7 @@ if grep -q 'rwflowpack' /etc/rc.local; then
         echo "$(tput setaf 2)It appears you already have flow collection enabled at boot.$(tput sgr0)"
         if ask "$(tput setaf 3)Do you wish to skip putting in redundant commands in /etc/rc.local? Saying no to this question could result in duplicate entries in /etc/rc.local.(tput sgr0)"; then
                 sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
-                sudo sed -i '$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=eth0 --applabel --max-payload=384 \&\nexit 0,' /etc/rc.local
+                sudo sed -i "$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 \&\nexit 0," /etc/rc.local
         else
                 exit 0
         fi
@@ -209,7 +209,7 @@ if grep -q 'rwflowpack' /etc/rc.local; then
         if ask "$(tput setaf 3)Do you wish to setup flow collection on boot?$(tput sgr0)"; then
               onBoot=$(echo "---YAF and rwflowpack start on boot")
               sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
-              sudo sed -i '$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=eth0 --applabel --max-payload=384 \&\nexit 0,' /etc/rc.local
+              sudo sed -i "$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 \&\nexit 0," /etc/rc.local
         else
               exit 0
         fi
@@ -218,7 +218,7 @@ fi
 if ask "$(tput setaf 3)Would you like to go ahead and start collecting data now?$(tput sgr0)"; then
   startNow=$(echo "---Collection Interface = $interface")
   sudo /usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack
-  sudo nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=eth0 --applabel --max-payload=384 &
+  sudo nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 &
   pidrwflowpack=$(pidof rwflowpack)
   pidyaf=$(pidof yaf)
   rwflowpackstatus=$(echo "---rwflowpack pid = $pidrwflowpack")
