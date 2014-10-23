@@ -89,7 +89,7 @@ share.parseResult = (result) ->
     rows.push(row.split("|"))
   rows
 
-share.queryTypes = ["in", "out", "inweb", "outweb", "inicmp", "outicmp", "innull", "outnull"]
+share.queryTypes = ["in", "out", "inweb", "outweb", "inicmp", "outicmp", "innull", "outnull", "int2int", "ext2ext", "other"]
 share.inputFields = [
   "interface"
   "cmd"
