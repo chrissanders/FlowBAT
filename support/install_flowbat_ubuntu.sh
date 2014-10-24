@@ -38,9 +38,14 @@ ask() {
 if [ "$1" = "--update" ]; then
 echo "$(tput setaf 6)This script will install flowbat updates automatically. If it is not up-to-date, it will require a FlowBAT restart.$(tput sgr0)"
         if ask "$(tput setaf 3)Are you sure you want to update?$(tput sgr0)"; then
-		cd "$workingDir"/FlowBAT/
+if [ -d "$workingDir/FlowBAT/" ]; then
+	cd "$workingDir"/FlowBAT/
 		git pull
 		exit
+else
+	echo "$(tput setaf 1)There doesn't seem to be a FlowBAT installation located in this directory. Run this script from the location where FlowBAT was installed. Exiting.$(tput sgr0)"
+	exit 1
+fi
   else
     exit 1
 	fi
