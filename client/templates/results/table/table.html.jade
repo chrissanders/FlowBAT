@@ -28,6 +28,10 @@ template(name="table")
                   +time
                 else if condition _id "is" "Date"
                   +time
+                else if condition _id "is" "protocol"
+                  {{protocolname}}
+                else if condition _id "is" "application"
+                  {{appname}}
                 else
                   | {{value}}
               if isPivotable ../../output
@@ -39,6 +43,8 @@ template(name="table")
                       a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="dIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.dIP"}}"
                     li(role='presentation')
                       a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="aIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.aIP"}}"
+                    li(role='presentation')
+                      a(href="https://www.robtex.com/ip/{{value}}.html" target="_blank") Search robtex for {{value}}
                   else if condition _id "in" "sPort" "dPort"
                     li(role='presentation')
                       a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sPort"}}"
@@ -46,6 +52,8 @@ template(name="table")
                       a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="dPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.dPort"}}"
                     li(role='presentation')
                       a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="aPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.aPort"}}"
+                    li(role='presentation')
+                      a(href="https://isc.sans.edu/port.html?port={{value}}" target="_blank") More Information on Port {{value}}...
                   else if condition _id "in" "sTime" "eTime"
                     li(role='presentation')
                       a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sTime", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sTime"}}"
