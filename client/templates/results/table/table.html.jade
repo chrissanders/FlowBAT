@@ -29,9 +29,9 @@ template(name="table")
                 else if condition _id "is" "Date"
                   +time
                 else if condition _id "is" "protocol"
-                  {{protocolname}}
+                  | {{protocolname}}
                 else if condition _id "is" "application"
-                  {{appname}}
+                  | {{appname}}
                 else
                   | {{value}}
               if isPivotable ../../output
