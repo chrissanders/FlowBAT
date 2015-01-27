@@ -11,7 +11,7 @@ share.cleanupCachedQueryResults = ->
 #  borderline = new Date(new Date().getTime() - 1000)
   config = share.Configs.findOne({}, {transform: share.Transformations.config})
   share.Queries.find({executingInterval: {$lte: 0}, updatedAt: {$lt: borderline}}).forEach (query) ->
-    rmCommand = "rm -f /tmp/" + query._id + ".rwf"
+    rmCommand = "rm -f " + config.dataTempdir + "/" + query._id + ".rwf"
     if config.isSSH
       rmCommand = config.wrapCommand(rmCommand)
     Process.exec(rmCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
@@ -24,7 +24,7 @@ share.cleanupCachedQueryResults = ->
 
 share.Queries.after.remove (userId, query) ->
   config = share.Configs.findOne({}, {transform: share.Transformations.config})
-  rmCommand = "rm -f /tmp/" + query._id + ".rwf"
+  rmCommand = "rm -f " + config.dataTempdir + "/" + query._id + ".rwf"
   if config.isSSH
     rmCommand = config.wrapCommand(rmCommand)
   Process.exec(rmCommand, Meteor.bindEnvironment((err, stdout, stderr) ->

@@ -6,7 +6,7 @@ Router.map ->
     where: 'server',
     action: ->
       basename = @params.token + ".rwf"
-      filename = "/tmp/" + basename
+      filename = config.dataTempdir + basename
       try
         stats = fs.statSync(filename)
         if stats.isFile()
@@ -26,4 +26,3 @@ Router.map ->
       @response.writeHead(404)
       @response.end()
   })
-

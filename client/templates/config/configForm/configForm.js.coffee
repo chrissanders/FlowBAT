@@ -8,6 +8,8 @@ Template.configForm.rendered = ->
         required: true
       dataRootdir:
         required: true
+      dataTempdir:
+        required: true
   )
 
 Template.configForm.events

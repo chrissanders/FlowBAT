@@ -75,9 +75,9 @@ Meteor.methods
         fut.throw(new Error(error))
       else
         if config.isSSH
-          copyCommand = "scp " + config.getSSHOptions() + " -P " + config.port + " " + config.user + "@" + config.host + ":/tmp/" + query._id + ".rwf /tmp/" + token + ".rwf"
+          copyCommand = "scp " + config.getSSHOptions() + " -P " + config.port + " " + config.user + "@" + config.host + ":" + config.dataTempdir + "/" + query._id + ".rwf " + config.dataTempdir + "/" + token + ".rwf"
         else
-          copyCommand = "cp /tmp/" + query._id + ".rwf /tmp/" + token + ".rwf"
+          copyCommand = "cp " + config.dataTempdir + "/" + query._id + ".rwf " + config.dataTempdir + "/" + token + ".rwf"
         Process.exec(copyCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
           result = stdout.trim()
           error = stderr.trim()
@@ -100,8 +100,8 @@ executeQuery = (query, config, callback) ->
       if set.isOutputStale
         isIpsetStale = true
         rwsetbuildFuture = new Future()
-        txtFilename = "/tmp/" + set._id + ".txt"
-        rwsFilename = "/tmp/" + set._id + ".rws"
+        txtFilename = config.dataTempdir + "/" + set._id + ".txt"
+        rwsFilename = config.dataTempdir + "/" + set._id + ".rws"
         writeFileFuture = writeFile(txtFilename, set.contents)
         if config.isSSH
           scpCommand = "scp " + config.getSSHOptions() + " -P " + config.port + " " + txtFilename + " " + config.user + "@" + config.host + ":" + txtFilename

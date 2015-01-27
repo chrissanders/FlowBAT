@@ -29,6 +29,9 @@ template(name="configForm")
         .form-group
           label.control-label SiLK Root Directory (Full Server File Path)
           +input(family="config" _id=_id property="dataRootdir" value=dataRootdir isNew=isNew)
+        .form-group
+          label.control-label Temporary Storage Directory (Full Server File Path)
+          +input(family="config" _id=_id property="dataTempdir" value=dataTempdir isNew=isNew)
       .panel-footer
         p.text-muted.fields-saved-automatically
           | Fields are saved automatically

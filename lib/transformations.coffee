@@ -85,7 +85,10 @@ class share.Query
     command = "rwfilter"
     command += " " + @inputOptions()
     if config and config.siteConfigFile
+      console.log "pass"
       command += " --site-config-file=" + config.siteConfigFile
+    else
+      console.log "fail"
     if config and config.dataRootdir
       command += " --data-rootdir=" + config.dataRootdir
     command += " --pass=stdout"
@@ -96,7 +99,8 @@ class share.Query
         command += " --site-config-file=" + config.siteConfigFile
       # config.dataRootdir shouldn't be used with exclusions
       command += " --fail=stdout"
-    command += " > /tmp/" + @_id + ".rwf"
+    if config and config.dataTempdir
+      command += " > " + config.dataTempdir + "/" + @_id + ".rwf"
     if config and config.isSSH
       command = config.wrapCommand(command)
     command
@@ -193,7 +197,8 @@ class share.Query
     rwcutOptionsString = rwcutOptions.join(" ")
     rwcutOptionsString = share.filterOptions(rwcutOptionsString)
     commands.push("rwcut " + rwcutOptionsString)
-    commands[0] += " /tmp/" + @_id + ".rwf"
+    if config and config.dataTempdir
+      commands[0] += " " + config.dataTempdir + "/" + @_id + ".rwf"
     command = commands.join(" | ")
     if config and config.isSSH
       command = config.wrapCommand(command)

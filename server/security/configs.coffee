@@ -12,6 +12,7 @@ share.Configs.allow
       identityFile: Match.Optional(String)
       siteConfigFile: Match.Optional(String)
       dataRootdir: Match.Optional(String)
+      dataTempdir: Match.Optional(String)
       isNew: Match.Optional(Match.App.isNewUpdate(config.isNew))
       updatedAt: Date
     if not config.isSetupComplete
@@ -25,6 +26,8 @@ share.Configs.allow
       throw new Match.Error("siteConfigFile required")
     if modifier.$set and _.has(modifier.$set, "dataRootdir") and not modifier.$set.dataRootdir
       throw new Match.Error("dataRootdir required")
+    if modifier.$set and _.has(modifier.$set, "dataTempdir") and not modifier.$set.dataTempdir
+      throw new Match.Error("dataTempdir required")
     true
   remove: share.securityRulesWrapper (userId, config) ->
     false # Who wants to live forever?
