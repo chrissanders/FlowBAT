@@ -83,12 +83,9 @@ class share.Query
     if @isQuick then "Quick query #" + @_id else @name or "#" + @_id
   inputCommand: (config) ->
     command = "rwfilter"
-    command += " " + @inputOptions()
+    command += " " + @inputOptions(config)
     if config and config.siteConfigFile
-      console.log "pass"
       command += " --site-config-file=" + config.siteConfigFile
-    else
-      console.log "fail"
     if config and config.dataRootdir
       command += " --data-rootdir=" + config.dataRootdir
     command += " --pass=stdout"
@@ -104,7 +101,7 @@ class share.Query
     if config and config.isSSH
       command = config.wrapCommand(command)
     command
-  inputOptions: ->
+  inputOptions: (config) ->
     if @interface is "builder"
       parameters = []
       if @typesEnabled and @types.length and _.difference(share.queryTypes, @types).length
@@ -136,11 +133,11 @@ class share.Query
       if @anyAddressEnabled and @anyAddress
         parameters.push("--any-address=" + @anyAddress)
       if @dipSetEnabled and @dipSet
-        parameters.push("--dipset=/tmp/" + @dipSet + ".rws")
+        parameters.push("--dipset=" + (config and config.dataTempdir or "/tmp") + "/" + @dipSet + ".rws")
       if @sipSetEnabled and @sipSet
-        parameters.push("--sipset=/tmp/" + @sipSet + ".rws")
+        parameters.push("--sipset=" + (config and config.dataTempdir or "/tmp") + "/" + @sipSet + ".rws")
       if @anySetEnabled and @anySet
-        parameters.push("--anyset=/tmp/" + @anySet + ".rws")
+        parameters.push("--anyset=" + (config and config.dataTempdir or "/tmp") + "/" + @anySet + ".rws")
       if @dportEnabled and @dport
         parameters.push("--dport=" + @dport)
       if @sportEnabled and @sport
@@ -241,7 +238,9 @@ class share.Query
     else
       rwstatsOptionsString = @rwstatsCmd + " " + defaultRwstatsOptions.join(" ")
       rwstatsOptionsString = share.filterOptions(rwstatsOptionsString)
-    command = "rwstats " + rwstatsOptionsString + " /tmp/" + @_id + ".rwf"
+    command = "rwstats " + rwstatsOptionsString
+    if config and config.dataTempdir
+      command += " " + config.dataTempdir + "/" + @_id + ".rwf"
     if config and config.isSSH
       command = config.wrapCommand(command)
     command
@@ -261,7 +260,9 @@ class share.Query
     else
       rwcountOptionsString = @rwcountCmd + " " + defaultRwcountOptions.join(" ")
     rwcountOptionsString = share.filterOptions(rwcountOptionsString)
-    command = "rwcount " + rwcountOptionsString + " /tmp/" + @_id + ".rwf"
+    command = "rwcount " + rwcountOptionsString
+    if config and config.dataTempdir
+      command += " " + config.dataTempdir + "/" + @_id + ".rwf"
     if @presentation is "table"
       if @sortField
         fieldIndex = share.rwcountFields.indexOf(@sortField)

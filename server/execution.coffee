@@ -10,11 +10,11 @@ share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
 share.Queries.after.update (userId, query, fieldNames, modifier, options) ->
   if not query.isOutputStale
     return
+  config = share.Configs.findOne({}, {transform: share.Transformations.config})
   query = share.Transformations.query(query)
-  if not query.inputOptions()
+  if not query.inputOptions(config)
     share.Queries.update(query._id, {$set: {isInputStale: false, isOutputStale: false}})
     return
-  config = share.Configs.findOne({}, {transform: share.Transformations.config})
   profile = Meteor.users.findOne(query.ownerId).profile
   callback = (result, error, code) ->
     share.Queries.update(query._id, {$set: {result: result, error: error, code: code, isInputStale: false, isOutputStale: false}})
