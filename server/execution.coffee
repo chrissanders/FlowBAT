@@ -75,9 +75,9 @@ Meteor.methods
         fut.throw(new Error(error))
       else
         if config.isSSH
-          copyCommand = "scp " + config.getSSHOptions() + " -P " + config.port + " " + config.user + "@" + config.host + ":" + config.dataTempdir + "/" + query._id + ".rwf " + config.dataTempdir + "/" + token + ".rwf"
+          copyCommand = "scp " + config.getSSHOptions() + " -P " + config.port + " " + config.user + "@" + config.host + ":" + config.dataTempdir + "/" + query._id + ".rwf " + "/tmp" + "/" + token + ".rwf"
         else
-          copyCommand = "cp " + config.dataTempdir + "/" + query._id + ".rwf " + config.dataTempdir + "/" + token + ".rwf"
+          copyCommand = "cp " + config.dataTempdir + "/" + query._id + ".rwf " + "/tmp" + "/" + token + ".rwf"
         Process.exec(copyCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
           result = stdout.trim()
           error = stderr.trim()
