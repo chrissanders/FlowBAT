@@ -1,5 +1,8 @@
 #!/bin/bash
-(
+
+exec >  >(tee -a flowbatinstall.log)
+exec 2> >(tee -a flowbatinstall.log >&2)
+
 workingDir=$PWD
 
 ask() {
@@ -164,4 +167,4 @@ echo -e "$(tput sgr0)"
 echo "$(tput setaf 2)Attempting startup. This may take a few minutes if it is the first time. Press ctrl+c to stop FlowBAT after the application says it is running or proceed to 127.0.0.1:1800 in a browser.$(tput sgr0)"
 
 meteor --port 1800 run --settings settings/dev.json "$@"
-) 2>&1 | tee install.log
+

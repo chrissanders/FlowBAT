@@ -5,8 +5,8 @@
 
 #!/bin/bash
 
-exec >  >(tee -a foo.log)
-exec 2> >(tee -a foo.log >&2)
+exec >  >(tee -a silkinstall.log)
+exec 2> >(tee -a silkinstall.log >&2)
 
 silkversion=$(echo "3.10.0")
 yafversion=$(echo "2.7.1")
