@@ -4,7 +4,10 @@
 # Chris Sanders & Jason Smith
 
 #!/bin/bash
-(
+
+exec >  >(tee -a foo.log)
+exec 2> >(tee -a foo.log >&2)
+
 silkversion=$(echo "3.10.0")
 yafversion=$(echo "2.7.1")
 lfbversion=$(echo "1.6.2")
@@ -239,4 +242,3 @@ echo
 echo -e "$(tput setaf 2)Config files\n---/data/silk.conf\n---/data/sensors.conf\n---root-directory=/data/$(tput sgr0)"
 exit 0
 
-) 2>&1 | tee silkinstall.log
