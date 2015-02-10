@@ -100,7 +100,7 @@ executeQuery = (query, config, callback) ->
       if set.isOutputStale
         isIpsetStale = true
         rwsetbuildFuture = new Future()
-        txtFilename = config.dataTempdir + "/" + set._id + ".txt"
+        txtFilename = "/tmp" + "/" + set._id + ".txt"
         rwsFilename = config.dataTempdir + "/" + set._id + ".rws"
         writeFileFuture = writeFile(txtFilename, set.contents)
         if config.isSSH
