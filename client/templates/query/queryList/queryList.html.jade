@@ -11,9 +11,9 @@ template(name="queryList")
                   li
                     a(href=path)
                       h4.sender {{displayName}}
-                      if inputCommand
-                        code.query-display $ {{inputCommand}}
-                        code.query-display $ {{outputCommand null currentUser.profile}}
+                      if inputCommand currentConfig currentUser.profile true
+                        code.query-display $ {{inputCommand currentConfig currentUser.profile true}}
+                        code.query-display $ {{outputCommand currentConfig currentUser.profile true}}
                       else
                         code.query-display No parameters specified
           .panel-footer

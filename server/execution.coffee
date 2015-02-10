@@ -30,6 +30,7 @@ Meteor.methods
       isQuick: true
     })
     config = share.Configs.findOne({}, {transform: share.Transformations.config})
+    profile = Meteor.users.findOne(@userId).profile
     query = share.Queries.findOne(queryId, {transform: share.Transformations.query})
     @unblock()
     fut = new Future()
@@ -38,7 +39,7 @@ Meteor.methods
         fut.throw(new Meteor.Error(500, error))
       else
         fut.return(result)
-    executeQuery(query, config, callback)
+    executeQuery(query, config, profile, callback)
     fut.wait()
     # quick queries are cleaned up automatically
   loadDataForCSV: (queryId) ->
@@ -64,6 +65,7 @@ Meteor.methods
     unless @userId
       throw new Match.Error("Operation not allowed for unauthorized users")
     config = share.Configs.findOne({}, {transform: share.Transformations.config})
+    profile = Meteor.users.findOne(@userId).profile
     query = share.Queries.findOne(queryId, {transform: share.Transformations.query})
     unless @userId is query.ownerId
       throw new Match.Error("Operation not allowed for non-owners")
@@ -87,10 +89,10 @@ Meteor.methods
           else
             fut.return(token)
         ))
-    executeQuery(query, config, callback)
+    executeQuery(query, config, profile, callback)
     fut.wait()
 
-executeQuery = (query, config, callback) ->
+executeQuery = (query, config, profile, callback) ->
   rwsetbuildErrors = []
   rwsetbuildFutures = []
   isIpsetStale = false
@@ -170,7 +172,7 @@ executeQuery = (query, config, callback) ->
     callback("", "", 0)
     return
 
-  command = query.inputCommand(config)
+  command = query.inputCommand(config, profile)
   Process.exec(command, Meteor.bindEnvironment((err, stdout, stderr) ->
     result = stdout.trim()
     error = stderr.trim()
@@ -179,7 +181,7 @@ executeQuery = (query, config, callback) ->
   ))
 
 loadQueryResult = (query, config, profile, callback) ->
-  executeQuery(query, config, Meteor.bindEnvironment((result, error, code) ->
+  executeQuery(query, config, profile, Meteor.bindEnvironment((result, error, code) ->
     if error
       return callback(result, error, code)
     command = query.outputCommand(config, profile)

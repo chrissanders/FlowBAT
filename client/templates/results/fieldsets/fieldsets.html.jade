@@ -370,11 +370,11 @@ template(name="fieldsets")
     legend Final query
     .row
       .col-xs-12
-        if inputCommand
+        if inputCommand currentConfig currentUser.profile true
           code.query-display
-            | $ {{inputCommand}}
+            | $ {{inputCommand currentConfig currentUser.profile true}}
           code.query-display
-            | $ {{outputCommand null currentUser.profile}}
+            | $ {{outputCommand currentConfig currentUser.profile true}}
         else
           code.query-display
             em Please set some options to build the query

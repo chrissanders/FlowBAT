@@ -5,3 +5,7 @@ UI.registerHelper("fieldI18nString", ->
 UI.registerHelper("fieldIsSelected", (query, property) ->
   @.toString() in query[property]
 )
+
+UI.registerHelper("currentConfig", ->
+  share.Configs.findOne()
+)

@@ -81,24 +81,23 @@ class share.Query
       @header = filteredHeader
   displayName: ->
     if @isQuick then "Quick query #" + @_id else @name or "#" + @_id
-  inputCommand: (config) ->
+  inputCommand: (config, profile, isPresentation = false) ->
     command = "rwfilter"
     command += " " + @inputOptions(config)
-    if config and config.siteConfigFile
+    if config.siteConfigFile
       command += " --site-config-file=" + config.siteConfigFile
-    if config and config.dataRootdir
+    if config.dataRootdir
       command += " --data-rootdir=" + config.dataRootdir
     command += " --pass=stdout"
     for exclusion in @inputExclusions()
       command += " | rwfilter --input-pipe=stdin"
       command += " " + exclusion
-      if config and config.siteConfigFile
+      if config.siteConfigFile
         command += " --site-config-file=" + config.siteConfigFile
       # config.dataRootdir shouldn't be used with exclusions
       command += " --fail=stdout"
-    if config and config.dataTempdir
-      command += " > " + config.dataTempdir + "/" + @_id + ".rwf"
-    if config and config.isSSH
+    command += " > " + (config.dataTempdir or "/tmp") + "/" + @_id + ".rwf"
+    if config.isSSH and not isPresentation
       command = config.wrapCommand(command)
     command
   inputOptions: (config) ->
@@ -133,11 +132,11 @@ class share.Query
       if @anyAddressEnabled and @anyAddress
         parameters.push("--any-address=" + @anyAddress)
       if @dipSetEnabled and @dipSet
-        parameters.push("--dipset=" + (config and config.dataTempdir or "/tmp") + "/" + @dipSet + ".rws")
+        parameters.push("--dipset=" + (config.dataTempdir or "/tmp") + "/" + @dipSet + ".rws")
       if @sipSetEnabled and @sipSet
-        parameters.push("--sipset=" + (config and config.dataTempdir or "/tmp") + "/" + @sipSet + ".rws")
+        parameters.push("--sipset=" + (config.dataTempdir or "/tmp") + "/" + @sipSet + ".rws")
       if @anySetEnabled and @anySet
-        parameters.push("--anyset=" + (config and config.dataTempdir or "/tmp") + "/" + @anySet + ".rws")
+        parameters.push("--anyset=" + (config.dataTempdir or "/tmp") + "/" + @anySet + ".rws")
       if @dportEnabled and @dport
         parameters.push("--dport=" + @dport)
       if @sportEnabled and @sport
@@ -167,21 +166,21 @@ class share.Query
       exclusionsCmd = @exclusionsCmd
     exclusionsCmd = share.filterOptions(exclusionsCmd)
     _.compact(exclusionsCmd.split(/\s+(?:OR|\|\|)\s+/i))
-  outputCommand: (config, profile) ->
+  outputCommand: (config, profile, isPresentation = false) ->
     switch @output
       when "rwcut"
-        @outputRwcutCommand(config, profile)
+        @outputRwcutCommand(config, profile, isPresentation)
       when "rwstats"
-        @outputRwstatsCommand(config, profile)
+        @outputRwstatsCommand(config, profile, isPresentation)
       when "rwcount"
-        @outputRwcountCommand(config, profile)
-  outputRwcutCommand: (config, profile) ->
+        @outputRwcountCommand(config, profile, isPresentation)
+  outputRwcutCommand: (config, profile, isPresentation = false) ->
     commands = []
     if @sortField
       rwsortOptions = ["--fields=" + @sortField]
       if @sortReverse
         rwsortOptions.push("--reverse")
-      if config and config.siteConfigFile
+      if config.siteConfigFile
         rwsortOptions.push("--site-config-file=" + config.siteConfigFile)
       rwsortOptionsString = rwsortOptions.join(" ")
       rwsortOptionsString = share.filterOptions(rwsortOptionsString)
@@ -189,18 +188,17 @@ class share.Query
     rwcutOptions = ["--num-recs=" + profile.numRecs, "--start-rec-num=" + @startRecNum, "--delimited"]
     if @fields.length
       rwcutOptions.push("--fields=" + _.intersection(@fieldsOrder, @fields).join(","))
-    if config and config.siteConfigFile
+    if config.siteConfigFile
       rwcutOptions.push("--site-config-file=" + config.siteConfigFile)
     rwcutOptionsString = rwcutOptions.join(" ")
     rwcutOptionsString = share.filterOptions(rwcutOptionsString)
     commands.push("rwcut " + rwcutOptionsString)
-    if config and config.dataTempdir
-      commands[0] += " " + config.dataTempdir + "/" + @_id + ".rwf"
+    commands[0] += " " + (config.dataTempdir or "/tmp") + "/" + @_id + ".rwf"
     command = commands.join(" | ")
-    if config and config.isSSH
+    if config.isSSH and not isPresentation
       command = config.wrapCommand(command)
     command
-  outputRwstatsCommand: (config, profile) ->
+  outputRwstatsCommand: (config, profile, isPresentation = false) ->
     defaultRwstatsOptions = ["--delimited"]
     if @interface is "builder"
       rwstatsOptions = defaultRwstatsOptions
@@ -232,19 +230,18 @@ class share.Query
           rwstatsOptions.push("--bin-time=" + @rwstatsBinTime)
         else
           rwstatsOptions.push("--bin-time")
-      if config and config.siteConfigFile
+      if config.siteConfigFile
         rwstatsOptions.push("--site-config-file=" + config.siteConfigFile)
       rwstatsOptionsString = rwstatsOptions.join(" ")
     else
       rwstatsOptionsString = @rwstatsCmd + " " + defaultRwstatsOptions.join(" ")
       rwstatsOptionsString = share.filterOptions(rwstatsOptionsString)
     command = "rwstats " + rwstatsOptionsString
-    if config and config.dataTempdir
-      command += " " + config.dataTempdir + "/" + @_id + ".rwf"
-    if config and config.isSSH
+    command += " " + (config.dataTempdir or "/tmp") + "/" + @_id + ".rwf"
+    if config.isSSH and not isPresentation
       command = config.wrapCommand(command)
     command
-  outputRwcountCommand: (config, profile) ->
+  outputRwcountCommand: (config, profile, isPresentation = false) ->
     defaultRwcountOptions = ["--delimited", "--no-titles"] # --no-titles is necessary, because header is added later
     if @interface is "builder"
       rwcountOptions = defaultRwcountOptions
@@ -254,15 +251,14 @@ class share.Query
         rwcountOptions.push("--load-scheme=" + @rwcountLoadScheme)
       if @rwcountSkipZeroes
         rwcountOptions.push("--skip-zeroes")
-      if config and config.siteConfigFile
+      if config.siteConfigFile
         rwcountOptions.push("--site-config-file=" + config.siteConfigFile)
       rwcountOptionsString = rwcountOptions.join(" ")
     else
       rwcountOptionsString = @rwcountCmd + " " + defaultRwcountOptions.join(" ")
     rwcountOptionsString = share.filterOptions(rwcountOptionsString)
     command = "rwcount " + rwcountOptionsString
-    if config and config.dataTempdir
-      command += " " + config.dataTempdir + "/" + @_id + ".rwf"
+    command += " " + (config.dataTempdir or "/tmp") + "/" + @_id + ".rwf"
     if @presentation is "table"
       if @sortField
         fieldIndex = share.rwcountFields.indexOf(@sortField)
@@ -278,10 +274,10 @@ class share.Query
         tailOptions = share.filterOptions(tailOptions)
         tailCommand = "tail " + tailOptions
         command += " | " + headCommand + " | " + tailCommand
-    if config and config.isSSH
+    if config.isSSH and not isPresentation
       command = config.wrapCommand(command)
     command
-  rwstatsCountModeValueIsEnabled: (mode) ->
+  rwstatsCountModeValueIsEnabled: ->
     @rwstatsMode is "count"
   rwstatsThresholdModeValueIsEnabled: ->
     @rwstatsMode is "threshold"
