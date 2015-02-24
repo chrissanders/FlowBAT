@@ -65,8 +65,6 @@ share.Pivoting =
     else
       $set["cmd"] = @replace(query.cmd, share.Pivoting.fields2options[_id], value)
     share.Queries.update(query._id, {$set: $set})
-#    share.Queries.update(query._id, {$set: {isOutputStale: true}})
-#    don't execute before user clicks "Execute" (from RFP)
     if query.interface is "builder"
       switch _id
         when "type", "scc", "dcc"

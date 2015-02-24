@@ -22,7 +22,7 @@ Template.results.rendered = ->
 Template.results.events
   "submit .options-form": grab encapsulate (event, template) ->
     template.$(".execute").blur()
-    $set = _.extend({isInputStale: true, isOutputStale: true}, share.queryResetValues)
+    $set = _.extend({isInputStale: true, isOutputStale: true}, share.queryBlankValues, share.queryResetValues)
     share.Queries.update(template.data._id, {$set: $set})
   "click .set-executing-interval": grab (event, template) ->
     $target = $(event.currentTarget)

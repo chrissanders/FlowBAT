@@ -89,7 +89,7 @@ share.Queries.before.insert (userId, query) ->
     ownerId: userId
     updatedAt: now
     createdAt: now
-  , share.queryResetValues)
+  , share.queryBlankValues, share.queryResetValues)
   if not query.name
     prefix = "New query"
     count = share.Queries.find({ name: { $regex: "^" + prefix, $options: "i" } }).count()
@@ -104,9 +104,11 @@ share.Queries.before.update (userId, query, fieldNames, modifier, options) ->
   modifier.$set.updatedAt = modifier.$set.updatedAt or now
   queryPreSave.call(@, userId, modifier.$set)
 
-share.queryResetValues =
+share.queryBlankValues =
   result: ""
   error: ""
+
+share.queryResetValues =
   startRecNum: 1
   sortField: ""
   sortReverse: true
