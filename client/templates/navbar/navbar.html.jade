@@ -12,13 +12,11 @@ template(name="navbar")
       #top-navbar-collapse.collapse.navbar-collapse
         ul.nav.navbar-nav
           if currentUser
-            li
+            li(class="{{#if condition currentTemplateName 'is' 'dashboard'}}active{{/if}}")
               a(href="/") Dashboard
-            li
-              a(href="/query/create/quick") Quick Query
-            li
+            li(class="{{#if condition currentTemplateName 'in' 'queryList' 'query'}}{{#if not query.isQuick}}active{{/if}}{{/if}}")
               a(href="/query/list") Saved Queries
-            li
+            li(class="{{#if condition currentTemplateName 'in' 'ipsetList' 'ipset' 'ipsetCreate'}}active{{/if}}")
               a(href="/ipset/list") IP Sets
         ul.nav.navbar-nav.navbar-right
           if currentUser
@@ -38,3 +36,10 @@ template(name="navbar")
                 li: a.logout(href="#") Logout
           else
             +login
+        if currentUser
+          .navbar-form.navbar-right
+            .form-group
+              button.create-quick-query.btn.btn-primary(type="button")
+                .fa.fa-fw.fa-plus
+                | Quick Query
+

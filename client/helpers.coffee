@@ -9,3 +9,7 @@ UI.registerHelper("fieldIsSelected", (query, property) ->
 UI.registerHelper("currentConfig", ->
   share.Configs.findOne()
 )
+
+UI.registerHelper("currentTemplateName", ->
+  Router.current().lookupTemplate()
+)
