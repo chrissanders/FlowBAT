@@ -4,6 +4,7 @@ Router.configure
   loadingTemplate: "loading"
   yieldTemplates:
     navbar: {to: "header"}
+    footer: {to: "footer"}
 
 Router.onBeforeAction((pause) ->
   if not Meteor.user()
