@@ -1,10 +1,8 @@
 Template.chart.helpers
   nonNumberDataColumnSpec: ->
     for spec2 in @header.slice(0,1)
-      console.log spec2
       spec2.chartType = "string"
     for spec in @header.slice(1)
-      console.log spec
       if spec.chartType isnt "number"
         return spec
   reactivityHack: ->
@@ -30,7 +28,6 @@ Template.chart.helpers
             #test = typeof value
           values.push(value)
         data.addRow(values)
-        console.log values
       chartWrapper = share.chartWrappers.get(@_id)
       chartWrapper.setDataTable(data)
       chartWrapper.setChartType(@chartType)
