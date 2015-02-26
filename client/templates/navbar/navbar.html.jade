@@ -14,6 +14,8 @@ template(name="navbar")
           if currentUser
             li(class="{{#if condition currentTemplateName 'is' 'dashboard'}}active{{/if}}")
               a(href="/") Dashboard
+            li(class="{{#if condition currentTemplateName 'in' 'query'}}{{#if query.isQuick}}active{{/if}}{{/if}}")
+              a(href="/query/create/quick") Quick Query
             li(class="{{#if condition currentTemplateName 'in' 'queryList' 'query'}}{{#if not query.isQuick}}active{{/if}}{{/if}}")
               a(href="/query/list") Saved Queries
             li(class="{{#if condition currentTemplateName 'in' 'ipsetList' 'ipset' 'ipsetCreate'}}active{{/if}}")
@@ -36,10 +38,4 @@ template(name="navbar")
                 li: a.logout(href="#") Logout
           else
             +login
-        if currentUser
-          .navbar-form.navbar-right
-            .form-group
-              button.create-quick-query.btn.btn-primary(type="button")
-                .fa.fa-fw.fa-plus
-                | Quick Query
 
