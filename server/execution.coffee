@@ -172,62 +172,79 @@ executeQuery = (query, config, profile, callback) ->
     callback("", "", 0)
     return
 
-  tupleErrors = []
-  tupleFutures = []
+  tuplebuildErrors = []
+  tuplebuildFutures = []
   isTupleStale = false
   _.each(["tupleFile"], (field) ->
-    if field == 'tupleFile'
-      if query[field + "Enabled"] and query[field]
-        set = share.Tuples.findOne(query[field])
-        if set.isOutputStale
-          isTupleStale = true
-          tupleFuture = new Future()
-          txtFilename = config.dataTempdir + "/" + set._id + ".tuple"
-          writeFileFuture = writeFile(txtFilename, set.contents)
-          if config.isSSH
-            scpCommand = "scp " + config.getSSHOptions() + " -P " + config.port + " " + txtFilename + " " + config.user + "@" + config.host + ":" + txtFilename
-            scpFuture = new Future()
-            Process.exec(scpCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
-              result = stdout.trim()
-              error = stderr.trim()
-              code = if err then err.code else 0
-              if error
-                tupleErrors.push(error)
-              if code is 0
-              else
-                if not error
-                  throw "scp: code is \"" + code + "\" while stderr is \"" + error + "\""
-              scpFuture.return(result)
-            ))
-            scpFuture.wait()
-          rmCommand = "rm -f " + txtFilename
-          if config.isSSH
-            rmCommand = config.wrapCommand(rmCommand)
-          rmFuture = new Future()
-          Process.exec(rmCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
+    if query[field + "Enabled"] and query[field]
+      set = share.Tuples.findOne(query[field])
+      if set.isOutputStale
+        isTupleStale = true
+        tuplebuildFuture = new Future()
+        txtFilename = "/tmp" + "/" + set._id + ".tuple"
+        rwsFilename = config.dataTempdir + "/" + set._id + ".rws"
+        writeFileFuture = writeFile(txtFilename, set.contents)
+        if config.isSSH
+          scpCommand = "scp " + config.getSSHOptions() + " -P " + config.port + " " + txtFilename + " " + config.user + "@" + config.host + ":" + txtFilename
+          scpFuture = new Future()
+          Process.exec(scpCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
             result = stdout.trim()
             error = stderr.trim()
             code = if err then err.code else 0
             if error
-              tupleErrors.push(error)
+              tuplebuildErrors.push(error)
             if code is 0
             else
               if not error
-                throw "rm: code is \"" + code + "\" while stderr is \"" + error + "\""
-            rmFuture.return(result)
+                throw "scp: code is \"" + code + "\" while stderr is \"" + error + "\""
+            scpFuture.return(result)
           ))
-          rmFuture.wait()
-          writeFileFuture.resolve Meteor.bindEnvironment((err, result) ->
-            if err
-              tupleErrors.push(err)
-              tupleFuture.return(result)
-          )
-          tupleFutures.push(tupleFuture)
+          scpFuture.wait()
+        rmCommand = "rm -f " + rwsFilename
+        if config.isSSH
+          rmCommand = config.wrapCommand(rmCommand)
+        rmFuture = new Future()
+        Process.exec(rmCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
+          result = stdout.trim()
+          error = stderr.trim()
+          code = if err then err.code else 0
+          if error
+            tuplebuildErrors.push(error)
+          if code is 0
+          else
+            if not error
+              throw "rm: code is \"" + code + "\" while stderr is \"" + error + "\""
+          rmFuture.return(result)
+        ))
+        rmFuture.wait()
+        writeFileFuture.resolve Meteor.bindEnvironment((err, result) ->
+          if err
+            tuplebuildErrors.push(err)
+            tuplebuildFuture.return(result)
+          else
+            tuplebuildCommand = "echo " + txtFilename + " " + rwsFilename
+            if config.isSSH
+              tuplebuildCommand = config.wrapCommand(tuplebuildCommand)
+            Process.exec(tuplebuildCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
+              result = stdout.trim()
+              error = stderr.trim()
+              code = if err then err.code else 0
+              if error
+                tuplebuildErrors.push(error)
+              if code is 0
+                share.Tuples.update(set._id, {$set: {isOutputStale: false}})
+              else
+                if not error
+                  throw "tuplebuild: code is \"" + code + "\" while stderr is \"" + error + "\""
+              tuplebuildFuture.return(result)
+            ))
+        )
+        tuplebuildFutures.push(tuplebuildFuture)
   )
-  Future.wait(tupleFutures)
+  Future.wait(tuplebuildFutures)
 
-  if tupleErrors.length
-    callback("", tupleErrors.join("\n"), 255)
+  if tuplebuildErrors.length
+    callback("", tuplebuildErrors.join("\n"), 255)
     return
 
   if not query.isInputStale and not isTupleStale
