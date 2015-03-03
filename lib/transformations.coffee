@@ -137,6 +137,14 @@ class share.Query
         parameters.push("--sipset=" + (config.dataTempdir or "/tmp") + "/" + @sipSet + ".rws")
       if @anySetEnabled and @anySet
         parameters.push("--anyset=" + (config.dataTempdir or "/tmp") + "/" + @anySet + ".rws")
+      if @tupleFileEnabled and @tupleFile
+        parameters.push("--tuple-file=" + (config.dataTempdir or "/tmp") + "/" + @tupleFile + ".tuple")
+      if @tupleDirectionEnabled and @tupleDirection
+        parameters.push("--tuple-direction=" + @tupleDirection)
+      if @tupleDelimiterEnabled and @tupleDelimiter
+        parameters.push("--tuple-delimiter=" + @tupleDelimiter)
+      if @tupleFieldsEnabled and @tupleFields
+        parameters.push("--tuple-fields=" + @tupleFields)
       if @dportEnabled and @dport
         parameters.push("--dport=" + @dport)
       if @sportEnabled and @sport
@@ -300,6 +308,18 @@ class share.IPSet
   path: ->
     "/ipset/" + @_id
 
+class share.Tuple
+  constructor: (doc) ->
+    _.extend(@, doc)
+  displayName: ->
+    @name or "#" + @_id
+  objectSelectName: ->
+    @displayName()
+  objectSelectValue: ->
+    @_id
+  path: ->
+    "/tuple/" + @_id
+
 share.Transformations =
   user: (user) ->
     if user instanceof share.User or not user then user else new share.User(user)
@@ -309,3 +329,5 @@ share.Transformations =
     if query instanceof share.Query or not query then query else new share.Query(query)
   ipset: (ipset) ->
     if ipset instanceof share.IPSet or not ipset then ipset else new share.IPSet(ipset)
+  tuple: (tuple) ->
+    if tuple instanceof share.Tuple or not tuple then tuple else new share.Tuple(tuple)

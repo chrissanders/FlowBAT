@@ -212,32 +212,22 @@ template(name="fieldsets")
         .col-xs-6
           .form-group
             label.control-label
-              | Sensor
-              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Sensor", data-content='Used to view flow records associated with a specific sensor or group of sensors. Sensors are configured in your SiLK sensors.conf configuration file. If this field is left blank, all sensors are selected by default.')
-            .input-group
-              span.input-group-addon
-                +checkbox(family="query" _id=_id property="sensorEnabled" value=sensorEnabled isNew=isNew)
-              +input(family="query" _id=_id property="sensor" value=sensor enabled=sensorEnabled isNew=isNew)
-      .row
-        .col-xs-6
-          .form-group
-            label.control-label
               | Source country
               i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Source country", data-content='Used to view flow records from a specific source country. Counties are identified by their official country code. For instance, the United States would be identified by “us”.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="sccEnabled" value=sccEnabled isNew=isNew)
               +chosen(family="query" _id=_id property="scc" value=scc options=countriesOptions multiple=true enabled=sccEnabled isNew=isNew)
+      .row
         .col-xs-6
           .form-group
             label.control-label
-              | Additional parameters
-              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Additional parameters", data-content='Used to specify additional SiLK rwfilter command line options not made available through the FlowBAT interface. This should be used by advanced users only.')
-            .input-group.additional-parameters-form-group
+              | Sensor
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Sensor", data-content='Used to view flow records associated with a specific sensor or group of sensors. Sensors are configured in your SiLK sensors.conf configuration file. If this field is left blank, all sensors are selected by default.')
+            .input-group
               span.input-group-addon
-                +checkbox(family="query" _id=_id property="additionalParametersEnabled" value=additionalParametersEnabled isNew=isNew)
-              +input(family="query" _id=_id property="additionalParameters" value=additionalParameters enabled=additionalParametersEnabled placeholder="Raw command-line options" isNew=isNew)
-      .row
+                +checkbox(family="query" _id=_id property="sensorEnabled" value=sensorEnabled isNew=isNew)
+              +input(family="query" _id=_id property="sensor" value=sensor enabled=sensorEnabled isNew=isNew)
         .col-xs-6
           .form-group
             label.control-label
@@ -247,6 +237,60 @@ template(name="fieldsets")
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="dccEnabled" value=dccEnabled isNew=isNew)
               +chosen(family="query" _id=_id property="dcc" value=dcc options=countriesOptions multiple=true enabled=dccEnabled isNew=isNew)
+      .row
+        .col-xs-6
+          .form-group
+            label.control-label
+              | Tuple File
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Tuple File", data-content='This switch provides support for partitioning by arbitrary subsets of the basic five-tuple. These are referenced in the Tuple tab in the navbar.')
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="tupleFileEnabled" value=tupleFileEnabled isNew=isNew)
+              +chosen(family="query" _id=_id property="tupleFile" value=tupleFile options=tuples enabled=tupleFileEnabled withEmptyOption=true isNew=isNew)
+              span.input-group-btn
+                a.btn.btn-default(href="/tuple/{{tupleFile}}", disabled="{{not tupleFile}}")
+                  i.fa.fa-pencil
+                a.btn.btn-default(href="/tuple/create")
+                  i.fa.fa-plus
+        .col-xs-6
+          .form-group
+            label.control-label
+              | Tuple Direction
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Tuple Direction", data-content='Allows you to change the comparison between the tuple and the SiLK Flow record. This switch allows one to look for traffic in the reverse direction (or both directions) without having to write all of the rules twice. Options are "forward", "reverse", and "both".')
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="tupleDirectionEnabled" value=tupleDirectionEnabled isNew=isNew)
+              +input(family="query" _id=_id property="tupleDirection" value=tupleDirection enabled=tupleDirectionEnabled isNew=isNew)
+      .row
+        .col-xs-6
+          .form-group
+            label.control-label
+              | Tuple Delimiter
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Tuple Delimiter", data-content='Specifies the character separating the input fields. When the switch is not provided, the default of | is used.')
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="tupleDelimiterEnabled" value=tupleDelimiterEnabled isNew=isNew)
+              +input(family="query" _id=_id property="tupleDelimiter" value=tupleDelimiter enabled=tupleDelimiterEnabled isNew=isNew)
+        .col-xs-6
+          .form-group
+            label.control-label
+              | Tuple Fields
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Tuple Fields", data-content='These define how to interpret the list of fields (columns) in the Tuple File in the order in which they appear in the file. For instance, if you have two ip addresses, you might use "sip,dip".')
+            .input-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="tupleFieldsEnabled" value=tupleFieldsEnabled isNew=isNew)
+              +input(family="query" _id=_id property="tupleFields" value=tupleFields enabled=tupleFieldsEnabled isNew=isNew)
+      .row
+        .col-xs-12
+          .form-group
+            label.control-label
+              | Additional parameters
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Additional parameters", data-content='Used to specify additional SiLK rwfilter command line options not made available through the FlowBAT interface. This should be used by advanced users only.')
+            .input-group.additional-parameters-form-group
+              span.input-group-addon
+                +checkbox(family="query" _id=_id property="additionalParametersEnabled" value=additionalParametersEnabled isNew=isNew)
+              +input(family="query" _id=_id property="additionalParameters" value=additionalParameters enabled=additionalParametersEnabled placeholder="Raw command-line options" isNew=isNew)
+        
       .row
         .col-xs-12
           .form-group

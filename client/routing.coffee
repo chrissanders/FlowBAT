@@ -84,6 +84,31 @@ Router.map ->
     action: ->
       share.IPSets.remove(@params._id)
       Router.go("/")
+  @route "createTuple",
+    path: "/tuple/create"
+    template: "tupleCreate"
+    data: ->
+      tuple:
+        _id: "NEW"
+        isNew: true
+  @route "tupleList",
+    path: "/tuple/list"
+    data: -> {}
+  @route "tuple",
+    path: "/tuple/:_id"
+    data: ->
+      tuple = share.Tuples.findOne(@params._id)
+      if not tuple
+        return null
+      _.defaults({}, @params,
+        tuple: tuple
+      )
+  @route "removeTuple",
+    path: "/tuple/:_id/remove"
+    data: -> {}
+    action: ->
+      share.Tuples.remove(@params._id)
+      Router.go("/")
   @route "config",
     data: ->
       unless share.Security.currentUserHasRole("admin")

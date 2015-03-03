@@ -31,6 +31,14 @@ share.Queries.before.insert (userId, query) ->
     sipSet: null
     anySetEnabled: false
     anySet: null
+    tupleFileEnabled: false
+    tupleFile: null
+    tupleDirectionEnabled: false
+    tupleDirection: ""
+    tupleDelimiterEnabled: false
+    tupleDelimiter: ""
+    tupleFieldsEnabled: false
+    tupleFields: ""
     dportEnabled: false
     dport: ""
     sportEnabled: false

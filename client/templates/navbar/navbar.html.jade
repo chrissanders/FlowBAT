@@ -20,6 +20,8 @@ template(name="navbar")
               a(href="/query/list") Saved Queries
             li(class="{{#if condition currentTemplateName 'in' 'ipsetList' 'ipset' 'ipsetCreate'}}active{{/if}}")
               a(href="/ipset/list") IP Sets
+            li(class="{{#if condition currentTemplateName 'in' 'tupleList' 'tuple' 'tupleCreate'}}active{{/if}}")
+              a(href="/tuple/list") Tuple Files
         ul.nav.navbar-nav.navbar-right
           if currentUser
             li.dropdown
@@ -38,4 +40,3 @@ template(name="navbar")
                 li: a.logout(href="#") Logout
           else
             +login
-

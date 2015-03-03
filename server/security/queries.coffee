@@ -32,6 +32,14 @@ share.Queries.allow
       sipSet: Match.OneOf(null, Match.App.IPSetId)
       anySetEnabled: Boolean
       anySet: Match.OneOf(null, Match.App.IPSetId)
+      tupleFileEnabled: Boolean
+      tupleFile: Match.OneOf(null, Match.App.TupleId)
+      tupleDirectionEnabled: Boolean
+      tupleDirection: String
+      tupleDelimiterEnabled: Boolean
+      tupleDelimiter: String
+      tupleFieldsEnabled: Boolean
+      tupleFields: String
       dportEnabled: Boolean
       dport: String
       sportEnabled: Boolean

@@ -1,0 +1,16 @@
+template(name="tupleList")
+  .container-fluid.tuple-list.object-list
+    .row
+      .col-xs-12.col-md-6
+        .panel.panel-default.panel-alt.widget-messaging
+          if tuples.count
+            .panel-body
+              ul
+                each tuples
+                  li
+                    a(href=path)
+                      h4.sender {{displayName}}
+                      if note
+                        small {{note}}
+          .panel-footer
+            a.btn.btn-primary(href="/tuple/create") <i class="fa fa-plus"></i> Create Tuple file

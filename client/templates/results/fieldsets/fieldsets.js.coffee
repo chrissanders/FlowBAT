@@ -7,6 +7,14 @@ Template.fieldsets.helpers
         value: ipset._id
       }
     })
+  tuples: ->
+    share.Tuples.find({}, {sort: {createdAt: 1}, transform: (tuple) ->
+      tuple = share.Transformations.tuple(tuple)
+      {
+        name: tuple.displayName()
+        value: tuple._id
+      }
+    })
   typesOptions: ->
     for type in share.queryTypes
       {

@@ -44,3 +44,7 @@ Meteor.publish "queries", ->
 Meteor.publish "ipsets", ->
   if not @userId then return []
   share.IPSets.find({ownerId: @userId})
+
+Meteor.publish "tuples", ->
+  if not @userId then return []
+  share.Tuples.find({ownerId: @userId})
