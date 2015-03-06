@@ -29,8 +29,16 @@ Template.fieldsets.helpers
     options = []
     for loadScheme, index in share.rwcountLoadSchemes
       options.push(
-        value: index
+        value: loadScheme
         name: loadScheme
+      )
+    options
+  tupleDirectionOptions: ->
+    options = []
+    for tupleDirection, index in share.tupleDirections
+      options.push(
+        value: tupleDirection
+        name: tupleDirection
       )
     options
   startDateOffsets: ->

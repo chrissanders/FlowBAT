@@ -172,6 +172,68 @@ executeQuery = (query, config, profile, callback) ->
     callback("", "", 0)
     return
 
+  tupleErrors = []
+  tupleFutures = []
+  isTupleStale = false
+  _.each(["tupleFile"], (field) ->
+    if field == 'tupleFile'
+      if query[field + "Enabled"] and query[field]
+        set = share.Tuples.findOne(query[field])
+        if set.isOutputStale
+          isTupleStale = true
+          tupleFuture = new Future()
+          txtFilename = config.dataTempdir + "/" + set._id + ".tuple"
+          writeFileFuture = writeFile(txtFilename, set.contents)
+          if config.isSSH
+            scpCommand = "scp " + config.getSSHOptions() + " -P " + config.port + " " + txtFilename + " " + config.user + "@" + config.host + ":" + txtFilename
+            scpFuture = new Future()
+            Process.exec(scpCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
+              result = stdout.trim()
+              error = stderr.trim()
+              code = if err then err.code else 0
+              if error
+                tupleErrors.push(error)
+              if code is 0
+              else
+                if not error
+                  throw "scp: code is \"" + code + "\" while stderr is \"" + error + "\""
+              scpFuture.return(result)
+            ))
+            scpFuture.wait()
+          rmCommand = "rm -f " + txtFilename
+          if config.isSSH
+            rmCommand = config.wrapCommand(rmCommand)
+          rmFuture = new Future()
+          Process.exec(rmCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
+            result = stdout.trim()
+            error = stderr.trim()
+            code = if err then err.code else 0
+            if error
+              tupleErrors.push(error)
+            if code is 0
+            else
+              if not error
+                throw "rm: code is \"" + code + "\" while stderr is \"" + error + "\""
+            rmFuture.return(result)
+          ))
+          rmFuture.wait()
+          writeFileFuture.resolve Meteor.bindEnvironment((err, result) ->
+            if err
+              tupleErrors.push(err)
+              tupleFuture.return(result)
+          )
+          tupleFutures.push(tupleFuture)
+  )
+  Future.wait(tupleFutures)
+
+  if tupleErrors.length
+    callback("", tupleErrors.join("\n"), 255)
+    return
+
+  if not query.isInputStale and not isTupleStale
+    callback("", "", 0)
+    return
+
   command = query.inputCommand(config, profile)
   Process.exec(command, Meteor.bindEnvironment((err, stdout, stderr) ->
     result = stdout.trim()

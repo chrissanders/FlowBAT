@@ -256,11 +256,11 @@ template(name="fieldsets")
           .form-group
             label.control-label
               | Tuple Direction
-              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Tuple Direction", data-content='Allows you to change the comparison between the tuple and the SiLK Flow record. This switch allows one to look for traffic in the reverse direction (or both directions) without having to write all of the rules twice. Options are "forward", "reverse", and "both".')
+              i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Tuple Direction", data-content='Allows you to change the comparison between the tuple and the SiLK Flow record. This switch allows one to look for traffic in the reverse direction (or both directions) without having to write all of the rules twice.')
             .input-group
               span.input-group-addon
                 +checkbox(family="query" _id=_id property="tupleDirectionEnabled" value=tupleDirectionEnabled isNew=isNew)
-              +input(family="query" _id=_id property="tupleDirection" value=tupleDirection enabled=tupleDirectionEnabled isNew=isNew)
+              +chosen(family="query" _id=_id property="tupleDirection" value=tupleDirection options=tupleDirectionOptions enabled=tupleDirectionEnabled isNew=isNew)
       .row
         .col-xs-6
           .form-group

@@ -49,6 +49,7 @@ share.rwcountFields = [
   "Packets"
 ]
 share.rwcountLoadSchemes = [
+  ""
   "bin-uniform"
   "start-spike"
   "end-spike"
@@ -56,6 +57,12 @@ share.rwcountLoadSchemes = [
   "time-proportional"
   "maximum-volume"
   "minimum-volume"
+]
+share.tupleDirections = [
+  ""
+  "both"
+  "forward"
+  "reverse"
 ]
 share.availableChartTypes =
   "rwcut": []
