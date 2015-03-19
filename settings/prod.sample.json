@@ -7,7 +7,7 @@
     "secret": ""
   },
   "public": {
-    "version": "__VERSION__",
+    "version": "FlowBAT v1.2.0",
     "isDebug": false,
     "googleAnalytics": {
       "property": "",
