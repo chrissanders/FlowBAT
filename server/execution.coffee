@@ -182,7 +182,7 @@ executeQuery = (query, config, profile, callback) ->
         isTupleStale = true
         tuplebuildFuture = new Future()
         txtFilename = "/tmp" + "/" + set._id + ".tuple"
-        rwsFilename = config.dataTempdir + "/" + set._id + ".rws"
+        tupleFilename = config.dataTempdir + "/" + set._id + ".tuple"
         writeFileFuture = writeFile(txtFilename, set.contents)
         if config.isSSH
           scpCommand = "scp " + config.getSSHOptions() + " -P " + config.port + " " + txtFilename + " " + config.user + "@" + config.host + ":" + txtFilename
@@ -200,7 +200,7 @@ executeQuery = (query, config, profile, callback) ->
             scpFuture.return(result)
           ))
           scpFuture.wait()
-        rmCommand = "rm -f " + rwsFilename
+        rmCommand = "rm -f " + tupleFilename
         if config.isSSH
           rmCommand = config.wrapCommand(rmCommand)
         rmFuture = new Future()
@@ -222,7 +222,7 @@ executeQuery = (query, config, profile, callback) ->
             tuplebuildErrors.push(err)
             tuplebuildFuture.return(result)
           else
-            tuplebuildCommand = "echo " + txtFilename + " " + rwsFilename
+            tuplebuildCommand = "cat " + txtFilename + " > " + tupleFilename
             if config.isSSH
               tuplebuildCommand = config.wrapCommand(tuplebuildCommand)
             Process.exec(tuplebuildCommand, Meteor.bindEnvironment((err, stdout, stderr) ->
