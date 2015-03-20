@@ -181,7 +181,7 @@ executeQuery = (query, config, profile, callback) ->
       if set.isOutputStale
         isTupleStale = true
         tuplebuildFuture = new Future()
-        txtFilename = "/tmp" + "/" + set._id + ".tuple"
+        txtFilename = "/tmp" + "/" + set._id + ".txt"
         tupleFilename = config.dataTempdir + "/" + set._id + ".tuple"
         writeFileFuture = writeFile(txtFilename, set.contents)
         if config.isSSH
