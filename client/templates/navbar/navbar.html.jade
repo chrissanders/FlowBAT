@@ -12,14 +12,16 @@ template(name="navbar")
       #top-navbar-collapse.collapse.navbar-collapse
         ul.nav.navbar-nav
           if currentUser
-            li
+            li(class="{{#if condition currentTemplateName 'is' 'dashboard'}}active{{/if}}")
               a(href="/") Dashboard
-            li
+            li(class="{{#if condition currentTemplateName 'in' 'query'}}{{#if query.isQuick}}active{{/if}}{{/if}}")
               a(href="/query/create/quick") Quick Query
-            li
+            li(class="{{#if condition currentTemplateName 'in' 'queryList' 'query'}}{{#if not query.isQuick}}active{{/if}}{{/if}}")
               a(href="/query/list") Saved Queries
-            li
+            li(class="{{#if condition currentTemplateName 'in' 'ipsetList' 'ipset' 'ipsetCreate'}}active{{/if}}")
               a(href="/ipset/list") IP Sets
+            li(class="{{#if condition currentTemplateName 'in' 'tupleList' 'tuple' 'tupleCreate'}}active{{/if}}")
+              a(href="/tuple/list") Tuple Files
         ul.nav.navbar-nav.navbar-right
           if currentUser
             li.dropdown

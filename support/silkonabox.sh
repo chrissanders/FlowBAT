@@ -4,6 +4,14 @@
 # Chris Sanders & Jason Smith
 
 #!/bin/bash
+
+exec >  >(tee -a silkinstall.log)
+exec 2> >(tee -a silkinstall.log >&2)
+
+silkversion=$(echo "3.10.0")
+yafversion=$(echo "2.7.1")
+lfbversion=$(echo "1.6.2")
+
 ask() {
     # http://djm.me/ask
     while true; do
@@ -47,7 +55,7 @@ if [[ $? -eq 0 ]]; then
         echo "$(tput setaf 2)It appears that you do have an internet connection.$(tput sgr0)"
 else
         echo "$(tput setaf 1)It appears that you do not have an internet connection! This installation will fail.$(tput sgr0)"
-        if ask "$(tput setaf 2)Do you want to do such-and-such?$(tput sgr0)$(tput setaf 1)Success is unlikely.$(tput sgr0)"; then
+        if ask "$(tput setaf 2)Do you want to try anyways?$(tput sgr0)$(tput setaf 1)Success is unlikely.$(tput sgr0)"; then
           echo ""
         else
           echo "That was probably a good choice if this is your first time running this install."
@@ -78,6 +86,28 @@ else
 fi
 done
 
+if grep -q 'rwflowpack' /etc/rc.local; then
+        echo "$(tput setaf 2)It appears you already have flow collection enabled at boot, which also indicates you might have already installed SiLK.$(tput sgr0)"
+        if ask "$(tput setaf 3)Do you wish to skip putting in redundant commands in /etc/rc.local? Saying no to this question could result in duplicate entries in /etc/rc.local.(tput sgr0)"; then
+          echo "$(tput setaf 2)continuing installation...$(tput sgr0)"
+        else
+          sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
+          sudo sed -i "$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 \&\nexit 0," /etc/rc.local
+        fi
+      else
+        if ask "$(tput setaf 3)Do you wish to setup flow collection on boot?$(tput sgr0)"; then
+              onBoot=$(echo "---YAF and rwflowpack start on boot")
+              sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
+              sudo sed -i "$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 \&\nexit 0," /etc/rc.local
+        else
+              exit 0
+        fi
+fi
+
+if ask "$(tput setaf 3)Would you like to start flow collection after installation?$(tput sgr0)"; then
+  silkstartnow=$(echo "yes")
+fi
+
 echo "$(tput setaf 6)Checking installed packages...$(tput sgr0)"
 sudo apt-get update -qq
 
@@ -94,50 +124,50 @@ if which rwp2yaf2silk > /dev/null; then
         fi
         else
 	# Download and Extract SiLK Components
-	if [ ! -f libfixbuf-1.6.0.tar.gz ]; then
-    		echo -e "$(tput setaf 6)libfixbuf-1.6.0.tar.gz not found. Downloading.$(tput sgr0)"
-    		wget http://tools.netsa.cert.org/releases/libfixbuf-1.6.0.tar.gz
+	if [ ! -f libfixbuf-$lfbversion.tar.gz ]; then
+    		echo -e "$(tput setaf 6)libfixbuf-$lfbversion.tar.gz not found. Downloading.$(tput sgr0)"
+    		wget http://tools.netsa.cert.org/releases/libfixbuf-$lfbversion.tar.gz
       else
-        if ask "$(tput setaf 3)libfixbuf-1.6.0.tar.gz found. Remove original and download again?$(tput sgr0)"; then
+        if ask "$(tput setaf 3)libfixbuf-$lfbversion.tar.gz found. Remove original and download again?$(tput sgr0)"; then
             echo
-            rm libfixbuf-1.6.0.tar.gz
-            wget http://tools.netsa.cert.org/releases/libfixbuf-1.6.0.tar.gz
+            rm libfixbuf-$lfbversion.tar.gz
+            wget http://tools.netsa.cert.org/releases/libfixbuf-$lfbversion.tar.gz
         fi
 	fi
-	if [ ! -f yaf-2.6.0.tar.gz ]; then
-    		echo -e "$(tput setaf 6)yaf-2.6.0.tar.gz not found. Downloading.$(tput sgr0)"
-    		wget http://tools.netsa.cert.org/releases/yaf-2.6.0.tar.gz
+	if [ ! -f yaf-$yafversion.tar.gz ]; then
+    		echo -e "$(tput setaf 6)yaf-$yafversion.tar.gz not found. Downloading.$(tput sgr0)"
+    		wget http://tools.netsa.cert.org/releases/yaf-$yafversion.tar.gz
       else
-          if ask "$(tput setaf 3)yaf-2.6.0.tar.gz found. Remove original and download again?$(tput sgr0)"; then
+          if ask "$(tput setaf 3)yaf-$yafversion.tar.gz found. Remove original and download again?$(tput sgr0)"; then
               echo
-              rm yaf-2.6.0.tar.gz
-              wget http://tools.netsa.cert.org/releases/yaf-2.6.0.tar.gz
+              rm yaf-$yafversion.tar.gz
+              wget http://tools.netsa.cert.org/releases/yaf-$yafversion.tar.gz
           fi
 	fi
-	if [ ! -f silk-3.9.0.tar.gz ]; then
-    		echo -e "$(tput setaf 6)silk-3.9.0.tar.gz not found. Downloading.$(tput sgr0)"
-    		wget http://tools.netsa.cert.org/releases/silk-3.9.0.tar.gz
+	if [ ! -f silk-$silkversion.tar.gz ]; then
+    		echo -e "$(tput setaf 6)silk-$silkversion.tar.gz not found. Downloading.$(tput sgr0)"
+    		wget http://tools.netsa.cert.org/releases/silk-$silkversion.tar.gz
       else
-            if ask "$(tput setaf 3)silk-3.9.0.tar.gz found. Remove original and download again?$(tput sgr0)"; then
+            if ask "$(tput setaf 3)silk-$silkversion.tar.gz found. Remove original and download again?$(tput sgr0)"; then
                 echo
-                rm silk-3.9.0.tar.gz
-                wget http://tools.netsa.cert.org/releases/silk-3.9.0.tar.gz
+                rm silk-$silkversion.tar.gz
+                wget http://tools.netsa.cert.org/releases/silk-$silkversion.tar.gz
             fi
 	fi
-	tar zxvf libfixbuf-1.6.0.tar.gz
-	tar zxvf yaf-2.6.0.tar.gz
-	tar zxvf silk-3.9.0.tar.gz
+	tar zxvf libfixbuf-$lfbversion.tar.gz
+	tar zxvf yaf-$yafversion.tar.gz
+	tar zxvf silk-$silkversion.tar.gz
 
 	# Install Libfixbuf
   echo -e "$(tput setaf 6)Building libfixbuf...$(tput sgr0)"
-	cd libfixbuf-1.6.0/
+	cd libfixbuf-$lfbversion/
 	./configure
 	make
 	sudo make install
 
 	# Install YAF
   echo -e "$(tput setaf 6)Building YAF...$(tput sgr0)"
-	cd ../yaf-2.6.0/
+	cd ../yaf-$yafversion/
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 	./configure --enable-applabel
 	make
@@ -146,15 +176,15 @@ if which rwp2yaf2silk > /dev/null; then
 	# Create Data Directory and Install SiLK
 	sudo mkdir /data
 	echo -e "$(tput setaf 6)Building SiLK...$(tput sgr0)"
-  cd ../silk-3.9.0/
+  cd ../silk-$silkversion/
 	./configure --with-libfixbuf=/usr/local/lib/pkgconfig/ --with-python
 	make
 	sudo make install
 
   echo "$(tput setaf 6)Cleaning up tar files...$(tput sgr0)"
-  rm ../libfixbuf-1.6.0.tar.gz
-  rm ../yaf-2.6.0.tar.gz
-  rm ../silk-3.9.0.tar.gz
+  rm ../libfixbuf-$lfbversion.tar.gz
+  rm ../yaf-$yafversion.tar.gz
+  rm ../silk-$silkversion.tar.gz
 
 	# Configure SiLK
   cat > silk.conf << "EOF"
@@ -196,26 +226,7 @@ EOF
 	sudo mv rwflowpack.conf /usr/local/etc/
 
 fi
-
-if grep -q 'rwflowpack' /etc/rc.local; then
-        echo "$(tput setaf 2)It appears you already have flow collection enabled at boot.$(tput sgr0)"
-        if ask "$(tput setaf 3)Do you wish to skip putting in redundant commands in /etc/rc.local? Saying no to this question could result in duplicate entries in /etc/rc.local.(tput sgr0)"; then
-                sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
-                sudo sed -i "$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 \&\nexit 0," /etc/rc.local
-        else
-                exit 0
-        fi
-      else
-        if ask "$(tput setaf 3)Do you wish to setup flow collection on boot?$(tput sgr0)"; then
-              onBoot=$(echo "---YAF and rwflowpack start on boot")
-              sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
-              sudo sed -i "$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 \&\nexit 0," /etc/rc.local
-        else
-              exit 0
-        fi
-fi
-
-if ask "$(tput setaf 3)Would you like to go ahead and start collecting data now?$(tput sgr0)"; then
+if [ ! -z "$silkstartnow" ]; then
   startNow=$(echo "---Collection Interface = $interface")
   sudo /usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack
   sudo nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 &
@@ -230,3 +241,4 @@ echo -e "$(tput setaf 2)$onBoot\n$startNow\n$rwflowpackstatus\n$yafstatus$(tput 
 echo
 echo -e "$(tput setaf 2)Config files\n---/data/silk.conf\n---/data/sensors.conf\n---root-directory=/data/$(tput sgr0)"
 exit 0
+

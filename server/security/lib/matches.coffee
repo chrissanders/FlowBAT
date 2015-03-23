@@ -21,6 +21,11 @@ Match.App =
     unless share.IPSets.findOne(value)
       throw new Match.Error("IP Set with ID \"" + value + "\" doesn't exist")
     true
+  TupleId: Match.Where (value) ->
+    check(value, Match.App.Id)
+    unless share.Tuples.findOne(value)
+      throw new Match.Error("Tuple file with ID \"" + value + "\" doesn't exist")
+    true
   isNewUpdate: (oldValue) ->
     Match.Where (value) ->
       check(value, Boolean)

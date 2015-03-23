@@ -35,3 +35,10 @@ template(name="controlsForTheHeartOfTheSun")
         button.set-property.btn.btn-default(class="{{#if condition interface 'is' 'builder'}}active{{/if}} {{#if ../isDashboard}}btn-xs{{/if}}", data-property="interface", data-value="builder", type="button")
           i.fa.fa-cog
           | Query builder
+    | &nbsp;
+    if not ../isDashboard
+      if isQuick
+        .btn-group
+          button.set-property.btn.btn-default(class="{{#if ../isDashboard}}btn-xs{{/if}}", data-property="isQuick", data-type="boolean", data-value="false", type="button")
+            i.fa.fa-save
+            | Save as regular query

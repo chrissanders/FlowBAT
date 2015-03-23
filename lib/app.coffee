@@ -49,6 +49,7 @@ share.rwcountFields = [
   "Packets"
 ]
 share.rwcountLoadSchemes = [
+  ""
   "bin-uniform"
   "start-spike"
   "end-spike"
@@ -56,6 +57,12 @@ share.rwcountLoadSchemes = [
   "time-proportional"
   "maximum-volume"
   "minimum-volume"
+]
+share.tupleDirections = [
+  ""
+  "both"
+  "forward"
+  "reverse"
 ]
 share.availableChartTypes =
   "rwcut": []
@@ -114,6 +121,14 @@ share.inputFields = [
   "sipSet"
   "anySetEnabled"
   "anySet"
+  "tupleFileEnabled"
+  "tupleFile"
+  "tupleDirectionEnabled"
+  "tupleDirection"
+  "tupleDelimiterEnabled"
+  "tupleDelimiter"
+  "tupleFieldsEnabled"
+  "tupleFields"
   "dportEnabled"
   "dport"
   "sportEnabled"
@@ -137,7 +152,7 @@ share.inputFields = [
 ]
 
 share.filterOptions = (options, additionalPermittedCharacters = "") ->
-  for excludedOption in ["--python-expr", "--python-file", "--pmap", "--dynamic-library", "--tuple-file", "--tuple-fields", "--tuple-direction", "--tuple-delimiter", "--all-destination", "--fail-destination", "--pass-destination", "--print-statistics", "--print-volume-statistics", "--xargs"]
+  for excludedOption in ["--python-expr", "--python-file", "--pmap", "--dynamic-library", "--all-destination", "--fail-destination", "--pass-destination", "--print-statistics", "--print-volume-statistics", "--xargs"]
     regexp = new RegExp(excludedOption + "=?[^\\s]*", "gi")
     options = options.replace(regexp, "")
   filter = new RegExp("[^\\s\\=\\-\\/\\,\\.\\:0-9a-z" + additionalPermittedCharacters + "]", "gi")

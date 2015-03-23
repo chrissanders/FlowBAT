@@ -94,6 +94,10 @@ share.rwfilterAutocompleteOptions = [
   "--stype"
   "--syn-flag"
   "--tcp-flags"
+  "--tuple-file"
+  "--tuple-delimiter"
+  "--tuple-direction"
+  "--tuple-fields"
   "--urg-flag"
 ]
 

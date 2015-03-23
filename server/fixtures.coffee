@@ -30,6 +30,7 @@ share.loadFixturesForCompleteSetup = ->
       identityFile: ""
       siteConfigFile: "/usr/local/etc/silk.conf"
       dataRootdir: "/data"
+      dataTempdir: "/tmp"
   insertData(configs, share.Configs)
 
   users =

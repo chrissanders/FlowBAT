@@ -1,0 +1,19 @@
+template(name="tupleCreate")
+  .container-fluid.tuple-default.tuple-create
+    .row
+      .col-xs-12
+        with tuple
+          form.panel.panel-default
+            .panel-heading
+              .form-group
+                label Tuple file name
+                +input(family="tuple" _id=_id property="name" value=name isNew=isNew)
+            .panel-body
+              .form-group
+                label Note
+                +textarea(family="tuple" _id=_id property="note" value=note isNew=isNew)
+              .form-group
+                label Tuple Values
+                +textarea(family="tuple" _id=_id property="contents" value=contents isNew=isNew)
+              .form-group
+                button.btn.btn-primary(type="submit") Create

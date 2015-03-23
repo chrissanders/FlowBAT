@@ -7,3 +7,5 @@ template(name="layout")
   if currentUser
     +yield(region="header")
   +yield
+  if currentUser
+    +yield(region="footer")

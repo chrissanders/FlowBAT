@@ -2,7 +2,6 @@ template(name="queryList")
   .container-fluid.query-list.object-list
     .row
       .col-xs-12.col-md-6
-        h1.leader Saved Queries
         .panel.panel-default.panel-alt.widget-messaging
           if queries.count
             .panel-body
@@ -11,9 +10,9 @@ template(name="queryList")
                   li
                     a(href=path)
                       h4.sender {{displayName}}
-                      if inputCommand
-                        code.query-display $ {{inputCommand}}
-                        code.query-display $ {{outputCommand null currentUser.profile}}
+                      if inputCommand currentConfig currentUser.profile true
+                        code.query-display $ {{inputCommand currentConfig currentUser.profile true}}
+                        code.query-display $ {{outputCommand currentConfig currentUser.profile true}}
                       else
                         code.query-display No parameters specified
           .panel-footer

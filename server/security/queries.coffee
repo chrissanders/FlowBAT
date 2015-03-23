@@ -32,6 +32,14 @@ share.Queries.allow
       sipSet: Match.OneOf(null, Match.App.IPSetId)
       anySetEnabled: Boolean
       anySet: Match.OneOf(null, Match.App.IPSetId)
+      tupleFileEnabled: Boolean
+      tupleFile: Match.OneOf(null, Match.App.TupleId)
+      tupleDirectionEnabled: Boolean
+      tupleDirection: String
+      tupleDelimiterEnabled: Boolean
+      tupleDelimiter: String
+      tupleFieldsEnabled: Boolean
+      tupleFields: String
       dportEnabled: Boolean
       dport: String
       sportEnabled: Boolean
@@ -130,6 +138,14 @@ share.Queries.allow
       sipSet: Match.Optional(Match.OneOf(null, Match.App.IPSetId))
       anySetEnabled: Match.Optional(Boolean)
       anySet: Match.Optional(Match.OneOf(null, Match.App.IPSetId))
+      tupleFileEnabled: Match.Optional(Boolean)
+      tupleFile: Match.Optional(Match.OneOf(null, Match.App.TupleId))
+      tupleDirectionEnabled: Match.Optional(Boolean)
+      tupleDirection: Match.Optional(String)
+      tupleDelimiterEnabled: Match.Optional(Boolean)
+      tupleDelimiter: Match.Optional(String)
+      tupleFieldsEnabled: Match.Optional(Boolean)
+      tupleFields: Match.Optional(String)
       dportEnabled: Match.Optional(Boolean)
       dport: Match.Optional(String)
       sportEnabled: Match.Optional(Boolean)

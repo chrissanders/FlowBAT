@@ -7,6 +7,14 @@ Template.fieldsets.helpers
         value: ipset._id
       }
     })
+  tuples: ->
+    share.Tuples.find({}, {sort: {createdAt: 1}, transform: (tuple) ->
+      tuple = share.Transformations.tuple(tuple)
+      {
+        name: tuple.displayName()
+        value: tuple._id
+      }
+    })
   typesOptions: ->
     for type in share.queryTypes
       {
@@ -21,8 +29,16 @@ Template.fieldsets.helpers
     options = []
     for loadScheme, index in share.rwcountLoadSchemes
       options.push(
-        value: index
+        value: loadScheme
         name: loadScheme
+      )
+    options
+  tupleDirectionOptions: ->
+    options = []
+    for tupleDirection, index in share.tupleDirections
+      options.push(
+        value: tupleDirection
+        name: tupleDirection
       )
     options
   startDateOffsets: ->

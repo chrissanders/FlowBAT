@@ -22,7 +22,7 @@ Template.results.rendered = ->
 Template.results.events
   "submit .options-form": grab encapsulate (event, template) ->
     template.$(".execute").blur()
-    $set = _.extend({isInputStale: true, isOutputStale: true}, share.queryResetValues)
+    $set = _.extend({isInputStale: true, isOutputStale: true}, share.queryBlankValues, share.queryResetValues)
     share.Queries.update(template.data._id, {$set: $set})
   "click .set-executing-interval": grab (event, template) ->
     $target = $(event.currentTarget)
@@ -33,7 +33,15 @@ Template.results.events
   "click .set-property": grab encapsulate (event, template) ->
     $target = $(event.currentTarget)
     editor = share.EditorCache.editors["query"]
-    editor.saveProperty(template.data._id, $target.attr("data-property"), $target.attr("data-value"))
+    value = $target.attr("data-value")
+    type = $target.attr("data-type")
+    switch type
+      when "boolean"
+        value = true if value is "true" # thanks, Cap!
+        value = false if value is "false" # thanks again, Cap!
+        if typeof value isnt "boolean" # unexpected...
+          throw "#{value} is not a boolean"
+    editor.saveProperty(template.data._id, $target.attr("data-property"), value)
   "click .toggle-is-utc": grab encapsulate (event, template) ->
     event.currentTarget.blur()
     share.Queries.update(template.data._id, {$set: {isUTC: not @isUTC}})

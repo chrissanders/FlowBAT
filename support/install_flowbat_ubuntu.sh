@@ -1,5 +1,8 @@
 #!/bin/bash
 
+exec >  >(tee -a flowbatinstall.log)
+exec 2> >(tee -a flowbatinstall.log >&2)
+
 workingDir=$PWD
 
 ask() {
@@ -58,6 +61,14 @@ if [ ! -d "$workingDir/FlowBAT/" ]; then
   else
 		exit 1
 	fi
+fi
+
+if [ ! -f /etc/init/flowbat.conf ]; then
+	if ask "$(tput setaf 3)Do you wish to have FlowBAT start on boot in the background?$(tput sgr0)"; then
+      startonboot=$(echo "yes")
+		else
+			echo "$(tput setaf 2)For future reference, after installation move flowbat.conf to /etc/init/ if you would like to have FlowBAT start on boot.$(tput sgr0)".
+		fi
 fi
 
 echo "$(tput setaf 6)Checking installed packages...$(tput sgr0)"
@@ -138,12 +149,10 @@ EOF
 
 sed -i 's/testtest/\"$@"/g' flowbat.conf
 
-if [ ! -f /etc/init/flowbat.conf ]; then
-	if ask "$(tput setaf 3)Do you wish to have FlowBAT start on boot in the background?$(tput sgr0)"; then
-      sudo cp flowbat.conf /etc/init/
-		else
-			echo "$(tput setaf 2)For future reference, move flowbat.conf to /etc/init/ if you would like to have FlowBAT start on boot.$(tput sgr0)".
-		fi
+if [ ! -z "$startonboot" ]; then
+  sudo cp flowbat.conf /etc/init/
+else
+	echo "$(tput setaf 2)You chose to not run FlowBAT at boot. For future reference, move flowbat.conf to /etc/init/ if you would like to have FlowBAT start on boot.$(tput sgr0)".
 fi
 
 sudo chown -R "$USER":"$USER" $workingDir/FlowBAT/
@@ -158,3 +167,4 @@ echo -e "$(tput sgr0)"
 echo "$(tput setaf 2)Attempting startup. This may take a few minutes if it is the first time. Press ctrl+c to stop FlowBAT after the application says it is running or proceed to 127.0.0.1:1800 in a browser.$(tput sgr0)"
 
 meteor --port 1800 run --settings settings/dev.json "$@"
+
