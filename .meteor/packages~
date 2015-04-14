@@ -4,13 +4,15 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-iron:router
+iron-router
 coffeescript
 stylus
-mquandalle:jade
-matb33:collection-hooks
-accounts-password
-meteorhacks:fast-render
-cmather:handlebars-server
-email
+jade
 jquery
+underscore
+npm-packages
+collection-hooks
+accounts-password
+fast-render
+handlebars-server
+email

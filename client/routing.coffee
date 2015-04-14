@@ -6,21 +6,23 @@ Router.configure
     navbar: {to: "header"}
     footer: {to: "footer"}
 
-Router.onBeforeAction((pause) ->
+Router.onBeforeAction(() ->
   if not Meteor.user()
     config = share.Configs.findOne()
     if config and not config.isSetupComplete
       @render("setupAdminAccount")
     else
       @render("welcome")
-    pause()
+  else
+    @next()
 , {except: []})
 
-Router.onBeforeAction((pause) ->
+Router.onBeforeAction(() ->
   config = share.Configs.findOne()
   if config and not config.isSetupComplete
     @render("setupConfig")
-    pause()
+  else
+    @next()
 , except: ["setup"])
 
 Router.onBeforeAction("dataNotFound")
@@ -47,12 +49,11 @@ Router.map ->
       if not query
         return null
       _.defaults({}, @params,
-        query: query
+        queryObject: query
       )
     onStop: ->
-      data = @data()
-      if data?.query?.isQuick
-        share.Queries.remove(data.query._id)
+      if data?.queryObject?.isQuick
+        share.Queries.remove(data.queryObject._id)
   @route "removeQuery",
     path: "/query/:_id/remove"
     data: -> {}
@@ -146,7 +147,7 @@ Router.map ->
       if Meteor.users.findOne()
         @render("config")
 
-Router.onBeforeAction (pause) ->
+Router.onBeforeAction () ->
   if Accounts._resetPasswordToken
     UI.insert(UI.renderWithData(Template.alert,
       name: i18n.t("forms.login.passwordReset.alert.name")
@@ -156,6 +157,7 @@ Router.onBeforeAction (pause) ->
       buttonPanelTemplateData: {token: Accounts._resetPasswordToken}
     ), document.body)
     delete Accounts._resetPasswordToken
+  @next()
 
 share.setPageTitle = (title, appendSiteName = true) ->
   if appendSiteName
