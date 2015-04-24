@@ -23,7 +23,8 @@ share.initAutocomplete = ($element, options, values = {}, optionsWithoutValues =
         terms.push(optvalue[0] + "=" + valueSplinters.join(","))
       else
         terms.push(ui.item.value + (if ui.item.value in optionsWithoutValues then " " else "="))
-      @value = terms.join(" ")
+      newValue = terms.join(" ")
+      @value = newValue
       false
     autoFocus: ->
       true
