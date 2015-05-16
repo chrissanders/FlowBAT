@@ -1,22 +1,17 @@
-Template.chosen.helpers
+Template.select.helpers
   placeholder: ->
     @placeholder or i18n.t(@placeholderI18n)
   disabled: ->
     not (if _.isBoolean(@enabled) then @enabled else true)
   optionSelected: (context) ->
-    share.debouncedChosenUpdated()
     if context.multiple
       @value in context.value
     else
       @value is context.value
 
-Template.chosen.onRendered ->
+Template.select.onRendered ->
   editor = @firstNode
   $editor = $(editor)
-  options =
-    allow_single_deselect: @data.withEmptyOption
-  _.defer ->
-    $editor.chosen(options)
 #  editor = share.EditorCache.editors[@data.family]
 #  if editor.isEditedProperty(@data._id, @data.property)
 #    $activeElement = $(document.activeElement)
@@ -26,7 +21,7 @@ Template.chosen.onRendered ->
 #      else
 #        $editor.focusToEnd()
 
-Template.chosen.events
+Template.select.events
   "change .property-editor": encapsulate (event, template) ->
     $set = {}
     value = $(event.currentTarget).val()
@@ -38,7 +33,3 @@ Template.chosen.events
     $set[template.data.property] = value
     editor = share.EditorCache.editors[template.data.family]
     editor.collection.update(template.data._id, {$set: $set})
-
-share.debouncedChosenUpdated = _.debounce(->
-  $("select").trigger("chosen:updated")
-, 200)

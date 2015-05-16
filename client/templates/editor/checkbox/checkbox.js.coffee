@@ -1,6 +1,6 @@
 Template.checkbox.helpers
 
-Template.checkbox.rendered = ->
+Template.checkbox.onRendered ->
 
 Template.checkbox.events
   "change .property-editor": encapsulate (event, template) ->

@@ -9,7 +9,7 @@ Template.objectSelect.helpers
     else
       @objectSelectValue() is context.value
 
-Template.objectSelect.rendered = ->
+Template.objectSelect.onRendered ->
 
 Template.objectSelect.events
   "change .property-editor": encapsulate (event, template) ->

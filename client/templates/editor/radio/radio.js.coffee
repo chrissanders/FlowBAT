@@ -2,7 +2,7 @@ Template.radio.helpers
   isChecked: ->
     @object[@property] is @value
 
-Template.radio.rendered = ->
+Template.radio.onRendered ->
 
 Template.radio.events
   "change .property-editor": encapsulate (event, template) ->

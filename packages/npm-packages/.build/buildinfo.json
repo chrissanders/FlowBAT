@@ -1,0 +1,40 @@
+{
+  "builtBy": "meteor/10",
+  "sliceDependencies": {
+    "browser.json": {
+      "files": {
+        "/home/jason/FlowBAT/packages/npm-packages/package.js": "32e5675f4a52ffecc8afb47442ceccdb4cf9c516"
+      },
+      "directories": []
+    },
+    "os.json": {
+      "files": {
+        "/home/jason/FlowBAT/packages/npm-packages/package.js": "32e5675f4a52ffecc8afb47442ceccdb4cf9c516"
+      },
+      "directories": []
+    },
+    "tests.browser.json": {
+      "files": {
+        "/home/jason/FlowBAT/packages/npm-packages/package.js": "32e5675f4a52ffecc8afb47442ceccdb4cf9c516"
+      },
+      "directories": []
+    },
+    "tests.os.json": {
+      "files": {
+        "/home/jason/FlowBAT/packages/npm-packages/package.js": "32e5675f4a52ffecc8afb47442ceccdb4cf9c516"
+      },
+      "directories": []
+    }
+  },
+  "pluginDependencies": {
+    "files": {
+      "/home/jason/FlowBAT/packages/npm-packages/package.js": "32e5675f4a52ffecc8afb47442ceccdb4cf9c516"
+    },
+    "directories": []
+  },
+  "pluginProviderPackages": {
+    "npm-packages": "/home/jason/FlowBAT/packages/npm-packages",
+    "meteor": "/home/jason/.meteor/packages/meteor/144d60bec6"
+  },
+  "source": "/home/jason/FlowBAT/packages/npm-packages"
+}
