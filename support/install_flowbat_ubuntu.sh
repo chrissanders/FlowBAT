@@ -132,9 +132,9 @@ if ! which meteor > /dev/null; then
 fi
 
 #Arranging for localhost configuration
-cat $workingDir/FlowBAT/bundle/settings/prod.sample.json |  sed 's/flowbat.com/127.0.0.1:1800/' | sed 's/mailUrl.*/mailUrl": "",/' > $workingDir/FlowBAT/bundle/settings/dev.json
+cat $workingDir/FlowBAT/private/bundle/settings/prod.sample.json |  sed 's/flowbat.com/127.0.0.1:1800/' | sed 's/mailUrl.*/mailUrl": "",/' > $workingDir/FlowBAT/private/bundle/settings/dev.json
 
-(cd $workingDir/FlowBAT/bundle/programs/server && npm install)
+(cd $workingDir/FlowBAT/private/bundle/programs/server && npm install)
 
 #Generating upstart configuration for FlowBAT
 cat <<EOF > $workingDir/FlowBAT/flowbat.conf
@@ -163,8 +163,8 @@ script
     export PORT=1800
     export MONGO_URL=mongodb://localhost:27017/flowbat
     export ROOT_URL=http://127.0.0.1
-    export METEOR_SETTINGS='`cat $workingDir/FlowBAT/bundle/settings/dev.json`'
-    exec node $workingDir/FlowBAT/bundle/main.js >> $workingDir/FlowBAT/flowbat.log
+    export METEOR_SETTINGS='`cat $workingDir/FlowBAT/private/bundle/settings/dev.json`'
+    exec node $workingDir/FlowBAT/private/bundle/main.js >> $workingDir/FlowBAT/flowbat.log
 end script
 EOF
 
@@ -182,8 +182,8 @@ else
   echo "export PORT=1800"
   echo "export MONGO_URL=mongodb://localhost:27017/flowbat"
   echo "export ROOT_URL=http://127.0.0.1"
-  echo "export METEOR_SETTINGS=\`cat $workingDir/FlowBAT/bundle/settings/dev.json\`"
-  echo "node $workingDir/FlowBAT/bundle/main.js"
+  echo "export METEOR_SETTINGS=\`cat $workingDir/FlowBAT/private/bundle/settings/dev.json\`"
+  echo "node $workingDir/FlowBAT/private/bundle/main.js"
   echo -e "$(tput sgr0)"
 
 fi
@@ -195,6 +195,6 @@ echo "$(tput setaf 2)Attempting startup. Check http://127.0.0.1:1800. $(tput sgr
 export PORT=1800
 export MONGO_URL=mongodb://localhost:27017/flowbat
 export ROOT_URL=http://127.0.0.1
-export METEOR_SETTINGS=`cat $workingDir/FlowBAT/bundle/settings/dev.json`
-node $workingDir/FlowBAT/bundle/main.js &
+export METEOR_SETTINGS=`cat $workingDir/FlowBAT/private/bundle/settings/dev.json`
+node $workingDir/FlowBAT/private/bundle/main.js &
 
