@@ -88,10 +88,13 @@ fi
 
 if [ ! -f /etc/init/flowbat.conf ]; then
 	if ask "$(tput setaf 3)Do you wish to have FlowBAT start on boot in the background?$(tput sgr0)"; then
-      startonboot=$(echo "yes")
+      		startonboot=$(echo "yes")
 		else
 			echo "$(tput setaf 2)For future reference, after installation move flowbat.conf to /etc/init/ if you would like to have FlowBAT start on boot.$(tput sgr0)".
 		fi
+	else
+		sudo rm /etc/init/flowbat.conf
+		startonboot=$(echo "yes")
 fi
 
 echo "$(tput setaf 6)Checking installed packages...$(tput sgr0)"
