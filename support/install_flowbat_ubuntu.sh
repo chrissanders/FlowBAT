@@ -1,8 +1,9 @@
 #!/bin/bash
 
-exec >  >(tee -a flowbatinstall.log)
-exec 2> >(tee -a flowbatinstall.log >&2)
-
+exec > >(tee -a logfile.txt) 
+trap "kill -9 $! 2>/dev/null" EXIT 
+exec 2> >(tee -a logfile.txt >&2) 
+trap "kill -9 $! 2>/dev/null" EXIT
 workingDir=$PWD
 
 ask() {
