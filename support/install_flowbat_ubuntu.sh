@@ -200,5 +200,6 @@ export PORT=1800
 export MONGO_URL=mongodb://localhost:27017/flowbat
 export ROOT_URL=http://127.0.0.1
 export METEOR_SETTINGS=`cat $workingDir/FlowBAT/private/bundle/settings/dev.json`
-node $workingDir/FlowBAT/private/bundle/main.js &
+sudo service flowbat start
+#node $workingDir/FlowBAT/private/bundle/main.js &
 
