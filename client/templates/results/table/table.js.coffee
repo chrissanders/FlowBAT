@@ -377,6 +377,516 @@ Template.table.helpers
     else if @value is "65533"
       i18n.t("Palevo" + " (" + @value + ")")
     else i18n.t(@value)
+  ccname: ->
+    if @value is "a1"
+      i18n.t("Anonymous Proxy")
+    else if @value is "a2"
+      i18n.t("Satellite Provider")
+    else if @value is "o1"
+      i18n.t("Other Country")
+    else if @value is "ad"
+      i18n.t("Andorra")
+    else if @value is "ae"
+      i18n.t("United Arab Emirates")
+    else if @value is "af"
+      i18n.t("Afghanistan")
+    else if @value is "ag"
+      i18n.t("Antigua and Barbuda")
+    else if @value is "ai"
+      i18n.t("Anguilla")
+    else if @value is "al"
+      i18n.t("Albania")
+    else if @value is "am"
+      i18n.t("Armenia")
+    else if @value is "ao"
+      i18n.t("Angola")
+    else if @value is "ap"
+      i18n.t("Asia/Pacific Region")
+    else if @value is "aq"
+      i18n.t("Antarctica")
+    else if @value is "ar"
+      i18n.t("Argentina")
+    else if @value is "as"
+      i18n.t("American Samoa")
+    else if @value is "at"
+      i18n.t("Austria")
+    else if @value is "au"
+      i18n.t("Australia")
+    else if @value is "aw"
+      i18n.t("Aruba")
+    else if @value is "ax"
+      i18n.t("Aland Islands")
+    else if @value is "az"
+      i18n.t("Azerbaijan")
+    else if @value is "ba"
+      i18n.t("Bosnia and Herzegovina")
+    else if @value is "bb"
+      i18n.t("Barbados")
+    else if @value is "bd"
+      i18n.t("Bangladesh")
+    else if @value is "be"
+      i18n.t("Belgium")
+    else if @value is "bf"
+      i18n.t("Burkina Faso")
+    else if @value is "bg"
+      i18n.t("Bulgaria")
+    else if @value is "bh"
+      i18n.t("Bahrain")
+    else if @value is "bi"
+      i18n.t("Burundi")
+    else if @value is "bj"
+      i18n.t("Benin")
+    else if @value is "bl"
+      i18n.t("Saint Bartelemey")
+    else if @value is "bm"
+      i18n.t("Bermuda")
+    else if @value is "bn"
+      i18n.t("Brunei Darussalam")
+    else if @value is "bo"
+      i18n.t("Bolivia")
+    else if @value is "bq"
+      i18n.t("Bonaire, Saint Eustatius and Saba")
+    else if @value is "br"
+      i18n.t("Brazil")
+    else if @value is "bs"
+      i18n.t("Bahamas")
+    else if @value is "bt"
+      i18n.t("Bhutan")
+    else if @value is "bv"
+      i18n.t("Bouvet Island")
+    else if @value is "bw"
+      i18n.t("Botswana")
+    else if @value is "by"
+      i18n.t("Belarus")
+    else if @value is "bz"
+      i18n.t("Belize")
+    else if @value is "ca"
+      i18n.t("Canada")
+    else if @value is "cc"
+      i18n.t("Cocos (Keeling) Islands")
+    else if @value is "cd"
+      i18n.t("Congo, The Democratic Republic of the")
+    else if @value is "cf"
+      i18n.t("Central African Republic")
+    else if @value is "cg"
+      i18n.t("Congo")
+    else if @value is "ch"
+      i18n.t("Switzerland")
+    else if @value is "ci"
+      i18n.t("Cote d'Ivoire")
+    else if @value is "ck"
+      i18n.t("Cook Islands")
+    else if @value is "cl"
+      i18n.t("Chile")
+    else if @value is "cm"
+      i18n.t("Cameroon")
+    else if @value is "cn"
+      i18n.t("China")
+    else if @value is "co"
+      i18n.t("Colombia")
+    else if @value is "cr"
+      i18n.t("Costa Rica")
+    else if @value is "cu"
+      i18n.t("Cuba")
+    else if @value is "cv"
+      i18n.t("Cape Verde")
+    else if @value is "cw"
+      i18n.t("Curacao")
+    else if @value is "cx"
+      i18n.t("Christmas Island")
+    else if @value is "cy"
+      i18n.t("Cyprus")
+    else if @value is "cz"
+      i18n.t("Czech Republic")
+    else if @value is "de"
+      i18n.t("Germany")
+    else if @value is "dj"
+      i18n.t("Djibouti")
+    else if @value is "dk"
+      i18n.t("Denmark")
+    else if @value is "dm"
+      i18n.t("Dominica")
+    else if @value is "do"
+      i18n.t("Dominican Republic")
+    else if @value is "dz"
+      i18n.t("Algeria")
+    else if @value is "ec"
+      i18n.t("Ecuador")
+    else if @value is "ee"
+      i18n.t("Estonia")
+    else if @value is "eg"
+      i18n.t("Egypt")
+    else if @value is "eh"
+      i18n.t("Western Sahara")
+    else if @value is "er"
+      i18n.t("Eritrea")
+    else if @value is "es"
+      i18n.t("Spain")
+    else if @value is "et"
+      i18n.t("Ethiopia")
+    else if @value is "eu"
+      i18n.t("Europe")
+    else if @value is "fi"
+      i18n.t("Finland")
+    else if @value is "fj"
+      i18n.t("Fiji")
+    else if @value is "fk"
+      i18n.t("Falkland Islands (Malvinas)")
+    else if @value is "fm"
+      i18n.t("Micronesia, Federated States of")
+    else if @value is "fo"
+      i18n.t("Faroe Islands")
+    else if @value is "fr"
+      i18n.t("France")
+    else if @value is "ga"
+      i18n.t("Gabon")
+    else if @value is "gb"
+      i18n.t("United Kingdom")
+    else if @value is "gd"
+      i18n.t("Grenada")
+    else if @value is "ge"
+      i18n.t("Georgia")
+    else if @value is "gf"
+      i18n.t("French Guiana")
+    else if @value is "gg"
+      i18n.t("Guernsey")
+    else if @value is "gh"
+      i18n.t("Ghana")
+    else if @value is "gi"
+      i18n.t("Gibraltar")
+    else if @value is "gl"
+      i18n.t("Greenland")
+    else if @value is "gm"
+      i18n.t("Gambia")
+    else if @value is "gn"
+      i18n.t("Guinea")
+    else if @value is "gp"
+      i18n.t("Guadeloupe")
+    else if @value is "gq"
+      i18n.t("Equatorial Guinea")
+    else if @value is "gr"
+      i18n.t("Greece")
+    else if @value is "gs"
+      i18n.t("South Georgia and the South Sandwich Islands")
+    else if @value is "gt"
+      i18n.t("Guatemala")
+    else if @value is "gu"
+      i18n.t("Guam")
+    else if @value is "gw"
+      i18n.t("Guinea-Bissau")
+    else if @value is "gy"
+      i18n.t("Guyana")
+    else if @value is "hk"
+      i18n.t("Hong Kong")
+    else if @value is "hm"
+      i18n.t("Heard Island and McDonald Islands")
+    else if @value is "hn"
+      i18n.t("Honduras")
+    else if @value is "hr"
+      i18n.t("Croatia")
+    else if @value is "ht"
+      i18n.t("Haiti")
+    else if @value is "hu"
+      i18n.t("Hungary")
+    else if @value is "id"
+      i18n.t("Indonesia")
+    else if @value is "ie"
+      i18n.t("Ireland")
+    else if @value is "il"
+      i18n.t("Israel")
+    else if @value is "im"
+      i18n.t("Isle of Man")
+    else if @value is "in"
+      i18n.t("India")
+    else if @value is "io"
+      i18n.t("British Indian Ocean Territory")
+    else if @value is "iq"
+      i18n.t("Iraq")
+    else if @value is "ir"
+      i18n.t("Iran, Islamic Republic of")
+    else if @value is "is"
+      i18n.t("Iceland")
+    else if @value is "it"
+      i18n.t("Italy")
+    else if @value is "je"
+      i18n.t("Jersey")
+    else if @value is "jm"
+      i18n.t("Jamaica")
+    else if @value is "jo"
+      i18n.t("Jordan")
+    else if @value is "jp"
+      i18n.t("Japan")
+    else if @value is "ke"
+      i18n.t("Kenya")
+    else if @value is "kg"
+      i18n.t("Kyrgyzstan")
+    else if @value is "kh"
+      i18n.t("Cambodia")
+    else if @value is "ki"
+      i18n.t("Kiribati")
+    else if @value is "km"
+      i18n.t("Comoros")
+    else if @value is "kn"
+      i18n.t("Saint Kitts and Nevis")
+    else if @value is "kp"
+      i18n.t("Korea, Democratic People's Republic of")
+    else if @value is "kr"
+      i18n.t("Korea, Republic of")
+    else if @value is "kw"
+      i18n.t("Kuwait")
+    else if @value is "ky"
+      i18n.t("Cayman Islands")
+    else if @value is "kz"
+      i18n.t("Kazakhstan")
+    else if @value is "la"
+      i18n.t("Lao People's Democratic Republic")
+    else if @value is "lb"
+      i18n.t("Lebanon")
+    else if @value is "lc"
+      i18n.t("Saint Lucia")
+    else if @value is "li"
+      i18n.t("Liechtenstein")
+    else if @value is "lk"
+      i18n.t("Sri Lanka")
+    else if @value is "lr"
+      i18n.t("Liberia")
+    else if @value is "ls"
+      i18n.t("Lesotho")
+    else if @value is "lt"
+      i18n.t("Lithuania")
+    else if @value is "lu"
+      i18n.t("Luxembourg")
+    else if @value is "lv"
+      i18n.t("Latvia")
+    else if @value is "ly"
+      i18n.t("Libyan Arab Jamahiriya")
+    else if @value is "ma"
+      i18n.t("Morocco")
+    else if @value is "mc"
+      i18n.t("Monaco")
+    else if @value is "md"
+      i18n.t("Moldova, Republic of")
+    else if @value is "me"
+      i18n.t("Montenegro")
+    else if @value is "mf"
+      i18n.t("Saint Martin")
+    else if @value is "mg"
+      i18n.t("Madagascar")
+    else if @value is "mh"
+      i18n.t("Marshall Islands")
+    else if @value is "mk"
+      i18n.t("Macedonia")
+    else if @value is "ml"
+      i18n.t("Mali")
+    else if @value is "mm"
+      i18n.t("Myanmar")
+    else if @value is "mn"
+      i18n.t("Mongolia")
+    else if @value is "mo"
+      i18n.t("Macao")
+    else if @value is "mp"
+      i18n.t("Northern Mariana Islands")
+    else if @value is "mq"
+      i18n.t("Martinique")
+    else if @value is "mr"
+      i18n.t("Mauritania")
+    else if @value is "ms"
+      i18n.t("Montserrat")
+    else if @value is "mt"
+      i18n.t("Malta")
+    else if @value is "mu"
+      i18n.t("Mauritius")
+    else if @value is "mv"
+      i18n.t("Maldives")
+    else if @value is "mw"
+      i18n.t("Malawi")
+    else if @value is "mx"
+      i18n.t("Mexico")
+    else if @value is "my"
+      i18n.t("Malaysia")
+    else if @value is "mz"
+      i18n.t("Mozambique")
+    else if @value is "na"
+      i18n.t("Namibia")
+    else if @value is "nc"
+      i18n.t("New Caledonia")
+    else if @value is "ne"
+      i18n.t("Niger")
+    else if @value is "nf"
+      i18n.t("Norfolk Island")
+    else if @value is "ng"
+      i18n.t("Nigeria")
+    else if @value is "ni"
+      i18n.t("Nicaragua")
+    else if @value is "nl"
+      i18n.t("Netherlands")
+    else if @value is "no"
+      i18n.t("Norway")
+    else if @value is "np"
+      i18n.t("Nepal")
+    else if @value is "nr"
+      i18n.t("Nauru")
+    else if @value is "nu"
+      i18n.t("Niue")
+    else if @value is "nz"
+      i18n.t("New Zealand")
+    else if @value is "om"
+      i18n.t("Oman")
+    else if @value is "pa"
+      i18n.t("Panama")
+    else if @value is "pe"
+      i18n.t("Peru")
+    else if @value is "pf"
+      i18n.t("French Polynesia")
+    else if @value is "pg"
+      i18n.t("Papua New Guinea")
+    else if @value is "ph"
+      i18n.t("Philippines")
+    else if @value is "pk"
+      i18n.t("Pakistan")
+    else if @value is "pl"
+      i18n.t("Poland")
+    else if @value is "pm"
+      i18n.t("Saint Pierre and Miquelon")
+    else if @value is "pn"
+      i18n.t("Pitcairn")
+    else if @value is "pr"
+      i18n.t("Puerto Rico")
+    else if @value is "ps"
+      i18n.t("Palestinian Territory")
+    else if @value is "pt"
+      i18n.t("Portugal")
+    else if @value is "pw"
+      i18n.t("Palau")
+    else if @value is "py"
+      i18n.t("Paraguay")
+    else if @value is "qa"
+      i18n.t("Qatar")
+    else if @value is "re"
+      i18n.t("Reunion")
+    else if @value is "ro"
+      i18n.t("Romania")
+    else if @value is "rs"
+      i18n.t("Serbia")
+    else if @value is "ru"
+      i18n.t("Russian Federation")
+    else if @value is "rw"
+      i18n.t("Rwanda")
+    else if @value is "sa"
+      i18n.t("Saudi Arabia")
+    else if @value is "sb"
+      i18n.t("Solomon Islands")
+    else if @value is "sc"
+      i18n.t("Seychelles")
+    else if @value is "sd"
+      i18n.t("Sudan")
+    else if @value is "se"
+      i18n.t("Sweden")
+    else if @value is "sg"
+      i18n.t("Singapore")
+    else if @value is "sh"
+      i18n.t("Saint Helena")
+    else if @value is "si"
+      i18n.t("Slovenia")
+    else if @value is "sj"
+      i18n.t("Svalbard and Jan Mayen")
+    else if @value is "sk"
+      i18n.t("Slovakia")
+    else if @value is "sl"
+      i18n.t("Sierra Leone")
+    else if @value is "sm"
+      i18n.t("San Marino")
+    else if @value is "sn"
+      i18n.t("Senegal")
+    else if @value is "so"
+      i18n.t("Somalia")
+    else if @value is "sr"
+      i18n.t("Suriname")
+    else if @value is "ss"
+      i18n.t("South Sudan")
+    else if @value is "st"
+      i18n.t("Sao Tome and Principe")
+    else if @value is "sv"
+      i18n.t("El Salvador")
+    else if @value is "sx"
+      i18n.t("Sint Maarten")
+    else if @value is "sy"
+      i18n.t("Syrian Arab Republic")
+    else if @value is "sz"
+      i18n.t("Swaziland")
+    else if @value is "tc"
+      i18n.t("Turks and Caicos Islands")
+    else if @value is "td"
+      i18n.t("Chad")
+    else if @value is "tf"
+      i18n.t("French Southern Territories")
+    else if @value is "tg"
+      i18n.t("Togo")
+    else if @value is "th"
+      i18n.t("Thailand")
+    else if @value is "tj"
+      i18n.t("Tajikistan")
+    else if @value is "tk"
+      i18n.t("Tokelau")
+    else if @value is "tl"
+      i18n.t("Timor-Leste")
+    else if @value is "tm"
+      i18n.t("Turkmenistan")
+    else if @value is "tn"
+      i18n.t("Tunisia")
+    else if @value is "to"
+      i18n.t("Tonga")
+    else if @value is "tr"
+      i18n.t("Turkey")
+    else if @value is "tt"
+      i18n.t("Trinidad and Tobago")
+    else if @value is "tv"
+      i18n.t("Tuvalu")
+    else if @value is "tw"
+      i18n.t("Taiwan")
+    else if @value is "tz"
+      i18n.t("Tanzania, United Republic of")
+    else if @value is "ua"
+      i18n.t("Ukraine")
+    else if @value is "ug"
+      i18n.t("Uganda")
+    else if @value is "um"
+      i18n.t("United States Minor Outlying Islands")
+    else if @value is "us"
+      i18n.t("United States")
+    else if @value is "uy"
+      i18n.t("Uruguay")
+    else if @value is "uz"
+      i18n.t("Uzbekistan")
+    else if @value is "va"
+      i18n.t("Holy See (Vatican City State)")
+    else if @value is "vc"
+      i18n.t("Saint Vincent and the Grenadines")
+    else if @value is "ve"
+      i18n.t("Venezuela")
+    else if @value is "vg"
+      i18n.t("Virgin Islands, British")
+    else if @value is "vi"
+      i18n.t("Virgin Islands, U.S.")
+    else if @value is "vn"
+      i18n.t("Vietnam")
+    else if @value is "vu"
+      i18n.t("Vanuatu")
+    else if @value is "wf"
+      i18n.t("Wallis and Futuna")
+    else if @value is "ws"
+      i18n.t("Samoa")
+    else if @value is "ye"
+      i18n.t("Yemen")
+    else if @value is "yt"
+      i18n.t("Mayotte")
+    else if @value is "za"
+      i18n.t("South Africa")
+    else if @value is "zm"
+      i18n.t("Zambia")
+    else if @value is "zw"
+      i18n.t("Zimbabwe")
+    else i18n.t(@value)
 Template.table.rendered = ->
   _id = @data._id
   if @data.output is "rwcut"
