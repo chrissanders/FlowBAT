@@ -36,6 +36,10 @@ template(name="table")
                   | {{ccname}}
                 else if condition _id "is" "dcc"
                   | {{ccname}}
+                else if condition _id "is" "bytes"
+                  | {{bytecalc}}
+                else if condition _id "is" "Bytes"
+                  | {{bytecalc}}
                 else
                   | {{value}}
               if isPivotable ../../output

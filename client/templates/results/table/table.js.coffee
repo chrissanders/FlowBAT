@@ -887,6 +887,40 @@ Template.table.helpers
     else if @value is "zw"
       i18n.t("Zimbabwe")
     else i18n.t(@value)
+  bytecalc: ->
+    if @value > 1000 and @value < 1000000
+      num1 = @value / 1000
+      num2 = num1.toFixed(2)
+      i18n.t(num2 + " kB")
+    else if @value  > 1000000 and @value < 1000000000
+      num1 = @value / 1000000
+      num2 = num1.toFixed(2)
+      i18n.t(num2 + " MB")
+    else if @value  > 1000000000 and @value < 1000000000000
+      num1 = @value / 1000000000
+      num2 = num1.toFixed(2)
+      i18n.t(num2 + " GB")
+    else if @value  > 1000000000000 and @value < 1000000000000000
+      num1 = @value / 1000000000000
+      num2 = num1.toFixed(2)
+      i18n.t(num2 + " TB")
+    else if @value  > 1000000000000000 and @value < 1000000000000000000
+      num1 = @value / 1000000000000000
+      num2 = num1.toFixed(2)
+      i18n.t(num2 + " PB")
+    else if @value  > 1000000000000000000 and @value < 1000000000000000000000
+      num1 = @value / 1000000000000000000
+      num2 = num1.toFixed(2)
+      i18n.t(num2 + " EB")
+    else if @value  > 1000000000000000000000 and @value < 1000000000000000000000000
+      num1 = @value / 1000000000000000000000
+      num2 = num1.toFixed(2)
+      i18n.t(num2 + " ZB")
+    else if @value  > 1000000000000000000000000 and @value < 1000000000000000000000000000
+      num1 = @value / 1000000000000000000000000
+      num2 = num1.toFixed(2)
+      i18n.t(num2 + " YB")
+    else i18n.t(@value + " B")
 Template.table.rendered = ->
   _id = @data._id
   if @data.output is "rwcut"
