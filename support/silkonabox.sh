@@ -8,9 +8,9 @@
 exec >  >(tee -a silkinstall.log)
 exec 2> >(tee -a silkinstall.log >&2)
 
-silkversion=$(echo "3.10.0")
+silkversion=$(echo "3.10.2")
 yafversion=$(echo "2.7.1")
-lfbversion=$(echo "1.6.2")
+lfbversion=$(echo "1.7.0")
 
 ask() {
     # http://djm.me/ask
