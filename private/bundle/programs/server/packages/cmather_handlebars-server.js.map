@@ -1,0 +1,1 @@
+{"version":3,"file":"/packages/cmather:handlebars-server.js","sources":["cmather:handlebars-server/handlebars-server.js"],"names":[],"mappings":";;;;;;;;;;;;;;;;;AAAA,+C;AACA,8B;;AAEA,sB;AACA,gB;AACA,G","sourcesContent":["OriginalHandlebars = Npm.require('handlebars');\nHandlebars = Handlebars || {};\n\n_.extend(Handlebars, {\n  templates: {},\n});\n"]}
