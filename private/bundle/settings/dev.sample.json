@@ -1,0 +1,20 @@
+{
+  "baseUrl": "http://localhost:3000",
+  "mailUrl": "smtp://[username]:[password]@smtp.mailgun.org:465/",
+  "isLoadingFixtures": true,
+  "apm": {
+    "appId": "__disabled_for_dev__",
+    "secret": "__disabled_for_dev__"
+  },
+  "public": {
+    "isDebug": true,
+    "googleAnalytics": {
+      "property": "",
+      "disabled": true
+    },
+    "mixpanel": {
+      "token": "",
+      "disabled": true
+    }
+  }
+}
