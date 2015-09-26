@@ -18,6 +18,13 @@ Create a safe place to copy the db.
 Dump the db from the meteor dev instance of FlowBAT to ~/fbdevbackup
 # mongodump -h 127.0.0.1 --port 1801 -d meteor -o ~/fbdevbackup
 
+Kill all currently running meteor processes
+# ps aux | grep meteor 
+# kill [pid]
+
+rm the old flowbat directory
+#rm -rf FLOWBATPATH
+
 Install the new FlowBAT
 # ./install_flowbat_ubuntu.sh
 
