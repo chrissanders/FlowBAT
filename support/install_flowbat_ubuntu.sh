@@ -1,12 +1,12 @@
 #!/bin/bash
 
-exec >  >(tee -a flowbatinstall.log)
-exec 2> >(tee -a flowbatinstall.log >&2)
-
+exec > >(tee -a logfile.txt) 
+trap "kill -9 $! 2>/dev/null" EXIT 
+exec 2> >(tee -a logfile.txt >&2) 
+trap "kill -9 $! 2>/dev/null" EXIT
 workingDir=$PWD
 
 ask() {
-    # http://djm.me/ask
     while true; do
 
         if [ "${2:-}" = "Y" ]; then
@@ -38,11 +38,13 @@ ask() {
     done
 }
 
+
+
 if [ "$1" = "--update" ]; then
 echo "$(tput setaf 6)This script will install flowbat updates automatically. If it is not up-to-date, it will require a FlowBAT restart.$(tput sgr0)"
         if ask "$(tput setaf 3)Are you sure you want to update?$(tput sgr0)"; then
 if [ -d "$workingDir/FlowBAT/" ]; then
-	cd "$workingDir"/FlowBAT/
+	cd $workingDir/FlowBAT/
 		git pull
 		exit
 else
@@ -52,6 +54,28 @@ fi
   else
     exit 1
 	fi
+fi
+
+if [ "$(pidof mongod)" ]
+then
+  echo "It looks like mongod is running, which could be indicative that you have a meteor app running."
+  if ask "$(tput setaf 3)Are you sure you want to continue the install of FlowBAT?$(tput sgr0)"; then
+    echo
+  else
+    echo "Kill the mongod process if it pertains to an existing meteor app and restart this install. There might be conflicts if you do not kill it, especially if you are currently running FlowBAT already."
+    exit 1
+  fi
+fi
+
+if [ "$(pidof node)" ]
+then
+  echo "It looks like node is running, which could be indicative that you have a meteor app running."
+  if ask "$(tput setaf 3)Are you sure you want to continue the install of FlowBAT?$(tput sgr0)"; then
+    echo
+  else
+    echo "Kill the node process and restart this install. There might be conflicts if you do not kill it, especially if you are currently running FlowBAT already."
+    exit 1
+  fi
 fi
 
 if [ ! -d "$workingDir/FlowBAT/" ]; then
@@ -65,10 +89,13 @@ fi
 
 if [ ! -f /etc/init/flowbat.conf ]; then
 	if ask "$(tput setaf 3)Do you wish to have FlowBAT start on boot in the background?$(tput sgr0)"; then
-      startonboot=$(echo "yes")
+      		startonboot=$(echo "yes")
 		else
 			echo "$(tput setaf 2)For future reference, after installation move flowbat.conf to /etc/init/ if you would like to have FlowBAT start on boot.$(tput sgr0)".
 		fi
+	else
+		sudo rm /etc/init/flowbat.conf
+		startonboot=$(echo "yes")
 fi
 
 echo "$(tput setaf 6)Checking installed packages...$(tput sgr0)"
@@ -84,12 +111,13 @@ testinstall build-essential
 testinstall checkinstall
 testinstall curl
 testinstall git-core
+testinstall mongodb-server
 
 if [ ! -d "$workingDir/FlowBAT/" ]; then
 	echo "$(tput setaf 6)Downloading FlowBAT...$(tput sgr0)"
 	git clone https://github.com/chrissanders/FlowBAT.git
 fi
-cd FlowBAT/
+cd $workingDir/FlowBAT/
 
 echo""
 echo "$(tput setaf 6)Checking for nodejs...$(tput sgr0)"
@@ -100,12 +128,6 @@ dpkg -s nodejs &> /dev/null || {
 	sudo apt-get install -qq -y nodejs
         }
 
-echo""
-echo "$(tput setaf 6)Checking for meteorite...$(tput sgr0)"
-if ! which mrt > /dev/null; then
-	echo -e "$(tput setaf 6)Meteorite not found! Installing...$(tput sgr0)"
-	sudo npm install --silent -g meteorite
-fi
 echo ""
 echo "$(tput setaf 6)Checking for meteor...$(tput sgr0)"
 if ! which meteor > /dev/null; then
@@ -114,57 +136,70 @@ if ! which meteor > /dev/null; then
 fi
 
 #Arranging for localhost configuration
-cat settings/prod.sample.json |  sed 's/flowbat.com/127.0.0.1:1800/' | sed 's/mailUrl.*/mailUrl": "",/' > settings/dev.json
+cat $workingDir/FlowBAT/private/bundle/settings/prod.sample.json |  sed 's/flowbat.com/127.0.0.1:1800/' | sed 's/mailUrl.*/mailUrl": "",/' > $workingDir/FlowBAT/private/bundle/settings/dev.json
 
-cd "$workingDir"/FlowBAT
-mrt install
+(cd $workingDir/FlowBAT/private/bundle/programs/server && npm install)
 
 #Generating upstart configuration for FlowBAT
-cat <<EOF > flowbat.conf
-# meteorjs - FlowBAT job file
-
+cat <<EOF > $workingDir/FlowBAT/flowbat.conf
+# upstart service file at /etc/init/flowbat.conf
 description "FlowBAT"
 
 # When to start the service
-start on runlevel [2345]
+start on started mongodb and runlevel [2345]
 
 # When to stop the service
-stop on runlevel [016]
+stop on shutdown
 
 # Automatically restart process if crashed
 respawn
+respawn limit 10 5
 
-# Essentially lets upstart know the process will detach itself to the background
-expect fork
-
-chdir $workingDir/FlowBAT
+# drop root proviliges and switch to FlowBAT install user
+setuid $USER
+setgid $USER
 
 script
-
-cd $workingDir/FlowBAT
-exec sudo -u $USER meteor --port 1800 run --settings $workingDir/FlowBAT/settings/dev.json testtest
-
+    export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    export NODE_PATH=/usr/lib/nodejs:/usr/lib/node_modules
+    export PWD=$workingDir/FlowBAT/
+    export HOME=$workingDir/FlowBAT/
+    export PORT=1800
+    export MONGO_URL=mongodb://localhost:27017/flowbat
+    export ROOT_URL=http://127.0.0.1
+    export METEOR_SETTINGS='`cat $workingDir/FlowBAT/private/bundle/settings/dev.json`'
+    exec node $workingDir/FlowBAT/private/bundle/main.js >> $workingDir/FlowBAT/flowbat.log
 end script
 EOF
 
-sed -i 's/testtest/\"$@"/g' flowbat.conf
+sed -i 's/testtest/\"$@"/g' $workingDir/FlowBAT/flowbat.conf
 
 if [ ! -z "$startonboot" ]; then
-  sudo cp flowbat.conf /etc/init/
+  sudo cp $workingDir/FlowBAT/flowbat.conf /etc/init/
+  echo -e "$(tput setaf 2)To manually start, stop, or check status of FlowBAT:"
+  echo -e 'sudo service flowbat [start/stop/status]'
+  echo -e "$(tput sgr0)"
 else
-	echo "$(tput setaf 2)You chose to not run FlowBAT at boot. For future reference, move flowbat.conf to /etc/init/ if you would like to have FlowBAT start on boot.$(tput sgr0)".
+	echo -e "$(tput setaf 2)"
+  echo "You chose to not run FlowBAT at boot. For future reference, move flowbat.conf to /etc/init/ if you would like to have FlowBAT start on boot."
+  echo "Without a flowbat.conf in /etc/init/, you must run the following to start FlowBAT manually:"
+  echo "export PORT=1800"
+  echo "export MONGO_URL=mongodb://localhost:27017/flowbat"
+  echo "export ROOT_URL=http://127.0.0.1"
+  echo "export METEOR_SETTINGS=\`cat $workingDir/FlowBAT/private/bundle/settings/dev.json\`"
+  echo "node $workingDir/FlowBAT/private/bundle/main.js"
+  echo -e "$(tput sgr0)"
+
 fi
 
 sudo chown -R "$USER":"$USER" $workingDir/FlowBAT/
-sudo chown -R "$USER":"$USER" $workingDir/.npm
 
-echo -e "$(tput setaf 2)To manually run FlowBAT, cd to $workingDir/FlowBAT and run:"
-echo -e 'meteor --port 1800 run --settings settings/dev.json "$@"'
-echo -e 'or to run FlowBAT in the background:'
-echo -e 'nohup meteor --port 1800 run --settings settings/dev.json "$@" &'
-echo -e "$(tput sgr0)"
+echo "$(tput setaf 2)Attempting startup. Check http://127.0.0.1:1800. $(tput sgr0)"
 
-echo "$(tput setaf 2)Attempting startup. This may take a few minutes if it is the first time. Press ctrl+c to stop FlowBAT after the application says it is running or proceed to 127.0.0.1:1800 in a browser.$(tput sgr0)"
-
-meteor --port 1800 run --settings settings/dev.json "$@"
+export PORT=1800
+export MONGO_URL=mongodb://localhost:27017/flowbat
+export ROOT_URL=http://127.0.0.1
+export METEOR_SETTINGS=`cat $workingDir/FlowBAT/private/bundle/settings/dev.json`
+sudo service flowbat start
+#node $workingDir/FlowBAT/private/bundle/main.js &
 

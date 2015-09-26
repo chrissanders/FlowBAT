@@ -1,3 +1,2 @@
 template(name="textarea")
-  textarea(class="{{family}}-{{property}}-editor {{family}}-property-editor property-editor form-control {{#if isNew}}is-new{{/if}}", name="{{property}}", placeholder="{{placeholder}}", data-family="{{family}}", data-object-id="{{_id}}")
-    | #{value}
+  textarea(class="{{family}}-{{property}}-editor {{family}}-property-editor property-editor form-control {{cls}} {{#if isNew}}is-new{{/if}}", name="{{property}}", placeholder="{{placeholder}}", data-family="{{family}}", data-object-id="{{_id}}", rows="{{rows}}") {{value}}

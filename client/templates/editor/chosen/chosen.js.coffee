@@ -10,7 +10,7 @@ Template.chosen.helpers
     else
       @value is context.value
 
-Template.chosen.rendered = ->
+Template.chosen.onRendered ->
   editor = @firstNode
   $editor = $(editor)
   options =

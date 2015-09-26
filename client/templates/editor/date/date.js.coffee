@@ -1,6 +1,6 @@
 Template.date.helpers
 
-Template.date.rendered = ->
+Template.date.onRendered ->
   template = @
   $editor = template.$("input")
   $editor.datepicker(

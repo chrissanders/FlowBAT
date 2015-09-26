@@ -32,7 +32,7 @@ class share.Editor
   editorKey: (_id, key) ->
     share.EditorCache.editorKey(@family, _id, key)
   insert: (object = {}, callback = ->) ->
-    _.defaults(object, i18n.t("defaults." + @family, {returnObjectTrees: true}) or {})
+    _.defaults(object, i18n.t("defaults." + @family, {returnObjectTrees: true,  defaultValue: ""}) or {})
     _id = @collection.insert(object, callback)
     @startEditing(_id)
     _id

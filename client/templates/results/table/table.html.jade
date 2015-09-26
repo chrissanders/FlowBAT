@@ -32,6 +32,15 @@ template(name="table")
                   | {{protocolname}}
                 else if condition _id "is" "application"
                   | {{appname}}
+                else if condition _id "is" "scc"
+                  | {{ccname}}
+                else if condition _id "is" "dcc"
+                  | {{ccname}}
+                else if condition _id "is" "bytes"
+                    | {{bytecalc}}
+                else if condition _id "is" "Bytes"
+                  if condition presentation "isnt" "chart"
+                    | {{bytecalc}}
                 else
                   | {{value}}
               if isPivotable ../../output

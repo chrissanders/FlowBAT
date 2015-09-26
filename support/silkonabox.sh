@@ -8,9 +8,9 @@
 exec >  >(tee -a silkinstall.log)
 exec 2> >(tee -a silkinstall.log >&2)
 
-silkversion=$(echo "3.10.0")
+silkversion=$(echo "3.10.2")
 yafversion=$(echo "2.7.1")
-lfbversion=$(echo "1.6.2")
+lfbversion=$(echo "1.7.0")
 
 ask() {
     # http://djm.me/ask
@@ -186,7 +186,7 @@ if which rwp2yaf2silk > /dev/null; then
   rm ../yaf-$yafversion.tar.gz
   rm ../silk-$silkversion.tar.gz
 
-	# Configure SiLK
+# Configure SiLk
   cat > silk.conf << "EOF"
 	  /usr/local/lib
 	  /usr/local/lib/silk
@@ -226,6 +226,13 @@ EOF
 	sudo mv rwflowpack.conf /usr/local/etc/
 
 fi
+
+## Download country code database - These can be updated as needed via the commands below
+wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
+gzip -d -c GeoIP.dat.gz | rwgeoip2ccmap --encoded-input > country_codes.pmap
+sudo mv country_codes.pmap /usr/local/share/silk/
+
+# Start up services
 if [ ! -z "$silkstartnow" ]; then
   startNow=$(echo "---Collection Interface = $interface")
   sudo /usr/local/sbin/rwflowpack --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack

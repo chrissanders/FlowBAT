@@ -1,0 +1,34 @@
+The goal here is to do a backup of the mongodb from a running old FlowBAT instance and
+then restore that backup into the new fresh instance. To do that, you'll need to make sure
+to do the backup of the old instance before installing the new instance. Afterwards you can 
+kill all meteor processes that are running with FlowBAT (probably a meteor node command 
+and mongo db command.) Once they are dead, you can install the new FlowBAT using the new 
+install script. After it is installed and running, you can drop its database, then restore
+the backup to the previous dropped location.
+
+tl;dr
+
+If FlowBAT isn't already running then manually cd to the FlowBAT project directory and 
+start meteor dev so that you can grab a copy of the db.
+# meteor --port 1800 run --settings settings/dev.json "$@"
+
+Create a safe place to copy the db.
+# mkdir ~/fbdevbackup
+
+Dump the db from the meteor dev instance of FlowBAT to ~/fbdevbackup
+# mongodump -h 127.0.0.1 --port 1801 -d meteor -o ~/fbdevbackup
+
+Install the new FlowBAT
+# ./install_flowbat_ubuntu.sh
+
+Check that it is running (should have node main.js)
+#ps aux | grep node
+
+Remove the current prod database in the running node instance.
+# mongo flowbat --eval "db.dropDatabase()"
+
+Restore the dev backup to the prod node instance.
+# mongorestore -h 127.0.0.1:27017 -d flowbat ~/fbdevbackup/meteor/
+
+Manually remove backup DB and location (optional)
+# rm -rf ~/fbdevbackup
