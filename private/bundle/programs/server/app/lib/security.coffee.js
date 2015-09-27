@@ -4,7 +4,7 @@ var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; 
 share.Security = {
   effectiveRoles: {
     admin: ["admin", "analyst"],
-    analyst: ["analyst"]
+    analyst: ["admin", "analyst"]
   },
   groups: function() {
     return Object.keys(this.effectiveRoles);
