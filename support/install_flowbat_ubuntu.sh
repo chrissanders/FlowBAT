@@ -167,7 +167,8 @@ script
     export PORT=1800
     export MONGO_URL=mongodb://localhost:27017/flowbat
     export ROOT_URL=http://127.0.0.1
-    export METEOR_SETTINGS='`cat $workingDir/FlowBAT/private/bundle/settings/dev.json`'
+    . $workingDIR/FlowBAT/settings/meteorsettings.json
+    export METEOR_SETTINGS
     exec node $workingDir/FlowBAT/private/bundle/main.js >> $workingDir/FlowBAT/flowbat.log
 end script
 EOF
