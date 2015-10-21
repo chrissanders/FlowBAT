@@ -203,7 +203,8 @@ EOF
 	 listen-as-host 127.0.0.1
 	 end probe
 	 group my-network
-	 ipblocks 192.168.1.0/24 # address of eth0. CHANGE THIS.
+	 ipblocks 192.168.0.0/16 # address of eth0. CHANGE THIS.
+	 ipblocks 172.16.0.0/12 # other blocks you consider internal
 	 ipblocks 10.0.0.0/8 # other blocks you consider internal
 	 end group
 	 sensor S0
