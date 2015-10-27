@@ -3,14 +3,13 @@
 # Automatic SiLK Installation Script
 # Chris Sanders & Jason Smith
 
-#!/bin/bash
-
 exec >  >(tee -a silkinstall.log)
 exec 2> >(tee -a silkinstall.log >&2)
 
 silkversion=$(echo "3.10.2")
 yafversion=$(echo "2.7.1")
 lfbversion=$(echo "1.7.0")
+workingDir=$PWD
 
 ask() {
     # http://djm.me/ask
@@ -71,20 +70,23 @@ fi
 
 #Set interface variable
 while true; do
-echo "$(tput setaf 6)These appear to be your current interfaces."
-ifconfig -a | grep -oP '^[a-zA-Z0-9]{1,} '
-tput sgr0
-echo "$(tput setaf 3)Which interface do you wish to monitor?$(tput sgr0)"
-read interface
-interfaceFound=$(grep " $interface" /proc/net/dev)
-if  [ ! -n "$interfaceFound" ] ; then
-        case "$interface" in
-        *) echo  "$(tput setaf 1)The interface that you have chosen does not exist. Please verify.$(tput sgr0)" ;;
-        esac
-else
+        echo "$(tput setaf 3)Which interface do you wish to monitor?"
+        cd /sys/class/net && select interface in *; do
+                tput sgr0
+                if [ "$interface" = "" ]; then
+                        echo  "$(tput setaf 1)You didn't pick an interface. Pick a number from the list.$(tput sgr0)"
+                else
+                        if [ ! -d "/sys/class/net/$interface" ]; then
+                                echo  "$(tput setaf 1)The interface that you have chosen does not exist. Please verify.$(tput sgr0)"
+                        else
+                                echo "$(tput setaf 6)You will be monitoring the $interface interface$(tput sgr0)"
+                                break
+                        fi
+                fi
+        done
         break
-fi
 done
+cd $workingDir
 
 if grep -q 'rwflowpack' /etc/rc.local; then
         echo "$(tput setaf 2)It appears you already have flow collection enabled at boot, which also indicates you might have already installed SiLK.$(tput sgr0)"
