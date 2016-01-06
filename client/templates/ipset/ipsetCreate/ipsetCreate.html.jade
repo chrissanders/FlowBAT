@@ -7,13 +7,16 @@ template(name="ipsetCreate")
             .panel-heading
               .form-group
                 label IP Set name
+                  i.fa.fa-question-circle.text-muted(data-toggle="popover", title="IP Set name", data-content="This is the name that will be referenced in the query builder.")
                 +input(family="ipset" _id=_id property="name" value=name isNew=isNew)
             .panel-body
               .form-group
                 label Note
+                  i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Note", data-content="These notes are for personal use and can be quickly referenced when examining the list in the IP Sets tab in the navbar.")
                 +textarea(family="ipset" _id=_id property="note" value=note isNew=isNew)
               .form-group
                 label IP addresses
+                  i.fa.fa-question-circle.text-muted(data-toggle="popover", title="IP addresses", data-content="List of IP addresses or CIDR ranges. When sets are specified in the query builder (via Source IP Set, Destination IP Set, or Any IP Set), records that contain matching IP addresses will be displayed.")
                 +textarea(family="ipset" _id=_id property="contents" value=contents isNew=isNew)
               .form-group
                 button.btn.btn-primary(type="submit") Create
