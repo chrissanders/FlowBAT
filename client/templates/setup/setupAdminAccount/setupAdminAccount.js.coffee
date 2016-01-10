@@ -1,7 +1,7 @@
 Template.setupAdminAccount.helpers
   newUserFormContext: ->
     title: "Welcome to FlowBAT!"
-    description: "Please create administrator account:"
+    description: "Please create the administrator account:"
     submitText: i18n.t("interface.create")
 
 Template.setupAdminAccount.rendered = ->

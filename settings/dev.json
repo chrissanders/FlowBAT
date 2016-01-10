@@ -1,7 +1,7 @@
 {
   "baseUrl": "http://127.0.0.1:1800",
   "mailUrl": "",
-  "isLoadingFixtures": false,
+  "isLoadingFixtures": true,
   "apm": {
     "appId": "",
     "secret": ""

@@ -6,6 +6,8 @@ Router.configure
     navbar: {to: "header"}
     footer: {to: "footer"}
 
+Router.setTemplateNameConverter (str) -> str
+
 Router.onBeforeAction(() ->
   if not Meteor.user()
     config = share.Configs.findOne()

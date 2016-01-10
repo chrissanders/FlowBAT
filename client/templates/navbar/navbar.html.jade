@@ -14,9 +14,9 @@ template(name="navbar")
           if currentUser
             li(class="{{#if condition currentTemplateName 'is' 'dashboard'}}active{{/if}}")
               a(href="/") Dashboard
-            li(class="{{#if condition currentTemplateName 'in' 'query'}}{{#if query.isQuick}}active{{/if}}{{/if}}")
+            li(class="{{#if condition currentTemplateName 'in' 'query'}}{{#if queryObject.isQuick}}active{{/if}}{{/if}}")
               a(href="/query/create/quick") Quick Query
-            li(class="{{#if condition currentTemplateName 'in' 'queryList' 'query'}}{{#if not query.isQuick}}active{{/if}}{{/if}}")
+            li(class="{{#if condition currentTemplateName 'in' 'queryList' 'query'}}{{#if not queryObject.isQuick}}active{{/if}}{{/if}}")
               a(href="/query/list") Saved Queries
             li(class="{{#if condition currentTemplateName 'in' 'ipsetList' 'ipset' 'ipsetCreate'}}active{{/if}}")
               a(href="/ipset/list") IP Sets
