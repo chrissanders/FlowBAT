@@ -6,7 +6,7 @@ template(name="tupleCreate")
           form.panel.panel-default
             .panel-heading
               .form-group
-                label Tuple file name
+                label Tuple File Name
                   i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Tuple file name", data-content="This is the name that will be referenced in the query builder. Tuples allow for searching for records based on the 5-tuple, where the values can occur in any direction.")
                 +input(family="tuple" _id=_id property="name" value=name isNew=isNew)
             .panel-body
