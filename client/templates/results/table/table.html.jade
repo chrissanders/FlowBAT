@@ -44,34 +44,56 @@ template(name="table")
                 else
                   | {{value}}
               if isPivotable ../../output
-                ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu1')
+                if condition ../../output "is" "rwcut"    
+                  ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu1')
+                    if condition _id "in" "sIP" "dIP"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sIP"}}"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="dIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.dIP"}}"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="aIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.aIP"}}"
+                      li(role='presentation')
+                        a(href="https://www.robtex.com/ip/{{value}}.html" target="_blank") Search robtex for {{value}}
+                    else if condition _id "in" "sPort" "dPort"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sPort"}}"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="dPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.dPort"}}"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="aPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.aPort"}}"
+                      li(role='presentation')
+                        a(href="https://isc.sans.edu/port.html?port={{value}}" target="_blank") More Information on Port {{value}}...
+                    else if condition _id "in" "sTime" "eTime"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sTime", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sTime"}}"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="eTime", data-value="{{value}}") Add to query as "{{t "rwcut.fields.eTime"}}"
+                      li(role='presentation')
+                        a.add-to-query-as-before-after-time(role='menuitem', tabindex='-1', href='#', data-spread="60000", data-value="{{value}}") Add to query as "Before/After Time (1 Minute)"
+                      li(role='presentation')
+                        a.add-to-query-as-before-after-time(role='menuitem', tabindex='-1', href='#', data-spread="300000", data-value="{{value}}") Add to query as "Before/After Time (5 Minutes)"
+                     else
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="{{_id}}", data-value="{{value}}") Add to query as "{{fieldI18n}}"
+                else
                   if condition _id "in" "sIP" "dIP"
-                    li(role='presentation')
-                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sIP"}}"
-                    li(role='presentation')
-                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="dIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.dIP"}}"
-                    li(role='presentation')
-                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="aIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.aIP"}}"
-                    li(role='presentation')
-                      a(href="https://www.robtex.com/ip/{{value}}.html" target="_blank") Search robtex for {{value}}
+                    ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu1')
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sIP"}}"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="dIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.dIP"}}"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="aIP", data-value="{{value}}") Add to query as "{{t "rwcut.fields.aIP"}}"
+                      li(role='presentation')
+                        a(href="https://www.robtex.com/ip/{{value}}.html" target="_blank") Search robtex for {{value}}
                   else if condition _id "in" "sPort" "dPort"
-                    li(role='presentation')
-                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sPort"}}"
-                    li(role='presentation')
-                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="dPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.dPort"}}"
-                    li(role='presentation')
-                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="aPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.aPort"}}"
-                    li(role='presentation')
-                      a(href="https://isc.sans.edu/port.html?port={{value}}" target="_blank") More Information on Port {{value}}...
-                  else if condition _id "in" "sTime" "eTime"
-                    li(role='presentation')
-                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sTime", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sTime"}}"
-                    li(role='presentation')
-                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="eTime", data-value="{{value}}") Add to query as "{{t "rwcut.fields.eTime"}}"
-                    li(role='presentation')
-                      a.add-to-query-as-before-after-time(role='menuitem', tabindex='-1', href='#', data-spread="60000", data-value="{{value}}") Add to query as "Before/After Time (1 Minute)"
-                    li(role='presentation')
-                      a.add-to-query-as-before-after-time(role='menuitem', tabindex='-1', href='#', data-spread="300000", data-value="{{value}}") Add to query as "Before/After Time (5 Minutes)"
-                   else
-                    li(role='presentation')
-                      a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="{{_id}}", data-value="{{value}}") Add to query as "{{fieldI18n}}"
+                    ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu1')
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="sPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.sPort"}}"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="dPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.dPort"}}"
+                      li(role='presentation')
+                        a.add-to-query(role='menuitem', tabindex='-1', href='#', data-id="aPort", data-value="{{value}}") Add to query as "{{t "rwcut.fields.aPort"}}"
+                      li(role='presentation')
+                        a(href="https://isc.sans.edu/port.html?port={{value}}" target="_blank") More Information on Port {{value}}...

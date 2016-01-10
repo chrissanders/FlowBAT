@@ -1,6 +1,6 @@
 Template.table.helpers
   isPivotable: (output) ->
-    output is "rwcut"
+    output isnt "rwcount"
   fieldI18n: ->
     i18n.t("rwcut.fields." + @_id)
   protocolname: ->
