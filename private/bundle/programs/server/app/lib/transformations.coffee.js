@@ -138,7 +138,7 @@ share.Query = (function() {
   };
 
   Query.prototype.inputCommand = function(config, profile, isPresentation) {
-    var command, exclusion, _i, _len, _ref;
+    var command, exclusion, rwFileValidate, _i, _len, _ref;
     if (isPresentation == null) {
       isPresentation = false;
     }
@@ -147,8 +147,11 @@ share.Query = (function() {
     if (config.siteConfigFile) {
       command += " --site-config-file=" + config.siteConfigFile;
     }
-    if (config.dataRootdir) {
-      command += " --data-rootdir=" + config.dataRootdir;
+    rwFileValidate = command.search(RegExp(' (\\/|\\w)+\\.(rwf|rw)', 'i'));
+    if (rwFileValidate < 0) {
+      if (config.dataRootdir) {
+        command += " --data-rootdir=" + config.dataRootdir;
+      }
     }
     command += " --pass=stdout";
     _ref = this.inputExclusions();
