@@ -69,14 +69,10 @@ class share.Query
           row = []
           for parsedValue, index in parsedRow
             spec = @header[index]
-            if @output is "rwcount" and spec.name not in @rwcountFields
-              continue
             row.push({_id: spec._id, value: parsedValue, queryId: @_id})
           @rows.push(row)
       filteredHeader = []
       for spec in @header
-        if @output is "rwcount" and spec.name not in @rwcountFields
-          continue
         filteredHeader.push(spec)
       @header = filteredHeader
   displayName: ->
@@ -84,10 +80,15 @@ class share.Query
   inputCommand: (config, profile, isPresentation = false) ->
     command = "rwfilter"
     command += " " + @inputOptions(config)
+    
     if config.siteConfigFile
       command += " --site-config-file=" + config.siteConfigFile
-    if config.dataRootdir
-      command += " --data-rootdir=" + config.dataRootdir
+    rwFileValidate = command.search(RegExp(' (\\/|\\w)+\\.(rwf|rw)', 'i'))
+    
+    if rwFileValidate < 0
+      if config.dataRootdir
+        command += " --data-rootdir=" + config.dataRootdir
+    
     command += " --pass=stdout"
     for exclusion in @inputExclusions()
       command += " | rwfilter --input-pipe=stdin"

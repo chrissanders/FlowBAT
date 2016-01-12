@@ -42,7 +42,7 @@ share.Config = (function() {
 
 share.Query = (function() {
   function Query(doc) {
-    var distinctRegex, filteredHeader, index, m, name, parsedResult, parsedRow, parsedValue, rawHeader, row, spec, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1, _ref2, _ref3;
+    var distinctRegex, filteredHeader, index, m, name, parsedResult, parsedRow, parsedValue, rawHeader, row, spec, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _m, _n, _ref, _ref1;
     _.extend(this, doc);
     this.header = [];
     this.rows = [];
@@ -110,9 +110,6 @@ share.Query = (function() {
           for (index = _m = 0, _len4 = parsedRow.length; _m < _len4; index = ++_m) {
             parsedValue = parsedRow[index];
             spec = this.header[index];
-            if (this.output === "rwcount" && (_ref1 = spec.name, __indexOf.call(this.rwcountFields, _ref1) < 0)) {
-              continue;
-            }
             row.push({
               _id: spec._id,
               value: parsedValue,
@@ -123,12 +120,9 @@ share.Query = (function() {
         }
       }
       filteredHeader = [];
-      _ref2 = this.header;
-      for (_n = 0, _len5 = _ref2.length; _n < _len5; _n++) {
-        spec = _ref2[_n];
-        if (this.output === "rwcount" && (_ref3 = spec.name, __indexOf.call(this.rwcountFields, _ref3) < 0)) {
-          continue;
-        }
+      _ref1 = this.header;
+      for (_n = 0, _len5 = _ref1.length; _n < _len5; _n++) {
+        spec = _ref1[_n];
         filteredHeader.push(spec);
       }
       this.header = filteredHeader;
@@ -144,7 +138,7 @@ share.Query = (function() {
   };
 
   Query.prototype.inputCommand = function(config, profile, isPresentation) {
-    var command, exclusion, _i, _len, _ref;
+    var command, exclusion, rwFileValidate, _i, _len, _ref;
     if (isPresentation == null) {
       isPresentation = false;
     }
@@ -153,8 +147,11 @@ share.Query = (function() {
     if (config.siteConfigFile) {
       command += " --site-config-file=" + config.siteConfigFile;
     }
-    if (config.dataRootdir) {
-      command += " --data-rootdir=" + config.dataRootdir;
+    rwFileValidate = command.search(RegExp(' (\\/|\\w)+\\.(rwf|rw)', 'i'));
+    if (rwFileValidate < 0) {
+      if (config.dataRootdir) {
+        command += " --data-rootdir=" + config.dataRootdir;
+      }
     }
     command += " --pass=stdout";
     _ref = this.inputExclusions();

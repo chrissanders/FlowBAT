@@ -3,6 +3,13 @@ Template.tuple.helpers
     share.Queries.find({isQuick: false, $or: [{tupleFile: @_id}]})
 
 Template.tuple.rendered = ->
+
+  @$(".panel").popover(
+    selector: "*[data-toggle='popover']"
+    trigger: "hover"
+    delay: {show: 300, hide: 100}
+  )
+
   @$("form").validate(
     rules:
       name:

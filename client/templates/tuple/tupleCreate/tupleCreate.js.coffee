@@ -2,6 +2,13 @@ Template.tupleCreate.helpers
 #  helper: ->
 
 Template.tupleCreate.rendered = ->
+
+  @$(".panel").popover(
+    selector: "*[data-toggle='popover']"
+    trigger: "hover"
+    delay: {show: 300, hide: 100}
+  )
+  
   @$("form").validate(
     rules:
       name:

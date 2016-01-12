@@ -6,14 +6,17 @@ template(name="tupleCreate")
           form.panel.panel-default
             .panel-heading
               .form-group
-                label Tuple file name
+                label Tuple File Name
+                  i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Tuple file name", data-content="This is the name that will be referenced in the query builder. Tuples allow for searching for records based on the 5-tuple, where the values can occur in any direction.")
                 +input(family="tuple" _id=_id property="name" value=name isNew=isNew)
             .panel-body
               .form-group
                 label Note
+                  i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Note", data-content="These notes are for personal use and can be quickly referenced when examining tuples in the Tuple Files tab.")
                 +textarea(family="tuple" _id=_id property="note" value=note isNew=isNew)
               .form-group
                 label Tuple Values
+                  i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Note", data-content="You may enter a list of n-tuples, up to a 5-tuple. You may choose to 2 IP addresses instead of the full 5 tuple to examine records going in either direction or be port specific in order to filter more closely. For more information, see the options in the query builder.")
                 +textarea(family="tuple" _id=_id property="contents" value=contents isNew=isNew)
               .form-group
                 button.btn.btn-primary(type="submit") Create

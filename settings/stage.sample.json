@@ -1,7 +1,7 @@
 {
   "baseUrl": "http://flowbat.com",
   "mailUrl": "smtp://[username]:[password]@smtp.mailgun.org:465/",
-  "isLoadingFixtures": true,
+  "isLoadingFixtures": false,
   "apm": {
     "appId": "",
     "secret": ""
