@@ -96,6 +96,6 @@ template(name="results")
                   legend Display fields
                   each fieldsOrder
                     .checkbox
-                      label
+                      label(data-toggle="popover", title="{{t fieldI18nString}}", data-content="{{t fieldDefinitions}}")
                         input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'fields'}}", value="{{.}}", data-property="fields")
                         | {{t fieldI18nString}}
