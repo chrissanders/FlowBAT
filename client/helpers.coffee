@@ -2,6 +2,10 @@ UI.registerHelper("fieldI18nString", ->
   "rwcut.fields." + @.trim()
 )
 
+UI.registerHelper("fieldDefinitions", ->
+  "field.definitions." + @.trim()
+)
+
 UI.registerHelper("fieldIsSelected", (query, property) ->
   @.toString() in query[property]
 )
