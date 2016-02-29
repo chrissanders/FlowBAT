@@ -40,3 +40,5 @@ template(name="navbar")
                 li: a.logout(href="#") Logout
           else
             +login
+        ul.nav.navbar-nav.navbar-right  
+            a.btn.btn-primary#nightMode(href="javascript:!function(d){d.head.appendChild(d.createElement('style')).innerText='html,img,video{-webkit-filter:invert(1)hue-rotate(180deg);filter:invert(1)hue-rotate(180deg)}body{background:#16181B}'}(document);" style="margin-top: 0.5em; margin-right: 0.5em; ") <i class="fa fa-moon-o"></i> Night Mode
