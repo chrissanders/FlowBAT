@@ -138,19 +138,33 @@ share.Query = (function() {
   };
 
   Query.prototype.inputCommand = function(config, profile, isPresentation) {
-    var command, exclusion, rwFileValidate, _i, _len, _ref;
+    var command, exclusion, pcapFile, pcapFileValidate, rwFileValidate, typeValidate, _i, _len, _ref;
     if (isPresentation == null) {
       isPresentation = false;
     }
     command = "rwfilter";
     command += " " + this.inputOptions(config);
+    if (this["interface"] === "cmd") {
+      typeValidate = command.search(RegExp('--type', 'i'));
+      if (typeValidate < 0) {
+        command += " --type=all ";
+      }
+    }
     if (config.siteConfigFile) {
       command += " --site-config-file=" + config.siteConfigFile;
     }
-    rwFileValidate = command.search(RegExp(' (\\/|\\w)+\\.(rwf|rw)', 'i'));
+    rwFileValidate = command.search(RegExp(' (\\/|\\w)+(\\/|\\w|\\-)*\\.(rwf|rw)', 'i'));
     if (rwFileValidate < 0) {
-      if (config.dataRootdir) {
-        command += " --data-rootdir=" + config.dataRootdir;
+      pcapFileValidate = command.search(RegExp(' (\\/|\\w)+(\\/|\\w|\\-)*\\.(pcap)', 'i'));
+      if (pcapFileValidate >= 0) {
+        pcapFile = command.match(RegExp('(\\/|\\w)+(\\/|\\w|\\-)*\\.(pcap)', 'i'));
+        command += " --input-pipe=stdin";
+        command = command.replace(pcapFile[0], "");
+        command = "rwp2yaf2silk --in=" + pcapFile[0] + " --out=- |" + command;
+      } else {
+        if (config.dataRootdir) {
+          command += " --data-rootdir=" + config.dataRootdir;
+        }
       }
     }
     command += " --pass=stdout";
