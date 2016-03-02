@@ -52,6 +52,8 @@ template(name="help")
                   a(href='#Count_40') - Count
                   a(href='#IP_Sets_53') - IP Sets
                   a(href='#Tuple_Files_56') - Tuple Files
+                  a(href='#PCAP_Analysis') - PCAP Analysis
+                  a(href='#RWF_Analysis') - RWF Analysis
               h4
                 a(href='#Layout_59') Layout
               h5
@@ -229,6 +231,22 @@ template(name="help")
                 | . If we’ve chosen the tuple direction to be both, this really just implies that both of the values are IP addresses. Had we chosen otherwise, the sip,dip would have more meaning. Also, had we provided the full 5-tuple we might have used
                 strong sip,dip,sport,dport,protocol
                 |  to define the tuple fields.
+              h4
+                a#PCAP_Analysis
+                | PCAP Analysis
+              p
+                | PCAP analysis can be performed in FlowBAT by specifying the full path of the file at either the command line FlowBAT interface or the "Additional Options" tab. See the examples at the end of this documentation for more details.
+              pre
+                code
+                  | /home/jason/badguys.pcap --saddress=192.168.1.15 --aport=31337
+              h4
+                a#RWF_Analysis
+                | RWF Analysis
+              p
+                | RWF files are the binary files that SiLK tools operate on. These can also be created at the command line in cases where automation might be desired. If you need to review an rwf file in FlowBAT, simply specify it prior to the rest of the filter. 
+              pre
+                code
+                  | /home/jason/IOT.rwf --type=out,outweb --packets=4- --ack-flag=1
               h3
                 a#Layout_59
                 | Layout
@@ -325,6 +343,19 @@ template(name="help")
                   | Filter: --protocol=0-255 --type=out,outweb
                   | Exclusion: --dcc=US,GB,--
                   | Stats: --top --count=10 --fields=dcc --values=packets
+              p
+                | Examine a pre-made RWF file of IoT traffic to determine how much outbound data is traversing the network.
+              pre
+                code
+                  | Filter: /home/jason/IOT.rwf --type=out,outweb --packets=4- --ack-flag=1
+                  | Count: --bin-size=60
+              p
+                | Examine a PCAP file to generate a list of the top talking sip-dip pairs by bytes.
+              pre
+                code
+                  | Filter: /home/jason/badguys.pcap --protocol=0-255
+                  | Stats --top --count=10 --fields=sip,dip --values=bytes
+
               h3
                 a#Additional_Notes_115
                 | Additional Notes
