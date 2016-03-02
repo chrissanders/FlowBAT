@@ -357,7 +357,7 @@
       "sourceMapRoot": "server/security/lib",
       "path": "app/server/security/lib/matches.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -365,31 +365,31 @@
       "sourceMapRoot": "server/security/lib",
       "path": "app/server/security/lib/securityRulesWrapper.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
       "path": "app/lib/compatibility/i18next-1.7.3.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
       "path": "app/lib/compatibility/moment.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
       "path": "app/lib/compatibility/underscore.string.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
       "path": "app/lib/compatibility/xss.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -397,7 +397,7 @@
       "sourceMapRoot": "lib",
       "path": "app/lib/app.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -405,7 +405,7 @@
       "sourceMapRoot": "lib",
       "path": "app/lib/regexps.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -413,7 +413,7 @@
       "sourceMapRoot": "lib",
       "path": "app/lib/security.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -421,37 +421,37 @@
       "sourceMapRoot": "lib",
       "path": "app/lib/transformations.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
       "path": "app/server/emailTemplates/handlebars.newUserHtml.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
       "path": "app/server/emailTemplates/handlebars.newUserSubject.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
       "path": "app/server/emailTemplates/handlebars.resetPasswordHtml.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
       "path": "app/server/emailTemplates/handlebars.resetPasswordSubject.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
       "path": "app/server/exec/exec.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -459,7 +459,7 @@
       "sourceMapRoot": "server/i18n",
       "path": "app/server/i18n/_.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -467,7 +467,7 @@
       "sourceMapRoot": "server/i18n",
       "path": "app/server/i18n/en.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -475,7 +475,7 @@
       "sourceMapRoot": "server/model",
       "path": "app/server/model/collections.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -483,7 +483,7 @@
       "sourceMapRoot": "server/model",
       "path": "app/server/model/publications.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -491,7 +491,7 @@
       "sourceMapRoot": "server/security",
       "path": "app/server/security/configs.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -499,7 +499,7 @@
       "sourceMapRoot": "server/security",
       "path": "app/server/security/ipsets.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -507,7 +507,7 @@
       "sourceMapRoot": "server/security",
       "path": "app/server/security/queries.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -515,7 +515,7 @@
       "sourceMapRoot": "server/security",
       "path": "app/server/security/tuples.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -523,7 +523,7 @@
       "sourceMapRoot": "server/security",
       "path": "app/server/security/users.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -531,7 +531,7 @@
       "sourceMapRoot": "common",
       "path": "app/common/configs.defaults.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -539,7 +539,7 @@
       "sourceMapRoot": "common",
       "path": "app/common/ipsets.defaults.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -547,7 +547,7 @@
       "sourceMapRoot": "common",
       "path": "app/common/ipsets.hooks.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -555,7 +555,7 @@
       "sourceMapRoot": "common",
       "path": "app/common/queries.defaults.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -563,7 +563,7 @@
       "sourceMapRoot": "common",
       "path": "app/common/queries.hooks.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -571,7 +571,7 @@
       "sourceMapRoot": "common",
       "path": "app/common/tuples.defaults.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -579,7 +579,7 @@
       "sourceMapRoot": "common",
       "path": "app/common/tuples.hooks.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -587,7 +587,7 @@
       "sourceMapRoot": "common",
       "path": "app/common/users.defaults.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -595,7 +595,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/cleanup.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -603,7 +603,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/configs.hooks.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -611,7 +611,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/cron.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -619,7 +619,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/executingAt.query.hooks.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -627,7 +627,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/execution.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -635,7 +635,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/fastrender.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -643,7 +643,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/fixtures.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -651,13 +651,13 @@
       "sourceMapRoot": "server",
       "path": "app/server/helpers.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
       "path": "app/server/meteor-security-patch.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -665,7 +665,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/methods.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -673,7 +673,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/periodic.execution.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -681,7 +681,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/queries.hooks.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -689,7 +689,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/routing.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -697,7 +697,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/startup.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
@@ -705,7 +705,7 @@
       "sourceMapRoot": "server",
       "path": "app/server/users.hooks.coffee.js",
       "assets": {
-        "bundle/settings/dev.json": "assets/app/bundle/settings/dev.json"
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
       }
     },
     {
