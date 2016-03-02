@@ -309,7 +309,7 @@ template(name="fieldsets")
   if condition output "is" "rwstats"
     fieldset.rwstats-parameters
       legend Stats parameters
-        i.fa.fa-question-circle.text-muted(data-toggle="popover", title="rwstats fields", data-content="These parameters determine how the statistics are to be calculated by selecting Top-N or Bottom-N, and a value to limit the amount of output. Count sets a static limit (top 20 for instance), threshold outputs all results over/under a specific stats VALUE, and percentage prints the bins where the primary value is greater-than (or less-than) N percent of the sum of the primary values across all bins.")
+        i.fa.fa-question-circle.text-muted(data-toggle="popover", title="Stats Parameters", data-content="These parameters determine how the statistics are to be calculated by selecting Top-N or Bottom-N, and a value to limit the amount of output. Count sets a static limit (top 20 for instance), threshold outputs all results over/under a specific stats VALUE, and percentage prints the bins where the primary value is greater-than (or less-than) N percent of the sum of the primary values across all bins.")
       .row
         .col-xs-2
           .input-group.direction-input-group
@@ -359,7 +359,7 @@ template(name="fieldsets")
         .col-xs-12
           each rwstatsFieldsOrder
             .checkbox
-              label
+              label(data-toggle="popover", title="{{t fieldI18nString}}", data-content="{{t fieldDefinitions}}")
                 input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsFields'}}", value="{{.}}", data-property="rwstatsFields")
                 | {{t fieldI18nString}}
     fieldset.display-fields-block
@@ -369,7 +369,7 @@ template(name="fieldsets")
         .col-xs-12
           each rwstatsValuesOrder
             .checkbox
-              label
+              label(data-toggle="popover", title="{{t fieldI18nString}}", data-content="{{t fieldDefinitions}}")
                 input.field-checkbox(type="checkbox", checked="{{fieldIsSelected .. 'rwstatsValues'}}", value="{{.}}", data-property="rwstatsValues")
                 if condition . "in" share.rwstatsValues
                   strong {{t fieldI18nString}}

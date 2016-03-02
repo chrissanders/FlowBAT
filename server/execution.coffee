@@ -256,6 +256,8 @@ executeQuery = (query, config, profile, callback) ->
     result = stdout.trim()
     error = stderr.trim()
     code = if err then err.code else 0
+    if error.indexOf("Rejected") isnt -1
+      error = null
     callback(result, error, code)
   ))
 

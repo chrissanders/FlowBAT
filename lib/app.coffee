@@ -155,7 +155,7 @@ share.filterOptions = (options, additionalPermittedCharacters = "") ->
   for excludedOption in ["--python-expr", "--python-file", "--pmap", "--dynamic-library", "--all-destination", "--fail-destination", "--pass-destination", "--print-statistics", "--print-volume-statistics", "--xargs"]
     regexp = new RegExp(excludedOption + "=?[^\\s]*", "gi")
     options = options.replace(regexp, "")
-  filter = new RegExp("[^\\s\\=\\-\\/\\,\\.\\:0-9a-z" + additionalPermittedCharacters + "]", "gi")
+  filter = new RegExp("[^\\s\\=\\-\\/\\,\\.\\:0-9a-z_" + additionalPermittedCharacters + "]", "gi")
   options = options.replace(filter, "")
   options
 

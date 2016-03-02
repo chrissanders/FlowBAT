@@ -355,217 +355,358 @@
     {
       "sourceMap": "app/server/security/lib/matches.coffee.js.map",
       "sourceMapRoot": "server/security/lib",
-      "path": "app/server/security/lib/matches.coffee.js"
+      "path": "app/server/security/lib/matches.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/security/lib/securityRulesWrapper.coffee.js.map",
       "sourceMapRoot": "server/security/lib",
-      "path": "app/server/security/lib/securityRulesWrapper.coffee.js"
+      "path": "app/server/security/lib/securityRulesWrapper.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
-      "path": "app/lib/compatibility/i18next-1.7.3.js"
+      "path": "app/lib/compatibility/i18next-1.7.3.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
-      "path": "app/lib/compatibility/moment.js"
+      "path": "app/lib/compatibility/moment.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
-      "path": "app/lib/compatibility/underscore.string.js"
+      "path": "app/lib/compatibility/underscore.string.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
-      "path": "app/lib/compatibility/xss.js"
+      "path": "app/lib/compatibility/xss.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/lib/app.coffee.js.map",
       "sourceMapRoot": "lib",
-      "path": "app/lib/app.coffee.js"
+      "path": "app/lib/app.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/lib/regexps.coffee.js.map",
       "sourceMapRoot": "lib",
-      "path": "app/lib/regexps.coffee.js"
+      "path": "app/lib/regexps.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/lib/security.coffee.js.map",
       "sourceMapRoot": "lib",
-      "path": "app/lib/security.coffee.js"
+      "path": "app/lib/security.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/lib/transformations.coffee.js.map",
       "sourceMapRoot": "lib",
-      "path": "app/lib/transformations.coffee.js"
+      "path": "app/lib/transformations.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
-      "path": "app/server/emailTemplates/handlebars.newUserHtml.js"
+      "path": "app/server/emailTemplates/handlebars.newUserHtml.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
-      "path": "app/server/emailTemplates/handlebars.newUserSubject.js"
+      "path": "app/server/emailTemplates/handlebars.newUserSubject.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
-      "path": "app/server/emailTemplates/handlebars.resetPasswordHtml.js"
+      "path": "app/server/emailTemplates/handlebars.resetPasswordHtml.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
-      "path": "app/server/emailTemplates/handlebars.resetPasswordSubject.js"
+      "path": "app/server/emailTemplates/handlebars.resetPasswordSubject.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
-      "path": "app/server/exec/exec.js"
+      "path": "app/server/exec/exec.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/i18n/_.coffee.js.map",
       "sourceMapRoot": "server/i18n",
-      "path": "app/server/i18n/_.coffee.js"
+      "path": "app/server/i18n/_.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/i18n/en.coffee.js.map",
       "sourceMapRoot": "server/i18n",
-      "path": "app/server/i18n/en.coffee.js"
+      "path": "app/server/i18n/en.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/model/collections.coffee.js.map",
       "sourceMapRoot": "server/model",
-      "path": "app/server/model/collections.coffee.js"
+      "path": "app/server/model/collections.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/model/publications.coffee.js.map",
       "sourceMapRoot": "server/model",
-      "path": "app/server/model/publications.coffee.js"
+      "path": "app/server/model/publications.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/security/configs.coffee.js.map",
       "sourceMapRoot": "server/security",
-      "path": "app/server/security/configs.coffee.js"
+      "path": "app/server/security/configs.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/security/ipsets.coffee.js.map",
       "sourceMapRoot": "server/security",
-      "path": "app/server/security/ipsets.coffee.js"
+      "path": "app/server/security/ipsets.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/security/queries.coffee.js.map",
       "sourceMapRoot": "server/security",
-      "path": "app/server/security/queries.coffee.js"
+      "path": "app/server/security/queries.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/security/tuples.coffee.js.map",
       "sourceMapRoot": "server/security",
-      "path": "app/server/security/tuples.coffee.js"
+      "path": "app/server/security/tuples.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/security/users.coffee.js.map",
       "sourceMapRoot": "server/security",
-      "path": "app/server/security/users.coffee.js"
+      "path": "app/server/security/users.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/common/configs.defaults.coffee.js.map",
       "sourceMapRoot": "common",
-      "path": "app/common/configs.defaults.coffee.js"
+      "path": "app/common/configs.defaults.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/common/ipsets.defaults.coffee.js.map",
       "sourceMapRoot": "common",
-      "path": "app/common/ipsets.defaults.coffee.js"
+      "path": "app/common/ipsets.defaults.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/common/ipsets.hooks.coffee.js.map",
       "sourceMapRoot": "common",
-      "path": "app/common/ipsets.hooks.coffee.js"
+      "path": "app/common/ipsets.hooks.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/common/queries.defaults.coffee.js.map",
       "sourceMapRoot": "common",
-      "path": "app/common/queries.defaults.coffee.js"
+      "path": "app/common/queries.defaults.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/common/queries.hooks.coffee.js.map",
       "sourceMapRoot": "common",
-      "path": "app/common/queries.hooks.coffee.js"
+      "path": "app/common/queries.hooks.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/common/tuples.defaults.coffee.js.map",
       "sourceMapRoot": "common",
-      "path": "app/common/tuples.defaults.coffee.js"
+      "path": "app/common/tuples.defaults.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/common/tuples.hooks.coffee.js.map",
       "sourceMapRoot": "common",
-      "path": "app/common/tuples.hooks.coffee.js"
+      "path": "app/common/tuples.hooks.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/common/users.defaults.coffee.js.map",
       "sourceMapRoot": "common",
-      "path": "app/common/users.defaults.coffee.js"
+      "path": "app/common/users.defaults.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/cleanup.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/cleanup.coffee.js"
+      "path": "app/server/cleanup.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/configs.hooks.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/configs.hooks.coffee.js"
+      "path": "app/server/configs.hooks.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/cron.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/cron.coffee.js"
+      "path": "app/server/cron.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/executingAt.query.hooks.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/executingAt.query.hooks.coffee.js"
+      "path": "app/server/executingAt.query.hooks.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/execution.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/execution.coffee.js"
+      "path": "app/server/execution.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/fastrender.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/fastrender.coffee.js"
+      "path": "app/server/fastrender.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/fixtures.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/fixtures.coffee.js"
+      "path": "app/server/fixtures.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/helpers.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/helpers.coffee.js"
+      "path": "app/server/helpers.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
-      "path": "app/server/meteor-security-patch.js"
+      "path": "app/server/meteor-security-patch.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/methods.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/methods.coffee.js"
+      "path": "app/server/methods.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/periodic.execution.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/periodic.execution.coffee.js"
+      "path": "app/server/periodic.execution.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/queries.hooks.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/queries.hooks.coffee.js"
+      "path": "app/server/queries.hooks.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/routing.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/routing.coffee.js"
+      "path": "app/server/routing.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/startup.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/startup.coffee.js"
+      "path": "app/server/startup.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "app/server/users.hooks.coffee.js.map",
       "sourceMapRoot": "server",
-      "path": "app/server/users.hooks.coffee.js"
+      "path": "app/server/users.hooks.coffee.js",
+      "assets": {
+        "FlowBAT.tar.gz": "assets/app/FlowBAT.tar.gz"
+      }
     },
     {
       "sourceMap": "packages/service-configuration.js.map",

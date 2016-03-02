@@ -89,7 +89,7 @@ share.filterOptions = function(options, additionalPermittedCharacters) {
     regexp = new RegExp(excludedOption + "=?[^\\s]*", "gi");
     options = options.replace(regexp, "");
   }
-  filter = new RegExp("[^\\s\\=\\-\\/\\,\\.\\:0-9a-z" + additionalPermittedCharacters + "]", "gi");
+  filter = new RegExp("[^\\s\\=\\-\\/\\,\\.\\:0-9a-z_" + additionalPermittedCharacters + "]", "gi");
   options = options.replace(filter, "");
   return options;
 };

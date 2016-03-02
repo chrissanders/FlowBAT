@@ -7,7 +7,7 @@ exec >  >(tee -a silkinstall.log)
 exec 2> >(tee -a silkinstall.log >&2)
 
 silkversion=$(echo "3.11.0.1")
-yafversion=$(echo "2.8.0")
+yafversion=$(echo "2.8.1")
 lfbversion=$(echo "1.7.1")
 workingDir=$PWD
 

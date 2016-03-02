@@ -3,7 +3,416 @@ template(name="help")
     .row
       .col-xs-12
         .panel
-          .panel-heading
-            h4.panel-title Help
           .panel-body
-            | Documentation will be here soon.
+            head
+              meta(charset='utf-8')
+              title Untitled Document.md
+              style.
+            body#preview
+              h1
+                a#FlowBAT_0
+                | FlowBAT Help
+              hr
+              p
+                a(href='http://www.flowbat.com/') FlowBAT
+                |  is a graphical flow-based analysis tool. Utilizing the power and versatility of network flow records,
+                a(href='http://www.flowbat.com/') FlowBAT
+                |  can help provide visibility for network administrators and network security practitioners.
+              p
+                | Whether you are a seasoned pro at using flow data or brand new to it, FlowBAT provides a user experience that should make it easy to rapidly track connections in to and out of your network. This includes
+              ul
+                li Investigating intrusion detection system alerts
+                li Tracking attacker activity through a network
+                li Troubleshooting network communication issues
+                li Learning more about the communication to/from devices on your network
+              h2
+                a#ToC
+                | Table of Contents
+              hr
+              h4
+                p(style='white-space:pre;')
+                  a(href='#FlowBAT_0') FlowBAT
+                  a(href='#Tech_10') Tech
+                  a(href='#Count_40') Count
+                  a(href='#Tech_10') Tech
+                  a(href='#Installation_14') Installation
+                  a(href='#Initial_Configuration_18') Initial Configuration
+              h5
+                p(style='white-space:pre;')
+                  a(href='#SiLK_Site_Configuration_File_20') - SiLK Site Configuration File
+                  a(href='#SiLK_Root_Directory_22') - SiLK Root Directory
+                  a(href='#Temporary_Storage_Directory_24') - Temporary Storage Directory
+              h4
+                a(href='#Basic_Usage_and_Best_Practices_27') Basic Usage and Best Practices
+              h5
+                p(style='white-space:pre;')
+                  a(href='#Filters_31') - Filters
+                  a(href='#Exclusions_38') - Exclusions
+                  a(href='#Stats_45') - Stats
+                  a(href='#Count_40') - Count
+                  a(href='#IP_Sets_53') - IP Sets
+                  a(href='#Tuple_Files_56') - Tuple Files
+                  a(href='#PCAP_Analysis') - PCAP Analysis
+                  a(href='#RWF_Analysis') - RWF Analysis
+              h4
+                a(href='#Layout_59') Layout
+              h5
+                p(style='white-space:pre;')
+                  a(href='#Dashboard_69') - Dashboard
+                  a(href='#Quick_Query_72') - Quick Query
+                  a(href='#Saved_Queries_75') - Saved Queries
+                  a(href='#IP_Sets_78') - IP Sets
+                  a(href='#Tuple_Files_81') - Tuple Files
+                  a(href='#Night_Mode') - Night Mode
+                  a(href='#Configuration_Settings_84') - Configuration Settings
+                  a(href='#User_Administration_86') - User Administration
+                  a(href='#SiLK_Server_Administration_88') - SiLK Server Administration
+                  a(href='#Help_90') - Help
+              h4
+                a(href='#Query_Examples_94') QueryExamples
+                a(href='#Additional_Notes_115') Additional Notes
+              h5
+                p(style='white-space:pre;')
+                  a(href='#Standards_117') - Standards
+                  a(href='#HTTPS_123') - HTTPS
+              h4
+                a(href='#Support_126') Support
+                a(href='#License_135') License
+              h3
+                a#Tech_10
+                | Tech
+              hr
+              p
+                a(href='http://www.flowbat.com/') FlowBAT
+                |  is written in Node.js using the Meteor framework. It is designed to work along side an existing
+                a(href='https://tools.netsa.cert.org/silk/') SiLK
+                | -based NetFlow system, or to be installed in conjunction with one.
+                a(href='http://www.flowbat.com/') FlowBAT
+                |  was written with ease of installation and deployment in mind.
+              h3
+                a#Installation_14
+                | Installation
+              hr
+              p
+                | If you’re reading this, you probably already succeeded at installing
+                a(href='http://www.flowbat.com/') FlowBAT
+                | . However, if you are perhaps not the installer and are looking to check out what went into getting this running, check out the
+                a(href='http://www.flowbat.com/installation.html') installation
+                |  documentation. It was probably just two scripts and maybe some manually configuration editing of sensor.conf and silk.conf.
+              h3
+                a#Initial_Configuration_18
+                | Initial Configuration
+              hr
+              h4
+                a#SiLK_Site_Configuration_File_20
+                | SiLK Site Configuration File
+              p
+                | This is the main configuration file that SiLK uses to interpret your sensor deployment. If you’ve installed using the scripts provided at
+                a(href='http://www.flowbat.com/') FlowBAT
+                | .com then it is /data/silk.conf
+              h4
+                a#SiLK_Root_Directory_22
+                | SiLK Root Directory
+              p
+                | This is the directory where you are storing flow data on the SiLK server. If you’ve installed using the scripts provided at
+                a(href='http://www.flowbat.com/') FlowBAT
+                | .com then it is /data/
+              h4
+                a#Temporary_Storage_Directory_24
+                | Temporary Storage Directory
+              p
+                | This is where temporary files, sets, rwf files, and generally anything else that FlowBAT needs to make and use later will be stored. It is easy to want to use /tmp/ as the directory but due to how the filesystem cleans it up regularly, it is not recommended. Instead, create a directory that you can manually control if needed.
+              h3
+                a#Basic_Usage_and_Best_Practices_27
+                | Basic Usage and Best Practices
+              hr
+              p
+                a(href='http://www.flowbat.com/') FlowBAT
+                |  can be used to search for flows, perform stats against user defined bins of flow data, or it can be used to count flows of a certain type and put them in timebased bins for a time based analysis. The record results are presented as a customizable table where columns can be moved around via mouse, and fields can be removed using selection boxes below the table. Single clicking a column will all data on the table in an ascending or descending order based on the column clicked. Every value in the table has a pivot capability when clicked. For instance, timestamps can be used to further customize the filter by adding a “Before/After 1 minute” to the filter simply by clicking and pivoting off of the user selected time in the table. IP addresses have lookup features in Robtex. More sources are being added via updates.
+                em Stats
+                |  and
+                em Count
+                |  output types can be presented as either a table or a chart.
+                em Stats
+                |  is based on
+                a(href='https://tools.netsa.cert.org/silk/rwstats.html') rwstats
+                |  and the tables have limited pivoting available for
+                em Stats Fields
+                | .
+                em Count
+                |  is based on
+                a(href='https://tools.netsa.cert.org/silk/rwcount.html') rwcount
+                |  and has static table output as well as line chart output. For more details on
+                em Stats
+                |  and
+                em Count
+                |  usage, see below.
+              h4
+                a#Filters_31
+                | Filters
+              p
+                | The most common usage of FlowBAT will be to use filters to search for specific flows from a SiLK datastore. The syntax for a query is implicitly “AND”, meaning that every record in a result will be a match of the combined result of all user provided options in the query. The goal is always to narrow down to smaller results via
+                em filters
+                | , and then you can do more specific carving using
+                em exclusions
+                | . Lets say that you are looking for traffic where either address is 192.168.1.15. Your filter will be as simple as:
+              pre
+                code
+                  | --any-address=192.168.1.15 --type=all
+              p
+                | The
+                em any-address
+                |  option says to look for 192.168.1.15 in source or destination IP address fields. The
+                em type
+                |  option is an input option that states that we want to look in all forms of traffic whether it is inbound, outbound, or internal to internal traffic. In this case the
+                em type
+                |  is redundant though due to liberties taken in FlowBAT to meet more common user use cases. We default to “all” for the
+                em type
+                |  field. See “Other Notes” at the end of this documentation for more detail.
+              h4
+                a#Exclusions_38
+                | Exclusions
+              p
+                em Exclusions
+                |  are used to narrow a filter’s results. Think of exclusions as doing an equal and opposite feature of filtering. Assume that you have a fair amount of SSH traffic and Google Hangouts traffic that is overwhelming a specific search. Hypothetically the following exclusion would remove records from the results that have [a source IP address of 192.168.1.15 and a source address of port 22] OR [UDP records with some local source IP addresses that looks like Google Hangouts traffic on ports 19302 through 19309]. You could write an exclusion as such:
+              pre
+                code
+                  | --saddress=192.168.1.15 --sport=22 OR --protocol=17 --scidr=192.168.0.0/16 --dcidr=173.194.0.0/16,74.125.0.0/16 --aport=19302-19309
+              p
+                | If you’re wanting to look for large groupings of IP addresses, you’ll want to generate IP sets. Please refer to the “IP Sets” section for more information. When filters alone won’t accomplish some goals of pulling very specific 5-tuple combinations, we allow the creation of 5-tuple files for use in the query builder. See “Tuple Files” for more information.
+              h4
+                a#Stats_45
+                | Stats
+              p
+                em Stats
+                |  is based on
+                a(href='https://tools.netsa.cert.org/silk/rwstats.html') rwstats
+                |  and is used to calculate top-n/bottom-n lists based on user definied fields and stat values.
+                em Stats
+                |  is best explained via examples and the best practice is usually to try to put into words what you are looking for first. For instance, you are looking for the [top 10 sIP-dIP pairs by bytes]. In this case you would specify “Top”, “Count=10”, select Source IP and Dest IP as fields, and select “Bytes” as the
+                em Stats Value
+                | . Multiple
+                em Stats Values
+                |  can be selected as long as the value does not match the field being searched for. In the event that you are pulling muliple stat values, you’ll want to select the *Primary Stats Value" that is most important to you. The other fields will be supplementary information, but will not be the main values being used to calculate against.
+              p
+                | Table output allows for pivoting on certain
+                em stats fields
+                |  but not on
+                em stats values
+                | . You can select between bar, column, and pie charts for the chart display. The chart uses a logarithmic scale due to the widely varying values when using multiple
+                em stats values
+              h4
+                a#Count_40
+                | Count
+              p
+                em Count
+                |  is based on
+                a(href='https://tools.netsa.cert.org/silk/rwcount.html') rwcount
+                |  and is used to summarize flow records over time, grouping record, byte, and packet counts into time bins of a user defined duration. Each row in the table output each data point on the line chart output represents one bin. If the user uses a 60 second bin size (the default is 30 seconds) this means that the total number of records/minute, bytes/minute, and packets/minute. Special considerations need to be taken when making charts with rwcount. If the time range specified is incredible long and the bin size is unreasonably small for that range, the chart will take a long time to create and it will be illegible if it actually appears. This is because you are loading the entire dataset onto one chart.
+              h4
+                a#IP_Sets_53
+                | IP Sets
+              p
+                em IP Sets
+                |  are user defined lists of IP addresses that can be edited in the “IP Sets” tab in the navbar at the top of the screen. There you will create an IP set that can be IP addresses, CIDR ranges, or combinations of the two. Saving the results will allow you to specify those sets in the query builder under the “host” subheading. As before, selecting
+                em any IP set
+                |  will add the
+                em anyset
+                |  option to the query. That option looks for any match from the sets, regardless if they occur as the source or destination IP address.
+              h4
+                a#Tuple_Files_56
+                | Tuple Files
+              p
+                em Tuple Files
+                |  allow you to specify up to an entire 5-tuple to search for, and by default it will search in any direction. This means that if you choose to only look for communications between two addresses, you can specify them in the file as something like “192.168.1.15,8.8.8.8”. You can save as many tuples as you would like in the file (just as you did in IP Sets), but specifying the options in the query builder is slightly more complex to give you more power in filtering. Under the “additional options” subheading in the query builder you’ll find Tuple File, Tuple Direction, Tuple Delimiter, and Tuple Fields. After selecting the tuple file that you’ve created, the tuple direction refers to what order you wish to search in. Selecting “both” will search for any occurence of the tuple elements regardless of where they appear in the individual record. This is the most common use case as it accomplishes a task that isn’t easily specified in default options. After specifying direction, you need to tell FlowBAT how the tuple file is formatted. Provide the delimiter that you chose (in this example we are using a comma
+                strong ,
+                | ), and tell FlowBAT what the elements are in the tuple. In this case, we can say
+                strong sip,dip
+                | . If we’ve chosen the tuple direction to be both, this really just implies that both of the values are IP addresses. Had we chosen otherwise, the sip,dip would have more meaning. Also, had we provided the full 5-tuple we might have used
+                strong sip,dip,sport,dport,protocol
+                |  to define the tuple fields.
+              h4
+                a#PCAP_Analysis
+                | PCAP Analysis
+              p
+                | PCAP analysis can be performed in FlowBAT by specifying the full path of the file at either the command line FlowBAT interface or the "Additional Options" tab. See the examples at the end of this documentation for more details.
+              pre
+                code
+                  | /home/jason/badguys.pcap --saddress=192.168.1.15 --aport=31337
+              h4
+                a#RWF_Analysis
+                | RWF Analysis
+              p
+                | RWF files are the binary files that SiLK tools operate on. These can also be created at the command line in cases where automation might be desired. If you need to review an rwf file in FlowBAT, simply specify it prior to the rest of the filter. 
+              pre
+                code
+                  | /home/jason/IOT.rwf --type=out,outweb --packets=4- --ack-flag=1
+              h3
+                a#Layout_59
+                | Layout
+              hr
+              p
+                a(href='http://www.flowbat.com/') FlowBAT
+                |  was created to be a more user-friendly frontend for the SiLK flow analysis tool suite. Seasoned professionals will notice that many tools are not immediately available to use, but instead have been packaged together in an effort to meet the most common SiLK analysis use-cases.
+                a(href='http://www.flowbat.com/') FlowBAT
+                |  allows the user to search and filter for flow data as well as run statistics based on the outputs. The main FlowBAT Interface is divided into six main sections:
+              ul
+                li Dashboard
+                li Quick Query
+                li Saved Queries
+                li IP Sets
+                li Tuple Files
+                li Configuration Settings
+              h4
+                a#Dashboard_69
+                | Dashboard
+              p
+                | If this is your first time booting up
+                a(href='http://www.flowbat.com/') FlowBAT
+                |  you might notice that the dashboard is a plain canvas. This is a place to put the output of saved queries. Those outputs might be bandwidth graphs or tables of records with interactions with malicious IP sets, or generally just anything you want. In order to make them actionable in a dashboard, you’ll want to make sure that the outputs are updated, so make sure that the intended queries have rolling times and periodic execution. At the top of the Dashboard is a quick query command interface input. This input allows for running a search spontaneously without navigating manually to other tabs. For the query builder, you will need to go to
+                em quick query
+                |  or
+                em saved queries
+                | .
+              h4
+                a#Quick_Query_72
+                | Quick Query
+              p
+                | Running a quick query is useful when you are just doing some regular hunting or providing situational awareness upon request. If it is something that you don’t think that you will keep, then quick query is the place to go. However, in the event that you just love something you’ve found, you can go ahead and make it a saved query on the fly from the quick query page. In the event that you cannot filter exactly how you want, or perhaps there is an outlier that you also want removed, you can also provide “exclusions” which will remove data from your results. See “Basic Usage and Best Practices”. There is also a query builder that provides individual descriptions and input fields for those not verse in SiLK syntax already. Each input contains a help bubble that can assist in understanding what fields mean. Upon adding fields in the query builder, the full SiLK query itself (in red) is populated below the input parameters. New users can take note of the syntax to ween themselves off of the query builder and opt to make use of quick query for a more streamlined experience.
+              h4
+                a#Saved_Queries_75
+                | Saved Queries
+              p
+                | The
+                em Saved Queries
+                |  tab shows all queries that you have saved. This tab also provides the actual SiLK queries needed to replicate from the command line on the server itself (useful for those wanting to learn SiLK syntax and run automated tasks against flow data). Query names in this list are referenced when selecting outputs to display on the dashboard.
+              h4
+                a#IP_Sets_78
+                | IP Sets
+              p
+                | Here you can create an IP set that can be IP addresses, CIDR ranges, or combinations of the two. Saving the results will allow you to specify those sets in the query builder under the “host” subheading. When creating IP sets it is recommended that you leave a note descibing the set and have a unique IP set name. The name will be referenced in the query builder. See “Basic Usage and Best Practices” for more details.
+              h4
+                a#Tuple_Files_81
+                | Tuple Files
+              p
+                | Here you can create a tuple file (see “Basic Usage and Best Practices” for more details on these unique files). Saving the results will allow you to specify those tuples in the query builder under the “Additional options” subheading. When creating tuple files it is recommended that you leave a note descibing the file and have a unique name. The name will be referenced in the query builder. See “Basic Usage and Best Practices” for more details.
+              h4
+                a#Night_Mode
+                | Night Mode
+              p
+                | Night Mode changes the visual theme of FlowBAT to make it easier on the eyes in darker environments. Simple click the sun/moon symbol to toggle. Night Mode is only available on webkit enabled browsers (Chrome, Safari, Opera).
+              h4
+                a#Configuration_Settings_84
+                | Configuration Settings
+              p These are options available to all users.
+              h5
+                a#User_Administration_86
+                | - User Administration
+              p Add, remove, or edit users.
+              h5
+                a#SiLK_Server_Administration_88
+                | - SiLK Server Administration
+              p
+                | Change initial FlowBAT configuration options such as silk.conf location, data directory, temporary storage directory, and SSH options. See “Initial Configuration” for more details.
+              h5
+                a#Help_90
+                | - Help
+              p You are here.
+              h3
+                a#Query_Examples_94
+                | Query Examples
+              hr
+              p
+                | Search for all records with IP address 192.168.1.15 as either source IP or dest IP
+              pre
+                code
+                  | Filter: --any-address=192.168.1.15
+              p Search for 192.168.1.15 but only show outbound flows
+              pre
+                code
+                  | Filter: --any-address=192.168.1.15 --type=out,outweb
+              p Look at the top 10 source-dest ip pairs with stats by bytes
+              pre
+                code
+                  | Filter: --protocol=0-255
+                  | Stats: --top --count=10 --fields=sip,dip --values=bytes
+              p
+                | Look at the top 10 list of destination country codes for outbound traffic by packets, excluding the United States, Great Britain, and private IP space
+              pre
+                code
+                  | Filter: --protocol=0-255 --type=out,outweb
+                  | Exclusion: --dcc=US,GB,--
+                  | Stats: --top --count=10 --fields=dcc --values=packets
+              p
+                | Examine a pre-made RWF file of IoT traffic to determine how much outbound data is traversing the network.
+              pre
+                code
+                  | Filter: /home/jason/IOT.rwf --type=out,outweb --packets=4- --ack-flag=1
+                  | Count: --bin-size=60
+              p
+                | Examine a PCAP file to generate a list of the top talking sip-dip pairs by bytes.
+              pre
+                code
+                  | Filter: /home/jason/badguys.pcap --protocol=0-255
+                  | Stats --top --count=10 --fields=sip,dip --values=bytes
+
+              h3
+                a#Additional_Notes_115
+                | Additional Notes
+              hr
+              h4
+                a#Standards_117
+                | Standards
+              p
+                a(href='http://www.flowbat.com/') FlowBAT
+                |  makes every attempt at keeping most of the standards set by
+                a(href='https://tools.netsa.cert.org/silk/') SiLK
+                |  and only deviates when it is in the analysts best interest. The most significant change is regarding the
+                em type
+                |  default values when creating a filter. If you’re a veteran of SiLK you’ll probably know that SiLK defaults to incoming traffic as per the
+                a(href='https://tools.netsa.cert.org/silk/rwfilter.html') rwfilter
+                |  documentation:
+              blockquote
+                p
+                  | The default-type list is determined by the value of CLASS, and the default types generally include only incoming traffic.
+              p
+                | In our experience analysts generally intend to start searching by looking through all flows collected and as such
+                strong
+                  | we have made “all” the default value for
+                  em type
+                | .
+              h4
+                a#HTTPS_123
+                | HTTPS
+              p
+                | We have also provided a script in the support folder of the project that allows the user to quickly set up an nginx proxy for https access. This script is only meant to ensure that connections made to FlowBAT are encrypted, but as with any security measures, you should customize the proxy configuration to your own liking if you desire any more than what is described here.
+              h3
+                a#Support_126
+                | Support
+              hr
+              p
+                | Don’t hesitate to email
+                a(href='support@flowbat.com') support
+                |  if you have any questions or feature requests about
+                a(href='http://www.flowbat.com/') FlowBAT
+                | . You can also submit
+                a(href='https://github.com/chrissanders/FlowBAT/issues') issues
+                |  if you feel inclined to submit bugs or requests via github.
+              p
+                | For more information on
+                a(href='https://tools.netsa.cert.org/silk/') SiLK
+                |  please see the [SiLK documentation] and for tool specific documentation, see the following
+              ul
+                li
+                  a(href='https://tools.netsa.cert.org/silk/rwfilter.html') rwfilter
+                li
+                  a(href='https://tools.netsa.cert.org/silk/rwstats.html') rwstats
+                li
+                  a(href='https://tools.netsa.cert.org/silk/rwcount.html') rwcount
+              h3
+                a#License_135
+                | License
+              p
+                | Refer to the
+                a(href='https://github.com/chrissanders/FlowBAT/blob/master/LICENSE.md') license
+                |  on the project page.

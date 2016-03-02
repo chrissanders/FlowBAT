@@ -374,6 +374,9 @@ executeQuery = function(query, config, profile, callback) {
     result = stdout.trim();
     error = stderr.trim();
     code = err ? err.code : 0;
+    if (error.indexOf("Rejected") !== -1) {
+      error = null;
+    }
     return callback(result, error, code);
   }));
 };
