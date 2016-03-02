@@ -1,1 +1,0 @@
-{"version":3,"sources":["users.hooks.coffee"],"names":[],"mappings":";AA6BuE","file":"/server/users.hooks.coffee.js","sourcesContent":["#Meteor.users.after.insert (userId, user) ->\n#  share.Queries.insert(\n#    ownerId: user._id\n#    isQuick: true\n#  )\n"]}
