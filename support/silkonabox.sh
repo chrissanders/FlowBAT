@@ -6,8 +6,8 @@
 exec >  >(tee -a silkinstall.log)
 exec 2> >(tee -a silkinstall.log >&2)
 
-silkversion=$(echo "3.11.0.1")
-yafversion=$(echo "2.8.1")
+silkversion=$(echo "3.12.1")
+yafversion=$(echo "2.8.4")
 lfbversion=$(echo "1.7.1")
 workingDir=$PWD
 
@@ -231,8 +231,8 @@ EOF
 fi
 
 ## Download country code database - These can be updated as needed via the commands below
-wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
-gzip -d -c GeoIP.dat.gz | rwgeoip2ccmap --encoded-input > country_codes.pmap
+wget http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
+unzip GeoIPCountryCSV.zip ; cat GeoIPCountryWhois.csv | rwgeoip2ccmap --csv-input > country_codes.pmap
 sudo mv country_codes.pmap /usr/local/share/silk/
 
 # Start up services
