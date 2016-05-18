@@ -90,107 +90,107 @@ if which rwp2yaf2silk > /dev/null; then
           exit 1
         fi
         else
-	# Download and Extract SiLK Components
-	if [ ! -f libfixbuf-1.6.0.tar.gz ]; then
-    		echo -e "$(tput setaf 6)libfixbuf-1.6.0.tar.gz not found. Downloading.$(tput sgr0)"
-    		wget http://tools.netsa.cert.org/releases/libfixbuf-1.6.0.tar.gz
+        # Download and Extract SiLK Components
+        if [ ! -f libfixbuf-1.7.1.tar.gz ]; then
+                echo -e "$(tput setaf 6)libfixbuf-1.7.1.tar.gz not found. Downloading.$(tput sgr0)"
+                wget http://tools.netsa.cert.org/releases/libfixbuf-1.7.1.tar.gz
       else
-        if ask "$(tput setaf 3)libfixbuf-1.6.0.tar.gz found. Remove original and download again?$(tput sgr0)"; then
+        if ask "$(tput setaf 3)libfixbuf-1.7.1.tar.gz found. Remove original and download again?$(tput sgr0)"; then
             echo
-            rm libfixbuf-1.6.0.tar.gz
-            wget http://tools.netsa.cert.org/releases/libfixbuf-1.6.0.tar.gz
+            rm libfixbuf-1.7.1.tar.gz
+            wget http://tools.netsa.cert.org/releases/libfixbuf-1.7.1.tar.gz
         fi
-	fi
-	if [ ! -f yaf-2.6.0.tar.gz ]; then
-    		echo -e "$(tput setaf 6)yaf-2.6.0.tar.gz not found. Downloading.$(tput sgr0)"
-    		wget http://tools.netsa.cert.org/releases/yaf-2.6.0.tar.gz
+        fi
+        if [ ! -f yaf-2.8.4.tar.gz ]; then
+                echo -e "$(tput setaf 6)yaf-2.8.4.tar.gz not found. Downloading.$(tput sgr0)"
+                wget http://tools.netsa.cert.org/releases/yaf-2.8.4.tar.gz
       else
-          if ask "$(tput setaf 3)yaf-2.6.0.tar.gz found. Remove original and download again?$(tput sgr0)"; then
+          if ask "$(tput setaf 3)yaf-2.8.4.tar.gz found. Remove original and download again?$(tput sgr0)"; then
               echo
-              rm yaf-2.6.0.tar.gz
-              wget http://tools.netsa.cert.org/releases/yaf-2.6.0.tar.gz
+              rm yaf-2.8.4.tar.gz
+              wget http://tools.netsa.cert.org/releases/yaf-2.8.4.tar.gz
           fi
-	fi
-	if [ ! -f silk-3.9.0.tar.gz ]; then
-    		echo -e "$(tput setaf 6)silk-3.9.0.tar.gz not found. Downloading.$(tput sgr0)"
-    		wget http://tools.netsa.cert.org/releases/silk-3.9.0.tar.gz
+        fi
+        if [ ! -f silk-3.12.1.tar.gz ]; then
+                echo -e "$(tput setaf 6)silk-3.12.1.tar.gz not found. Downloading.$(tput sgr0)"
+                wget http://tools.netsa.cert.org/releases/silk-3.12.1.tar.gz
       else
-            if ask "$(tput setaf 3)silk-3.9.0.tar.gz found. Remove original and download again?$(tput sgr0)"; then
+            if ask "$(tput setaf 3)silk-3.12.1.tar.gz found. Remove original and download again?$(tput sgr0)"; then
                 echo
-                rm silk-3.9.0.tar.gz
-                wget http://tools.netsa.cert.org/releases/silk-3.9.0.tar.gz
+                rm silk-3.12.1.tar.gz
+                wget http://tools.netsa.cert.org/releases/silk-3.12.1.tar.gz
             fi
-	fi
-	tar zxvf libfixbuf-1.6.0.tar.gz
-	tar zxvf yaf-2.6.0.tar.gz
-	tar zxvf silk-3.9.0.tar.gz
+        fi
+        tar zxvf libfixbuf-1.7.1.tar.gz
+        tar zxvf yaf-2.8.4.tar.gz
+        tar zxvf silk-3.12.1.tar.gz
 
-	# Install Libfixbuf
+        # Install Libfixbuf
   echo -e "$(tput setaf 6)Building libfixbuf...$(tput sgr0)"
-	cd libfixbuf-1.6.0/
-	./configure
-	make
-	sudo make install
+        cd libfixbuf-1.7.1/
+        ./configure
+        make
+        sudo make install
 
-	# Install YAF
+        # Install YAF
   echo -e "$(tput setaf 6)Building YAF...$(tput sgr0)"
-	cd ../yaf-2.6.0/
-	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-	./configure --enable-applabel
-	make
-	sudo make install
+        cd ../yaf-2.8.4/
+        export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+        ./configure --enable-applabel
+        make
+        sudo make install
 
-	# Create Data Directory and Install SiLK
-	sudo mkdir /data
-	echo -e "$(tput setaf 6)Building SiLK...$(tput sgr0)"
-  cd ../silk-3.9.0/
-	./configure --with-libfixbuf=/usr/local/lib/pkgconfig/ --with-python
-	make
-	sudo make install
+        # Create Data Directory and Install SiLK
+        sudo mkdir /data
+        echo -e "$(tput setaf 6)Building SiLK...$(tput sgr0)"
+  cd ../silk-3.12.1/
+        ./configure --with-libfixbuf=/usr/local/lib/pkgconfig/ --with-python
+        make
+        sudo make install
 
   echo "$(tput setaf 6)Cleaning up tar files...$(tput sgr0)"
-  rm ../libfixbuf-1.6.0.tar.gz
-  rm ../yaf-2.6.0.tar.gz
-  rm ../silk-3.9.0.tar.gz
+  rm ../libfixbuf-1.7.1.tar.gz
+  rm ../yaf-2.8.4.tar.gz
+  rm ../silk-3.12.1.tar.gz
 
-	# Configure SiLK
+        # Configure SiLK
   cat > silk.conf << "EOF"
-	  /usr/local/lib
-	  /usr/local/lib/silk
+          /usr/local/lib
+          /usr/local/lib/silk
 EOF
 
-	sudo mv silk.conf /etc/ld.so.conf.d/
-	sudo ldconfig
+        sudo mv silk.conf /etc/ld.so.conf.d/
+        sudo ldconfig
   sudo cp site/twoway/silk.conf /data
 
-	cat > sensors.conf << "EOF"
-	 probe S0 ipfix
-	 listen-on-port 18001
-	 protocol tcp
-	 listen-as-host 127.0.0.1
-	 end probe
-	 group my-network
-	 ipblocks 192.168.1.0/24 # address of eth0. CHANGE THIS.
-	 ipblocks 10.0.0.0/8 # other blocks you consider internal
-	 end group
-	 sensor S0
-	 ipfix-probes S0
-	 internal-ipblocks @my-network
-	 external-ipblocks remainder
-	 end sensor
+        cat > sensors.conf << "EOF"
+         probe S0 ipfix
+         listen-on-port 18001
+         protocol tcp
+         listen-as-host 127.0.0.1
+         end probe
+         group my-network
+         ipblocks 192.168.1.0/24 # address of eth0. CHANGE THIS.
+         ipblocks 10.0.0.0/8 # other blocks you consider internal
+         end group
+         sensor S0
+         ipfix-probes S0
+         internal-ipblocks @my-network
+         external-ipblocks remainder
+         end sensor
 EOF
 
-	sudo mv sensors.conf /data
+        sudo mv sensors.conf /data
 
-	cat /usr/local/share/silk/etc/rwflowpack.conf | \
-	sed 's/ENABLED=/ENABLED=yes/;' | \
-	sed 's/SENSOR_CONFIG=/SENSOR_CONFIG=\/data\/sensors.conf/;' | \
-	sed 's/SITE_CONFIG=/SITE_CONFIG=\/data\/silk.conf/' | \
-	sed 's/LOG_TYPE=syslog/LOG_TYPE=legacy/' | \
-	sed 's/LOG_DIR=.*/LOG_DIR=\/var\/log/' | \
-	sed 's/CREATE_DIRECTORIES=.*/CREATE_DIRECTORIES=yes/' \
-	>> rwflowpack.conf
-	sudo mv rwflowpack.conf /usr/local/etc/
+        cat /usr/local/share/silk/etc/rwflowpack.conf | \
+        sed 's/ENABLED=/ENABLED=yes/;' | \
+        sed 's/SENSOR_CONFIG=/SENSOR_CONFIG=\/data\/sensors.conf/;' | \
+        sed 's/SITE_CONFIG=/SITE_CONFIG=\/data\/silk.conf/' | \
+        sed 's/LOG_TYPE=syslog/LOG_TYPE=legacy/' | \
+        sed 's/LOG_DIR=.*/LOG_DIR=\/var\/log/' | \
+        sed 's/CREATE_DIRECTORIES=.*/CREATE_DIRECTORIES=yes/' \
+        >> rwflowpack.conf
+        sudo mv rwflowpack.conf /usr/local/etc/
 
 fi
 
@@ -212,6 +212,11 @@ if grep -q 'rwflowpack' /etc/rc.d/rc.local; then
               exit 0
         fi
 fi
+
+## Download country code database - These can be updated as needed via the commands below
+wget http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
+unzip GeoIPCountryCSV.zip ; cat GeoIPCountryWhois.csv | rwgeoip2ccmap --csv-input > country_codes.pmap
+sudo mv country_codes.pmap /usr/local/share/silk/
 
 if ask "$(tput setaf 3)Would you like to go ahead and start collecting data now?$(tput sgr0)"; then
   startNow=$(echo "---Collection Interface = $interface")
