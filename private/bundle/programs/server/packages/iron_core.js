@@ -8,11 +8,11 @@ var EJSON = Package.ejson.EJSON;
 /* Package-scope variables */
 var Iron;
 
-(function () {
+(function(){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                              //
-// packages/iron:core/lib/version_conflict_error.js                                             //
+// packages/iron_core/lib/version_conflict_error.js                                             //
 //                                                                                              //
 //////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                 //
@@ -44,11 +44,11 @@ if (Package['cmather:iron-core']) {                                             
 
 
 
-(function () {
+(function(){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                              //
-// packages/iron:core/lib/iron_core.js                                                          //
+// packages/iron_core/lib/iron_core.js                                                          //
 //                                                                                              //
 //////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                 //
@@ -96,7 +96,7 @@ Iron.utils.defaultValue = function (target, prop, value) {                      
  */                                                                                             // 42
 Iron.utils.inherits = function (Child, Parent, props) {                                         // 43
   Iron.utils.assert(typeof Child !== "undefined", "Child is undefined in inherits function");   // 44
-  Iron.utils.assert(typeof Parent !== "undefined", "Parent is undefined in inherits function"); // 45
+  Iron.utils.assert(typeof Parent !== "undefined", "Parent is undefined in inherits function");
                                                                                                 // 46
   // copy static fields                                                                         // 47
   for (var key in Parent) {                                                                     // 48
@@ -346,5 +346,3 @@ Package['iron:core'] = {
 };
 
 })();
-
-//# sourceMappingURL=iron_core.js.map

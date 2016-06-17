@@ -3,16 +3,17 @@
 /* Imports */
 var Meteor = Package.meteor.Meteor;
 var _ = Package.underscore._;
+var EJSON = Package.ejson.EJSON;
 var Iron = Package['iron:core'].Iron;
 
 /* Package-scope variables */
 var Handler, MiddlewareStack, Iron;
 
-(function () {
+(function(){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                     //
-// packages/iron:middleware-stack/lib/handler.js                                                       //
+// packages/iron_middleware-stack/lib/handler.js                                                       //
 //                                                                                                     //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                        //
@@ -64,79 +65,77 @@ Handler = function (path, fn, options) {                                        
     this.name = options.name;                                                                          // 46
   else if (typeof path === 'string' && path.charAt(0) !== '/')                                         // 47
     this.name = path;                                                                                  // 48
-  else if (fn && fn.name)                                                                              // 49
-    this.name = fn.name;                                                                               // 50
-  else if (typeof path === 'string' && path !== '/')                                                   // 51
-    this.name = path.split('/').slice(1).join('.');                                                    // 52
-                                                                                                       // 53
-  // if the path is explicitly set on the options (e.g. legacy router support)                         // 54
-  // then use that                                                                                     // 55
-  // otherwise use the path argument which could also be a name                                        // 56
-  path = options.path || path;                                                                         // 57
-                                                                                                       // 58
-  if (typeof path === 'string' && path.charAt(0) !== '/')                                              // 59
-    path = '/' + path;                                                                                 // 60
-                                                                                                       // 61
-  this.path = path;                                                                                    // 62
-  this.compiledUrl = new Url(path, options);                                                           // 63
-                                                                                                       // 64
-  if (_.isString(fn)) {                                                                                // 65
-    this.handle = function handle () {                                                                 // 66
-      // try to find a method on the current thisArg which might be a Controller                       // 67
-      // for example.                                                                                  // 68
-      var func = this[fn];                                                                             // 69
-                                                                                                       // 70
-      if (typeof func !== 'function')                                                                  // 71
-        throw new Error("No method named " + JSON.stringify(fn) + " found on handler.");               // 72
-                                                                                                       // 73
-      return func.apply(this, arguments);                                                              // 74
-    };                                                                                                 // 75
-  } else if (_.isFunction(fn)) {                                                                       // 76
-    // or just a regular old function                                                                  // 77
-    this.handle = fn;                                                                                  // 78
-  }                                                                                                    // 79
-};                                                                                                     // 80
-                                                                                                       // 81
-/**                                                                                                    // 82
- * Returns true if the path matches the handler's compiled url, method                                 // 83
- * and environment (e.g. client/server). If no options.method or options.where                         // 84
- * is provided, then only the path will be used to test.                                               // 85
- */                                                                                                    // 86
-Handler.prototype.test = function (path, options) {                                                    // 87
-  options = options || {};                                                                             // 88
-                                                                                                       // 89
-  var isUrlMatch = this.compiledUrl.test(path);                                                        // 90
-  var isMethodMatch = true;                                                                            // 91
-  var isEnvMatch = true;                                                                               // 92
-                                                                                                       // 93
-  if (this.method && options.method)                                                                   // 94
-    isMethodMatch = this.method == options.method.toLowerCase();                                       // 95
-                                                                                                       // 96
-  if (options.where)                                                                                   // 97
-    isEnvMatch = this.where == options.where;                                                          // 98
-                                                                                                       // 99
-  return isUrlMatch && isMethodMatch && isEnvMatch;                                                    // 100
-};                                                                                                     // 101
-                                                                                                       // 102
-Handler.prototype.params = function (path) {                                                           // 103
-  return this.compiledUrl.params(path);                                                                // 104
-};                                                                                                     // 105
-                                                                                                       // 106
-Handler.prototype.resolve = function (params, options) {                                               // 107
-  return this.compiledUrl.resolve(params, options);                                                    // 108
-};                                                                                                     // 109
-                                                                                                       // 110
-/**                                                                                                    // 111
- * Returns a new cloned Handler.                                                                       // 112
- * XXX problem is here because we're not storing the original path.                                    // 113
- */                                                                                                    // 114
-Handler.prototype.clone = function () {                                                                // 115
-  var clone = new Handler(this.path, this.handle, this.options);                                       // 116
-  // in case the original function had a name                                                          // 117
-  clone.name = this.name;                                                                              // 118
-  return clone;                                                                                        // 119
-};                                                                                                     // 120
-                                                                                                       // 121
+  else if (typeof path === 'string' && path !== '/')                                                   // 49
+    this.name = path.split('/').slice(1).join('.');                                                    // 50
+                                                                                                       // 51
+  // if the path is explicitly set on the options (e.g. legacy router support)                         // 52
+  // then use that                                                                                     // 53
+  // otherwise use the path argument which could also be a name                                        // 54
+  path = options.path || path;                                                                         // 55
+                                                                                                       // 56
+  if (typeof path === 'string' && path.charAt(0) !== '/')                                              // 57
+    path = '/' + path;                                                                                 // 58
+                                                                                                       // 59
+  this.path = path;                                                                                    // 60
+  this.compiledUrl = new Url(path, options);                                                           // 61
+                                                                                                       // 62
+  if (_.isString(fn)) {                                                                                // 63
+    this.handle = function handle () {                                                                 // 64
+      // try to find a method on the current thisArg which might be a Controller                       // 65
+      // for example.                                                                                  // 66
+      var func = this[fn];                                                                             // 67
+                                                                                                       // 68
+      if (typeof func !== 'function')                                                                  // 69
+        throw new Error("No method named " + JSON.stringify(fn) + " found on handler.");               // 70
+                                                                                                       // 71
+      return func.apply(this, arguments);                                                              // 72
+    };                                                                                                 // 73
+  } else if (_.isFunction(fn)) {                                                                       // 74
+    // or just a regular old function                                                                  // 75
+    this.handle = fn;                                                                                  // 76
+  }                                                                                                    // 77
+};                                                                                                     // 78
+                                                                                                       // 79
+/**                                                                                                    // 80
+ * Returns true if the path matches the handler's compiled url, method                                 // 81
+ * and environment (e.g. client/server). If no options.method or options.where                         // 82
+ * is provided, then only the path will be used to test.                                               // 83
+ */                                                                                                    // 84
+Handler.prototype.test = function (path, options) {                                                    // 85
+  options = options || {};                                                                             // 86
+                                                                                                       // 87
+  var isUrlMatch = this.compiledUrl.test(path);                                                        // 88
+  var isMethodMatch = true;                                                                            // 89
+  var isEnvMatch = true;                                                                               // 90
+                                                                                                       // 91
+  if (this.method && options.method)                                                                   // 92
+    isMethodMatch = this.method == options.method.toLowerCase();                                       // 93
+                                                                                                       // 94
+  if (options.where)                                                                                   // 95
+    isEnvMatch = this.where == options.where;                                                          // 96
+                                                                                                       // 97
+  return isUrlMatch && isMethodMatch && isEnvMatch;                                                    // 98
+};                                                                                                     // 99
+                                                                                                       // 100
+Handler.prototype.params = function (path) {                                                           // 101
+  return this.compiledUrl.params(path);                                                                // 102
+};                                                                                                     // 103
+                                                                                                       // 104
+Handler.prototype.resolve = function (params, options) {                                               // 105
+  return this.compiledUrl.resolve(params, options);                                                    // 106
+};                                                                                                     // 107
+                                                                                                       // 108
+/**                                                                                                    // 109
+ * Returns a new cloned Handler.                                                                       // 110
+ * XXX problem is here because we're not storing the original path.                                    // 111
+ */                                                                                                    // 112
+Handler.prototype.clone = function () {                                                                // 113
+  var clone = new Handler(this.path, this.handle, this.options);                                       // 114
+  // in case the original function had a name                                                          // 115
+  clone.name = this.name;                                                                              // 116
+  return clone;                                                                                        // 117
+};                                                                                                     // 118
+                                                                                                       // 119
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
@@ -146,11 +145,11 @@ Handler.prototype.clone = function () {                                         
 
 
 
-(function () {
+(function(){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                     //
-// packages/iron:middleware-stack/lib/middleware_stack.js                                              //
+// packages/iron_middleware-stack/lib/middleware_stack.js                                              //
 //                                                                                                     //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                        //
@@ -283,9 +282,9 @@ MiddlewareStack.prototype.concat = function (/* stack1, stack2, */) {           
   var ret = new MiddlewareStack;                                                                       // 127
   var concat = Array.prototype.concat;                                                                 // 128
   var clonedThisStack = EJSON.clone(this._stack);                                                      // 129
-  var clonedOtherStacks = _.map(_.toArray(arguments), function (s) { return EJSON.clone(s._stack); }); // 130
+  var clonedOtherStacks = _.map(_.toArray(arguments), function (s) { return EJSON.clone(s._stack); });
   ret._stack = concat.apply(clonedThisStack, clonedOtherStacks);                                       // 131
-  this.length = ret._stack.length;                                                                     // 132
+  ret.length = ret._stack.length;                                                                      // 132
   return ret;                                                                                          // 133
 };                                                                                                     // 134
                                                                                                        // 135
@@ -449,5 +448,3 @@ Package['iron:middleware-stack'] = {
 };
 
 })();
-
-//# sourceMappingURL=iron_middleware-stack.js.map

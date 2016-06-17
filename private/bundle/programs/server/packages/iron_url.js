@@ -8,11 +8,11 @@ var Iron = Package['iron:core'].Iron;
 /* Package-scope variables */
 var compilePath, Url;
 
-(function () {
+(function(){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                          //
-// packages/iron:url/lib/compiler.js                                                                        //
+// packages/iron_url/lib/compiler.js                                                                        //
 //                                                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                             //
@@ -143,7 +143,7 @@ function pathtoRegexp (path, keys, options) {                                   
   }                                                                                                         // 125
                                                                                                             // 126
   // Alter the path string into a usable regexp.                                                            // 127
-  path = path.replace(PATH_REGEXP, function (match, escaped, prefix, key, capture, group, suffix, escape) { // 128
+  path = path.replace(PATH_REGEXP, function (match, escaped, prefix, key, capture, group, suffix, escape) {
     // Avoiding re-escaping escaped characters.                                                             // 129
     if (escaped) {                                                                                          // 130
       return escaped;                                                                                       // 131
@@ -218,11 +218,11 @@ compilePath = pathtoRegexp;                                                     
 
 
 
-(function () {
+(function(){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                          //
-// packages/iron:url/lib/url.js                                                                             //
+// packages/iron_url/lib/url.js                                                                             //
 //                                                                                                          //
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                             //
@@ -236,7 +236,7 @@ var warn = Iron.utils.warn;                                                     
 /*****************************************************************************/                             // 8
 function safeDecodeURIComponent (val) {                                                                     // 9
   try {                                                                                                     // 10
-    return decodeURIComponent(val).replace(/\+/g, ' ');                                                     // 11
+    return decodeURIComponent(val.replace(/\+/g, ' '));                                                     // 11
   } catch (e) {                                                                                             // 12
     if (e.constructor == URIError) {                                                                        // 13
       warn("Tried to decode an invalid URI component: " + JSON.stringify(val) + " " + e.stack);             // 14
@@ -248,7 +248,7 @@ function safeDecodeURIComponent (val) {                                         
                                                                                                             // 20
 function safeDecodeURI (val) {                                                                              // 21
   try {                                                                                                     // 22
-    return decodeURI(val).replace(/\+/g, ' ');                                                              // 23
+    return decodeURI(val.replace(/\+/g, ' '));                                                              // 23
   } catch (e) {                                                                                             // 24
     if (e.constructor == URIError) {                                                                        // 25
       warn("Tried to decode an invalid URI: " + JSON.stringify(val) + " " + e.stack);                       // 26
@@ -360,7 +360,7 @@ Url.toQueryString = function (queryObject) {                                    
   _.each(queryObject, function (value, key) {                                                               // 132
     if (_.isArray(value)) {                                                                                 // 133
       _.each(value, function(valuePart) {                                                                   // 134
-        result.push(encodeURIComponent(key + '[]') + '=' + encodeURIComponent(valuePart));                  // 135
+        result.push(encodeURIComponent(key) + '[]=' + encodeURIComponent(valuePart));                       // 135
       });                                                                                                   // 136
     } else {                                                                                                // 137
       result.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));                               // 138
@@ -549,67 +549,68 @@ Url.prototype.resolve = function (params, options) {                            
         /(\/)?(\.)?:(\w+)(?:(\(.*?\)))?(\?)?/g,                                                             // 321
         function (match, slash, format, key, capture, optional, offset) {                                   // 322
           slash = slash || '';                                                                              // 323
-          value = params[key];                                                                              // 324
-          isValueDefined = typeof value !== 'undefined';                                                    // 325
-                                                                                                            // 326
-          if (optional && !isValueDefined) {                                                                // 327
-            value = '';                                                                                     // 328
-          } else if (!isValueDefined) {                                                                     // 329
-            missingParams.push(key);                                                                        // 330
-            return;                                                                                         // 331
-          }                                                                                                 // 332
-                                                                                                            // 333
-          value = _.isFunction(value) ? value.call(params) : value;                                         // 334
-          var escapedValue = _.map(String(value).split('/'), function (segment) {                           // 335
-            return encodeURIComponent(segment);                                                             // 336
-          }).join('/');                                                                                     // 337
-          return slash + escapedValue                                                                       // 338
-        }                                                                                                   // 339
-      )                                                                                                     // 340
-      .replace(                                                                                             // 341
-        /\*/g,                                                                                              // 342
-        function (match) {                                                                                  // 343
-          if (typeof params[wildCardCount] === 'undefined') {                                               // 344
-            throw new Error(                                                                                // 345
-              'You are trying to access a wild card parameter at index ' +                                  // 346
-              wildCardCount +                                                                               // 347
-              ' but the value of params at that index is undefined');                                       // 348
-          }                                                                                                 // 349
-                                                                                                            // 350
-          var paramValue = String(params[wildCardCount++]);                                                 // 351
-          return _.map(paramValue.split('/'), function (segment) {                                          // 352
-            return encodeURIComponent(segment);                                                             // 353
-          }).join('/');                                                                                     // 354
-        }                                                                                                   // 355
-      );                                                                                                    // 356
-                                                                                                            // 357
-    query = Url.toQueryString(query);                                                                       // 358
-                                                                                                            // 359
-    path = path + query;                                                                                    // 360
-                                                                                                            // 361
-    if (hash) {                                                                                             // 362
-      hash = encodeURI(hash.replace('#', ''));                                                              // 363
-      path = path + '#' + hash;                                                                             // 364
-    }                                                                                                       // 365
-  }                                                                                                         // 366
-                                                                                                            // 367
-  // Because of optional possibly empty segments we normalize path here                                     // 368
-  path = path.replace(/\/+/g, '/'); // Multiple / -> one /                                                  // 369
-  path = path.replace(/^(.+)\/$/g, '$1'); // Removal of trailing /                                          // 370
-                                                                                                            // 371
-  if (missingParams.length == 0)                                                                            // 372
-    return path;                                                                                            // 373
-  else if (options.throwOnMissingParams === true)                                                           // 374
+          format = format || '';                                                                            // 324
+          value = params[key];                                                                              // 325
+          isValueDefined = typeof value !== 'undefined';                                                    // 326
+                                                                                                            // 327
+          if (optional && !isValueDefined) {                                                                // 328
+            value = '';                                                                                     // 329
+          } else if (!isValueDefined) {                                                                     // 330
+            missingParams.push(key);                                                                        // 331
+            return;                                                                                         // 332
+          }                                                                                                 // 333
+                                                                                                            // 334
+          value = _.isFunction(value) ? value.call(params) : value;                                         // 335
+          var escapedValue = _.map(String(value).split('/'), function (segment) {                           // 336
+            return encodeURIComponent(segment);                                                             // 337
+          }).join('/');                                                                                     // 338
+          return slash + format + escapedValue;                                                             // 339
+        }                                                                                                   // 340
+      )                                                                                                     // 341
+      .replace(                                                                                             // 342
+        /\*/g,                                                                                              // 343
+        function (match) {                                                                                  // 344
+          if (typeof params[wildCardCount] === 'undefined') {                                               // 345
+            throw new Error(                                                                                // 346
+              'You are trying to access a wild card parameter at index ' +                                  // 347
+              wildCardCount +                                                                               // 348
+              ' but the value of params at that index is undefined');                                       // 349
+          }                                                                                                 // 350
+                                                                                                            // 351
+          var paramValue = String(params[wildCardCount++]);                                                 // 352
+          return _.map(paramValue.split('/'), function (segment) {                                          // 353
+            return encodeURIComponent(segment);                                                             // 354
+          }).join('/');                                                                                     // 355
+        }                                                                                                   // 356
+      );                                                                                                    // 357
+                                                                                                            // 358
+    query = Url.toQueryString(query);                                                                       // 359
+                                                                                                            // 360
+    path = path + query;                                                                                    // 361
+                                                                                                            // 362
+    if (hash) {                                                                                             // 363
+      hash = encodeURI(hash.replace('#', ''));                                                              // 364
+      path = path + '#' + hash;                                                                             // 365
+    }                                                                                                       // 366
+  }                                                                                                         // 367
+                                                                                                            // 368
+  // Because of optional possibly empty segments we normalize path here                                     // 369
+  path = path.replace(/\/+/g, '/'); // Multiple / -> one /                                                  // 370
+  path = path.replace(/^(.+)\/$/g, '$1'); // Removal of trailing /                                          // 371
+                                                                                                            // 372
+  if (missingParams.length == 0)                                                                            // 373
+    return path;                                                                                            // 374
+  else if (options.throwOnMissingParams === true)                                                           // 375
     throw new Error("Missing required parameters on path " + JSON.stringify(this._originalPath) + ". The missing params are: " + JSON.stringify(missingParams) + ". The params object passed in was: " + JSON.stringify(originalParams) + ".");
-  else                                                                                                      // 376
-    return null;                                                                                            // 377
-};                                                                                                          // 378
-                                                                                                            // 379
-/*****************************************************************************/                             // 380
-/* Namespacing */                                                                                           // 381
-/*****************************************************************************/                             // 382
-Iron.Url = Url;                                                                                             // 383
-                                                                                                            // 384
+  else                                                                                                      // 377
+    return null;                                                                                            // 378
+};                                                                                                          // 379
+                                                                                                            // 380
+/*****************************************************************************/                             // 381
+/* Namespacing */                                                                                           // 382
+/*****************************************************************************/                             // 383
+Iron.Url = Url;                                                                                             // 384
+                                                                                                            // 385
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
@@ -620,5 +621,3 @@ if (typeof Package === 'undefined') Package = {};
 Package['iron:url'] = {};
 
 })();
-
-//# sourceMappingURL=iron_url.js.map
