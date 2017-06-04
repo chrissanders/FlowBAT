@@ -111,19 +111,19 @@ if which rwp2yaf2silk > /dev/null; then
               wget http://tools.netsa.cert.org/releases/yaf-2.8.4.tar.gz
           fi
         fi
-        if [ ! -f silk-3.12.1.tar.gz ]; then
-                echo -e "$(tput setaf 6)silk-3.12.1.tar.gz not found. Downloading.$(tput sgr0)"
-                wget http://tools.netsa.cert.org/releases/silk-3.12.1.tar.gz
+        if [ ! -f silk-3.15.0.tar.gz ]; then
+                echo -e "$(tput setaf 6)silk-3.15.0.tar.gz not found. Downloading.$(tput sgr0)"
+                wget http://tools.netsa.cert.org/releases/silk-3.15.0.tar.gz
       else
-            if ask "$(tput setaf 3)silk-3.12.1.tar.gz found. Remove original and download again?$(tput sgr0)"; then
+            if ask "$(tput setaf 3)silk-3.15.0.tar.gz found. Remove original and download again?$(tput sgr0)"; then
                 echo
-                rm silk-3.12.1.tar.gz
-                wget http://tools.netsa.cert.org/releases/silk-3.12.1.tar.gz
+                rm silk-3.15.0.tar.gz
+                wget http://tools.netsa.cert.org/releases/silk-3.15.0.tar.gz
             fi
         fi
         tar zxvf libfixbuf-1.7.1.tar.gz
         tar zxvf yaf-2.8.4.tar.gz
-        tar zxvf silk-3.12.1.tar.gz
+        tar zxvf silk-3.15.0.tar.gz
 
         # Install Libfixbuf
   echo -e "$(tput setaf 6)Building libfixbuf...$(tput sgr0)"
@@ -143,7 +143,7 @@ if which rwp2yaf2silk > /dev/null; then
         # Create Data Directory and Install SiLK
         sudo mkdir /data
         echo -e "$(tput setaf 6)Building SiLK...$(tput sgr0)"
-  cd ../silk-3.12.1/
+  cd ../silk-3.15.0/
         ./configure --with-libfixbuf=/usr/local/lib/pkgconfig/ --with-python
         make
         sudo make install
@@ -151,7 +151,7 @@ if which rwp2yaf2silk > /dev/null; then
   echo "$(tput setaf 6)Cleaning up tar files...$(tput sgr0)"
   rm ../libfixbuf-1.7.1.tar.gz
   rm ../yaf-2.8.4.tar.gz
-  rm ../silk-3.12.1.tar.gz
+  rm ../silk-3.15.0.tar.gz
 
         # Configure SiLK
   cat > silk.conf << "EOF"
