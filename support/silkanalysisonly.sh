@@ -6,7 +6,7 @@
 exec >  >(tee -a silkanalysisinstall.log)
 exec 2> >(tee -a silkanalysisinstall.log >&2)
 
-silkversion=$(echo "3.11.0.1")
+silkversion=$(echo "3.15.0")
 lfbversion=$(echo "1.7.1")
 workingDir=$PWD
 
