@@ -132,7 +132,7 @@ echo ""
 echo "$(tput setaf 6)Checking for meteor...$(tput sgr0)"
 if ! which meteor > /dev/null; then
         echo -e "$(tput setaf 6)Meteor not installed. Attempting Install.$(tput sgr0)"
-        curl https://install.meteor.com | /bin/sh
+        curl https://install.meteor.com/?release=0.9.1 | /bin/sh
 fi
 
 #Arranging for localhost configuration
