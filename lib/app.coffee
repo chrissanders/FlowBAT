@@ -161,7 +161,7 @@ share.filterOptions = (options, additionalPermittedCharacters = "") ->
 
 share.isDebug = Meteor.settings.public.isDebug
 
-object = if typeof(window) != "undefined" then window else GLOBAL
+object = if typeof(window) != "undefined" then window else global
 object.isDebug = share.isDebug
 if typeof(console) != "undefined" && console.log && _.isFunction(console.log)
   object.cl = _.bind(console.log, console)

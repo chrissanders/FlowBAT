@@ -6,11 +6,16 @@
 standard-app-packages
 iron:router
 coffeescript
-stylus
+stylus@2.513.13
 mquandalle:jade
 matb33:collection-hooks
-accounts-password
-meteorhacks:fast-render
+accounts-password@1.5.0
+staringatlights:fast-render
+# meteorhacks:fast-render - not supported anymore
 cmather:handlebars-server
-email
-jquery
+email@1.2.3
+jquery@1.11.10
+standard-minifier-css
+standard-minifier-js
+shell-server
+dynamic-import
