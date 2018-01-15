@@ -1,0 +1,529 @@
+{
+  "format": "javascript-image-pre1",
+  "arch": "os",
+  "load": [
+    {
+      "node_modules": "npm/node_modules/meteor/meteor/node_modules",
+      "path": "packages/meteor.js"
+    },
+    {
+      "path": "packages/standard-app-packages.js"
+    },
+    {
+      "path": "packages/underscore.js"
+    },
+    {
+      "path": "packages/ecmascript-runtime.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/modules-runtime/node_modules",
+      "path": "packages/modules-runtime.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/modules/node_modules",
+      "path": "packages/modules.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/ecmascript-runtime-server/node_modules",
+      "path": "packages/ecmascript-runtime-server.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/babel-compiler/node_modules",
+      "path": "packages/babel-compiler.js"
+    },
+    {
+      "sourceMap": "packages/ecmascript.js.map",
+      "path": "packages/ecmascript.js"
+    },
+    {
+      "path": "packages/base64.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/promise/node_modules",
+      "path": "packages/promise.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/babel-runtime/node_modules",
+      "path": "packages/babel-runtime.js"
+    },
+    {
+      "sourceMap": "packages/ejson.js.map",
+      "path": "packages/ejson.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/logging/node_modules",
+      "path": "packages/logging.js"
+    },
+    {
+      "path": "packages/routepolicy.js"
+    },
+    {
+      "sourceMap": "packages/boilerplate-generator.js.map",
+      "path": "packages/boilerplate-generator.js"
+    },
+    {
+      "sourceMap": "packages/webapp-hashing.js.map",
+      "path": "packages/webapp-hashing.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/webapp/node_modules",
+      "sourceMap": "packages/webapp.js.map",
+      "path": "packages/webapp.js"
+    },
+    {
+      "path": "packages/jquery.js"
+    },
+    {
+      "path": "packages/tracker.js"
+    },
+    {
+      "path": "packages/check.js"
+    },
+    {
+      "path": "packages/id-map.js"
+    },
+    {
+      "sourceMap": "packages/random.js.map",
+      "path": "packages/random.js"
+    },
+    {
+      "path": "packages/mongo-id.js"
+    },
+    {
+      "path": "packages/diff-sequence.js"
+    },
+    {
+      "path": "packages/observe-sequence.js"
+    },
+    {
+      "path": "packages/reactive-var.js"
+    },
+    {
+      "path": "packages/ordered-dict.js"
+    },
+    {
+      "path": "packages/deps.js"
+    },
+    {
+      "path": "packages/htmljs.js"
+    },
+    {
+      "path": "packages/blaze.js"
+    },
+    {
+      "path": "packages/ui.js"
+    },
+    {
+      "path": "packages/spacebars.js"
+    },
+    {
+      "path": "packages/templating-compiler.js"
+    },
+    {
+      "path": "packages/templating-runtime.js"
+    },
+    {
+      "path": "packages/templating.js"
+    },
+    {
+      "path": "packages/iron_core.js"
+    },
+    {
+      "path": "packages/iron_dynamic-template.js"
+    },
+    {
+      "path": "packages/iron_layout.js"
+    },
+    {
+      "path": "packages/iron_url.js"
+    },
+    {
+      "path": "packages/iron_middleware-stack.js"
+    },
+    {
+      "path": "packages/iron_location.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/npm-mongo/node_modules",
+      "path": "packages/npm-mongo.js"
+    },
+    {
+      "path": "packages/geojson-utils.js"
+    },
+    {
+      "sourceMap": "packages/minimongo.js.map",
+      "path": "packages/minimongo.js"
+    },
+    {
+      "path": "packages/retry.js"
+    },
+    {
+      "path": "packages/callback-hook.js"
+    },
+    {
+      "path": "packages/ddp-common.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/ddp-client/node_modules",
+      "sourceMap": "packages/ddp-client.js.map",
+      "path": "packages/ddp-client.js"
+    },
+    {
+      "path": "packages/rate-limit.js"
+    },
+    {
+      "path": "packages/ddp-rate-limiter.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/ddp-server/node_modules",
+      "sourceMap": "packages/ddp-server.js.map",
+      "path": "packages/ddp-server.js"
+    },
+    {
+      "path": "packages/ddp.js"
+    },
+    {
+      "sourceMap": "packages/allow-deny.js.map",
+      "path": "packages/allow-deny.js"
+    },
+    {
+      "path": "packages/binary-heap.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/mongo/node_modules",
+      "sourceMap": "packages/mongo.js.map",
+      "path": "packages/mongo.js"
+    },
+    {
+      "sourceMap": "packages/reactive-dict.js.map",
+      "path": "packages/reactive-dict.js"
+    },
+    {
+      "path": "packages/iron_controller.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/iron_router/node_modules",
+      "path": "packages/iron_router.js"
+    },
+    {
+      "path": "packages/coffeescript.js"
+    },
+    {
+      "path": "packages/stylus.js"
+    },
+    {
+      "path": "packages/mquandalle_jade.js"
+    },
+    {
+      "sourceMap": "packages/accounts-base.js.map",
+      "path": "packages/accounts-base.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/matb33_collection-hooks/node_modules",
+      "path": "packages/matb33_collection-hooks.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/npm-bcrypt/node_modules",
+      "path": "packages/npm-bcrypt.js"
+    },
+    {
+      "path": "packages/sha.js"
+    },
+    {
+      "path": "packages/srp.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/email/node_modules",
+      "path": "packages/email.js"
+    },
+    {
+      "sourceMap": "packages/accounts-password.js.map",
+      "path": "packages/accounts-password.js"
+    },
+    {
+      "path": "packages/staringatlights_inject-data.js",
+      "assets": {
+        "lib/inject.html": "assets/packages/staringatlights_inject-data/lib/inject.html"
+      }
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/meteorhacks_picker/node_modules",
+      "path": "packages/meteorhacks_picker.js"
+    },
+    {
+      "path": "packages/meteorhacks_meteorx.js"
+    },
+    {
+      "path": "packages/livedata.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/staringatlights_fast-render/node_modules",
+      "path": "packages/staringatlights_fast-render.js"
+    },
+    {
+      "path": "packages/handlebars.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/cmather_handlebars-server/node_modules",
+      "path": "packages/cmather_handlebars-server.js"
+    },
+    {
+      "path": "packages/standard-minifier-css.js"
+    },
+    {
+      "path": "packages/standard-minifier-js.js"
+    },
+    {
+      "sourceMap": "packages/shell-server.js.map",
+      "path": "packages/shell-server.js"
+    },
+    {
+      "sourceMap": "packages/dynamic-import.js.map",
+      "path": "packages/dynamic-import.js"
+    },
+    {
+      "path": "packages/reload.js"
+    },
+    {
+      "path": "packages/autoupdate.js"
+    },
+    {
+      "path": "packages/meteor-platform.js"
+    },
+    {
+      "path": "packages/session.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "packages/global-imports.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/lib/matches.coffee.map",
+      "path": "app/server/security/lib/matches.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/lib/securityRulesWrapper.coffee.map",
+      "path": "app/server/security/lib/securityRulesWrapper.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "app/lib/compatibility/i18next-1.7.3.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "app/lib/compatibility/moment.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "app/lib/compatibility/underscore.string.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "app/lib/compatibility/xss.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/lib/app.coffee.map",
+      "path": "app/lib/app.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/lib/regexps.coffee.map",
+      "path": "app/lib/regexps.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/lib/security.coffee.map",
+      "path": "app/lib/security.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/lib/transformations.coffee.map",
+      "path": "app/lib/transformations.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "app/server/emailTemplates/handlebars.newUserHtml.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "app/server/emailTemplates/handlebars.newUserSubject.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "app/server/emailTemplates/handlebars.resetPasswordHtml.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "app/server/emailTemplates/handlebars.resetPasswordSubject.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "app/server/exec/exec.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/i18n/_.coffee.map",
+      "path": "app/server/i18n/_.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/i18n/en.coffee.map",
+      "path": "app/server/i18n/en.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/model/collections.coffee.map",
+      "path": "app/server/model/collections.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/model/publications.coffee.map",
+      "path": "app/server/model/publications.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/configs.coffee.map",
+      "path": "app/server/security/configs.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/ipsets.coffee.map",
+      "path": "app/server/security/ipsets.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/queries.coffee.map",
+      "path": "app/server/security/queries.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/tuples.coffee.map",
+      "path": "app/server/security/tuples.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/users.coffee.map",
+      "path": "app/server/security/users.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/configs.defaults.coffee.map",
+      "path": "app/common/configs.defaults.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/ipsets.defaults.coffee.map",
+      "path": "app/common/ipsets.defaults.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/ipsets.hooks.coffee.map",
+      "path": "app/common/ipsets.hooks.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/queries.defaults.coffee.map",
+      "path": "app/common/queries.defaults.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/queries.hooks.coffee.map",
+      "path": "app/common/queries.hooks.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/tuples.defaults.coffee.map",
+      "path": "app/common/tuples.defaults.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/tuples.hooks.coffee.map",
+      "path": "app/common/tuples.hooks.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/users.defaults.coffee.map",
+      "path": "app/common/users.defaults.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/cleanup.coffee.map",
+      "path": "app/server/cleanup.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/configs.hooks.coffee.map",
+      "path": "app/server/configs.hooks.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/cron.coffee.map",
+      "path": "app/server/cron.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/executingAt.query.hooks.coffee.map",
+      "path": "app/server/executingAt.query.hooks.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/execution.coffee.map",
+      "path": "app/server/execution.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/fastrender.coffee.map",
+      "path": "app/server/fastrender.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/fixtures.coffee.map",
+      "path": "app/server/fixtures.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/helpers.coffee.map",
+      "path": "app/server/helpers.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "path": "app/server/meteor-security-patch.js"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/methods.coffee.map",
+      "path": "app/server/methods.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/periodic.execution.coffee.map",
+      "path": "app/server/periodic.execution.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/queries.hooks.coffee.map",
+      "path": "app/server/queries.hooks.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/routing.coffee.map",
+      "path": "app/server/routing.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/startup.coffee.map",
+      "path": "app/server/startup.coffee"
+    },
+    {
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/users.hooks.coffee.map",
+      "path": "app/server/users.hooks.coffee"
+    },
+    {
+      "path": "packages/service-configuration.js"
+    }
+  ]
+}
