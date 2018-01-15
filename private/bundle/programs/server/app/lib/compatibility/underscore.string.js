@@ -672,4 +672,4 @@
   root._.string = root._.str = _s;
 }(this, String);
 
-})();
+}).call(this);

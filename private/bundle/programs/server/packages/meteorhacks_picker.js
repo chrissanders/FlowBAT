@@ -2,14 +2,24 @@
 
 /* Imports */
 var Meteor = Package.meteor.Meteor;
+var global = Package.meteor.global;
+var meteorEnv = Package.meteor.meteorEnv;
 var WebApp = Package.webapp.WebApp;
-var main = Package.webapp.main;
 var WebAppInternals = Package.webapp.WebAppInternals;
+var main = Package.webapp.main;
 var _ = Package.underscore._;
 
 /* Package-scope variables */
-var Picker, PickerImp;
+var PickerImp, Picker;
 
+(function(){
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                      //
+// packages/meteorhacks_picker/packages/meteorhacks_picker.js                           //
+//                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////
+                                                                                        //
 (function () {
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -77,7 +87,7 @@ PickerImp.prototype._dispatch = function(req, res, bypass) {                    
       if(m) {                                                                    // 57
         var params = self._buildParams(route.keys, m);                           // 58
         params.query = urlParse(req.url, true).query;                            // 59
-        self._processRoute(route.callback, params, req, res, processNextRoute);  // 60
+        self._processRoute(route.callback, params, req, res, bypass);            // 60
       } else {                                                                   // 61
         processNextRoute();                                                      // 62
       }                                                                          // 63
@@ -156,13 +166,18 @@ WebApp.rawConnectHandlers.use(function(req, res, next) {                        
 
 }).call(this);
 
+//////////////////////////////////////////////////////////////////////////////////////////
+
+}).call(this);
+
 
 /* Exports */
 if (typeof Package === 'undefined') Package = {};
-Package['meteorhacks:picker'] = {
+(function (pkg, symbols) {
+  for (var s in symbols)
+    (s in pkg) || (pkg[s] = symbols[s]);
+})(Package['meteorhacks:picker'] = {}, {
   Picker: Picker
-};
+});
 
 })();
-
-//# sourceMappingURL=meteorhacks_picker.js.map

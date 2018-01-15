@@ -1,177 +1,138 @@
 {
   "format": "javascript-image-pre1",
-  "arch": "os.linux.x86_64",
+  "arch": "os",
   "load": [
     {
-      "sourceMap": "packages/underscore.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/underscore.js"
-    },
-    {
-      "node_modules": "npm/meteor/node_modules",
-      "sourceMap": "packages/meteor.js.map",
-      "sourceMapRoot": "packages",
+      "node_modules": "npm/node_modules/meteor/meteor/node_modules",
       "path": "packages/meteor.js"
     },
     {
-      "sourceMap": "packages/standard-app-packages.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/standard-app-packages.js"
     },
     {
-      "sourceMap": "packages/json.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/json.js"
+      "path": "packages/underscore.js"
     },
     {
-      "sourceMap": "packages/base64.js.map",
-      "sourceMapRoot": "packages",
+      "path": "packages/ecmascript-runtime.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/modules-runtime/node_modules",
+      "path": "packages/modules-runtime.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/modules/node_modules",
+      "path": "packages/modules.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/ecmascript-runtime-server/node_modules",
+      "path": "packages/ecmascript-runtime-server.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/babel-compiler/node_modules",
+      "path": "packages/babel-compiler.js"
+    },
+    {
+      "sourceMap": "packages/ecmascript.js.map",
+      "path": "packages/ecmascript.js"
+    },
+    {
       "path": "packages/base64.js"
     },
     {
+      "node_modules": "npm/node_modules/meteor/promise/node_modules",
+      "path": "packages/promise.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/babel-runtime/node_modules",
+      "path": "packages/babel-runtime.js"
+    },
+    {
       "sourceMap": "packages/ejson.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/ejson.js"
     },
     {
-      "node_modules": "npm/logging/node_modules",
-      "sourceMap": "packages/logging.js.map",
-      "sourceMapRoot": "packages",
+      "node_modules": "npm/node_modules/meteor/logging/node_modules",
       "path": "packages/logging.js"
     },
     {
-      "sourceMap": "packages/routepolicy.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/routepolicy.js"
     },
     {
-      "sourceMap": "packages/tracker.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/tracker.js"
-    },
-    {
-      "sourceMap": "packages/deps.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/deps.js"
-    },
-    {
-      "sourceMap": "packages/htmljs.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/htmljs.js"
-    },
-    {
-      "sourceMap": "packages/html-tools.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/html-tools.js"
-    },
-    {
-      "sourceMap": "packages/blaze-tools.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/blaze-tools.js"
-    },
-    {
-      "sourceMap": "packages/spacebars-compiler.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/spacebars-compiler.js"
-    },
-    {
-      "sourceMap": "packages/jquery.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/jquery.js"
-    },
-    {
-      "sourceMap": "packages/id-map.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/id-map.js"
-    },
-    {
-      "sourceMap": "packages/ordered-dict.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/ordered-dict.js"
-    },
-    {
-      "sourceMap": "packages/random.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/random.js"
-    },
-    {
-      "sourceMap": "packages/geojson-utils.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/geojson-utils.js"
-    },
-    {
-      "sourceMap": "packages/minimongo.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/minimongo.js"
-    },
-    {
-      "sourceMap": "packages/observe-sequence.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/observe-sequence.js"
-    },
-    {
-      "sourceMap": "packages/reactive-var.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/reactive-var.js"
-    },
-    {
-      "sourceMap": "packages/blaze.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/blaze.js"
-    },
-    {
-      "sourceMap": "packages/templating.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/templating.js"
-    },
-    {
-      "sourceMap": "packages/spacebars.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/spacebars.js"
-    },
-    {
-      "sourceMap": "packages/ui.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/ui.js"
-    },
-    {
       "sourceMap": "packages/boilerplate-generator.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/boilerplate-generator.js",
-      "assets": {
-        "boilerplate_web.browser.html": "assets/packages/boilerplate-generator/boilerplate_web.browser.html",
-        "boilerplate_web.cordova.html": "assets/packages/boilerplate-generator/boilerplate_web.cordova.html"
-      }
+      "path": "packages/boilerplate-generator.js"
     },
     {
       "sourceMap": "packages/webapp-hashing.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/webapp-hashing.js"
     },
     {
-      "node_modules": "npm/webapp/node_modules",
+      "node_modules": "npm/node_modules/meteor/webapp/node_modules",
       "sourceMap": "packages/webapp.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/webapp.js"
+    },
+    {
+      "path": "packages/jquery.js"
+    },
+    {
+      "path": "packages/tracker.js"
+    },
+    {
+      "path": "packages/check.js"
+    },
+    {
+      "path": "packages/id-map.js"
+    },
+    {
+      "sourceMap": "packages/random.js.map",
+      "path": "packages/random.js"
+    },
+    {
+      "path": "packages/mongo-id.js"
+    },
+    {
+      "path": "packages/diff-sequence.js"
+    },
+    {
+      "path": "packages/observe-sequence.js"
+    },
+    {
+      "path": "packages/reactive-var.js"
+    },
+    {
+      "path": "packages/ordered-dict.js"
+    },
+    {
+      "path": "packages/deps.js"
+    },
+    {
+      "path": "packages/htmljs.js"
+    },
+    {
+      "path": "packages/blaze.js"
+    },
+    {
+      "path": "packages/ui.js"
+    },
+    {
+      "path": "packages/spacebars.js"
+    },
+    {
+      "path": "packages/templating-compiler.js"
+    },
+    {
+      "path": "packages/templating-runtime.js"
+    },
+    {
+      "path": "packages/templating.js"
     },
     {
       "path": "packages/iron_core.js"
     },
     {
-      "sourceMap": "packages/iron_dynamic-template.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/iron_dynamic-template.js",
-      "assets": {
-        "dynamic_template.html": "assets/packages/iron_dynamic-template/dynamic_template.html"
-      }
+      "path": "packages/iron_dynamic-template.js"
     },
     {
-      "sourceMap": "packages/iron_layout.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/iron_layout.js",
-      "assets": {
-        "default_layout.html": "assets/packages/iron_layout/default_layout.html"
-      }
+      "path": "packages/iron_layout.js"
     },
     {
       "path": "packages/iron_url.js"
@@ -180,390 +141,388 @@
       "path": "packages/iron_middleware-stack.js"
     },
     {
-      "sourceMap": "packages/iron_location.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/iron_location.js"
     },
     {
-      "sourceMap": "packages/check.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/check.js"
+      "node_modules": "npm/node_modules/meteor/npm-mongo/node_modules",
+      "path": "packages/npm-mongo.js"
     },
     {
-      "sourceMap": "packages/retry.js.map",
-      "sourceMapRoot": "packages",
+      "path": "packages/geojson-utils.js"
+    },
+    {
+      "sourceMap": "packages/minimongo.js.map",
+      "path": "packages/minimongo.js"
+    },
+    {
       "path": "packages/retry.js"
     },
     {
-      "sourceMap": "packages/callback-hook.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/callback-hook.js"
     },
     {
-      "node_modules": "npm/ddp/node_modules",
-      "sourceMap": "packages/ddp.js.map",
-      "sourceMapRoot": "packages",
+      "path": "packages/ddp-common.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/ddp-client/node_modules",
+      "sourceMap": "packages/ddp-client.js.map",
+      "path": "packages/ddp-client.js"
+    },
+    {
+      "path": "packages/rate-limit.js"
+    },
+    {
+      "path": "packages/ddp-rate-limiter.js"
+    },
+    {
+      "node_modules": "npm/node_modules/meteor/ddp-server/node_modules",
+      "sourceMap": "packages/ddp-server.js.map",
+      "path": "packages/ddp-server.js"
+    },
+    {
       "path": "packages/ddp.js"
     },
     {
-      "sourceMap": "packages/binary-heap.js.map",
-      "sourceMapRoot": "packages",
+      "sourceMap": "packages/allow-deny.js.map",
+      "path": "packages/allow-deny.js"
+    },
+    {
       "path": "packages/binary-heap.js"
     },
     {
-      "node_modules": "npm/mongo/node_modules",
+      "node_modules": "npm/node_modules/meteor/mongo/node_modules",
       "sourceMap": "packages/mongo.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/mongo.js"
     },
     {
       "sourceMap": "packages/reactive-dict.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/reactive-dict.js"
     },
     {
-      "sourceMap": "packages/iron_controller.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/iron_controller.js"
     },
     {
-      "node_modules": "npm/iron_router/node_modules",
-      "sourceMap": "packages/iron_router.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/iron_router.js",
-      "assets": {
-        "lib/templates.html": "assets/packages/iron_router/lib/templates.html"
-      }
+      "node_modules": "npm/node_modules/meteor/iron_router/node_modules",
+      "path": "packages/iron_router.js"
     },
     {
-      "sourceMap": "packages/coffeescript.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/coffeescript.js"
     },
     {
-      "sourceMap": "packages/stylus.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/stylus.js"
     },
     {
-      "sourceMap": "packages/mquandalle_jade.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/mquandalle_jade.js"
     },
     {
       "sourceMap": "packages/accounts-base.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/accounts-base.js"
     },
     {
-      "sourceMap": "packages/matb33_collection-hooks.js.map",
-      "sourceMapRoot": "packages",
+      "node_modules": "npm/node_modules/meteor/matb33_collection-hooks/node_modules",
       "path": "packages/matb33_collection-hooks.js"
     },
     {
-      "node_modules": "npm/npm-bcrypt/node_modules",
-      "sourceMap": "packages/npm-bcrypt.js.map",
-      "sourceMapRoot": "packages",
+      "node_modules": "npm/node_modules/meteor/npm-bcrypt/node_modules",
       "path": "packages/npm-bcrypt.js"
     },
     {
-      "sourceMap": "packages/sha.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/sha.js"
     },
     {
-      "sourceMap": "packages/srp.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/srp.js"
     },
     {
-      "node_modules": "npm/email/node_modules",
-      "sourceMap": "packages/email.js.map",
-      "sourceMapRoot": "packages",
+      "node_modules": "npm/node_modules/meteor/email/node_modules",
       "path": "packages/email.js"
     },
     {
       "sourceMap": "packages/accounts-password.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/accounts-password.js"
     },
     {
-      "sourceMap": "packages/meteorhacks_inject-data.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/meteorhacks_inject-data.js",
+      "path": "packages/staringatlights_inject-data.js",
       "assets": {
-        "lib/inject.html": "assets/packages/meteorhacks_inject-data/lib/inject.html"
+        "lib/inject.html": "assets/packages/staringatlights_inject-data/lib/inject.html"
       }
     },
     {
-      "node_modules": "npm/meteorhacks_picker/node_modules",
-      "sourceMap": "packages/meteorhacks_picker.js.map",
-      "sourceMapRoot": "packages",
+      "node_modules": "npm/node_modules/meteor/meteorhacks_picker/node_modules",
       "path": "packages/meteorhacks_picker.js"
     },
     {
-      "sourceMap": "packages/livedata.js.map",
-      "sourceMapRoot": "packages",
+      "path": "packages/meteorhacks_meteorx.js"
+    },
+    {
       "path": "packages/livedata.js"
     },
     {
-      "node_modules": "npm/meteorhacks_fast-render/node_modules",
-      "sourceMap": "packages/meteorhacks_fast-render.js.map",
-      "sourceMapRoot": "packages",
-      "path": "packages/meteorhacks_fast-render.js"
+      "node_modules": "npm/node_modules/meteor/staringatlights_fast-render/node_modules",
+      "path": "packages/staringatlights_fast-render.js"
     },
     {
-      "sourceMap": "packages/handlebars.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/handlebars.js"
     },
     {
-      "node_modules": "npm/cmather_handlebars-server/node_modules",
-      "sourceMap": "packages/cmather_handlebars-server.js.map",
-      "sourceMapRoot": "packages",
+      "node_modules": "npm/node_modules/meteor/cmather_handlebars-server/node_modules",
       "path": "packages/cmather_handlebars-server.js"
     },
     {
-      "sourceMap": "packages/reload.js.map",
-      "sourceMapRoot": "packages",
+      "path": "packages/standard-minifier-css.js"
+    },
+    {
+      "path": "packages/standard-minifier-js.js"
+    },
+    {
+      "sourceMap": "packages/shell-server.js.map",
+      "path": "packages/shell-server.js"
+    },
+    {
+      "sourceMap": "packages/dynamic-import.js.map",
+      "path": "packages/dynamic-import.js"
+    },
+    {
       "path": "packages/reload.js"
     },
     {
-      "sourceMap": "packages/autoupdate.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/autoupdate.js"
     },
     {
-      "sourceMap": "packages/meteor-platform.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/meteor-platform.js"
     },
     {
-      "sourceMap": "packages/session.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/session.js"
     },
     {
+      "node_modules": "npm/node_modules",
       "path": "packages/global-imports.js"
     },
     {
-      "sourceMap": "app/server/security/lib/matches.coffee.js.map",
-      "sourceMapRoot": "server/security/lib",
-      "path": "app/server/security/lib/matches.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/lib/matches.coffee.map",
+      "path": "app/server/security/lib/matches.coffee"
     },
     {
-      "sourceMap": "app/server/security/lib/securityRulesWrapper.coffee.js.map",
-      "sourceMapRoot": "server/security/lib",
-      "path": "app/server/security/lib/securityRulesWrapper.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/lib/securityRulesWrapper.coffee.map",
+      "path": "app/server/security/lib/securityRulesWrapper.coffee"
     },
     {
+      "node_modules": "npm/node_modules",
       "path": "app/lib/compatibility/i18next-1.7.3.js"
     },
     {
+      "node_modules": "npm/node_modules",
       "path": "app/lib/compatibility/moment.js"
     },
     {
+      "node_modules": "npm/node_modules",
       "path": "app/lib/compatibility/underscore.string.js"
     },
     {
+      "node_modules": "npm/node_modules",
       "path": "app/lib/compatibility/xss.js"
     },
     {
-      "sourceMap": "app/lib/app.coffee.js.map",
-      "sourceMapRoot": "lib",
-      "path": "app/lib/app.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/lib/app.coffee.map",
+      "path": "app/lib/app.coffee"
     },
     {
-      "sourceMap": "app/lib/regexps.coffee.js.map",
-      "sourceMapRoot": "lib",
-      "path": "app/lib/regexps.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/lib/regexps.coffee.map",
+      "path": "app/lib/regexps.coffee"
     },
     {
-      "sourceMap": "app/lib/security.coffee.js.map",
-      "sourceMapRoot": "lib",
-      "path": "app/lib/security.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/lib/security.coffee.map",
+      "path": "app/lib/security.coffee"
     },
     {
-      "sourceMap": "app/lib/transformations.coffee.js.map",
-      "sourceMapRoot": "lib",
-      "path": "app/lib/transformations.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/lib/transformations.coffee.map",
+      "path": "app/lib/transformations.coffee"
     },
     {
+      "node_modules": "npm/node_modules",
       "path": "app/server/emailTemplates/handlebars.newUserHtml.js"
     },
     {
+      "node_modules": "npm/node_modules",
       "path": "app/server/emailTemplates/handlebars.newUserSubject.js"
     },
     {
+      "node_modules": "npm/node_modules",
       "path": "app/server/emailTemplates/handlebars.resetPasswordHtml.js"
     },
     {
+      "node_modules": "npm/node_modules",
       "path": "app/server/emailTemplates/handlebars.resetPasswordSubject.js"
     },
     {
+      "node_modules": "npm/node_modules",
       "path": "app/server/exec/exec.js"
     },
     {
-      "sourceMap": "app/server/i18n/_.coffee.js.map",
-      "sourceMapRoot": "server/i18n",
-      "path": "app/server/i18n/_.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/i18n/_.coffee.map",
+      "path": "app/server/i18n/_.coffee"
     },
     {
-      "sourceMap": "app/server/i18n/en.coffee.js.map",
-      "sourceMapRoot": "server/i18n",
-      "path": "app/server/i18n/en.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/i18n/en.coffee.map",
+      "path": "app/server/i18n/en.coffee"
     },
     {
-      "sourceMap": "app/server/model/collections.coffee.js.map",
-      "sourceMapRoot": "server/model",
-      "path": "app/server/model/collections.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/model/collections.coffee.map",
+      "path": "app/server/model/collections.coffee"
     },
     {
-      "sourceMap": "app/server/model/publications.coffee.js.map",
-      "sourceMapRoot": "server/model",
-      "path": "app/server/model/publications.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/model/publications.coffee.map",
+      "path": "app/server/model/publications.coffee"
     },
     {
-      "sourceMap": "app/server/security/configs.coffee.js.map",
-      "sourceMapRoot": "server/security",
-      "path": "app/server/security/configs.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/configs.coffee.map",
+      "path": "app/server/security/configs.coffee"
     },
     {
-      "sourceMap": "app/server/security/ipsets.coffee.js.map",
-      "sourceMapRoot": "server/security",
-      "path": "app/server/security/ipsets.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/ipsets.coffee.map",
+      "path": "app/server/security/ipsets.coffee"
     },
     {
-      "sourceMap": "app/server/security/queries.coffee.js.map",
-      "sourceMapRoot": "server/security",
-      "path": "app/server/security/queries.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/queries.coffee.map",
+      "path": "app/server/security/queries.coffee"
     },
     {
-      "sourceMap": "app/server/security/tuples.coffee.js.map",
-      "sourceMapRoot": "server/security",
-      "path": "app/server/security/tuples.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/tuples.coffee.map",
+      "path": "app/server/security/tuples.coffee"
     },
     {
-      "sourceMap": "app/server/security/users.coffee.js.map",
-      "sourceMapRoot": "server/security",
-      "path": "app/server/security/users.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/security/users.coffee.map",
+      "path": "app/server/security/users.coffee"
     },
     {
-      "sourceMap": "app/common/configs.defaults.coffee.js.map",
-      "sourceMapRoot": "common",
-      "path": "app/common/configs.defaults.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/configs.defaults.coffee.map",
+      "path": "app/common/configs.defaults.coffee"
     },
     {
-      "sourceMap": "app/common/ipsets.defaults.coffee.js.map",
-      "sourceMapRoot": "common",
-      "path": "app/common/ipsets.defaults.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/ipsets.defaults.coffee.map",
+      "path": "app/common/ipsets.defaults.coffee"
     },
     {
-      "sourceMap": "app/common/ipsets.hooks.coffee.js.map",
-      "sourceMapRoot": "common",
-      "path": "app/common/ipsets.hooks.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/ipsets.hooks.coffee.map",
+      "path": "app/common/ipsets.hooks.coffee"
     },
     {
-      "sourceMap": "app/common/queries.defaults.coffee.js.map",
-      "sourceMapRoot": "common",
-      "path": "app/common/queries.defaults.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/queries.defaults.coffee.map",
+      "path": "app/common/queries.defaults.coffee"
     },
     {
-      "sourceMap": "app/common/queries.hooks.coffee.js.map",
-      "sourceMapRoot": "common",
-      "path": "app/common/queries.hooks.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/queries.hooks.coffee.map",
+      "path": "app/common/queries.hooks.coffee"
     },
     {
-      "sourceMap": "app/common/tuples.defaults.coffee.js.map",
-      "sourceMapRoot": "common",
-      "path": "app/common/tuples.defaults.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/tuples.defaults.coffee.map",
+      "path": "app/common/tuples.defaults.coffee"
     },
     {
-      "sourceMap": "app/common/tuples.hooks.coffee.js.map",
-      "sourceMapRoot": "common",
-      "path": "app/common/tuples.hooks.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/tuples.hooks.coffee.map",
+      "path": "app/common/tuples.hooks.coffee"
     },
     {
-      "sourceMap": "app/common/users.defaults.coffee.js.map",
-      "sourceMapRoot": "common",
-      "path": "app/common/users.defaults.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/common/users.defaults.coffee.map",
+      "path": "app/common/users.defaults.coffee"
     },
     {
-      "sourceMap": "app/server/cleanup.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/cleanup.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/cleanup.coffee.map",
+      "path": "app/server/cleanup.coffee"
     },
     {
-      "sourceMap": "app/server/configs.hooks.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/configs.hooks.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/configs.hooks.coffee.map",
+      "path": "app/server/configs.hooks.coffee"
     },
     {
-      "sourceMap": "app/server/cron.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/cron.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/cron.coffee.map",
+      "path": "app/server/cron.coffee"
     },
     {
-      "sourceMap": "app/server/executingAt.query.hooks.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/executingAt.query.hooks.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/executingAt.query.hooks.coffee.map",
+      "path": "app/server/executingAt.query.hooks.coffee"
     },
     {
-      "sourceMap": "app/server/execution.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/execution.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/execution.coffee.map",
+      "path": "app/server/execution.coffee"
     },
     {
-      "sourceMap": "app/server/fastrender.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/fastrender.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/fastrender.coffee.map",
+      "path": "app/server/fastrender.coffee"
     },
     {
-      "sourceMap": "app/server/fixtures.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/fixtures.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/fixtures.coffee.map",
+      "path": "app/server/fixtures.coffee"
     },
     {
-      "sourceMap": "app/server/helpers.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/helpers.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/helpers.coffee.map",
+      "path": "app/server/helpers.coffee"
     },
     {
+      "node_modules": "npm/node_modules",
       "path": "app/server/meteor-security-patch.js"
     },
     {
-      "sourceMap": "app/server/methods.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/methods.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/methods.coffee.map",
+      "path": "app/server/methods.coffee"
     },
     {
-      "sourceMap": "app/server/periodic.execution.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/periodic.execution.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/periodic.execution.coffee.map",
+      "path": "app/server/periodic.execution.coffee"
     },
     {
-      "sourceMap": "app/server/queries.hooks.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/queries.hooks.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/queries.hooks.coffee.map",
+      "path": "app/server/queries.hooks.coffee"
     },
     {
-      "sourceMap": "app/server/routing.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/routing.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/routing.coffee.map",
+      "path": "app/server/routing.coffee"
     },
     {
-      "sourceMap": "app/server/startup.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/startup.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/startup.coffee.map",
+      "path": "app/server/startup.coffee"
     },
     {
-      "sourceMap": "app/server/users.hooks.coffee.js.map",
-      "sourceMapRoot": "server",
-      "path": "app/server/users.hooks.coffee.js"
+      "node_modules": "npm/node_modules",
+      "sourceMap": "app/server/users.hooks.coffee.map",
+      "path": "app/server/users.hooks.coffee"
     },
     {
-      "sourceMap": "packages/service-configuration.js.map",
-      "sourceMapRoot": "packages",
       "path": "packages/service-configuration.js"
     }
   ]

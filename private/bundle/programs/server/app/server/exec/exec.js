@@ -49,4 +49,4 @@ Exec.spawn = function (command, args, options) {
   return ret;
 };
 
-})();
+}).call(this);

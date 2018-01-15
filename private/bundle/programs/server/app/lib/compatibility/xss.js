@@ -502,4 +502,4 @@ function filter_attributes(str) {
 }
 
 
-})();
+}).call(this);

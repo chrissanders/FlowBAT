@@ -2,11 +2,21 @@
 
 /* Imports */
 var Meteor = Package.meteor.Meteor;
+var global = Package.meteor.global;
+var meteorEnv = Package.meteor.meteorEnv;
 var _ = Package.underscore._;
 
 /* Package-scope variables */
-var Handlebars, OriginalHandlebars;
+var OriginalHandlebars, Handlebars;
 
+(function(){
+
+////////////////////////////////////////////////////////////////////////////
+//                                                                        //
+// packages/cmather_handlebars-server/packages/cmather_handlebars-server. //
+//                                                                        //
+////////////////////////////////////////////////////////////////////////////
+                                                                          //
 (function () {
 
 ///////////////////////////////////////////////////////////////////////
@@ -26,14 +36,19 @@ _.extend(Handlebars, {                                               // 4
 
 }).call(this);
 
+////////////////////////////////////////////////////////////////////////////
+
+}).call(this);
+
 
 /* Exports */
 if (typeof Package === 'undefined') Package = {};
-Package['cmather:handlebars-server'] = {
+(function (pkg, symbols) {
+  for (var s in symbols)
+    (s in pkg) || (pkg[s] = symbols[s]);
+})(Package['cmather:handlebars-server'] = {}, {
   Handlebars: Handlebars,
   OriginalHandlebars: OriginalHandlebars
-};
+});
 
 })();
-
-//# sourceMappingURL=cmather_handlebars-server.js.map
