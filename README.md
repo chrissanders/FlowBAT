@@ -6,4 +6,4 @@ Installation: http://www.flowbat.com/installation.html<br/>
 User Manual: http://www.flowbat.com/user-manual.html<br/>
 Support: support@flowbat.com
 
-v1.5.1
+v1.5.3
