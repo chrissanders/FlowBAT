@@ -6,9 +6,9 @@
 exec >  >(tee -a silkinstall.log)
 exec 2> >(tee -a silkinstall.log >&2)
 
-silkversion=$(echo "3.15.0")
-yafversion=$(echo "2.8.4")
-lfbversion=$(echo "1.7.1")
+silkversion=$(echo "3.16.0")
+yafversion=$(echo "2.9.3")
+lfbversion=$(echo "1.8.0")
 workingDir=$PWD
 
 ask() {
@@ -93,14 +93,17 @@ if grep -q 'rwflowpack' /etc/rc.local; then
         if ask "$(tput setaf 3)Do you wish to skip putting in redundant commands in /etc/rc.local? Saying no to this question could result in duplicate entries in /etc/rc.local.(tput sgr0)"; then
           echo "$(tput setaf 2)continuing installation...$(tput sgr0)"
         else
-          sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --compression-method=best --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
-          sudo sed -i "$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 \&\nexit 0," /etc/rc.local
+          sudo sed -i -e '$i /usr/local/sbin/rwflowpack --compression-method=best --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack \nnohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 & \nexit 0' /etc/rc.local
+          sudo sed -i "s/\$interface/$interface/g" /etc/rc.local
+          sudo chmod 755 /etc/rc.local
+
         fi
       else
         if ask "$(tput setaf 3)Do you wish to setup flow collection on boot?$(tput sgr0)"; then
               onBoot=$(echo "---YAF and rwflowpack start on boot")
-              sudo sed -i '$ s,exit 0,/usr/local/sbin/rwflowpack --compression-method=best --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack\nexit 0,' /etc/rc.local
-              sudo sed -i "$ s,exit 0,nohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 \&\nexit 0," /etc/rc.local
+              sudo sed -i -e '$i /usr/local/sbin/rwflowpack --compression-method=best --sensor-configuration=/data/sensors.conf --site-config-file=/data/silk.conf --output-mode=local-storage --root-directory=/data/ --pidfile=/var/log/rwflowpack.pid --log-level=info --log-directory=/var/log --log-basename=rwflowpack \nnohup /usr/local/bin/yaf --silk --ipfix=tcp --live=pcap  --out=127.0.0.1 --ipfix-port=18001 --in=$interface --applabel --max-payload=384 & \nexit 0' /etc/rc.local
+              sudo sed -i "s/\$interface/$interface/g" /etc/rc.local
+              sudo chmod 755 /etc/rc.local
         else
               exit 0
         fi
@@ -251,3 +254,4 @@ echo -e "$(tput setaf 2)$onBoot\n$startNow\n$rwflowpackstatus\n$yafstatus$(tput 
 echo
 echo -e "$(tput setaf 2)Config files\n---/data/silk.conf\n---/data/sensors.conf\n---root-directory=/data/$(tput sgr0)"
 exit 0
+
