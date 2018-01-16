@@ -15,7 +15,6 @@ if [[ $(sudo fuser /var/lib/dpkg/lock) ]]; then
     echo "There is apt-get lock keeping things from installing. Exiting"
     exit
 fi
-sudo apt-get -y upgrade
 
 # Install Pre-reqs
 sudo apt-get install -y curl build-essential git
