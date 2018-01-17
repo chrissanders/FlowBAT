@@ -33,6 +33,61 @@ export NVM_DIR="$HOME/.nvm"
 sudo apt-get install -y mongodb-server
 
 ## Install FlowBAT packages
+mkdir $workingDir/FlowBAT/private/bundle/programs/server/npm
+(cd $workingDir/FlowBAT/private/bundle/programs/server && npm install)
+cat <<EOF > $workingDir/FlowBAT/private/meteorsettings.json
+METEOR_SETTINGS='{ "baseUrl": "http://127.0.0.1:1800", "mailUrl": "", "isLoadingFixtures": false, "apm": { "appId": "", "secret": "" }, "public": { "version": "FlowBAT v1.5.3", "isDebug": false, "googleAnalytics": { "property": "", "disabled": true }, "mixpanel": { "token": "", "disabled": false } } }'
+EOF
+
+#Generating upstart configuration for FlowBAT
+cat <<EOF > $workingDir/flowbat.conf
+# upstart service file at /etc/init/flowbat.conf
+description "FlowBAT"
+# When to start the service
+start on started mongodb and runlevel [2345]
+# When to stop the service
+stop on shutdown
+# Automatically restart process if crashed
+respawn
+respawn limit 10 5
+# drop root proviliges and switch to FlowBAT install user
+setuid $USER
+setgid $USER
+script
+    export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    export NODE_PATH=/usr/lib/nodejs:/usr/lib/node_modules
+    export PWD=$workingDir/FlowBAT/
+    export HOME=$workingDir/FlowBAT/
+    export PORT=1800
+    export MONGO_URL=mongodb://localhost:27017/flowbat
+    export ROOT_URL=http://127.0.0.1
+    . $workingDir/FlowBAT/private/meteorsettings.json
+    export METEOR_SETTINGS
+    exec /home/$flowbatUser/.nvm/versions/node/v8.9.3/bin/node $workingDir/FlowBAT/private/bundle/main.js >> $workingDir/FlowBAT/flowbat.log
+end script
+EOF
+
+# Move init config to upstart and start flowbat
+sudo cp $workingDir/flowbat.conf /etc/init/
+sudo service flowbat start
+}
+
+soinstall() {
+# extract SO specific packages
+rm -rf $workingDir/FlowBAT/private/bundle/
+tar zxf FlowBAT/private/SO.tar.gz -C FlowBAT/private/
+
+# Install NVM and Node 8.9.3
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+ nvm install v8.9.3
+
+## Install mongodb
+sudo apt-get install -y mongodb-server
+
+## Install FlowBAT packages
+mkdir $workingDir/FlowBAT/private/bundle/programs/server/npm
 (cd $workingDir/FlowBAT/private/bundle/programs/server && npm install)
 cat <<EOF > $workingDir/FlowBAT/private/meteorsettings.json
 METEOR_SETTINGS='{ "baseUrl": "http://127.0.0.1:1800", "mailUrl": "", "isLoadingFixtures": false, "apm": { "appId": "", "secret": "" }, "public": { "version": "FlowBAT v1.5.3", "isDebug": false, "googleAnalytics": { "property": "", "disabled": true }, "mixpanel": { "token": "", "disabled": false } } }'
@@ -116,7 +171,11 @@ sudo systemctl enable flowbat
 }
 
 if [[ $(lsb_release -c) = *trusty* ]]; then
-  trustyinstall
+  if [ -d "/usr/share/securityonion/" ]; then
+    soinstall
+    else
+    trustyinstall
+  fi
   elif [[ $(lsb_release -c) = *xenial* ]]; then
   xenialinstall
   else
