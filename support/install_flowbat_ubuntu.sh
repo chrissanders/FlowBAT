@@ -75,7 +75,7 @@ sudo service flowbat start
 soinstall() {
 # extract SO specific packages
 rm -rf $workingDir/FlowBAT/private/bundle/
-tar zxf FlowBAT/private/SO.tar.gz -C FlowBAT/private/
+tar zxf $workingDir/FlowBAT/private/SO.tar.gz -C $workingDir/FlowBAT/private/
 
 # Install NVM and Node 8.9.3
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
