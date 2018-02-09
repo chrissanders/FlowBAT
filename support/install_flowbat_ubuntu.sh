@@ -17,7 +17,7 @@ if [[ $(sudo fuser /var/lib/dpkg/lock) ]]; then
 fi
 
 # Install Pre-reqs
-sudo apt-get install -y curl build-essential git
+sudo apt-get install -y curl build-essential git unzip
 
 # Clone the FlowBAT repo
 git clone https://github.com/chrissanders/FlowBAT.git
