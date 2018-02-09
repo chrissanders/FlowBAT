@@ -118,7 +118,7 @@ sudo apt-get update -qq
 
 # Install Prerequisites
 echo -e "$(tput setaf 6)Installing Prerequisites. This might require your password and take a few minutes.$(tput sgr0)"
-sudo apt-get -qq -y install glib2.0 libglib2.0-dev libpcap-dev g++ python-dev make gcc
+sudo apt-get -qq -y install glib2.0 libglib2.0-dev libpcap-dev g++ python-dev make gcc unzip
 
 if which rwp2yaf2silk > /dev/null; then
         echo -e "$(tput setaf 2)It looks like SiLK might already be installed.$(tput sgr0)"
