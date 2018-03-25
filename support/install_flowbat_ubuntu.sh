@@ -22,6 +22,12 @@ sudo apt-get install -y curl build-essential git unzip
 # Clone the FlowBAT repo
 git clone https://github.com/chrissanders/FlowBAT.git
 
+# Install meteor and build package. Removes any existing bundle folders.
+curl https://install.meteor.com/ | sh
+rm -rf $workingDir/FlowBAT/private/bundle/
+(cd $workingDir/FlowBAT/ && meteor npm install --save babel-runtime)
+(cd $workingDir/FlowBAT/ && meteor build --directory $workingDir/FlowBAT/private/)
+
 trustyinstall() {
 # Install NVM and Node 8.9.3
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
