@@ -20,7 +20,7 @@ fi
 sudo apt-get install -y curl build-essential git unzip
 
 # Clone the FlowBAT repo
-git clone https://github.com/chrissanders/FlowBAT.git
+git clone https://github.com/WojRep/FlowBAT.git
 
 # Install meteor and build package. Removes any existing bundle folders.
 curl https://install.meteor.com/ | sh
