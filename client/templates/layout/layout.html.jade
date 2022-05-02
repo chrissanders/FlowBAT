@@ -1,8 +1,11 @@
 head
   meta(name="viewport" content="width=device-width, initial-scale=1")
   link(rel="icon" href="/favicon.ico")
-  script(type='text/javascript' src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1","packages":["corechart"]}]}]}')
-
+  script(src='https://www.gstatic.com/charts/loader.js')
+  script
+    | google.charts.load('current', {packages: ['corechart']})
+    | google.charts.setOnLoadCallback(drawChart)
+    
 template(name="layout")
   if currentUser
     +yield(region="header")
